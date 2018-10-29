@@ -1,0 +1,45 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "default-case": 0,
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "peerDependencies": true
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": [
+          "Link"
+        ],
+        "specialLink": [
+          "to"
+        ]
+      }
+    ],
+    "max-len": [
+      1,
+      120,
+      2,
+      {
+        "ignoreComments": true
+      }
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.answer{
+  font-size: 28px;
+  text-align: center;
+  width:100%;
+  background: white;
+  padding: .75em 0;
+  margin: 1em .25em;
+  border-radius: 8px;
+  border: 4px solid black;
+  &.correct{
+    background:#aefb94;
+  }
+  &.incorrect{
+    background:#ffb3b3;
+  }
+  &.unanswered{
+    background: white!important;
+    &:active{
+      background:yellow!important;
+    }
+  }
+}

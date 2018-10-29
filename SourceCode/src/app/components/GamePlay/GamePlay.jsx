@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
+import Answers from '../Answers/Answers';
 
 import './GamePlay.scss';
 
@@ -25,6 +26,7 @@ export default class GamePlay extends React.Component {
         <Link to="/">Main route</Link> | Play Game
         <ScoreBoard/>
         <Equation/>
+        <Answers/>
       </main>
     );
   }

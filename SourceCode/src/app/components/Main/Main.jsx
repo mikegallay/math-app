@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 
 import './Main.scss';
 
-
 import imageEmojiSmile from '../../images/sample-emoji-smile.png';
 
 export default class Main extends React.Component {

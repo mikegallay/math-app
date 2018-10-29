@@ -1,27 +1,33 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
-.eq-wrapper{
-}
+.eq-wrapper{}
 
-.eq-top{
-
-}
+.eq-top{}
 
 .eq-bot{
   margin-top: -0.2em;
 }
 
 .eq-operand{
+
   width:100%;
   text-align: right;
-  font-size: 200px;
+  font-size: 170px;
+  @media only screen and (min-width: 375px) {
+      font-size: 200px;
+  }
+
 }
 
 .eq-operator{
   position:absolute;
   font-size: 89px;
-  top: 4em;
+  top: 3.4em;
+  @media only screen and (min-width: 375px) {
+      top: 4em;
+  }
+
 }
 
 .eq-equals{

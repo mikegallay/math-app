@@ -1,0 +1,22 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.streak-wrapper{
+  font-size: 25px;
+  text-align: right;
+  width:auto;
+}
+
+.streak-wrapper:after {
+    content: '';
+    background-image: url('/public/images/streak.png');
+    width: 10px;
+    height: 25px;
+    background-size: cover;
+    // margin-left: 4px;
+    position: absolute;
+}
+
+.streak-count{
+  margin-right: 3px;
+}

@@ -1,0 +1,31 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.eq-wrapper{
+}
+
+.eq-top{
+
+}
+
+.eq-bot{
+  margin-top: -0.2em;
+}
+
+.eq-operand{
+  width:100%;
+  text-align: right;
+  font-size: 200px;
+}
+
+.eq-operator{
+  position:absolute;
+  font-size: 90px;
+  top: 3.8em;
+}
+
+.eq-equals{
+  width:100%;
+  height:10px;
+  background-color: black;
+}

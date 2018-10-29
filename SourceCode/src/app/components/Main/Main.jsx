@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 
 import './Main.scss';
 
+
 import imageEmojiSmile from '../../images/sample-emoji-smile.png';
 
 export default class Main extends React.Component {
@@ -21,7 +22,7 @@ export default class Main extends React.Component {
   render() {
     return (
       <main className="page-main">
-        Main route | <Link to="/another/">Another route</Link>
+        Main route | <Link to="/gameplay/">Play Game</Link>
 
         <div>
           <img src={imageEmojiSmile} alt="" />

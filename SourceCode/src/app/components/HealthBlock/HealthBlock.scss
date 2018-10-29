@@ -1,0 +1,12 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.health-block{
+  width: 7px;
+  height:20px;
+  background-color: black;
+  opacity:1;
+  display: inline-block;
+  float: left;
+  margin-right: 3px;
+}

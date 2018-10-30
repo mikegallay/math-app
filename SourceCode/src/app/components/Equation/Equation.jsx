@@ -13,7 +13,11 @@ export default class Equation extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    const symbol = {'add' : '+', 'subtract':'-', 'multiply':'x', 'divide':'%'};
+    
+    this.state = {
+      operator : symbol[this.props.data.version]
+    };
   }
 
   render() {
@@ -21,7 +25,7 @@ export default class Equation extends React.Component {
       <div className="eq-wrapper">
         <div className="eq-top eq-operand">2</div>
         <div className="eq-bot eq-operand">3</div>
-        <div className="eq-operator">+</div>
+        <div className="eq-operator">{this.state.operator}</div>
         <div className="eq-equals"></div>
       </div>
     );

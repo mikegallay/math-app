@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
@@ -23,9 +22,8 @@ export default class GamePlay extends React.Component {
   render() {
     return (
       <main className="gameplay-wrapper">
-        <Link to="/">Main route</Link> | Play Game
-        <ScoreBoard/>
-        <Equation/>
+        <ScoreBoard data={{mode:this.props.data.mode}}/>
+        <Equation data={{version:this.props.data.version}}/>
         <Answers/>
       </main>
     );

@@ -8,7 +8,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Main from '../Main/Main';
-import GamePlay from '../GamePlay/GamePlay';
+import Addition from '../Addition/Addition';
 
 import appData from '../../data/app.json';
 
@@ -25,7 +25,7 @@ export default class App extends React.Component {
     return (
       <Switch>
         <Route exact path="/" render={props => <Main {...props} />} />
-        <Route path="/gameplay/" render={props => <GamePlay {...props} />} />
+        <Route path="/addition/" render={props => <Addition {...props} />} />
       </Switch>
     );
   }

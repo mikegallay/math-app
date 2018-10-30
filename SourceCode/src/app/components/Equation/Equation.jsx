@@ -14,9 +14,9 @@ export default class Equation extends React.Component {
     super(props);
 
     const symbol = {'add' : '+', 'subtract':'-', 'multiply':'x', 'divide':'%'};
-    
+
     this.state = {
-      operator : symbol[this.props.data.version]
+      operator : this.props.version ? symbol[this.props.version] : 'o'
     };
   }
 

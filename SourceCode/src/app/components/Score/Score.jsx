@@ -17,7 +17,7 @@ export default class Score extends React.Component {
 
   render() {
     return (
-      <div className="score-wrapper"><span className="muted">0000</span>700</div>
+      <div className="score-wrapper"><span className="muted">0000</span>{this.props.score}</div>
     );
   }
 }

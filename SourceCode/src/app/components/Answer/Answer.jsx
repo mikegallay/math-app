@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Answer.scss';
 
@@ -17,7 +18,19 @@ export default class Answer extends React.Component {
 
   render() {
     return (
-      <div className={`answer unanswered ${this.props.data.status}`}>{this.props.data.value}</div>
+      <button
+          onClick={(e)=> this.props.onAnswer(this.props.status=='correct')}
+          className={`answer unanswered ${this.props.status}`}>
+            {this.props.value}
+      </button>
     );
   }
+}
+
+Answer.defaultProps = {
+  status:"incorrect"
+}
+
+Answer.propTypes = {
+  status: PropTypes.string
 }

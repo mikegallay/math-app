@@ -25,7 +25,7 @@ export default class ScoreBoard extends React.Component {
         <Health/>
         <Streak/>
         <Multiplier/>
-        <Score/>
+        <Score score={this.props.score}/>
       </div>
     );
   }

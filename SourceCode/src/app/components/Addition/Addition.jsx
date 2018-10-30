@@ -7,19 +7,41 @@
 import React from 'react';
 
 import './Addition.scss';
-import GamePlay from '../GamePlay/GamePlay';
+// import GamePlay from '../GamePlay/GamePlay';
+import Equation from '../Equation/Equation';
+import ScoreBoard from '../ScoreBoard/ScoreBoard';
+import Answers from '../Answers/Answers';
+
 
 export default class Addition extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      score:100
+
+    };
   }
+
+  onAnswer(correct){
+    console.log('anssered correctly? ',correct);
+    if (correct){
+      let score = this.state.score + 100
+      this.setState({
+        score
+      })
+    }
+
+  }
+
+
 
   render() {
     return (
       <div>
-        <GamePlay data={{mode:'lives',version:'add'}}/>
+        <ScoreBoard score={this.state.score} mode="health"/>
+        <Equation version="add"/>
+        <Answers onAnswer={(correct)=>{this.onAnswer(correct)}}/>
       </div>
     );
   }

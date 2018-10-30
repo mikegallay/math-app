@@ -19,9 +19,9 @@ export default class Answers extends React.Component {
   render() {
     return (
       <div className="answers-wrapper">
-          <Answer data={{value:4,status:'incorrect'}}/>
-          <Answer data={{value:5,status:'correct'}}/>
-          <Answer data={{value:6,status:'incorrect'}}/>
+          <Answer onAnswer={this.props.onAnswer} value={4}/>
+          <Answer onAnswer={this.props.onAnswer} value={5} status='correct'/>
+          <Answer onAnswer={this.props.onAnswer} value={7}/>
       </div>
     );
   }

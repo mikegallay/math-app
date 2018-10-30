@@ -17,8 +17,8 @@ export default class Multiplier extends React.Component {
 
   render() {
     return (
-      <div className="multiplier-wrapper">2x</div>
+      <div className="multiplier-wrapper">{this.props.multiplier}x</div>
     );
   }
-  
+
 }

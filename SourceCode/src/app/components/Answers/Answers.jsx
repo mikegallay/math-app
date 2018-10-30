@@ -18,10 +18,10 @@ export default class Answers extends React.Component {
 
   render() {
     return (
-      <div className="answers-wrapper">
-          <Answer onAnswer={this.props.onAnswer} value={4}/>
-          <Answer onAnswer={this.props.onAnswer} value={5} status='correct'/>
-          <Answer onAnswer={this.props.onAnswer} value={7}/>
+      <div className="answers-wrapper"> 
+          <Answer answered={this.props.answered} onAnswer={this.props.onAnswer} value={4}/>
+          <Answer answered={this.props.answered} onAnswer={this.props.onAnswer} value={5} status='correct'/>
+          <Answer answered={this.props.answered} onAnswer={this.props.onAnswer} value={7}/>
       </div>
     );
   }

@@ -15,9 +15,24 @@ export default class Score extends React.Component {
     this.state = {};
   }
 
+  inactiveScore(score){
+    let zeros = '0000000';
+    if (score > 0){
+      let scoreLength = 7 - score.toString().length
+      zeros = ''
+
+      for (let i=0;i<scoreLength;i++){
+        zeros += '0'
+      }
+    }
+    return zeros
+  }
+
   render() {
     return (
-      <div className="score-wrapper"><span className="muted">0000</span>{this.props.score}</div>
+      <div className="score-wrapper">
+        <span className="inactive">{this.inactiveScore(this.props.score)}</span>{this.props.score==0 ? '' : this.props.score}
+      </div>
     );
   }
 }

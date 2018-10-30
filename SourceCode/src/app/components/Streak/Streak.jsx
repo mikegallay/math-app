@@ -18,7 +18,7 @@ export default class Streak extends React.Component {
   render() {
     return (
       <div className="streak-wrapper">
-        <span className="streak-count">0</span>
+        <span className="streak-count">{this.props.streak}</span>
       </div>
     );
   }

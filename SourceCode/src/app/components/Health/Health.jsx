@@ -22,8 +22,8 @@ export default class Health extends React.Component {
         <HealthBlock/>
         <HealthBlock/>
         <HealthBlock/>
-        <HealthBlock status={'muted'}/>
-        <HealthBlock status={'muted'}/>
+        <HealthBlock status="inactive"/>
+        <HealthBlock status="inactive"/>
       </div>
     );
   }

@@ -19,8 +19,8 @@ export default class Answer extends React.Component {
   render() {
     return (
       <button
-          onClick={(e)=> this.props.onAnswer(this.props.status=='correct')}
-          className={`answer unanswered ${this.props.status}`}>
+          onClick={(e)=> {this.props.onAnswer(this.props.status=='correct'); e.target.setAttribute('id','selected');}}
+          className={`answer ${this.props.answered ? '' : 'unanswered'} ${this.props.status}`}>
             {this.props.value}
       </button>
     );

@@ -23,8 +23,8 @@ export default class Equation extends React.Component {
   render() {
     return (
       <div className="eq-wrapper">
-        <div className="eq-top eq-operand">2</div>
-        <div className="eq-bot eq-operand">3</div>
+        <div className="eq-top eq-operand">{this.props.numOne}</div>
+        <div className="eq-bot eq-operand">{this.props.numTwo}</div>
         <div className="eq-operator">{this.state.operator}</div>
         <div className="eq-equals"></div>
       </div>

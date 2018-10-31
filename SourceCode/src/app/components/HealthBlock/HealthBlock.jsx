@@ -11,7 +11,6 @@ import './HealthBlock.scss';
 export default class HealthBlock extends React.Component {
   constructor(props) {
     super(props);
-    console.log('p',props);
     this.state = {};
   }
 

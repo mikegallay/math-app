@@ -6,6 +6,8 @@
 
 import React from 'react';
 
+import streak from '../../images/streak.png'
+
 import './Multiplier.scss';
 
 export default class Multiplier extends React.Component {

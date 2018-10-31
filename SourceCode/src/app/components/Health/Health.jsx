@@ -13,17 +13,19 @@ export default class Health extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+    };
   }
 
   render() {
     return (
+
       <div className="health-wrapper">
-        <HealthBlock/>
-        <HealthBlock/>
-        <HealthBlock/>
-        <HealthBlock status="inactive"/>
-        <HealthBlock status="inactive"/>
+        <HealthBlock status={this.props.health<1?'inactive':''}/>
+        <HealthBlock status={this.props.health<2?'inactive':''}/>
+        <HealthBlock status={this.props.health<3?'inactive':''}/>
+        <HealthBlock status={this.props.health<4?'inactive':''}/>
+        <HealthBlock status={this.props.health<5?'inactive':''}/>
       </div>
     );
   }

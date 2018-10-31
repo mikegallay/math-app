@@ -17,6 +17,13 @@ export default class Addition extends React.Component {
   constructor(props) {
     super(props);
 
+    let range = 10;
+    let randOne = this.rand(-5,5)
+    let randTwo = this.rand(-5,5)
+    if (randOne == 0) randOne++
+    if (randTwo == 0) randTwo++
+    if (randOne == randTwo) randTwo++
+
     this.state = {
       score:0,
       streak: 0,
@@ -24,10 +31,11 @@ export default class Addition extends React.Component {
       multiplier: 1,
       health: 5,
       fullHealth: 5,
-      numOne:this.rand(0,9),
-      numTwo:this.rand(0,9),
-      randOne:this.rand(-5,5),
-      randTwo:this.rand(-5,5),
+      range: range,
+      numOne:this.rand(0,range),
+      numTwo:this.rand(0,range),
+      randOne,
+      randTwo,
       timerID:0
     };
   }
@@ -72,8 +80,17 @@ export default class Addition extends React.Component {
     let el = document.getElementById('selected')
     el.setAttribute('id','')
     let answered = false
+    let randOne = this.rand(-5,5)
+    let randTwo = this.rand(-5,5)
+    if (randOne == 0) randOne++
+    if (randTwo == 0) randTwo++
+    if (randOne == randTwo) randTwo++
     this.setState({
-      answered,numOne:this.rand(0,9),numTwo:this.rand(0,9)
+      answered,
+      randOne,
+      randTwo,
+      numOne:this.rand(0,this.state.range),
+      numTwo:this.rand(0,this.state.range)
     })
   }
 
@@ -86,7 +103,7 @@ export default class Addition extends React.Component {
       answers = <LoginButton onClick={this.handleLoginClick} />;
     }*/
     return (
-      <div>
+      <div className="page-main">
         <ScoreBoard
           multiplier={this.state.multiplier}
           streak={this.state.streak}

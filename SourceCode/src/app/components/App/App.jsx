@@ -24,7 +24,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={props => <Main {...props} />} />
+        <Route exact path="/" render={props => <Addition {...props} />} />
         <Route path="/addition/" render={props => <Addition {...props} />} />
       </Switch>
     );

@@ -11,15 +11,20 @@
   border-radius: 8px;
   border: 4px solid black;
   outline:none;
+  // background:#ffb3b3;
+  &#selected{
+    border-color:red;
+  }
   &.correct{
     background:#aefb94;
+    &#selected{
+      border-color:green;
+    }
   }
   &.incorrect{
-    background:#ffb3b3;
+
   }
-  &#selected{
-    border-color:yellow;
-  }
+
   &.unanswered{
     background: white!important;
     &:active{

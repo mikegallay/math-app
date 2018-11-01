@@ -7,10 +7,10 @@
 import React from 'react';
 
 import './Addition.scss';
-// import GamePlay from '../GamePlay/GamePlay';
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
+import Modal from '../Modal/Modal';
 
 
 export default class Addition extends React.Component {
@@ -27,11 +27,15 @@ export default class Addition extends React.Component {
     this.state = {
       score:0,
       streak: 0,
-      correct:false,
+      correct:null,
       answered: false,
       multiplier: 1,
       health: 5,
       fullHealth: 5,
+      modalVisible:'init false',
+      modalTitle:'Game Over',
+      modalBody:'you are not good',
+      nextQuestionDelay:500,
       range: range,
       numOne:this.rand(0,range),
       numTwo:this.rand(0,range),
@@ -46,7 +50,9 @@ export default class Addition extends React.Component {
   }
 
   onAnswer(isCorrect){
-    console.log('answered correctly? ',isCorrect);
+    // prevent multiple button presses for same unanswer
+    if (this.state.answered) return;
+
     let answered = true;
     let correct = isCorrect;
     let multiplier = this.state.multiplier;
@@ -56,7 +62,7 @@ export default class Addition extends React.Component {
       multiplier = Math.floor(streak/5)+1
       let score = this.state.score + (100 * multiplier)
       this.setState({
-        score,streak,answered,multiplier,correct
+        score,streak,answered,multiplier,correct,modalVisible:false
       })
     }else{
       multiplier = 1;
@@ -64,9 +70,6 @@ export default class Addition extends React.Component {
       this.setState({
         streak:0,answered,multiplier,health,correct
       })
-      if (health==0){
-        console.log("Game Over");
-      }
     }
 
     if (this.state.timerid) {
@@ -74,8 +77,18 @@ export default class Addition extends React.Component {
     }
 
     this.state.timerid = setTimeout(() => {
-      this.nextQuestion()
-    }, 500);
+      if (this.state.health <= 0){
+        console.log("Game Over");
+        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect. Why don’t you try again?'
+        this.setState({
+          modalVisible:true,
+          modalTitle:'You’ve run out of health',
+          modalBody
+        })
+      }else{
+        this.nextQuestion()
+      }
+    }, this.state.nextQuestionDelay);
       }
 
   nextQuestion(){
@@ -91,6 +104,7 @@ export default class Addition extends React.Component {
     if (randTwo == 0) randTwo++
     if (randOne == randTwo) randTwo++
     if (randTwo == 0) randTwo++
+
     this.setState({
       answered,
       correct,
@@ -101,14 +115,13 @@ export default class Addition extends React.Component {
     })
   }
 
+  closeModal(){
+    this.setState({
+      modalVisible:false
+    })
+  }
+
   render() {
-    /*const isAnswered = this.state.answered;
-    let answers
-    if (isAnswered) {
-      answers = <LogoutButton onClick={this.handleLogoutClick} />;
-    } else {
-      answers = <LoginButton onClick={this.handleLoginClick} />;
-    }*/
     return (
       <div className="page-main">
         <ScoreBoard
@@ -134,6 +147,13 @@ export default class Addition extends React.Component {
           numTwo={this.state.numTwo}
           randOne={this.state.randOne}
           randTwo={this.state.randTwo}
+        />
+        <Modal
+          title={this.state.modalTitle}
+          body={this.state.modalBody}
+          score={this.state.score}
+          visible={this.state.modalVisible}
+          closeModal={()=>{this.closeModal()}}
         />
       </div>
     );

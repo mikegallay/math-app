@@ -13,12 +13,15 @@ export default class Streak extends React.Component {
     super(props);
 
     this.state = {};
+    /*<div id="streak" className={`streak-wrapper ${this.props.correct}`}>
+      <span className="streak-count">{this.props.streak}</span>
+    </div>*/
   }
 
   render() {
     return (
       <div className="streak-wrapper">
-        <span className="streak-count">{this.props.streak}</span>
+        <div className={`streak-count ${this.props.correct}`}>{this.props.streak}</div>
       </div>
     );
   }

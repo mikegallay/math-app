@@ -11,14 +11,17 @@
   border-radius: 8px;
   border: 4px solid black;
   outline:none;
+  transition: border .25s;
   // background:#ffb3b3;
   &#selected{
     border-color:red;
+    transition: border .5s;
   }
   &.correct{
     background:#aefb94;
     &#selected{
       border-color:green;
+      transition: border .5s;
     }
   }
   &.incorrect{

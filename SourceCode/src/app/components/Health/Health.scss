@@ -3,4 +3,18 @@
 
 .health-wrapper{
   margin-top: 4px;
+  .inactive{
+    // transition: background-color 1s;
+    animation-name: loseHealth;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+
+  }
+}
+
+@keyframes loseHealth {
+  0%  {background-color: black;transform:scale(1);}
+  15%  {background-color: red;opacity:1;transform:scale(1.5);}
+  80%  {background-color: red;opacity:1;transform:scale(.95);}
+  100%  {background-color: black;opacity:.3;transform:scale(1);}
 }

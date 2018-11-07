@@ -17,16 +17,26 @@ export default class Health extends React.Component {
     };
   }
 
-  render() {
-    return (
+  buildHealth(){
+    var bars = [];
+    for (var i = 0; i < this.props.fullHeath; i++) {
+      bars.push(i+1);
+    }
 
-      <div className="health-wrapper">
-        <HealthBlock status={this.props.health<1?'inactive':''}/>
-        <HealthBlock status={this.props.health<2?'inactive':''}/>
-        <HealthBlock status={this.props.health<3?'inactive':''}/>
-        <HealthBlock status={this.props.health<4?'inactive':''}/>
-        <HealthBlock status={this.props.health<5?'inactive':''}/>
-      </div>
+    return bars;
+
+  }
+
+  render() {
+    let bars = []
+    for (var i = 1; i < this.props.fullHeath+1; i++) {
+      bars.push(<HealthBlock key={i} status={this.props.health<i?'inactive':''} />);
+    }
+
+    return (
+      <div className='health-wrapper'>
+        {bars}
+    </div>
     );
   }
 }

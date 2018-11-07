@@ -22,7 +22,7 @@ export default class ScoreBoard extends React.Component {
   render() {
     return (
       <div className="scoreboard-wrapper">
-        <Health health={this.props.health} fullHeath={this.props.health}/>
+        <Health health={this.props.health} fullHeath={this.props.fullHealth}/>
         <Streak correct={this.props.correct} streak={this.props.streak}/>
         <Multiplier multiplier={this.props.multiplier}/>
         <Score score={this.props.score}/>

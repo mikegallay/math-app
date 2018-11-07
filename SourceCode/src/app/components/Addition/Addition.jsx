@@ -20,7 +20,8 @@ export default class Addition extends React.Component {
   constructor(props) {
     super(props);
 
-    let range = 10;
+    let range = 10
+    let fullHealth = 3
     let randOne = this.rand(-5,5)
     let randTwo = this.rand(-5,5)
     if (randOne == 0) randOne++
@@ -34,9 +35,9 @@ export default class Addition extends React.Component {
       correct:null,
       answered: false,
       multiplier: 1,
-      health: 5,
-      fullHealth: 5,
-      operator: 'sub',
+      health: fullHealth,
+      fullHealth,
+      operator: 'mul',
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',
@@ -114,13 +115,16 @@ export default class Addition extends React.Component {
     if (randOne == randTwo) randTwo++
     if (randTwo == 0) randTwo++
 
+    let numOne = this.rand(0,this.state.range)
+    let numTwo = this.rand(0,this.state.range)
+
     this.setState({
       answered,
       correct,
       randOne,
       randTwo,
-      numOne:this.rand(0,this.state.range),
-      numTwo:this.rand(0,this.state.range)
+      numOne,
+      numTwo
     })
   }
 
@@ -146,6 +150,13 @@ export default class Addition extends React.Component {
         answer = numOne
         numOne = (this.state.numOne + this.state.numTwo)
         return [numOne,numTwo,answer]
+    } else if (this.state.operator == 'mul'){
+        answer = this.state.numOne * this.state.numTwo
+        return [numOne,numTwo,answer]
+    } else if (this.state.operator == 'div'){
+        answer = numOne
+        numOne = (this.state.numOne * this.state.numTwo)
+        return [numOne,numTwo,answer]
     }
   }
 
@@ -154,7 +165,7 @@ export default class Addition extends React.Component {
     //let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
 
     let equation = this.calculateEquation()
-    console.log('equation',equation);
+    // console.log('equation',equation);
     let numOne = equation[0]
     let numTwo = equation[1]
     let answer = equation[2]

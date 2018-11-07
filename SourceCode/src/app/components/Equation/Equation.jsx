@@ -13,10 +13,10 @@ export default class Equation extends React.Component {
   constructor(props) {
     super(props);
 
-    const symbol = {'add' : '+', 'subtract':'-', 'multiply':'x', 'divide':'%'};
+    const symbol = {'add' : '+', 'sub':'–', 'mul':'x', 'div':'%'};
 
     this.state = {
-      operator : this.props.version ? symbol[this.props.version] : 'o'
+      operator : this.props.operator ? symbol[this.props.operator] : 'o'
     };
   }
 

@@ -12,6 +12,9 @@ import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
 import Modal from '../Modal/Modal';
 
+import AudioRight from '../AudioRight/AudioRight';
+import AudioWrong from '../AudioWrong/AudioWrong';
+
 
 export default class Addition extends React.Component {
   constructor(props) {
@@ -23,6 +26,7 @@ export default class Addition extends React.Component {
     if (randOne == 0) randOne++
     if (randTwo == 0) randTwo++
     if (randOne == randTwo) randTwo++
+    if (randTwo == 0) randTwo++
 
     this.state = {
       score:0,
@@ -32,15 +36,17 @@ export default class Addition extends React.Component {
       multiplier: 1,
       health: 5,
       fullHealth: 5,
+      operator: 'sub',
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',
-      nextQuestionDelay:500,
+      nextQuestionDelay: 1500,
       range: range,
       numOne:this.rand(0,range),
       numTwo:this.rand(0,range),
       randOne,
       randTwo,
+      soundFX:'null',
       timerID:0
     };
   }
@@ -48,6 +54,7 @@ export default class Addition extends React.Component {
   rand(min,max){
     return Math.floor(Math.random() * ((max-min)+1) + min)
   }
+
 
   onAnswer(isCorrect){
     // prevent multiple button presses for same unanswer
@@ -61,14 +68,16 @@ export default class Addition extends React.Component {
       let streak = this.state.streak + 1
       multiplier = Math.floor(streak/5)+1
       let score = this.state.score + (100 * multiplier)
+      let soundFX = 'right'
       this.setState({
-        score,streak,answered,multiplier,correct,modalVisible:false
+        soundFX,score,streak,answered,multiplier,correct,modalVisible:false
       })
     }else{
       multiplier = 1;
       let health = this.state.health - 1
+      let soundFX = 'wrong'
       this.setState({
-        streak:0,answered,multiplier,health,correct
+        soundFX,streak:0,answered,multiplier,health,correct
       })
     }
 
@@ -117,13 +126,45 @@ export default class Addition extends React.Component {
 
   closeModal(){
     this.setState({
-      modalVisible:false
+      modalVisible:false,
+      answered:false,
+      correct:null,
+      health:5,
+      score:0
     })
+    this.nextQuestion()
+  }
+
+  calculateEquation(){
+    let numOne = this.state.numOne
+    let numTwo = this.state.numTwo
+    let answer = numOne + numTwo
+
+    if (this.state.operator == 'add'){
+        return [numOne,numTwo,answer]
+    } else if (this.state.operator == 'sub'){
+        answer = numOne
+        numOne = (this.state.numOne + this.state.numTwo)
+        return [numOne,numTwo,answer]
+    }
   }
 
   render() {
+    let rightFX = (this.state.soundFX == 'right' && this.state.correct != null) ? true : false;
+    //let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
+
+    let equation = this.calculateEquation()
+    console.log('equation',equation);
+    let numOne = equation[0]
+    let numTwo = equation[1]
+    let answer = equation[2]
+
     return (
       <div className="page-main">
+
+        <AudioRight playing={rightFX}/>
+        {/* <AudioWrong playing={wrongFX}/> */}
+
         <ScoreBoard
           multiplier={this.state.multiplier}
           streak={this.state.streak}
@@ -135,16 +176,15 @@ export default class Addition extends React.Component {
         />
 
         <Equation
-          version="add"
-          numOne={this.state.numOne}
-          numTwo={this.state.numTwo}
+          operator={this.state.operator}
+          numOne={numOne}
+          numTwo={numTwo}
         />
 
         <Answers
           answered={this.state.answered}
           onAnswer={(correct)=>{this.onAnswer(correct)}}
-          numOne={this.state.numOne}
-          numTwo={this.state.numTwo}
+          answer={answer}
           randOne={this.state.randOne}
           randTwo={this.state.randTwo}
         />

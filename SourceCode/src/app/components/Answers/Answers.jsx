@@ -12,24 +12,24 @@ import Answer from '../Answer/Answer';
 export default class Answers extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('answers',props);
     this.state = {
       staticAnswers:[
-        {top:this.props.numOne,bot:this.props.numTwo,rand:0,status:'correct'},
-        {top:this.props.numOne,bot:this.props.numTwo,rand:this.props.randOne,status:''},
-        {top:this.props.numOne,bot:this.props.numTwo,rand:this.props.randTwo,status:''}
+        {answer:this.props.answer,rand:0,status:'correct'},
+        {answer:this.props.answer,rand:this.props.randOne,status:''},
+        {answer:this.props.answer,rand:this.props.randTwo,status:''}
       ],
 
     };
   }
 
   componentWillReceiveProps(nextProps){
-    console.log('np',nextProps,nextProps.answered);
+    // console.log('np',nextProps,nextProps.answered);
     if (nextProps.answered == false){
       let staticAnswers = [
-        {top:nextProps.numOne,bot:nextProps.numTwo,rand:0,status:'correct'},
-        {top:nextProps.numOne,bot:nextProps.numTwo,rand:nextProps.randOne,status:''},
-        {top:nextProps.numOne,bot:nextProps.numTwo,rand:nextProps.randTwo,status:''}
+        {answer:nextProps.answer,rand:0,status:'correct'},
+        {answer:nextProps.answer,rand:nextProps.randOne,status:''},
+        {answer:nextProps.answer,rand:nextProps.randTwo,status:''}
       ]
 
       let shuffledAnswers = this.shuffleArray(staticAnswers);
@@ -51,22 +51,18 @@ export default class Answers extends React.Component {
     return array;
   }
 
-  rand(min,max){
-    return Math.floor(Math.random() * ((max-min)+1) + min)
-  }
-
   render() {
 
     return(
       <div className="answers-wrapper">
-      {this.state.staticAnswers.map((answer,idx) => {
+      {this.state.staticAnswers.map((arr,idx) => {
           return (
             <Answer
               key={idx}
               answered={this.props.answered}
               onAnswer={this.props.onAnswer}
-              value={answer.top+answer.bot+answer.rand}
-              status={answer.status}
+              value={arr.answer+arr.rand}
+              status={arr.status}
             />
           );
         })}

@@ -7,6 +7,7 @@
 import React from 'react';
 
 import './Countdown.scss';
+import AudioCountdown from '../AudioCountdown/AudioCountdown';
 
 export default class Countdown extends React.Component {
   constructor(props) {
@@ -62,15 +63,18 @@ export default class Countdown extends React.Component {
 
     // Check if we're at zero.
     if (seconds == 0) {
-      clearInterval(this.timer);
-      this.props.onTimeExpired();
+      clearInterval(this.timer)
+      this.timer = setTimeout(this.props.onTimeExpired, 1000)
     }
   }
 
   render() {
+    let final5 = (this.state.seconds<6 && !this.props.gameover )
+
     return(
-      <div className={`countdown-wrapper ${(this.state.seconds<5)?'final-5':''}`}>
+      <div className={`countdown-wrapper ${(this.state.seconds<6)?'final-5':''}`}>
         {this.state.time.m}:{this.state.time.s}
+        <AudioCountdown playing={final5}/>
       </div>
     );
   }

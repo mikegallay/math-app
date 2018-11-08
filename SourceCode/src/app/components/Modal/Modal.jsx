@@ -25,7 +25,7 @@ export default class Modal extends React.Component {
             <img src={imageEmojiSunglasses} width="125" height="125"/>
             <h2>{this.props.title}</h2>
             <div className="font-normal" dangerouslySetInnerHTML={{__html:this.props.body}}/>
-            <Link className="back-btn" to="/gameplay/">Back to Main Menu</Link>
+            <Link className="back-btn" to="/">Back to Main Menu</Link>
           </div>
 
           <button

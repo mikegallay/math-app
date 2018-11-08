@@ -35,13 +35,14 @@ export default class Addition extends React.Component {
       correct:null,
       answered: false,
       multiplier: 1,
+      gameover: false,
       health: fullHealth,
       fullHealth,
       operator: 'mul',
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',
-      nextQuestionDelay: 1500,
+      nextQuestionDelay: 100,
       range: range,
       numOne:this.rand(0,range),
       numTwo:this.rand(0,range),
@@ -91,6 +92,7 @@ export default class Addition extends React.Component {
         console.log("Game Over");
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
         this.setState({
+          gameover: true,
           modalVisible:true,
           modalTitle:'You’ve run out of health',
           modalBody
@@ -107,6 +109,7 @@ export default class Addition extends React.Component {
     this.setState({
       modalVisible:true,
       modalTitle:'Time is up!',
+      gameover: true,
       modalBody
     })
   }
@@ -146,7 +149,8 @@ export default class Addition extends React.Component {
       health:this.state.fullHeath,
       streak:0,
       multiplier:1,
-      score:0
+      score:0,
+      gameover: false
     })
     this.nextQuestion()
   }
@@ -195,6 +199,7 @@ export default class Addition extends React.Component {
           correct={this.state.correct}
           score={this.state.score}
           mode="health"
+          gameover={this.state.gameover}
           fullHealth={this.state.fullHealth}
           health={this.state.health}
         />

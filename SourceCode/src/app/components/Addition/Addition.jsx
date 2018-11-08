@@ -21,7 +21,7 @@ export default class Addition extends React.Component {
     super(props);
 
     let range = 10
-    let fullHealth = 3
+    let fullHealth = 7
     let randOne = this.rand(-5,5)
     let randTwo = this.rand(-5,5)
     if (randOne == 0) randOne++
@@ -89,7 +89,7 @@ export default class Addition extends React.Component {
     this.state.timerid = setTimeout(() => {
       if (this.state.health <= 0){
         console.log("Game Over");
-        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect. Why don’t you try again?'
+        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
         this.setState({
           modalVisible:true,
           modalTitle:'You’ve run out of health',
@@ -99,7 +99,17 @@ export default class Addition extends React.Component {
         this.nextQuestion()
       }
     }, this.state.nextQuestionDelay);
-      }
+  }
+
+  timeExpired(){
+    console.log("Time Expired");
+    let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
+    this.setState({
+      modalVisible:true,
+      modalTitle:'Time is up!',
+      modalBody
+    })
+  }
 
   nextQuestion(){
     //remove selected id from chosen answer
@@ -133,7 +143,9 @@ export default class Addition extends React.Component {
       modalVisible:false,
       answered:false,
       correct:null,
-      health:5,
+      health:this.state.fullHeath,
+      streak:0,
+      multiplier:1,
       score:0
     })
     this.nextQuestion()
@@ -177,6 +189,7 @@ export default class Addition extends React.Component {
         {/* <AudioWrong playing={wrongFX}/> */}
 
         <ScoreBoard
+          onTimeExpired={()=>{this.timeExpired()}}
           multiplier={this.state.multiplier}
           streak={this.state.streak}
           correct={this.state.correct}

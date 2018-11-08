@@ -17,16 +17,6 @@ export default class Health extends React.Component {
     };
   }
 
-  buildHealth(){
-    var bars = [];
-    for (var i = 0; i < this.props.fullHeath; i++) {
-      bars.push(i+1);
-    }
-
-    return bars;
-
-  }
-
   render() {
     let bars = []
     for (var i = 1; i < this.props.fullHeath+1; i++) {

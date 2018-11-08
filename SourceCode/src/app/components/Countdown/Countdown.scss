@@ -1,0 +1,9 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.countdown-wrapper{
+  font-size: 25px;
+  &.final-5{
+    color:red;
+  }
+}

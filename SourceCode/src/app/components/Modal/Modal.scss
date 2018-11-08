@@ -32,7 +32,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 90%;
+      height: 80%;
       width: 90%;
       text-align: center;
       padding: 5%;
@@ -47,6 +47,21 @@
       }
       .font-normal{
         font-weight: normal;
+      }
+    }
+
+    .back-btn{
+      padding: 5px 15px 5px;
+      margin-top: 20px;
+      font-size:15px;
+      background-color: lightgreen;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 5px;
+      border: 2px solid black;
+      color:black;
+      &:active, &:visited{
+        color:black;
       }
     }
 

@@ -35,9 +35,18 @@
 }*/
 .streak-bg{
   position:absolute;
-  top: -8px;
+  top: -7px;
   left: -2px;
-  opacity: 0.5;
+  opacity: 0.4;
+  img{
+    transform-origin: center center;
+    transition: transform .7s;
+    transform:scale(.8);
+    &.active{
+      transform:scale(1.2);
+      transition: transform .25s;
+    }
+  }
 }
 .streak-count{
   opacity:1;

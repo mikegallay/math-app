@@ -19,10 +19,13 @@ export default class Main extends React.Component {
   render() {
     return (
       <main className="page-main">
-        Main route | <Link to="/gameplay/">Play Game</Link>
+        <h1>MathApp</h1>
         <div className="gameModes">
-          <a href="/addition/">Addition</a>
-          <a href="/subtraction/">Subtraction</a>
+          <Link to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'health'} }}>Addition Health</Link>
+          <Link to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown'} }}>Addition Timer</Link>
+
+          <Link to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'health'} }}>Subtraction Health</Link>
+          <Link to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'countdown'} }}>Subtraction Timer</Link>
         </div>
       </main>
     );

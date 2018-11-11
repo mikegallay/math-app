@@ -17,14 +17,22 @@ export default class ScoreBoard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    const {gamemode} = props
+
+    console.log('gm',props.gamemode)
+
+    this.state = {}
   }
 
   render() {
+    let gamemode = <Countdown gameover={this.props.gameover} onTimeExpired={this.props.onTimeExpired}/>
+
+    if (this.props.gamemode=='health'){
+      gamemode = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>
+    }
     return (
       <div className="scoreboard-wrapper">
-        <Countdown gameover={this.props.gameover} onTimeExpired={this.props.onTimeExpired}/>
-        {/* <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/> */}
+        {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>
         <Multiplier multiplier={this.props.multiplier}/>
         <Score score={this.props.score}/>

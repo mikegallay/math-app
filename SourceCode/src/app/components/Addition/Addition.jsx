@@ -38,7 +38,7 @@ export default class Addition extends React.Component {
       gameover: false,
       health: fullHealth,
       fullHealth,
-      operator: 'mul',
+      operator: 'sub',
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',

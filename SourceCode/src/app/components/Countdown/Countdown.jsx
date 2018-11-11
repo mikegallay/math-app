@@ -64,7 +64,12 @@ export default class Countdown extends React.Component {
     // Check if we're at zero.
     if (seconds == 0) {
       clearInterval(this.timer)
-      this.timer = setTimeout(this.props.onTimeExpired, 1000)
+      this.timer = setTimeout(()=>{
+        this.setState({
+          time: this.secondsToTime(6), seconds: 6
+        });
+        this.props.onTimeExpired()
+      }, 1000)
     }
   }
 

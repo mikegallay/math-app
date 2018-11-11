@@ -32,10 +32,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 90%;
+      height: 100%;
       width: 90%;
       text-align: center;
-      padding: 5%;
+      padding: 0 5%;
 
       h2,h3{
         text-transform: uppercase;
@@ -50,19 +50,28 @@
       }
     }
 
-    .back-btn{
+    .modal-btn{
       padding: 5px 15px 5px;
       margin-top: 20px;
       font-size:15px;
-      background-color: lightgreen;
+      background-color: white;
       text-decoration: none;
       text-transform: uppercase;
       border-radius: 5px;
       border: 2px solid black;
       color:black;
+      font-weight: bold;
       &:active, &:visited{
         color:black;
       }
+    }
+
+    .back-btn{
+      background-color: pink;
+    }
+
+    .again-btn{
+      background-color: lightgreen;
     }
 
     .close-btn{

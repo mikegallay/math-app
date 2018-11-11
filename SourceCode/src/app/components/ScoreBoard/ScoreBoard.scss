@@ -5,11 +5,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 3px solid black;
+  border-bottom: 2px solid black;
+  height: 38px;
+  top:-5px;
+  position: relative;
   .back-btn{
     background: black;
     color: white;
     text-decoration: none;
-    padding: 9px 11px 8px;
+    top:5px;
+    position: relative;
+    // padding: 9px 11px 8px;
+        height: 20px;
+        width:20px;
   }
 }

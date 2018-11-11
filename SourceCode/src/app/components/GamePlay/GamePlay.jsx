@@ -25,7 +25,7 @@ export default class GamePlay extends React.Component {
     console.log(operator,gamemode)
 
     let range = 10
-    let fullHealth = 7
+    let fullHealth = 5
     let randOne = this.rand(-5,5)
     let randTwo = this.rand(-5,5)
     if (randOne == 0) randOne++

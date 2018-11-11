@@ -1,5 +1,5 @@
 /**
- * Equation component
+ * ScoreBoard component
  *
  * Description of component... lorem ipsum dolor sit amet consectetur adipiscing elit
  */
@@ -10,6 +10,7 @@ import Health from '../Health/Health';
 import Countdown from '../Countdown/Countdown';
 import Multiplier from '../Multiplier/Multiplier';
 import Streak from '../Streak/Streak';
+import { Link } from 'react-router-dom';
 
 import './ScoreBoard.scss';
 
@@ -32,6 +33,7 @@ export default class ScoreBoard extends React.Component {
     }
     return (
       <div className="scoreboard-wrapper">
+        <Link to='/' className='back-btn'>&#8592;</Link>
         {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>
         <Multiplier multiplier={this.props.multiplier}/>

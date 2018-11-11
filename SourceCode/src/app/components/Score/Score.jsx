@@ -16,9 +16,9 @@ export default class Score extends React.Component {
   }
 
   inactiveScore(score){
-    let zeros = '0000000';
+    let zeros = '000000';
     if (score > 0){
-      let scoreLength = 7 - score.toString().length
+      let scoreLength = zeros.length - score.toString().length
       zeros = ''
 
       for (let i=0;i<scoreLength;i++){

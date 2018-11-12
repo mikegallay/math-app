@@ -13,8 +13,12 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
+    let gamelength = 3
+
     this.state = {
-      time: {}, seconds: 6
+      time: {},
+      seconds: gamelength, gamelength,
+      timerStarted: false
     };
 
     this.timer = 0;
@@ -24,13 +28,31 @@ export default class Countdown extends React.Component {
 
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
+    this.setState({ time: timeLeftVar, timerStarted: true});
     this.startTimer()
+    this._ismounted = true;
+  }
+
+  componentWillUnmount() {
+     this._ismounted = false;
+  }
+
+  componentDidUpdate(props){
+    console.log('ssss',props,this.state.timerStarted);
+    if (this.props.timerRestart && !this.state.timerStarted) {
+      console.log('hey');
+      this.timer = 0;
+      this.startTimer();
+      this.setState({ timerStarted: true});
+    }
   }
 
   startTimer() {
     if (this.timer == 0 && this.state.seconds > 0) {
       this.timer = setInterval(this.countDown, 1000);
+      this.state = {
+        timerStarted: true
+      };
     }
   }
 
@@ -54,6 +76,13 @@ export default class Countdown extends React.Component {
   }
 
   countDown() {
+
+    // if the component was unmounted kill timer
+    if (!this._ismounted) {
+      clearInterval(this.timer)
+      return;
+    }
+
     // Remove one second, set state so a re-render happens.
     let seconds = this.state.seconds - 1;
     this.setState({
@@ -63,10 +92,14 @@ export default class Countdown extends React.Component {
 
     // Check if we're at zero.
     if (seconds == 0) {
+      this.setState({
+        timerStarted: false
+      })
       clearInterval(this.timer)
       this.timer = setTimeout(()=>{
         this.setState({
-          time: this.secondsToTime(6), seconds: 6
+          time: this.secondsToTime(this.state.gamelength),
+          seconds: this.state.gamelength
         });
         this.props.onTimeExpired()
       }, 1000)
@@ -74,6 +107,7 @@ export default class Countdown extends React.Component {
   }
 
   render() {
+
     let final5 = (this.state.seconds<6 && !this.props.gameover )
 
     return(

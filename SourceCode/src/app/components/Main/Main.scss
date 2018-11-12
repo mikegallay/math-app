@@ -4,21 +4,50 @@
 .page-main {
   padding:1rem;
   text-align: center;
+  h1{
+    margin-bottom: 0.25em;
+  }
 }
 
-.gameModes{
+.credit,.instructions{
+  font-weight: normal;
+}
+
+.instructions{
+  margin-top: 0;
+  margin-bottom:2em;
+}
+
+.main-menu{
   display:flex;
   flex-direction: column;
   width:100%;
-  a{
+  align-items: center;
+  .menu-btns{
     background: white;
     padding: .75em 0;
     border-radius: 8px;
     border: 4px solid black;
-    width:70%;
-    text-align: center;
-    text-decoration: none;
-    color:black;
-    margin:0 auto 1em;
+    width:80%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1em;
+    a{
+      text-align: center;
+      text-decoration: none;
+      color:black;
+      margin:0 auto;
+    }
+    .stopwatch-btn{
+      margin-right: 14px;
+    }
+    .health-btn{
+      margin-left: 14px;
+    }
+    span.menu-name {
+      top: 5px;
+      position: relative;
+    }
   }
+
 }

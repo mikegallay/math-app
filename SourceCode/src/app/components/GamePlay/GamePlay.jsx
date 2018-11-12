@@ -54,6 +54,7 @@ export default class GamePlay extends React.Component {
       randOne,
       randTwo,
       soundFX:'null',
+      timerRestart: false,
       timerID:0
     };
   }
@@ -115,14 +116,16 @@ export default class GamePlay extends React.Component {
       modalVisible:true,
       modalTitle:'Time is up!',
       gameover: true,
+      timerRestart:false,
       modalBody
     })
   }
 
   nextQuestion(){
+
     //remove selected id from chosen answer
     let el = document.getElementById('selected')
-    el.setAttribute('id','')
+    if (el) el.setAttribute('id','')
 
     let correct = null
     let answered = false
@@ -155,9 +158,16 @@ export default class GamePlay extends React.Component {
       streak:0,
       multiplier:1,
       score:0,
-      gameover: false
+      gameover:false
     })
     this.nextQuestion()
+
+    //if timer isn't started (new game) start it up.
+    if (this.state.gamemode == 'countdown'){
+      this.setState({
+        timerRestart:true
+      })
+    }
   }
 
   calculateEquation(){
@@ -205,6 +215,7 @@ export default class GamePlay extends React.Component {
           score={this.state.score}
           gamemode={this.state.gamemode}
           gameover={this.state.gameover}
+          timerRestart={this.state.timerRestart}
           fullHealth={this.state.fullHealth}
           health={this.state.health}
         />

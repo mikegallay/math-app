@@ -87,6 +87,7 @@ export default class GamePlay extends React.Component {
     }else{
       multiplier = 1;
       let health = this.state.health - 1
+      console.log('asdasdfasdf',health);
       let soundFX = 'wrong'
       this.setState({
         soundFX,streak:0,answered,multiplier,health,correct
@@ -168,7 +169,7 @@ export default class GamePlay extends React.Component {
       modalVisible:false,
       answered:false,
       correct:null,
-      health:this.state.fullHeath,
+      health:this.state.fullHealth,
       streak:0,
       multiplier:1,
       score:0,

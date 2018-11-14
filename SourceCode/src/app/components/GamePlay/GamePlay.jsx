@@ -20,10 +20,12 @@ export default class GamePlay extends React.Component {
   constructor(props) {
     super(props);
 
-    const {operator, gamemode} = props.location.state
+    const {operator, gamemode, constant} = props.location.state
 
-    console.log(operator,gamemode)
+    console.log('props',constant);
 
+    let nextQuestionDelay = 50
+    if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
     let fullHealth = 3
     let randOne = this.rand(-5,5)
@@ -44,12 +46,13 @@ export default class GamePlay extends React.Component {
       fullHealth,
       operator,
       gamemode,
+      constant,
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',
-      nextQuestionDelay: 100,
+      nextQuestionDelay,
       range: range,
-      numOne:this.rand(0,range),
+      numOne:constant?constant:this.rand(0,range),
       numTwo:this.rand(0,range),
       randOne,
       randTwo,
@@ -136,7 +139,7 @@ export default class GamePlay extends React.Component {
     if (randOne == randTwo) randTwo++
     if (randTwo == 0) randTwo++
 
-    let numOne = this.rand(0,this.state.range)
+    let numOne = this.state.constant?this.state.constant:this.rand(0,this.state.range)
     let numTwo = this.rand(0,this.state.range)
 
     this.setState({

@@ -13,7 +13,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 3
+    let gamelength = 60
 
     this.state = {
       time: {},
@@ -92,14 +92,12 @@ export default class Countdown extends React.Component {
 
     // Check if we're at zero.
     if (seconds == 0) {
-      this.setState({
-        timerStarted: false
-      })
       clearInterval(this.timer)
       this.timer = setTimeout(()=>{
         this.setState({
           time: this.secondsToTime(this.state.gamelength),
-          seconds: this.state.gamelength
+          seconds: this.state.gamelength,
+          timerStarted: false
         });
         this.props.onTimeExpired()
       }, 1000)

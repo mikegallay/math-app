@@ -21,8 +21,8 @@ export default class Main extends React.Component {
   render() {
     return (
       <main className="page-main">
-        <h1>Math in a Minute</h1>
-        <p className="instructions">Choose the game mode for the math skill you&nbsp;want to practice. </p>
+        <h1>Math 60</h1>
+        <p className="instructions">Choose the game mode for the math skill you&nbsp;want&nbsp;to&nbsp;practice. </p>
         <p className="instructions"><img className="legend" src={heart} width="25" height="25"/><span> Play until you make 3 mistakes</span></p>
         <p className="instructions"><img className="legend" src={stopwatch} width="25" height="25"/><span> Answer as many as you can in 60 seconds</span></p>
         <div className="main-menu">
@@ -66,8 +66,19 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <p className="instructions mb10">Times Tables</p>
           <div className="menu-btns">
+            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'health', randomize:true} }}>
+              <img src={heart} width="25" height="25"/>
+            </Link>
+            <span className="menu-name">RANDOMIZE ALL</span>
+            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown', randomize:true} }}>
+              <img src={stopwatch} width="25" height="25"/>
+            </Link>
+          </div>
+
+
+          {/* <p className="instructions section"><strong>Times Tables</strong></p>
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:9} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -77,7 +88,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:8} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -87,7 +98,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:7} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -97,7 +108,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:6} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -107,7 +118,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:5} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -117,7 +128,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:4} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -127,7 +138,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:3} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -137,7 +148,7 @@ export default class Main extends React.Component {
             </Link>
           </div>
 
-          <div className="menu-btns">
+          <div className="menu-btns times-table">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:2} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
@@ -145,10 +156,10 @@ export default class Main extends React.Component {
             <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:2} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
-          </div>
+          </div> */}
 
         </div>
-        <p className="credit">©2018 Mike Gallay</p>
+        <p className="credit">© 2018 Mike Gallay</p>
       </main>
     );
   }

@@ -16,8 +16,18 @@ export default class Equation extends React.Component {
     const symbol = {'add' : '+', 'sub':'–', 'mul':'x', 'div':'%'};
 
     this.state = {
+      symbol,
       operator : this.props.operator ? symbol[this.props.operator] : 'o'
     };
+  }
+
+  componentDidUpdate(props){
+    console.log('eq',props.operator, this.state.operator);
+    if (props.operator && this.state.symbol[props.operator] != this.state.operator){
+      this.setState({
+        operator:this.state.symbol[props.operator]
+      })
+    }
   }
 
   render() {

@@ -20,9 +20,9 @@ export default class GamePlay extends React.Component {
   constructor(props) {
     super(props);
 
-    const {operator, gamemode, constant} = props.location.state
+    const {operator, gamemode, constant, randomize} = props.location.state
 
-    console.log('props',constant);
+    // console.log('props',randomize);
 
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
@@ -47,6 +47,7 @@ export default class GamePlay extends React.Component {
       operator,
       gamemode,
       constant,
+      randomize,
       modalVisible:'init false',
       modalTitle:'Game Over',
       modalBody:'you are not good',
@@ -107,6 +108,13 @@ export default class GamePlay extends React.Component {
           modalBody
         })
       }else{
+        let operator = this.state.operator
+        let operators = ['add','sub','mul','div']
+        if (this.state.randomize) operator = operators[this.rand(0,operators.length-1)]
+        this.setState({
+          operator
+        })
+
         this.nextQuestion()
       }
     }, this.state.nextQuestionDelay);
@@ -142,6 +150,8 @@ export default class GamePlay extends React.Component {
     let numOne = this.state.constant?this.state.constant:this.rand(0,this.state.range)
     let numTwo = this.rand(0,this.state.range)
 
+
+
     this.setState({
       answered,
       correct,
@@ -150,6 +160,7 @@ export default class GamePlay extends React.Component {
       numOne,
       numTwo
     })
+
   }
 
   closeModal(){

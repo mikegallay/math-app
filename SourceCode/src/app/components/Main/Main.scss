@@ -16,6 +16,9 @@
 .instructions{
   margin-top: 0;
   margin-bottom:0em;
+  &.section{
+    margin:1em auto;
+  }
 }
 
 .mb10{
@@ -43,6 +46,9 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 1em;
+    &.times-table{
+      background-color: lightblue;
+    }
     a{
       text-align: center;
       text-decoration: none;

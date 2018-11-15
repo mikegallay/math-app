@@ -13,12 +13,12 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 60
+    let gamelength = 10
 
     this.state = {
       time: {},
       seconds: gamelength, gamelength,
-      timerStarted: false
+      timerStarted: 'false'
     };
 
     this.timer = 0;
@@ -28,7 +28,9 @@ export default class Countdown extends React.Component {
 
   componentDidMount() {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar, timerStarted: true});
+
+    this.setState({ time: timeLeftVar });
+
     this.startTimer()
     this._ismounted = true;
   }
@@ -37,22 +39,18 @@ export default class Countdown extends React.Component {
      this._ismounted = false;
   }
 
-  componentDidUpdate(props){
-    console.log('ssss',props,this.state.timerStarted);
-    if (this.props.timerRestart && !this.state.timerStarted) {
-      console.log('hey');
-      this.timer = 0;
+  componentDidUpdate(){
+    if (this.props.restart && !this.state.timerStarted) {
+      clearInterval(this.timer)
       this.startTimer();
-      this.setState({ timerStarted: true});
     }
   }
 
   startTimer() {
-    if (this.timer == 0 && this.state.seconds > 0) {
+    console.log('start timer');
+    this.setState({ timerStarted: true });
+    if (this.state.seconds > 0) {
       this.timer = setInterval(this.countDown, 1000);
-      this.state = {
-        timerStarted: true
-      };
     }
   }
 
@@ -76,8 +74,9 @@ export default class Countdown extends React.Component {
   }
 
   countDown() {
+    console.log('countdown',this.state.seconds);
 
-    // if the component was unmounted kill timer
+    // if the component was unmounted, kill timer
     if (!this._ismounted) {
       clearInterval(this.timer)
       return;
@@ -86,13 +85,14 @@ export default class Countdown extends React.Component {
     // Remove one second, set state so a re-render happens.
     let seconds = this.state.seconds - 1;
     this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds,
+      seconds,
+      time: this.secondsToTime(seconds)
     });
 
     // Check if we're at zero.
     if (seconds == 0) {
       clearInterval(this.timer)
+
       this.timer = setTimeout(()=>{
         this.setState({
           time: this.secondsToTime(this.state.gamelength),

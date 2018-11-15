@@ -22,8 +22,6 @@ export default class GamePlay extends React.Component {
 
     const {operator, gamemode, constant, randomize} = props.location.state
 
-    // console.log('props',randomize);
-
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
@@ -42,6 +40,7 @@ export default class GamePlay extends React.Component {
       answered: false,
       multiplier: 1,
       gameover: false,
+      restart:false,
       health: fullHealth,
       fullHealth,
       operator,
@@ -58,7 +57,6 @@ export default class GamePlay extends React.Component {
       randOne,
       randTwo,
       soundFX:'null',
-      timerRestart: false,
       timerID:0
     };
   }
@@ -87,7 +85,6 @@ export default class GamePlay extends React.Component {
     }else{
       multiplier = 1;
       let health = this.state.health - 1
-      console.log('asdasdfasdf',health);
       let soundFX = 'wrong'
       this.setState({
         soundFX,streak:0,answered,multiplier,health,correct
@@ -128,7 +125,6 @@ export default class GamePlay extends React.Component {
       modalVisible:true,
       modalTitle:'Time is up!',
       gameover: true,
-      timerRestart:false,
       modalBody
     })
   }
@@ -151,17 +147,15 @@ export default class GamePlay extends React.Component {
     let numOne = this.state.constant?this.state.constant:this.rand(0,this.state.range)
     let numTwo = this.rand(0,this.state.range)
 
-
-
     this.setState({
       answered,
       correct,
       randOne,
       randTwo,
       numOne,
-      numTwo
+      numTwo,
+      restart:false
     })
-
   }
 
   closeModal(){
@@ -173,16 +167,15 @@ export default class GamePlay extends React.Component {
       streak:0,
       multiplier:1,
       score:0,
-      gameover:false
+      gameover:false,
+      restart:true
     })
-    this.nextQuestion()
 
-    //if timer isn't started (new game) start it up.
-    if (this.state.gamemode == 'countdown'){
-      this.setState({
-        timerRestart:true
-      })
-    }
+    this.state.timerid = setTimeout(() => {
+      this.nextQuestion()
+    }, 300);
+
+
   }
 
   calculateEquation(){
@@ -211,7 +204,6 @@ export default class GamePlay extends React.Component {
     //let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
 
     let equation = this.calculateEquation()
-    // console.log('equation',equation);
     let numOne = equation[0]
     let numTwo = equation[1]
     let answer = equation[2]
@@ -230,7 +222,7 @@ export default class GamePlay extends React.Component {
           score={this.state.score}
           gamemode={this.state.gamemode}
           gameover={this.state.gameover}
-          timerRestart={this.state.timerRestart}
+          restart={this.state.restart}
           fullHealth={this.state.fullHealth}
           health={this.state.health}
         />

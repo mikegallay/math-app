@@ -22,7 +22,7 @@ export default class Equation extends React.Component {
   }
 
   componentDidUpdate(props){
-    console.log('eq',props.operator, this.state.operator);
+    // console.log('eq',props.operator, this.state.operator);
     if (props.operator && this.state.symbol[props.operator] != this.state.operator){
       this.setState({
         operator:this.state.symbol[props.operator]

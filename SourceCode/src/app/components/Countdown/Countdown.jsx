@@ -7,13 +7,14 @@
 import React from 'react';
 
 import './Countdown.scss';
-import AudioCountdown from '../AudioCountdown/AudioCountdown';
+// import AudioCountdown from '../AudioCountdown/AudioCountdown';
+import ReactHowler from 'react-howler'
 
 export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 10
+    let gamelength = 6
 
     this.state = {
       time: {},
@@ -111,7 +112,10 @@ export default class Countdown extends React.Component {
     return(
       <div className={`countdown-wrapper ${(this.state.seconds<6)?'final-5':''}`}>
         {this.state.time.m}:{this.state.time.s}
-        <AudioCountdown playing={final5}/>
+        <ReactHowler
+        src='http://michaelgallay.com/playground/math/audio/countdown.mp3'
+        playing={final5}
+      />
       </div>
     );
   }

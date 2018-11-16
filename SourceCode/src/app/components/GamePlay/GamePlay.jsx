@@ -5,16 +5,13 @@
  */
 
 import React from 'react';
+import ReactHowler from 'react-howler'
 
 import './GamePlay.scss';
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
 import Modal from '../Modal/Modal';
-
-import AudioRight from '../AudioRight/AudioRight';
-import AudioWrong from '../AudioWrong/AudioWrong';
-
 
 export default class GamePlay extends React.Component {
   constructor(props) {
@@ -56,7 +53,7 @@ export default class GamePlay extends React.Component {
       numTwo:this.rand(0,range),
       randOne,
       randTwo,
-      soundFX:'null',
+      soundFX:null,
       timerID:0
     };
   }
@@ -96,7 +93,7 @@ export default class GamePlay extends React.Component {
     }
 
     this.state.timerid = setTimeout(() => {
-      if (this.state.health <= 0){
+      if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
         this.setState({
@@ -110,7 +107,7 @@ export default class GamePlay extends React.Component {
         let operators = ['add','sub','mul','div']
         if (this.state.randomize) operator = operators[this.rand(0,operators.length-1)]
         this.setState({
-          operator
+          operator,soundFX:null
         })
 
         this.nextQuestion()
@@ -154,6 +151,7 @@ export default class GamePlay extends React.Component {
       randTwo,
       numOne,
       numTwo,
+      soundFX:null,
       restart:false
     })
   }
@@ -201,7 +199,7 @@ export default class GamePlay extends React.Component {
 
   render() {
     let rightFX = (this.state.soundFX == 'right' && this.state.correct != null) ? true : false;
-    //let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
+    let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
 
     let equation = this.calculateEquation()
     let numOne = equation[0]
@@ -211,8 +209,15 @@ export default class GamePlay extends React.Component {
     return (
       <div className="page-main">
 
-        <AudioRight playing={rightFX}/>
-        {/* <AudioWrong playing={wrongFX}/> */}
+        <ReactHowler
+          src='http://michaelgallay.com/playground/math/audio/right.mp3'
+          playing={rightFX}
+        />
+
+        <ReactHowler
+          src='http://michaelgallay.com/playground/math/audio/wrong.mp3'
+          playing={wrongFX}
+        />
 
         <ScoreBoard
           onTimeExpired={()=>{this.timeExpired()}}

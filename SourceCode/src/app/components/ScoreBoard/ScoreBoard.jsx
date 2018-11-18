@@ -36,7 +36,7 @@ export default class ScoreBoard extends React.Component {
         <Link to='/' className='back-btn'>x</Link>
         {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>
-        <Multiplier multiplier={this.props.multiplier}/>
+        <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>
         <Score score={this.props.score}/>
       </div>
     );

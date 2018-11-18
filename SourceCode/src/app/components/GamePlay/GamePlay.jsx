@@ -146,8 +146,6 @@ export default class GamePlay extends React.Component {
 
   nextQuestion(){
 
-    this.stopAudio()
-
     //remove selected id from chosen answer
     let el = document.getElementById('selected')
     if (el) el.setAttribute('id','')
@@ -171,12 +169,10 @@ export default class GamePlay extends React.Component {
       randTwo,
       numOne,
       numTwo,
-      restart:false,
-      rightFX:false,
-      wrongFX:false,
-      levelFX:false
+      restart:false
     })
 
+    if (this.state.gamemode == 'health') this.stopAudio()
 
   }
 

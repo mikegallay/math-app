@@ -18,8 +18,10 @@ export default class Multiplier extends React.Component {
   }
 
   render() {
+    let status = (this.props.streak != 0 && this.props.streak%5==0)?'level-up':''
+
     return (
-      <div className="multiplier-wrapper">{this.props.multiplier}x</div>
+      <div className={`multiplier-wrapper ${status}`}>{this.props.multiplier}x</div>
     );
   }
 

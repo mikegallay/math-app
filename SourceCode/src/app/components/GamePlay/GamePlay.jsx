@@ -20,9 +20,9 @@ export default class GamePlay extends React.Component {
     const {operator, gamemode, constant, randomize} = props.location.state
 
     let nextQuestionDelay = 50
-    if (gamemode == 'health') nextQuestionDelay = 1000
+    // if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
-    let fullHealth = 3
+    let fullHealth = 30
     let randOne = this.rand(-5,5)
     let randTwo = this.rand(-5,5)
     if (randOne == 0) randOne++
@@ -53,9 +53,11 @@ export default class GamePlay extends React.Component {
       numTwo:this.rand(0,range),
       randOne,
       randTwo,
-      soundFX:null,
-      timerID:0
+      timerID:0,
+      rightFX:false,
+      wrongFX:false
     };
+
   }
 
   rand(min,max){
@@ -67,6 +69,9 @@ export default class GamePlay extends React.Component {
     // prevent multiple button presses for same unanswer
     if (this.state.answered) return;
 
+    this.rightFX.stop()
+    this.wrongFX.stop()
+
     let answered = true;
     let correct = isCorrect;
     let multiplier = this.state.multiplier;
@@ -75,16 +80,15 @@ export default class GamePlay extends React.Component {
       let streak = this.state.streak + 1
       multiplier = Math.floor(streak/5)+1
       let score = this.state.score + (100 * multiplier)
-      let soundFX = 'right'
       this.setState({
-        soundFX,score,streak,answered,multiplier,correct,modalVisible:false
+        score,streak,answered,multiplier,correct,modalVisible:false,
+        rightFX:true,wrongFX:false
       })
     }else{
       multiplier = 1;
       let health = this.state.health - 1
-      let soundFX = 'wrong'
       this.setState({
-        soundFX,streak:0,answered,multiplier,health,correct
+        streak:0,answered,multiplier,health,correct,rightFX:false,wrongFX:true
       })
     }
 
@@ -100,15 +104,15 @@ export default class GamePlay extends React.Component {
           gameover: true,
           modalVisible:true,
           modalTitle:'You’ve run out of health',
+          rightFX:false,
+          wrongFX:false,
           modalBody
         })
       }else{
         let operator = this.state.operator
         let operators = ['add','sub','mul','div']
         if (this.state.randomize) operator = operators[this.rand(0,operators.length-1)]
-        this.setState({
-          operator,soundFX:null
-        })
+        this.setState({operator})
 
         this.nextQuestion()
       }
@@ -118,10 +122,13 @@ export default class GamePlay extends React.Component {
   timeExpired(){
     console.log("Time Expired");
     let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
+
     this.setState({
       modalVisible:true,
       modalTitle:'Time is up!',
       gameover: true,
+      rightFX:false,
+      wrongFX:false,
       modalBody
     })
   }
@@ -151,7 +158,6 @@ export default class GamePlay extends React.Component {
       randTwo,
       numOne,
       numTwo,
-      soundFX:null,
       restart:false
     })
   }
@@ -172,7 +178,6 @@ export default class GamePlay extends React.Component {
     this.state.timerid = setTimeout(() => {
       this.nextQuestion()
     }, 300);
-
 
   }
 
@@ -198,9 +203,6 @@ export default class GamePlay extends React.Component {
   }
 
   render() {
-    let rightFX = (this.state.soundFX == 'right' && this.state.correct != null) ? true : false;
-    let wrongFX = (this.state.soundFX == 'wrong' && this.state.correct != null) ? true : false;
-
     let equation = this.calculateEquation()
     let numOne = equation[0]
     let numTwo = equation[1]
@@ -210,13 +212,15 @@ export default class GamePlay extends React.Component {
       <div className="page-main">
 
         <ReactHowler
-          src='http://michaelgallay.com/playground/math/audio/right.mp3'
-          playing={rightFX}
+          src='http://math.michaelgallay.com/audio/right.mp3'
+          playing={this.state.rightFX}
+          ref={(ref) => (this.rightFX = ref)}
         />
 
         <ReactHowler
-          src='http://michaelgallay.com/playground/math/audio/wrong.mp3'
-          playing={wrongFX}
+          src='http://math.michaelgallay.com/audio/wrong.mp3'
+          playing={this.state.wrongFX}
+          ref={(ref) => (this.wrongFX = ref)}
         />
 
         <ScoreBoard

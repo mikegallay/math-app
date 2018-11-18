@@ -14,7 +14,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 6
+    let gamelength = 60
 
     this.state = {
       time: {},
@@ -113,7 +113,7 @@ export default class Countdown extends React.Component {
       <div className={`countdown-wrapper ${(this.state.seconds<6)?'final-5':''}`}>
         {this.state.time.m}:{this.state.time.s}
         <ReactHowler
-        src='http://michaelgallay.com/playground/math/audio/countdown.mp3'
+        src='http://math.michaelgallay.com/audio/countdown.mp3'
         playing={final5}
       />
       </div>

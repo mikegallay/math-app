@@ -20,9 +20,9 @@ export default class GamePlay extends React.Component {
     const {operator, gamemode, constant, randomize} = props.location.state
 
     let nextQuestionDelay = 50
-    // if (gamemode == 'health') nextQuestionDelay = 1000
+    if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
-    let fullHealth = 30
+    let fullHealth = 3
     let randOne = this.rand(-5,5)
     let randTwo = this.rand(-5,5)
     if (randOne == 0) randOne++
@@ -55,7 +55,8 @@ export default class GamePlay extends React.Component {
       randTwo,
       timerID:0,
       rightFX:false,
-      wrongFX:false
+      wrongFX:false,
+      levelFX:false
     };
 
   }
@@ -64,13 +65,18 @@ export default class GamePlay extends React.Component {
     return Math.floor(Math.random() * ((max-min)+1) + min)
   }
 
+  stopAudio(){
+    this.rightFX.stop()
+    this.wrongFX.stop()
+    this.levelFX.stop()
+  }
+
 
   onAnswer(isCorrect){
     // prevent multiple button presses for same unanswer
     if (this.state.answered) return;
 
-    this.rightFX.stop()
-    this.wrongFX.stop()
+    this.stopAudio()
 
     let answered = true;
     let correct = isCorrect;
@@ -79,16 +85,19 @@ export default class GamePlay extends React.Component {
     if (isCorrect){
       let streak = this.state.streak + 1
       multiplier = Math.floor(streak/5)+1
+      let levelFX = false
+      if (streak%5==0) levelFX=true
       let score = this.state.score + (100 * multiplier)
       this.setState({
         score,streak,answered,multiplier,correct,modalVisible:false,
-        rightFX:true,wrongFX:false
+        rightFX:true,wrongFX:false,levelFX
       })
     }else{
       multiplier = 1;
       let health = this.state.health - 1
       this.setState({
-        streak:0,answered,multiplier,health,correct,rightFX:false,wrongFX:true
+        streak:0,answered,multiplier,health,correct,
+        rightFX:false,wrongFX:true,levelFX:false
       })
     }
 
@@ -106,6 +115,7 @@ export default class GamePlay extends React.Component {
           modalTitle:'You’ve run out of health',
           rightFX:false,
           wrongFX:false,
+          levelFX:false,
           modalBody
         })
       }else{
@@ -129,11 +139,14 @@ export default class GamePlay extends React.Component {
       gameover: true,
       rightFX:false,
       wrongFX:false,
+      levelFX:false,
       modalBody
     })
   }
 
   nextQuestion(){
+
+    this.stopAudio()
 
     //remove selected id from chosen answer
     let el = document.getElementById('selected')
@@ -158,8 +171,13 @@ export default class GamePlay extends React.Component {
       randTwo,
       numOne,
       numTwo,
-      restart:false
+      restart:false,
+      rightFX:false,
+      wrongFX:false,
+      levelFX:false
     })
+
+
   }
 
   closeModal(){
@@ -221,6 +239,12 @@ export default class GamePlay extends React.Component {
           src='http://math.michaelgallay.com/audio/wrong.mp3'
           playing={this.state.wrongFX}
           ref={(ref) => (this.wrongFX = ref)}
+        />
+
+        <ReactHowler
+          src='http://math.michaelgallay.com/audio/level1.mp3'
+          playing={this.state.levelFX}
+          ref={(ref) => (this.levelFX = ref)}
         />
 
         <ScoreBoard

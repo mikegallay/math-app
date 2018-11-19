@@ -30,6 +30,9 @@ export default class GamePlay extends React.Component {
     if (randOne == randTwo) randTwo++
     if (randTwo == 0) randTwo++
 
+    let numTwo = this.rand(0,range)
+    if (operator == 'div' && numTwo == 0) numTwo++
+
     this.state = {
       score:0,
       streak: 0,
@@ -50,9 +53,9 @@ export default class GamePlay extends React.Component {
       modalTitle:'Game Over',
       modalBody:'you are not good',
       nextQuestionDelay,
-      range: range,
+      range,
       numOne:constant?constant:this.rand(0,range),
-      numTwo:this.rand(0,range),
+      numTwo,
       randOne,
       randTwo,
       timerID:0,
@@ -168,6 +171,7 @@ export default class GamePlay extends React.Component {
 
     let numOne = this.state.constant?this.state.constant:this.rand(0,this.state.range)
     let numTwo = this.rand(0,this.state.range)
+    if (this.state.operator == 'div' && numTwo == 0) numTwo++
 
     this.setState({
       answered,

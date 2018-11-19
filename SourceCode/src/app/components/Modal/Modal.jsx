@@ -25,10 +25,13 @@ export default class Modal extends React.Component {
             <img src={imageEmojiSunglasses} width="125" height="125"/>
             <h2>{this.props.title}</h2>
             <div className="font-normal" dangerouslySetInnerHTML={{__html:this.props.body}}/>
-            <button
-              onClick={this.props.closeModal}
-              className="modal-btn again-btn">Try Again</button>
-            <Link className="modal-btn back-btn" to="/">Back to Main Menu</Link>
+            <div className="modal-btns">
+              <button
+                onClick={this.props.closeModal}
+                className="modal-btn again-btn">Try Again
+              </button>
+              <Link className="modal-btn back-btn" to="/">Main Menu</Link>
+            </div>
           </div>
 
           <button

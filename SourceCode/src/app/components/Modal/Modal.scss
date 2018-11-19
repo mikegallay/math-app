@@ -49,10 +49,14 @@
         font-weight: normal;
       }
     }
+    .modal-btns{
+      display:flex;
+      flex-direction: row;
+    }
 
     .modal-btn{
       padding: 5px 15px 5px;
-      margin-top: 20px;
+      margin:20px 4px 0;
       font-size:15px;
       background-color: white;
       text-decoration: none;

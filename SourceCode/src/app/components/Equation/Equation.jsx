@@ -13,7 +13,7 @@ export default class Equation extends React.Component {
   constructor(props) {
     super(props);
 
-    const symbol = {'add' : '+', 'sub':'–', 'mul':'x', 'div':'%'};
+    const symbol = {'add' : '+', 'sub':'–', 'mul':'x', 'div':'÷'};
 
     this.state = {
       symbol,

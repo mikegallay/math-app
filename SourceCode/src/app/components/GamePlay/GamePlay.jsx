@@ -39,6 +39,8 @@ export default class GamePlay extends React.Component {
       gameover: false,
       restart:false,
       health: fullHealth,
+      numRight:0,
+      numWrong:0,
       fullHealth,
       operator,
       gamemode,
@@ -83,20 +85,22 @@ export default class GamePlay extends React.Component {
     let multiplier = this.state.multiplier;
 
     if (isCorrect){
+      let numRight = this.state.numRight + 1
       let streak = this.state.streak + 1
       multiplier = Math.floor(streak/5)+1
       let levelFX = false
       if (streak%5==0) levelFX=true
       let score = this.state.score + (100 * multiplier)
       this.setState({
-        score,streak,answered,multiplier,correct,modalVisible:false,
+        numRight,score,streak,answered,multiplier,correct,modalVisible:false,
         rightFX:true,wrongFX:false,levelFX
       })
     }else{
+      let numWrong = this.state.numWrong + 1
       multiplier = 1;
       let health = this.state.health - 1
       this.setState({
-        streak:0,answered,multiplier,health,correct,
+        numWrong,streak:0,answered,multiplier,health,correct,
         rightFX:false,wrongFX:true,levelFX:false
       })
     }
@@ -108,7 +112,8 @@ export default class GamePlay extends React.Component {
     this.state.timerid = setTimeout(() => {
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
-        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
+        let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
+        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
         this.setState({
           gameover: true,
           modalVisible:true,
@@ -131,7 +136,9 @@ export default class GamePlay extends React.Component {
 
   timeExpired(){
     console.log("Time Expired");
-    let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3>Practice makes perfect.<br/>Why don’t you try again?'
+    let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.numWrong) * 100)
+    if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
+    let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">' + this.state.numRight+ ' Correct</span> – <span class="red bold">' + this.state.numWrong + ' Wrong</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
 
     this.setState({
       modalVisible:true,
@@ -185,6 +192,8 @@ export default class GamePlay extends React.Component {
       streak:0,
       multiplier:1,
       score:0,
+      numRight:0,
+      numWrong:0,
       gameover:false,
       restart:true
     })

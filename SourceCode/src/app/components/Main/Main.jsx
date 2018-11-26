@@ -11,20 +11,35 @@ import './Main.scss';
 import stopwatch from '../../images/stopwatch.png';
 import heart from '../../images/heart.png';
 
+import Modal from '../Modal/Modal';
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {modalVisible:'init false'};
+  }
+
+  closeModal(){
+    this.setState({
+      modalVisible:false
+    })
+  }
+
+  openModal(){
+    console.log('open modal');
+    this.setState({
+      modalVisible:true
+    })
   }
 
   render() {
+
+    let howToBody = '<p>Use this app daily to improve your math skills. You can choose addition, subtraction, multiplication, division or randomize the skill</p><p>There are two icons next to each of the math skills.</p><p><img className="legend" src='+heart+' width="25" height="25"/><br/>Choose the heart and play until you make 3 mistakes.</p><p><img className="legend" src='+stopwatch+' width="25" height="25"/><br/>Choose the clock and answer as many as you can in 60 seconds.</p><p>The more answers you get correct in a row, the higher your score multiplier. Wrong answers will lower your overall accuracy. Good luck!!</p>'
     return (
       <main className="page-main">
         <h1>Math 60</h1>
-        <p className="instructions">Choose the game mode for the math skill you&nbsp;want&nbsp;to&nbsp;practice. </p>
-        <p className="instructions"><img className="legend" src={heart} width="25" height="25"/><span> Play until you make 3 mistakes</span></p>
-        <p className="instructions"><img className="legend" src={stopwatch} width="25" height="25"/><span> Answer as many as you can in 60 seconds</span></p>
+        <a className="how-to-play" onClick={()=>{this.openModal()}}>- How to Play -</a>
         <div className="main-menu">
           <div className="menu-btns">
             <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'health'} }}>
@@ -160,6 +175,16 @@ export default class Main extends React.Component {
 
         </div>
         <p className="credit">© 2018 Mike Gallay</p>
+
+        <Modal
+          title="How To Play"
+          body={howToBody}
+          score=""
+          gameplayBtns={false}
+          visible={this.state.modalVisible}
+          closeModal={()=>{this.closeModal()}}
+        />
+
       </main>
     );
   }

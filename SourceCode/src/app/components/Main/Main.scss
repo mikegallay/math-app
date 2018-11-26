@@ -13,12 +13,21 @@
   font-weight: normal;
 }
 
+.how-to-play{
+  font-weight: normal;
+  cursor: pointer;
+}
+
 .instructions{
   margin-top: 0;
   margin-bottom:0em;
   &.section{
     margin:1em auto;
   }
+}
+
+.modal-content p {
+  margin-top:0;
 }
 
 .mb10{

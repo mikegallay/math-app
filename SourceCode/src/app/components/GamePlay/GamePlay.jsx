@@ -286,6 +286,7 @@ export default class GamePlay extends React.Component {
           title={this.state.modalTitle}
           body={this.state.modalBody}
           score={this.state.score}
+          gameplayBtns={true}
           visible={this.state.modalVisible}
           closeModal={()=>{this.closeModal()}}
         />

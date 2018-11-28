@@ -16,7 +16,18 @@ export default class Modal extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      visible: 'init false'
+    };
+  }
+
+  closeModal(){
+    this.setState({visible:false})
+    if (this.props.closeModal) this.props.closeModal
+  }
+
+  openModal(){
+    this.setState({visible:true})
   }
 
   render() {

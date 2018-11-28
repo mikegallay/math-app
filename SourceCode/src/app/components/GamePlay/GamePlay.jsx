@@ -23,15 +23,9 @@ export default class GamePlay extends React.Component {
     if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
     let fullHealth = 3
-    let randOne = this.rand(-5,5)
-    let randTwo = this.rand(-5,5)
-    if (randOne == 0) randOne++
-    if (randTwo == 0) randTwo++
-    if (randOne == randTwo) randTwo++
-    if (randTwo == 0) randTwo++
 
-    let numTwo = this.rand(0,range)
-    if (operator == 'div' && numTwo == 0) numTwo++
+    let numbers = this.calculateNumbers(constant,range,operator)
+    let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
 
     this.state = {
       score:0,
@@ -51,13 +45,11 @@ export default class GamePlay extends React.Component {
       randomize,
       modalVisible:'init false',
       modalTitle:'Game Over',
-      modalBody:'you are not good',
+      modalBody:'Game not started',
       nextQuestionDelay,
       range,
-      numOne:constant?constant:this.rand(0,range),
-      numTwo,
-      randOne,
-      randTwo,
+      numbers,
+      equation,
       timerID:0,
       rightFX:false,
       wrongFX:false,
@@ -155,31 +147,21 @@ export default class GamePlay extends React.Component {
   }
 
   nextQuestion(){
-
     //remove selected id from chosen answer
     let el = document.getElementById('selected')
     if (el) el.setAttribute('id','')
 
     let correct = null
     let answered = false
-    let randOne = this.rand(-5,5)
-    let randTwo = this.rand(-5,5)
-    if (randOne == 0) randOne++
-    if (randTwo == 0) randTwo++
-    if (randOne == randTwo) randTwo++
-    if (randTwo == 0) randTwo++
 
-    let numOne = this.state.constant?this.state.constant:this.rand(0,this.state.range)
-    let numTwo = this.rand(0,this.state.range)
-    if (this.state.operator == 'div' && numTwo == 0) numTwo++
+    let numbers = this.calculateNumbers(this.state.constant,this.state.range,this.state.operator)
+    let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,this.state.operator)
 
     this.setState({
       answered,
       correct,
-      randOne,
-      randTwo,
-      numOne,
-      numTwo,
+      numbers,
+      equation,
       restart:false
     })
 
@@ -208,32 +190,49 @@ export default class GamePlay extends React.Component {
 
   }
 
-  calculateEquation(){
-    let numOne = this.state.numOne
-    let numTwo = this.state.numTwo
-    let answer = numOne + numTwo
+  calculateNumbers(_constant,_range,_operator){
+    let randOne = this.rand(-5,5)
+    let randTwo = this.rand(-5,5)
+    if (randOne == 0) randOne++
+    if (randTwo == 0) randTwo++
+    if (randOne == randTwo) randTwo++
+    if (randTwo == 0) randTwo++
 
-    if (this.state.operator == 'add'){
-        return [numOne,numTwo,answer]
-    } else if (this.state.operator == 'sub'){
+    let numOne = _constant?_constant:this.rand(0,_range)
+    let numTwo = this.rand(0,_range)
+    if (_operator == 'div' && numTwo == 0) numTwo++
+
+    var obj = {numOne:numOne,numTwo:numTwo,randOne:randOne,randTwo:randTwo}
+    return obj
+  }
+
+  calculateEquation(_numOne,_numTwo,_operator){
+    let operator = _operator
+    let numOne = _numOne
+    let numTwo = _numTwo
+    let answer = _numOne + _numTwo
+
+    if (operator == 'sub'){
         answer = numOne
-        numOne = (this.state.numOne + this.state.numTwo)
-        return [numOne,numTwo,answer]
-    } else if (this.state.operator == 'mul'){
-        answer = this.state.numOne * this.state.numTwo
-        return [numOne,numTwo,answer]
-    } else if (this.state.operator == 'div'){
+        numOne = numOne + numTwo
+    } else if (operator == 'mul'){
+        answer = numOne * numTwo
+    } else if (operator == 'div'){
         answer = numOne
-        numOne = (this.state.numOne * this.state.numTwo)
-        return [numOne,numTwo,answer]
+        numOne = numOne * numTwo
     }
+
+    console.log('ce',numOne,numTwo,answer);
+    var obj = {numOne:numOne,numTwo:numTwo,answer:answer}
+    return obj
   }
 
   render() {
-    let equation = this.calculateEquation()
-    let numOne = equation[0]
-    let numTwo = equation[1]
-    let answer = equation[2]
+    let numOne = this.state.equation.numOne
+    let numTwo = this.state.equation.numTwo
+    let answer = this.state.equation.answer
+    let randOne = this.state.numbers.randOne
+    let randTwo = this.state.numbers.randTwo
 
     return (
       <div className="page-main">
@@ -279,8 +278,8 @@ export default class GamePlay extends React.Component {
           answered={this.state.answered}
           onAnswer={(correct)=>{this.onAnswer(correct)}}
           answer={answer}
-          randOne={this.state.randOne}
-          randTwo={this.state.randTwo}
+          randOne={randOne}
+          randTwo={randTwo}
         />
         <Modal
           title={this.state.modalTitle}

@@ -22,7 +22,7 @@ export default class GamePlay extends React.Component {
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
-    let fullHealth = 3
+    let fullHealth = 1
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -31,6 +31,7 @@ export default class GamePlay extends React.Component {
       score:0,
       streak: 0,
       correct:null,
+      bonus:0,
       answered: false,
       multiplier: 1,
       gameover: false,
@@ -109,12 +110,18 @@ export default class GamePlay extends React.Component {
         console.log("Game Over");
         let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
+        console.log('score',this.state.score)
+        let bonus = 0
+        if (this.state.score > 200){
+          bonus = 1
+        }
         this.setState({
           gameover: true,
           modalVisible:true,
           modalTitle:'You’ve run out of health',
           rightFX:false,
           wrongFX:false,
+          bonus,
           levelFX:false,
           modalBody
         })
@@ -286,6 +293,7 @@ export default class GamePlay extends React.Component {
           body={this.state.modalBody}
           score={this.state.score}
           gameplayBtns={true}
+          bonus={this.state.bonus}
           visible={this.state.modalVisible}
           closeModal={()=>{this.closeModal()}}
         />

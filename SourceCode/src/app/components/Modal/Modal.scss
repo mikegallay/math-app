@@ -37,6 +37,14 @@
       text-align: center;
       padding: 0 5%;
 
+      .header-img-wrapper{
+        transform-origin: center center;
+        &.shake{
+          animation: 1.5s cubic-bezier(.36,.07,.19,.97) 1s infinite reverse both running shake;
+          /* duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name*/
+        }
+      }
+
       h2,h3{
         text-transform: uppercase;
         font-size: 1.5em;

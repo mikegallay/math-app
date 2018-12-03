@@ -49,7 +49,9 @@ export default class Bonus extends React.Component {
           </div>
           <div className="bonus-content">
             {headerImg}
-            {/* <h2>Bonus</h2> */}
+            <div className="bonus-title">
+              <h2>You got a coin</h2>
+            </div>
           </div>
 
           {/* <button

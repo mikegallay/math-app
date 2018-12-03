@@ -45,6 +45,12 @@
       width: 90%;
       text-align: center;
       padding: 0 5%;
+      .bonus-title{
+        opacity:0;
+        position: relative;
+        top:25px;
+        transition: opacity 0s,top 0s;
+      }
 
       .header-img-wrapper{
         transform-origin: center center;
@@ -124,6 +130,12 @@
           transform:scale(1) rotate(180deg);
           opacity:1;
         }
+      }
+
+      .bonus-title{
+        opacity:1;
+        top:0;
+        transition: opacity 1s 2s,top 1s 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
     }
   }

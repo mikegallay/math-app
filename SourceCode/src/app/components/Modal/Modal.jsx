@@ -11,23 +11,40 @@ import './Modal.scss';
 import imageEmojiSunglasses from '../../images/icon_sunglasses.png';
 import stopwatch from '../../images/stopwatch.png';
 import heart from '../../images/heart.png';
+import chestOpen from '../../images/chest-open.png';
+import chestClose from '../../images/chest-close.png';
+import Bonus from '../Bonus/Bonus';
 
 export default class Modal extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      visible: 'init false'
+      visible: 'init false',
+      openBonus: 'init false'
     };
   }
 
+  componentWillReceiveProps(props){
+    console.log('modal update',props);
+    if (props.visible != this.state.visible) {
+      console.log('modal here');
+      this.setState({visible:props.visible})
+    }
+  }
+
   closeModal(){
-    this.setState({visible:false})
-    if (this.props.closeModal) this.props.closeModal
+    console.log('modal close modal',this.props.closeModal);
+    this.setState({visible:'init false', openBonus: 'init false'})
+    if (this.props.closeModal) this.props.closeModal()
   }
 
   openModal(){
     this.setState({visible:true})
+  }
+
+  openBonus(){
+    this.setState({openBonus:true})
   }
 
   render() {
@@ -36,11 +53,14 @@ export default class Modal extends React.Component {
 
     let headerImg = <div className="header-img-wrapper"><img src={imageEmojiSunglasses} width="125" height="125"/></div>
 
-    if (this.props.bonus > 0) headerImg = <div className="header-img-wrapper shake"><img src={heart} width="125" height="125"/></div>
+    //set new image when bonus is > 0
+    if (this.props.bonus > 0) headerImg = <div className="header-img-wrapper shake"><img src={chestClose} onClick={()=>{this.openBonus()}} width="125" height="125"/></div>
     if (!this.props.gameplayBtns) headerImg = ''
 
+    if (this.props.bonus > 0 && this.state.openBonus == true) headerImg = <div className="header-img-wrapper"><img src={chestOpen} width="125" height="125"/></div>
+
     return (
-      <div className={`modal-wrapper ${this.props.visible}`}>
+      <div className={`modal-wrapper ${this.state.visible}`}>
         <div className="modal-overlay">
           <div className="modal-content">
             {headerImg}
@@ -50,9 +70,10 @@ export default class Modal extends React.Component {
           </div>
 
           <button
-            onClick={this.props.closeModal}
+            onClick={()=>this.closeModal()}
             className="close-btn">x</button>
         </div>
+        <Bonus openBonus={this.state.openBonus}/>
       </div>
     );
   }

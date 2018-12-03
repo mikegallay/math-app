@@ -1,14 +1,14 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
-.modal-wrapper{
+.bonus-wrapper{
   width:100%;
   height:100%;
   background-color: rgba(0, 0, 0, .5);
   position: fixed;
   top: 0;
   left: 0;
-  transition: opacity .5s;
+  transition: opacity 0s;
   visibility: visible;
   display: flex;
   justify-content: center;
@@ -16,18 +16,27 @@
   &.init{
     visibility: hidden!important;
   }
-  .modal-overlay{
-    width: 80%;
-    height: 80%;
-    background: white;
-    border-radius: 8px;
+  .bonus-overlay{
+    width: 100%;
+    height: 100%;
+    background: none;
     border: 4px solid black;
-    margin: 10%;
+    margin: 0%;
     position: relative;
-    transform: scale(1);
-    transition: transform .5s .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    .modal-content{
+    .bonus-glow{
+      position: absolute;
+      transform: translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+      img{
+        transform-origin: center center;
+        transform:scale(0) rotate(0deg);
+        opacity:0;
+      }
+    }
+
+    .bonus-content{
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -39,9 +48,24 @@
 
       .header-img-wrapper{
         transform-origin: center center;
+        .bonus-item{
+          transform-origin: center center;
+          transform: scale(.25);
+          opacity:0;
+          // top:-100px;
+          position: relative;
+          transition:transform 1s 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .2s 1s;
+        }
         &.shake{
           animation: 1.5s cubic-bezier(.36,.07,.19,.97) 1s infinite reverse both running shake;
           /* duration | timing-function | delay | iteration-count | direction | fill-mode | play-state | name*/
+        }
+        &.true{
+          .bonus-item{
+            transform: scale(.8);
+            opacity:1;
+            // top:0;
+          }
         }
       }
 
@@ -49,6 +73,7 @@
         text-transform: uppercase;
         font-size: 1.5em;
         margin:0 0 1em;
+        color:white;
       }
       h3{
         font-size: 1.25em;
@@ -57,12 +82,12 @@
         font-weight: normal;
       }
     }
-    .modal-btns{
+    .bonus-btns{
       display:flex;
       flex-direction: row;
     }
 
-    .modal-btn{
+    .bonus-btn{
       padding: 5px 15px 5px;
       margin:20px 4px 0;
       font-size:15px;
@@ -78,14 +103,6 @@
       }
     }
 
-    .back-btn{
-      background-color: pink;
-    }
-
-    .again-btn{
-      background-color: lightgreen;
-    }
-
     .close-btn{
       position: absolute;
       top: 10px;
@@ -99,13 +116,25 @@
     }
   }
 
+  &.true{
+    .bonus-overlay{
+      .bonus-glow{
+        img{
+          transition: transform 1s .5s,opacity 1s .5s;
+          transform:scale(1) rotate(180deg);
+          opacity:1;
+        }
+      }
+    }
+  }
   &.false{
     opacity:0;
+    transition: opacity .5s;
     pointer-events: none;
-    transition: opacity .25s;
-    .modal-overlay{
+    /* transition: opacity .5s .3s;
+    .bonus-overlay{
       transform: scale(0);
-      transition: transform 0s;
-    }
+      transition: transform .5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    }*/
   }
 }

@@ -109,16 +109,19 @@ export default class GamePlay extends React.Component {
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
         let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
+        let modalTitle = 'You’ve run out of health'
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
         console.log('score',this.state.score)
         let bonus = 0
-        if (this.state.score > 200){
+        if (this.state.score > 100){
           bonus = 1
+          modalTitle = 'You’ve unlocked a special reward!'
+
         }
         this.setState({
           gameover: true,
           modalVisible:true,
-          modalTitle:'You’ve run out of health',
+          modalTitle,
           rightFX:false,
           wrongFX:false,
           bonus,
@@ -153,6 +156,12 @@ export default class GamePlay extends React.Component {
     })
   }
 
+  clearAnswers(){
+    console.log('clearAnswers');
+    let el = document.getElementById('selected')
+    if (el) el.setAttribute('id','')
+  }
+
   nextQuestion(){
     //remove selected id from chosen answer
     let el = document.getElementById('selected')
@@ -177,6 +186,9 @@ export default class GamePlay extends React.Component {
   }
 
   closeModal(){
+    // console.log('game play closeModal');
+    // this.clearAnswers()
+
     this.setState({
       modalVisible:false,
       answered:false,

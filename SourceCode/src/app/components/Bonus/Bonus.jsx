@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ReactHowler from 'react-howler'
 
 import './Bonus.scss';
 import coin from '../../images/coin.png';
@@ -41,8 +41,16 @@ export default class Bonus extends React.Component {
     let bonus = <img className="bonus-item" src={coin} width="125" height="125"/>
     let headerImg = <div onClick={() => this.closeBonus()} className={`header-img-wrapper ${this.state.visible}`}>{bonus}</div>
 
+    let magicFX = (this.state.visible == true) ? true : false;
     return (
       <div className={`bonus-wrapper ${this.state.visible}`}>
+
+        <ReactHowler
+          src='http://math.michaelgallay.com/audio/magic.mp3'
+          playing={magicFX}
+          ref={(ref) => (this.magicFX = ref)}
+        />
+
         <div className="bonus-overlay">
           <div className="bonus-glow">
             <img src={glow} width="500" height="500"/>

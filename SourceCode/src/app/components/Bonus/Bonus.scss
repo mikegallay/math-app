@@ -5,6 +5,7 @@
   width:100%;
   height:100%;
   background-color: rgba(0, 0, 0, .75);
+  opacity:0;
   position: fixed;
   top: 0;
   left: 0;
@@ -124,12 +125,15 @@
   }
 
   &.true{
+    opacity:1;
+    transition:opacity .5s;
     .bonus-overlay{
       .bonus-glow{
         img{
           animation-name: bonus-glow;
           animation-fill-mode: forwards;
           animation-duration: 20s;
+          animation-delay: .5s;
           animation-timing-function: linear;
           // transition: transform 1s .5s,opacity 1s .5s;
           // transform:scale(1) rotate(180deg);
@@ -140,7 +144,7 @@
       .bonus-title{
         opacity:1;
         top:0;
-        transition: opacity 1s 2s,top 1s 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transition: opacity 1s 2.5s,top 1s 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
     }
   }

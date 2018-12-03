@@ -115,7 +115,7 @@ export default class GamePlay extends React.Component {
         let bonus = 0
         if (this.state.score > 100){
           bonus = 1
-          modalTitle = 'You’ve unlocked a special reward!'
+          modalTitle = 'You’ve unlocked a reward!'
 
         }
         this.setState({

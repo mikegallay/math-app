@@ -111,7 +111,7 @@ export default class GamePlay extends React.Component {
         let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
         let modalTitle = 'You’ve run out of health'
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
-        console.log('score',this.state.score)
+        // console.log('score',this.state.score)
         let bonus = 0
         if (this.state.score > 100){
           bonus = 1
@@ -157,7 +157,7 @@ export default class GamePlay extends React.Component {
   }
 
   clearAnswers(){
-    console.log('clearAnswers');
+    // console.log('clearAnswers');
     let el = document.getElementById('selected')
     if (el) el.setAttribute('id','')
   }
@@ -241,7 +241,7 @@ export default class GamePlay extends React.Component {
         numOne = numOne * numTwo
     }
 
-    console.log('ce',numOne,numTwo,answer);
+    // console.log('ce',numOne,numTwo,answer);
     var obj = {numOne:numOne,numTwo:numTwo,answer:answer}
     return obj
   }

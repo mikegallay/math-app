@@ -22,9 +22,9 @@ export default class Bonus extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('did update',props);
+    // console.log('did update',props);
     if (props.openBonus != this.state.visible) {
-      console.log('here');
+      // console.log('here');
       this.setState({visible:props.openBonus})
     }
   }

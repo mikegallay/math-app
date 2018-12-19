@@ -26,15 +26,15 @@ export default class Modal extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('modal update',props);
+    // console.log('modal update',props);
     if (props.visible != this.state.visible) {
-      console.log('modal here');
+      // console.log('modal here');
       this.setState({visible:props.visible})
     }
   }
 
   closeModal(){
-    console.log('modal close modal',this.props.closeModal);
+    // console.log('modal close modal',this.props.closeModal);
     this.setState({visible:'init false', openBonus: 'init false'})
     if (this.props.closeModal) this.props.closeModal()
   }

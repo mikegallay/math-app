@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, Router } from 'react-router-dom';
+import createBrowserHistory from "history/createBrowserHistory";
 
 import Main from '../Main/Main';
 import Login from '../Login/Login';
@@ -15,6 +16,8 @@ import appData from '../../data/app.json';
 
 import '../../css/app.scss';
 
+const customHistory = createBrowserHistory();
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,13 +25,17 @@ export default class App extends React.Component {
     this.state = {};
   }
 
+
+
   render() {
     return (
-      <Switch>
-        <Route exact path="/" render={props => <Login {...props} />} />
-        <Route exact path="/navigation/" render={props => <Main {...props} />} />
-        <Route path="/gameplay/" render={props => <GamePlay {...props} />} />
-      </Switch>
+      <Router history={customHistory}>
+        <div>
+          <Route exact path="/login" render={props => <Login {...props} />} />
+          <Route exact path="/navigation/" render={props => <Main {...props} />} />
+          <Redirect from="/" to="/login"/>
+        </div>
+      </Router>
     );
   }
 }

@@ -6,6 +6,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {logout} from "../../services/auth";
+import {firebaseAuth} from "../../config/constants";
 
 import './Main.scss';
 import stopwatch from '../../images/stopwatch.png';
@@ -13,12 +15,25 @@ import heart from '../../images/heart.png';
 
 import Modal from '../Modal/Modal';
 
+const appTokenKey = "appToken";
+
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {modalVisible:'init false'};
+    this.handleLogout = this.handleLogout.bind(this);
   }
+
+  handleLogout() {
+    console.log('handleLogout');
+     logout().then(function () {
+         localStorage.removeItem(appTokenKey);
+         this.props.history.push("/login");
+         console.log(this.props.history);
+         console.log("user signed out from firebase");
+     }.bind(this));
+   }
 
   closeModal(){
     this.setState({
@@ -174,6 +189,14 @@ export default class Main extends React.Component {
           </div> */}
 
         </div>
+
+        <div>
+            <button
+                value="Sign Out"
+                onClick={this.handleLogout}
+            >Sign Out</button>
+        </div>
+
         <p className="credit">© 2018 Mike Gallay</p>
 
         <Modal

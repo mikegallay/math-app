@@ -23,14 +23,15 @@ export default class Main extends React.Component {
 
     this.state = {modalVisible:'init false'};
     this.handleLogout = this.handleLogout.bind(this);
+    console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
 
   handleLogout() {
-    console.log('handleLogout');
+    // console.log('handleLogout');
      logout().then(function () {
          localStorage.removeItem(appTokenKey);
          this.props.history.push("/login");
-         console.log(this.props.history);
+         // console.log(this.props.history);
          console.log("user signed out from firebase");
      }.bind(this));
    }
@@ -42,7 +43,7 @@ export default class Main extends React.Component {
   }
 
   openModal(){
-    console.log('open modal');
+    // console.log('open modal');
     this.setState({
       modalVisible:true
     })

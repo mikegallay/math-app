@@ -11,7 +11,7 @@ import GoogleLogin from 'react-google-login';
 import './Login.scss';
 
 import {loginWithGoogle} from "../../services/auth";
-import {firebaseAuth} from "../../config/constants";
+import {firebaseAuth,ref} from "../../config/constants";
 
 const firebaseAuthKey = "firebaseAuthInProgress";
 const appTokenKey = "appToken";
@@ -70,19 +70,19 @@ export default class Login extends React.Component {
 
       /**
        * We have appToken relevant for our backend API
-       */
 
-       console.log('(appTokenKey)',localStorage.getItem(appTokenKey));
+
+      console.log('(appTokenKey)',localStorage.getItem(appTokenKey));
       if (localStorage.getItem(appTokenKey)) {
           this.props.history.push("/navigation");
           return;
-      }
+      }*/
 
       firebaseAuth().onAuthStateChanged(user => {
         console.log('onAuthStateChanged');
           if (user) {
               console.log("User signed in: ", JSON.stringify(user));
-
+              console.log('curruser',firebaseAuth().currentUser);
               localStorage.removeItem(firebaseAuthKey);
 
               // here you could authenticate with you web server to get the
@@ -91,12 +91,15 @@ export default class Login extends React.Component {
               localStorage.setItem(appTokenKey, user.uid);
 
               // store the token
-              this.props.history.push("/navigation")
+              var currUser = firebaseAuth().currentUser;
+              // console.log('uid',currUser.uid);
+              this.sendToFirebase(currUser);
+              // this.props.history.push("/navigation")
           }
       });
   }
 
-  responseGoogle(response){
+  /*responseGoogle(response){
     console.log(response.profileObj);
     var profile = response.profileObj;
     console.log('ID: ' + profile.googleId); // Do not send to your backend! Use an ID token instead.
@@ -113,54 +116,47 @@ export default class Login extends React.Component {
     firebase.auth().currentUser.linkWithRedirect(provider);
 
     // this.sendToFirebase(profile);
-  }
-
-  sendToFirebase(profile){
-    const userRef = firebase.database().ref('user');
-    const user = {
-      fname: this.state.fname,
-      userimg: this.state.userimg,
-      data:{
-        add:{
-          hiscore:0,
-          unlocked:false
-        }
-      },
-      monsters:{
-        level01:{m01:false,m02:false,m03:false}
-      }
-    }
-    userRef.push(user);
-    this.setState({
-      fname: '',
-      userimg: '',
-
-    });
-  }
-
-  /*render(){
-    return (
-      <main className="page-login">
-        <h1>Math 60</h1>
-        <h3>{this.state.greeting} {this.state.fname}!</h3>
-        <div><img src={this.state.userimg}/></div>
-        <div className={`google-signin ${this.state.onLogin}`}>
-          <GoogleLogin
-            clientId="44464936686-0iltkf2fc4926stprg6c46te9mcopd67.apps.googleusercontent.com"
-            render={renderProps => (
-              <button className={this.state.onLogin} onClick={renderProps.onClick}>LOGIN</button>
-            )}
-            buttonText="Login"
-            onSuccess={(e)=>this.responseGoogle(e)}
-            onFailure={(e)=>this.responseGoogle(e)}
-          />
-        </div>
-        <Link to="/navigation/">Navigation</Link>
-        <p className="credit">© 2018 Mike Gallay</p>
-
-      </main>
-    );
   }*/
+
+  sendToFirebase(currUser){
+    // const userRef = ref;//firebase.database().ref('user');
+    // let newUser = false
+    let userRef = ref.ref('/users/' + currUser.uid);
+    let newUserCheck = ref.ref('/users/' + currUser.uid).once('value').then(function(snapshot) {
+      // newUser = (snapshot.val()) ? false : true;
+
+      if (!snapshot.val()){
+        var uid = currUser.uid;
+        var displayName = currUser.displayName;
+        var photoURL = currUser.providerData[0].photoURL;
+
+          //create iniital data dump
+        console.log('new user. pushing default data.');
+        const data = {
+          userid: uid,
+          fname: displayName,
+          userimg: photoURL,
+          game:{
+            add:{
+              hiscore:0,
+              unlocked:false
+            }
+          },
+          monsters:{
+            level01:{m01:false,m02:false,m03:false}
+          }
+        }
+        // console.log('userRef',userRef)
+        userRef.set(data);
+      }else{
+        console.log('user exists',snapshot.val().fname);
+        let existingData = snapshot.val();
+        existingData.fname = 'existing user2';
+        userRef.set(existingData)
+      }
+    })
+  }
+
   render() {
         console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
         if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen/>;

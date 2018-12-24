@@ -2,7 +2,7 @@ import {firebaseAuth, googleProvider} from "../config/constants";
 
 export function loginWithGoogle() {
     return firebaseAuth().signInWithRedirect(googleProvider);
-    //return authenticate(loginWithFirebase(googleProvider));
+    // return authenticate(loginWithFirebase(googleProvider));
 }
 
 
@@ -29,6 +29,7 @@ function authenticate(promise) {
 }
 
 function loginWithFirebase(provider) {
+  console.log('login with firebase');
     return firebaseAuth().signInWithRedirect(provider);
 
      firebaseAuth().signInWithPopup(provider).then(function (result) {

@@ -140,7 +140,7 @@ export default class Login extends React.Component {
           game:{
             add:{ hiscore:0, unlocked:false },
             sub:{ hiscore:0, unlocked:false },
-            mul:{ hiscore:0, unlocked:true },
+            mul:{ hiscore:0, unlocked:false },
             div:{ hiscore:0, unlocked:false },
             ran:{ hiscore:0, unlocked:false },
           },

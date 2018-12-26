@@ -6,12 +6,15 @@
 
 import React from 'react';
 import ReactHowler from 'react-howler'
+import {firebaseAuth,ref} from "../../config/constants";
 
 import './GamePlay.scss';
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
 import Modal from '../Modal/Modal';
+
+const localUser = "localUser";
 
 export default class GamePlay extends React.Component {
   constructor(props) {
@@ -28,6 +31,8 @@ export default class GamePlay extends React.Component {
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
 
     this.state = {
+      unlockScore:100,
+      unlockAccuracy:25,
       score:0,
       streak: 0,
       correct:null,
@@ -111,7 +116,20 @@ export default class GamePlay extends React.Component {
         let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
         let modalTitle = 'You’ve run out of health'
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
-        // console.log('score',this.state.score)
+
+        if (accuracy >= this.state.unlockAccuracy && this.state.score >= this.state.unlockScore){
+          var locUser = JSON.parse(localStorage.getItem(localUser))
+          // console.log('loc id', locUser.userid);
+          var operator = (this.state.randomize) ? 'ran' : this.state.operator
+          locUser.game[operator].unlocked = true;
+          // console.log('loc user', locUser);
+          localStorage.setItem(localUser, JSON.stringify(locUser));
+
+          let userRef = ref.ref('/users/' + locUser.userid);
+          userRef.set(locUser);
+        }
+
+        // bonus logic
         let bonus = 0
         if (this.state.score > 100){
           bonus = 1

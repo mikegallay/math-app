@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {logout} from "../../services/auth";
-import {firebaseAuth} from "../../config/constants";
+import {firebaseAuth,ref} from "../../config/constants";
 
 import './Main.scss';
 import stopwatch from '../../images/stopwatch.png';
@@ -16,14 +16,26 @@ import heart from '../../images/heart.png';
 import Modal from '../Modal/Modal';
 
 const appTokenKey = "appToken";
+const localUser = "localUser";
 
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {modalVisible:'init false'};
+    //check current high score
+    // localStorage.setItem(localUser, JSON.stringify(existingData));
+    var locUser = JSON.parse(localStorage.getItem(localUser));
+    console.log('main',locUser);
+    // console.log('lu',lu);
+    var addBonus = (locUser) ? locUser.game.add.unlocked : false;
+    var subBonus = (locUser) ? locUser.game.sub.unlocked : false;
+    var mulBonus = (locUser) ? locUser.game.mul.unlocked : false;
+    var divBonus = (locUser) ? locUser.game.div.unlocked : false;
+    var ranBonus = (locUser) ? locUser.game.ran.unlocked : false;
+
+    this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus};
     this.handleLogout = this.handleLogout.bind(this);
-    console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
+    // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
 
   handleLogout() {
@@ -62,7 +74,7 @@ export default class Main extends React.Component {
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">ADDITION</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.addBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
@@ -72,7 +84,7 @@ export default class Main extends React.Component {
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">SUBTRACTION</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.subBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
@@ -82,7 +94,7 @@ export default class Main extends React.Component {
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">MULTIPLICATION</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.mulBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
@@ -92,7 +104,7 @@ export default class Main extends React.Component {
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">DIVISION</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'div', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.divBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'div', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
@@ -102,7 +114,7 @@ export default class Main extends React.Component {
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">RANDOMIZE ALL</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown', randomize:true} }}>
+            <Link className={`stopwatch-btn ${(this.state.ranBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown', randomize:true} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>

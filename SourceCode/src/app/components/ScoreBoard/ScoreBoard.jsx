@@ -33,7 +33,7 @@ export default class ScoreBoard extends React.Component {
     }
     return (
       <div className="scoreboard-wrapper">
-        <Link to='/' className='back-btn'>x</Link>
+        <Link to='/navigation' className='back-btn'>x</Link>
         {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>
         <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>

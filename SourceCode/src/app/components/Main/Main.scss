@@ -64,6 +64,10 @@
       color:black;
       margin:0 auto;
     }
+    .inactive{
+      opacity:.5;
+      pointer-events: none;
+    }
     .stopwatch-btn{
       margin-right: 14px;
     }

@@ -14,6 +14,7 @@ import {loginWithGoogle} from "../../services/auth";
 import {firebaseAuth,ref} from "../../config/constants";
 
 const firebaseAuthKey = "firebaseAuthInProgress";
+const localUser = "localUser";
 const appTokenKey = "appToken";
 
 export default class Login extends React.Component {
@@ -27,7 +28,7 @@ export default class Login extends React.Component {
     this.state = {fname,greeting,onLogin};
 
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
-    this.sendToFirebase = this.sendToFirebase.bind(this);
+    this.checkNewUser = this.checkNewUser.bind(this);
   }
 
     handleGoogleLogin() {
@@ -93,7 +94,7 @@ export default class Login extends React.Component {
               // store the token
               var currUser = firebaseAuth().currentUser;
               // console.log('uid',currUser.uid);
-              this.sendToFirebase(currUser);
+              this.checkNewUser(currUser);
               // this.props.history.push("/navigation")
           }
       });
@@ -118,7 +119,7 @@ export default class Login extends React.Component {
     // this.sendToFirebase(profile);
   }*/
 
-  sendToFirebase(currUser){
+  checkNewUser(currUser){
     // const userRef = ref;//firebase.database().ref('user');
     // let newUser = false
     let userRef = ref.ref('/users/' + currUser.uid);
@@ -137,10 +138,11 @@ export default class Login extends React.Component {
           fname: displayName,
           userimg: photoURL,
           game:{
-            add:{
-              hiscore:0,
-              unlocked:false
-            }
+            add:{ hiscore:0, unlocked:false },
+            sub:{ hiscore:0, unlocked:false },
+            mul:{ hiscore:0, unlocked:true },
+            div:{ hiscore:0, unlocked:false },
+            ran:{ hiscore:0, unlocked:false },
           },
           monsters:{
             level01:{m01:false,m02:false,m03:false}
@@ -149,12 +151,18 @@ export default class Login extends React.Component {
         // console.log('userRef',userRef)
         userRef.set(data);
       }else{
-        console.log('user exists',snapshot.val().fname);
+        // console.log('user exists',snapshot.val().fname);
         let existingData = snapshot.val();
-        existingData.fname = 'existing user2';
-        userRef.set(existingData)
+        // existingData.fname = 'existing user2';
+        localStorage.setItem(localUser, JSON.stringify(existingData));
+        // userRef.set(existingData)
+        // var lu = JSON.parse(localStorage.getItem(localUser));
+        // console.log('lu',lu.userimg);
+        // console.log('ed',existingData.userimg);
       }
+
     })
+    this.props.history.push("/navigation")
   }
 
   render() {

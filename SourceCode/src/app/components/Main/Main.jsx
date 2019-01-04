@@ -33,6 +33,7 @@ export default class Main extends React.Component {
     var divBonus = (locUser) ? locUser.game.div.unlocked : false;
     var ranBonus = (locUser) ? locUser.game.ran.unlocked : false;
 
+    console.log('asdfasdf',addBonus);
     this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus};
     this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));

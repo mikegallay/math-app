@@ -10,12 +10,14 @@ import ReactHowler from 'react-howler'
 import './Bonus.scss';
 import coin from '../../images/coin.png';
 import glow from '../../images/glow-wedge.png';
+import poop from '../../images/icon_sunglasses.png';
 
 export default class Bonus extends React.Component {
   constructor(props) {
     super(props);
 
     let visible = props.openBonus ? props.openBonus : 'init false'
+
     this.state = {
       visible
     };
@@ -39,6 +41,16 @@ export default class Bonus extends React.Component {
 
   render() {
     let bonus = <img className="bonus-item" src={coin} width="125" height="125"/>
+    let coinText = 'coins'
+    let bonusPoints = this.props.bonusPoints
+    if (bonusPoints == 1) coinText = 'coin'
+    let bonusTitle = <h2>You got {bonusPoints} {coinText}!</h2>
+    console.log('BONUS',bonusPoints);
+    if (bonusPoints >= 10000){
+      bonus = <img className="bonus-item" src={poop} width="125" height="125"/>
+      bonusTitle = <h2>FREE!</h2>
+    }
+
     let headerImg = <div onClick={() => this.closeBonus()} className={`header-img-wrapper ${this.state.visible}`}>{bonus}</div>
 
     let magicFX = (this.state.visible == true) ? true : false;
@@ -58,7 +70,7 @@ export default class Bonus extends React.Component {
           <div className="bonus-content">
             {headerImg}
             <div className="bonus-title">
-              <h2>You got a coin</h2>
+              {bonusTitle}
             </div>
           </div>
 

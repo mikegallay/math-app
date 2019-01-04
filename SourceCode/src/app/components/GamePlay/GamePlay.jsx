@@ -31,13 +31,14 @@ export default class GamePlay extends React.Component {
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
 
     this.state = {
-      unlockScore:100,
-      unlockAccuracy:25,
+      unlockScore:100,//2500
+      releaseScore:100,//2500
+      requiredAccuracy:25,//80
       score:0,
       streak: 0,
       correct:null,
       bonus:0,
-      answered: false,
+      ansßwered: false,
       multiplier: 1,
       gameover: false,
       restart:false,
@@ -113,11 +114,22 @@ export default class GamePlay extends React.Component {
     this.state.timerid = setTimeout(() => {
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
+        let bonus = 0
         let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
-        let modalTitle = 'You’ve run out of health'
-        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
+        if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
+        let modalTitle = 'Keep practicing!'
+        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
 
-        if (accuracy >= this.state.unlockAccuracy && this.state.score >= this.state.unlockScore){
+        //did they do well enough to unlock the timer round
+        if (accuracy >= this.state.requiredAccuracy && this.state.score >= this.state.unlockScore){
+
+          modalTitle = 'Well done!'
+          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>You’ve proven that you are ready for the next level.'
+
+          // if (this.state.score > this.state.unlockScore){
+            bonus = Math.floor(this.state.score/100)
+          // }
+
           var locUser = JSON.parse(localStorage.getItem(localUser))
           // console.log('loc id', locUser.userid);
           var operator = (this.state.randomize) ? 'ran' : this.state.operator
@@ -129,22 +141,16 @@ export default class GamePlay extends React.Component {
           userRef.set(locUser);
         }
 
-        // bonus logic
-        let bonus = 0
-        if (this.state.score > 100){
-          bonus = 1
-          modalTitle = 'You’ve unlocked a reward!'
-
-        }
         this.setState({
           gameover: true,
           modalVisible:true,
           modalTitle,
+          modalBody,
           rightFX:false,
           wrongFX:false,
           bonus,
-          levelFX:false,
-          modalBody
+          levelFX:false
+
         })
       }else{
         let operator = this.state.operator
@@ -160,17 +166,40 @@ export default class GamePlay extends React.Component {
   timeExpired(){
     console.log("Time Expired");
     let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.numWrong) * 100)
+    let bonus = 0
     if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
+    let modalTitle = 'You were defeated!'
     let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">' + this.state.numRight+ ' Correct</span> – <span class="red bold">' + this.state.numWrong + ' Wrong</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
+
+    //did they release a monster
+    if (accuracy >= this.state.requiredAccuracy && this.state.score >= this.state.releaseScore){
+
+      modalTitle = 'You unlocked a secret!'
+      modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to open it.'
+
+      // if (this.state.score > 1000){
+      bonus = Math.floor(this.state.score/100) * 10000
+      // }
+
+      //sync data
+      /*
+      var locUser = JSON.parse(localStorage.getItem(localUser))
+      locUser.game[operator].unlocked = true;
+      localStorage.setItem(localUser, JSON.stringify(locUser));
+      let userRef = ref.ref('/users/' + locUser.userid);
+      userRef.set(locUser);
+      */
+    }
 
     this.setState({
       modalVisible:true,
-      modalTitle:'Time is up!',
+      modalTitle,
+      modalBody,
       gameover: true,
+      bonus,
       rightFX:false,
       wrongFX:false,
-      levelFX:false,
-      modalBody
+      levelFX:false
     })
   }
 

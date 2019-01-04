@@ -48,17 +48,23 @@ export default class Modal extends React.Component {
   }
 
   render() {
+    let bonus = this.props.bonus;
     let gameplayBtns = <div className="modal-btns"><button onClick={()=>this.closeModal()} className="modal-btn again-btn">Try Again</button> <Link className="modal-btn back-btn" to="/navigation">Main Menu</Link></div>
     if (!this.props.gameplayBtns) gameplayBtns = ''
 
     let headerImg = <div className="header-img-wrapper"><img src={imageEmojiSunglasses} width="125" height="125"/></div>
 
     //set new image when bonus is > 0
-    if (this.props.bonus > 0) headerImg = <div className="header-img-wrapper shake"><img src={chestClose} onClick={()=>{this.openBonus()}} width="125" height="125"/></div>
+    if (bonus > 0) headerImg = <div className="header-img-wrapper shake"><img src={chestClose} onClick={()=>{this.openBonus()}} width="125" height="125"/></div>
+
     if (!this.props.gameplayBtns) headerImg = ''
 
-    if (this.props.bonus > 0 && this.state.openBonus == true) headerImg = <div className="header-img-wrapper"><img src={chestOpen} width="125" height="125"/></div>
+    if (bonus > 0 && this.state.openBonus == true) headerImg = <div className="header-img-wrapper"><img src={chestOpen} width="125" height="125"/></div>
 
+    let bonusRender = <div className="blankBonus"></div>
+    if (bonus > 0 == true) {
+      bonusRender = <Bonus openBonus={this.state.openBonus} bonusPoints={bonus}/>
+    }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>
         <div className="modal-overlay">
@@ -73,7 +79,7 @@ export default class Modal extends React.Component {
             onClick={()=>this.closeModal()}
             className="close-btn">x</button>
         </div>
-        <Bonus openBonus={this.state.openBonus}/>
+        {bonusRender}
       </div>
     );
   }

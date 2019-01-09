@@ -1,5 +1,5 @@
 /**
- * GamePlay component
+ * GamePlayMath component
  *
  * Description of component... lorem ipsum dolor sit amet consectetur adipiscing elit
  */
@@ -8,7 +8,7 @@ import React from 'react';
 import ReactHowler from 'react-howler'
 import {firebaseAuth,ref} from "../../config/constants";
 
-import './GamePlay.scss';
+import './GamePlayMath.scss';
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
@@ -16,7 +16,12 @@ import Modal from '../Modal/Modal';
 
 const localUser = "localUser";
 
-export default class GamePlay extends React.Component {
+const unlockScore = 100;//2500
+const unlockDecimal = 100;
+const releaseScore = 100;//2500
+const requiredAccuracy = 25;//80
+
+export default class GamePlayMath extends React.Component {
   constructor(props) {
     super(props);
 
@@ -31,9 +36,9 @@ export default class GamePlay extends React.Component {
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
 
     this.state = {
-      unlockScore:100,//2500
-      releaseScore:100,//2500
-      requiredAccuracy:25,//80
+      //unlockScore:100,//2500
+      //releaseScore:100,//2500
+      //requiredAccuracy:25,//80
       score:0,
       streak: 0,
       correct:null,
@@ -121,13 +126,13 @@ export default class GamePlay extends React.Component {
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
 
         //did they do well enough to unlock the timer round
-        if (accuracy >= this.state.requiredAccuracy && this.state.score >= this.state.unlockScore){
+        if (accuracy >= requiredAccuracy && this.state.score >= unlockScore){
 
           modalTitle = 'Well done!'
           modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>You’ve proven that you are ready for the next level.'
 
           // if (this.state.score > this.state.unlockScore){
-            bonus = Math.floor(this.state.score/100)
+            bonus = Math.floor(this.state.score/unlockDecimal)
           // }
 
           var locUser = JSON.parse(localStorage.getItem(localUser))
@@ -172,14 +177,13 @@ export default class GamePlay extends React.Component {
     let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">' + this.state.numRight+ ' Correct</span> – <span class="red bold">' + this.state.numWrong + ' Wrong</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Why don’t you try again?'
 
     //did they release a monster
-    if (accuracy >= this.state.requiredAccuracy && this.state.score >= this.state.releaseScore){
+    if (accuracy >= requiredAccuracy && this.state.score >= releaseScore){
 
       modalTitle = 'You unlocked a secret!'
       modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to open it.'
 
-      // if (this.state.score > 1000){
-      bonus = Math.floor(this.state.score/100) * 10000
-      // }
+      // multiply by 10000 to designate it as a creature in the Bonus component
+      bonus = Math.floor(this.state.score/unlockDecimal) * 10000
 
       //sync data
       /*

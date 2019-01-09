@@ -71,51 +71,51 @@ export default class Main extends React.Component {
         <a className="how-to-play" onClick={()=>{this.openModal()}}>- How to Play -</a>
         <div className="main-menu">
           <div className="menu-btns">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'health'} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health'} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">ADDITION</span>
-            <Link className={`stopwatch-btn ${(this.state.addBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.addBonus)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'health'} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'sub', gamemode:'health'} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">SUBTRACTION</span>
-            <Link className={`stopwatch-btn ${(this.state.subBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'sub', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.subBonus)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health'} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health'} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">MULTIPLICATION</span>
-            <Link className={`stopwatch-btn ${(this.state.mulBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.mulBonus)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'div', gamemode:'health'} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'div', gamemode:'health'} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">DIVISION</span>
-            <Link className={`stopwatch-btn ${(this.state.divBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'div', gamemode:'countdown'} }}>
+            <Link className={`stopwatch-btn ${(this.state.divBonus)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown'} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'health', randomize:true} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', randomize:true} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
             <span className="menu-name">RANDOMIZE ALL</span>
-            <Link className={`stopwatch-btn ${(this.state.ranBonus)?'':'inactive'}`} to={{ pathname: '/gameplay', state: { operator: 'add', gamemode:'countdown', randomize:true} }}>
+            <Link className={`stopwatch-btn ${(this.state.ranBonus)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', randomize:true} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
@@ -123,81 +123,81 @@ export default class Main extends React.Component {
 
           {/* <p className="instructions section"><strong>Times Tables</strong></p>
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:9} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:9} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">9X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:9} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:9} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:8} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:8} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">8X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:8} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:8} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:7} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:7} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">7X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:7} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:7} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:6} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:6} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">6X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:6} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:6} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:5} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:5} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">5X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:5} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:5} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:4} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:4} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">4X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:4} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:4} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:3} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:3} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">3X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:3} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:3} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div>
 
           <div className="menu-btns times-table">
-            <Link className="health-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'health', constant:2} }}>
+            <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', constant:2} }}>
               <img src={heart} width="25" height="25"/>
             </Link>
               <span className="menu-name">2X TABLE</span>
-            <Link className="stopwatch-btn" to={{ pathname: '/gameplay', state: { operator: 'mul', gamemode:'countdown', constant:2} }}>
+            <Link className="stopwatch-btn" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', constant:2} }}>
               <img src={stopwatch} width="25" height="25"/>
             </Link>
           </div> */}

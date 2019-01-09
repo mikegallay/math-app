@@ -10,7 +10,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 
 import Main from '../Main/Main';
 import Login from '../Login/Login';
-import GamePlay from '../GamePlay/GamePlay';
+import GamePlayMath from '../GamePlayMath/GamePlayMath';
 
 import appData from '../../data/app.json';
 
@@ -33,7 +33,7 @@ export default class App extends React.Component {
         <div>
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route exact path="/navigation/" render={props => <Main {...props} />} />
-          <Route exact path="/gameplay/" render={props => <GamePlay {...props} />} />
+          <Route exact path="/math/" render={props => <GamePlayMath {...props} />} />
           <Redirect from="/" to="/login"/>
         </div>
       </Router>

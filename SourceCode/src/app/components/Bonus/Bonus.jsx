@@ -11,6 +11,11 @@ import './Bonus.scss';
 import coin from '../../images/coin.png';
 import glow from '../../images/glow-wedge.png';
 import poop from '../../images/icon_sunglasses.png';
+const creatures = require.context('../../images/creatures', true);
+
+
+const creatureBonus = 10000;
+const rareBonus = 100000;
 
 export default class Bonus extends React.Component {
   constructor(props) {
@@ -45,10 +50,24 @@ export default class Bonus extends React.Component {
     let bonusPoints = this.props.bonusPoints
     if (bonusPoints == 1) coinText = 'coin'
     let bonusTitle = <h2>You got {bonusPoints} {coinText}!</h2>
+
     console.log('BONUS',bonusPoints);
-    if (bonusPoints >= 10000){
-      bonus = <img className="bonus-item" src={poop} width="125" height="125"/>
-      bonusTitle = <h2>FREE!</h2>
+
+    //over 10000 (creatureBonus) signifies that a creature has been unlocked
+    //this gets set in GamePlay
+    if (bonusPoints >= creatureBonus){
+      //randomize logic for rewards
+      let rareCreature = (bonusPoints > rareBonus && Math.random()*100 > 80) ? true : false;
+
+      let creature = 'creature'
+      let title = 'Rescued!'
+      // Dynamically reference image
+      // Set as inline style
+      // Pass as prop to child
+      let imgsrc = creatures(`./${creature}.png`);
+
+      bonus = <img className="bonus-item" src={imgsrc} width="125" height="125"/>
+      bonusTitle = <h2>{title}!</h2>
     }
 
     let headerImg = <div onClick={() => this.closeBonus()} className={`header-img-wrapper ${this.state.visible}`}>{bonus}</div>

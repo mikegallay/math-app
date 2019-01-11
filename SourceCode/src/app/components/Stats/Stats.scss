@@ -1,0 +1,21 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.page-main {
+  padding:1rem;
+  text-align: center;
+  h1{
+    margin-bottom: 0.25em;
+  }
+}
+
+.stats-btn{
+  font-weight: normal;
+  cursor: pointer;
+  text-decoration: none;
+  color:black;
+}
+
+.active{
+  font-weight: bold;
+}

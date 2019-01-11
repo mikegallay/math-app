@@ -68,7 +68,8 @@ export default class Main extends React.Component {
     return (
       <main className="page-main">
         <h1>Math 60</h1>
-        <a className="how-to-play" onClick={()=>{this.openModal()}}>- How to Play -</a>
+        -<a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>-
+        <Link to='/statistics' className='stats-btn'> View Statistics </Link>-
         <div className="main-menu">
           <div className="menu-btns">
             <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health'} }}>

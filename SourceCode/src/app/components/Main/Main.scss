@@ -13,9 +13,11 @@
   font-weight: normal;
 }
 
-.how-to-play{
+.how-to-play,.stats-btn{
   font-weight: normal;
   cursor: pointer;
+  text-decoration: none;
+  color:black;
 }
 
 .instructions{

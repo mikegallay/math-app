@@ -137,15 +137,19 @@ export default class Login extends React.Component {
           userid: uid,
           fname: displayName,
           userimg: photoURL,
-          game:{
-            add:{ hiscore:0, unlocked:false },
-            sub:{ hiscore:0, unlocked:false },
-            mul:{ hiscore:0, unlocked:false },
-            div:{ hiscore:0, unlocked:false },
-            ran:{ hiscore:0, unlocked:false },
+          gamemath:{
+            add:{ practice:0, battle:0, unlocked:false },
+            sub:{ practice:0, battle:0, unlocked:false },
+            mul:{ practice:0, battle:0, unlocked:false },
+            div:{ practice:0, battle:0, unlocked:false },
+            ran:{ practice:0, battle:0, unlocked:false },
           },
-          monsters:{
-            level01:{m01:false,m02:false,m03:false}
+          creatures:{
+            add:{c01:false,c02:false,r01:false},
+            sub:{c01:false,c02:false,r01:false},
+            mul:{c01:false,c02:false,r01:false},
+            div:{c01:false,c02:false,r01:false},
+            ran:{c01:false,c02:false,r01:false}
           }
         }
         // console.log('userRef',userRef)

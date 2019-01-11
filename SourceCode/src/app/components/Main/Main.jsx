@@ -25,13 +25,13 @@ export default class Main extends React.Component {
     //check current high score
     // localStorage.setItem(localUser, JSON.stringify(existingData));
     var locUser = JSON.parse(localStorage.getItem(localUser));
-    console.log('main',locUser);
+    console.log('main',locUser, (locUser));
     // console.log('lu',lu);
-    var addBonus = (locUser) ? locUser.game.add.unlocked : false;
-    var subBonus = (locUser) ? locUser.game.sub.unlocked : false;
-    var mulBonus = (locUser) ? locUser.game.mul.unlocked : false;
-    var divBonus = (locUser) ? locUser.game.div.unlocked : false;
-    var ranBonus = (locUser) ? locUser.game.ran.unlocked : false;
+    var addBonus = (locUser) ? locUser.gamemath.add.unlocked : false;
+    var subBonus = (locUser) ? locUser.gamemath.sub.unlocked : false;
+    var mulBonus = (locUser) ? locUser.gamemath.mul.unlocked : false;
+    var divBonus = (locUser) ? locUser.gamemath.div.unlocked : false;
+    var ranBonus = (locUser) ? locUser.gamemath.ran.unlocked : false;
 
     console.log('asdfasdf',addBonus);
     this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus};

@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ReactHowler from 'react-howler'
+import {creatureList} from "../../config/constants";
 
 import './Bonus.scss';
 import coin from '../../images/coin.png';

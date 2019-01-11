@@ -20,6 +20,7 @@ const unlockScore = 100;//2500
 const unlockDecimal = 100;
 const releaseScore = 100;//2500
 const requiredAccuracy = 25;//80
+const fullHealth = 1;
 
 export default class GamePlayMath extends React.Component {
   constructor(props) {
@@ -30,7 +31,6 @@ export default class GamePlayMath extends React.Component {
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 10
-    let fullHealth = 1
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -50,7 +50,6 @@ export default class GamePlayMath extends React.Component {
       health: fullHealth,
       numRight:0,
       numWrong:0,
-      fullHealth,
       operator,
       gamemode,
       constant,
@@ -120,7 +119,7 @@ export default class GamePlayMath extends React.Component {
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
         let bonus = 0
-        let accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.fullHealth) * 100)
+        let accuracy = Math.round(this.state.numRight / (this.state.numRight + fullHealth) * 100)
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
         let modalTitle = 'Keep practicing!'
         let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
@@ -138,12 +137,16 @@ export default class GamePlayMath extends React.Component {
           var locUser = JSON.parse(localStorage.getItem(localUser))
           // console.log('loc id', locUser.userid);
           var operator = (this.state.randomize) ? 'ran' : this.state.operator
-          locUser.game[operator].unlocked = true;
+          locUser.gamemath[operator].unlocked = true;
+
+          if (this.state.score > locUser.gamemath[operator].practice){
+            locUser.gamemath[operator].practice = this.state.score
+          }
           // console.log('loc user', locUser);
           localStorage.setItem(localUser, JSON.stringify(locUser));
 
-          let userRef = ref.ref('/users/' + locUser.userid);
-          userRef.set(locUser);
+          let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator);
+          userRef.set(locUser.gamemath[operator]);
         }
 
         this.setState({
@@ -186,13 +189,19 @@ export default class GamePlayMath extends React.Component {
       bonus = Math.floor(this.state.score/unlockDecimal) * 10000
 
       //sync data
-      /*
       var locUser = JSON.parse(localStorage.getItem(localUser))
-      locUser.game[operator].unlocked = true;
+      // console.log('loc id', locUser.userid);
+      var operator = (this.state.randomize) ? 'ran' : this.state.operator
+      locUser.gamemath[operator].unlocked = true;
+
+      if (this.state.score > locUser.gamemath[operator].battle){
+        locUser.gamemath[operator].battle = this.state.score
+      }
+      // console.log('loc user', locUser);
       localStorage.setItem(localUser, JSON.stringify(locUser));
-      let userRef = ref.ref('/users/' + locUser.userid);
-      userRef.set(locUser);
-      */
+
+      let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator);
+      userRef.set(locUser.gamemath[operator]);
     }
 
     this.setState({
@@ -244,7 +253,7 @@ export default class GamePlayMath extends React.Component {
       modalVisible:false,
       answered:false,
       correct:null,
-      health:this.state.fullHealth,
+      health:fullHealth,
       streak:0,
       multiplier:1,
       score:0,
@@ -334,7 +343,7 @@ export default class GamePlayMath extends React.Component {
           gamemode={this.state.gamemode}
           gameover={this.state.gameover}
           restart={this.state.restart}
-          fullHealth={this.state.fullHealth}
+          fullHealth={fullHealth}
           health={this.state.health}
         />
 

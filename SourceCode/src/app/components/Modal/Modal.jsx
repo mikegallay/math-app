@@ -63,7 +63,8 @@ export default class Modal extends React.Component {
 
     let bonusRender = <div className="blankBonus"></div>
     if (bonus > 0 == true) {
-      bonusRender = <Bonus openBonus={this.state.openBonus} bonusPoints={bonus}/>
+      
+      bonusRender = <Bonus openBonus={this.state.openBonus} bonusPoints={bonus} operator={this.props.operator}/>
     }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>

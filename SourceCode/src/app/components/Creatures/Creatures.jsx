@@ -23,16 +23,21 @@ export default class Creatures extends React.Component {
   }
 
   render() {
+    var locUser = JSON.parse(localStorage.getItem(localUser));
 
     return (
       <main className="page-main">
         <h1>Creatures</h1>
         <Link to='/statistics' className='stats-btn'> View Statistics </Link>
         <span className="active">View Creatures</span>
-        <div className="main-menu">
-
+        <div className="creature-list">
+          <div className="creature-section">
+            <h2>Addition - Common</h2>
+            <div className="creatures">
+              <div className={`creature ${(locUser.creatures.add.c01)?'gotit':''}`}>C01</div>
+            </div>
+          </div>
         </div>
-
       </main>
     );
   }

@@ -38,7 +38,7 @@ export default class App extends React.Component {
           <Route exact path="/math/" render={props => <GamePlayMath {...props} />} />
           <Route exact path="/statistics/" render={props => <Stats {...props} />} />
           <Route exact path="/creatures/" render={props => <Creatures {...props} />} />
-          <Redirect from="/" to="/login"/>
+          {/*<Redirect from="/" to="/login"/>*/}
         </div>
       </Router>
     );

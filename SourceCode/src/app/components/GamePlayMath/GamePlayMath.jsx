@@ -255,6 +255,7 @@ export default class GamePlayMath extends React.Component {
       correct:null,
       health:fullHealth,
       streak:0,
+      bonus:0,
       multiplier:1,
       score:0,
       numRight:0,
@@ -366,6 +367,7 @@ export default class GamePlayMath extends React.Component {
           score={this.state.score}
           gameplayBtns={true}
           bonus={this.state.bonus}
+          operator={this.state.operator}
           visible={this.state.modalVisible}
           closeModal={()=>{this.closeModal()}}
         />

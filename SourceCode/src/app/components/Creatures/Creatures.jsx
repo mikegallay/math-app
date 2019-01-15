@@ -39,16 +39,17 @@ export default class Creatures extends React.Component {
     return (
       <main className="page-main">
         <h1>Creatures</h1>
-        <Link to='/statistics' className='stats-btn'> Vadd iew Statistics </Link>
+        <Link to='/navigation' className='stats-btn'> Main Menu </Link>
+        <Link to='/statistics' className='stats-btn'> View Statistics </Link>
         <span className="active">View Creatures</span>
         <div className="creature-list">
           <div className="creature-section">
             <h2>Addition - Common</h2>
             <ul className="creatures">
-             <li style={this.renderStyles('add','c01')} className="creature">C01</li>
-             <li style={this.renderStyles('add','c02')} className="creature">C02</li>
-              {/*<li className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>C01</li>
-              <li style={this.renderStyles()} className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C02</li>
+             <li style={this.renderStyles('add','c01')} className="creature gotit">?</li>
+             <li style={this.renderStyles('add','c02')} className="creature gotit">?</li>
+              <li className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>?</li>
+              {/*<li style={this.renderStyles()} className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C02</li>
               <li className={`creature add c03 ${(locUser.creatures.add.c03)?'gotit':'notyet'}`}>C03</li>
               <li className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C03</li>*/}
             </ul>

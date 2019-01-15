@@ -38,6 +38,7 @@ export default class Stats extends React.Component {
     return (
       <main className="page-main">
         <h1>Statistics</h1>
+        <Link to='/navigation' className='stats-btn'> Main Menu </Link>
         <span className="active">View Statistics</span>
         <Link to='/creatures' className='stats-btn'> View Creatures</Link>
         <div className="stat-list">

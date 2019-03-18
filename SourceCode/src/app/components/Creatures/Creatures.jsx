@@ -46,7 +46,7 @@ export default class Creatures extends React.Component {
           <div className="creature-section">
             <h2>Addition - Common</h2>
             <ul className="creatures">
-             <li style={this.renderStyles('add','c01')} className="creature gotit">?</li>
+             <li style={this.renderStyles('add','c01')} className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>?</li>
              <li style={this.renderStyles('add','c02')} className="creature gotit">?</li>
               <li className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>?</li>
               {/*<li style={this.renderStyles()} className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C02</li>

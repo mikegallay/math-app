@@ -25,7 +25,7 @@ export default class Login extends React.Component {
     let userimg = '';
     let greeting = 'Please Log In';
     let onLogin = false;
-    let hidden = 'hidden';
+    let hidden = true;
 
     //username option
     let username = '';
@@ -125,8 +125,9 @@ export default class Login extends React.Component {
       });
       //hide the layout until the css is loaded
       let hider = setTimeout(() => {
-        this.setState({hidden : ""});
-    }, 1000)
+        let hidden = false
+        this.setState({hidden});
+      }, 1000)
   }
 
   /*responseGoogle(response){
@@ -229,16 +230,25 @@ export default class Login extends React.Component {
   }
 
   render() {
+    let display = (!this.state.hidden)?'block':'none'
+    let styles = {display};
     console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
-    if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen state={this.state}/>;
-    return <LoginPage handleGoogleLogin={this.handleGoogleLogin} state={this.state} />;
+
+    let toRender = <LoginPage style={styles} handleGoogleLogin={this.handleGoogleLogin} state={this.state} />
+
+    if (localStorage.getItem(firebaseAuthKey) === "1") toRender = <SplashScreen state={this.state}/>
+    return (
+      <div style={styles}>
+        {toRender}
+      </div>
+    )
 
     }
 }
 
 
 const LoginPage = ({handleGoogleLogin,state}) => (
-    <div className={state.hidden}>
+    <div>
         <h1>Login</h1>
         <div>
             <h2>Sign in with Google</h2>
@@ -247,47 +257,11 @@ const LoginPage = ({handleGoogleLogin,state}) => (
                 onClick={handleGoogleLogin}
             >Sign in</button>
         </div>
-        <div className="not-google">
-        <h2>Sign in with Username</h2>
-        <form onSubmit={this.onSubmit}>
-            <input
-              name="username"
-              value={state.username}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Username"
-            />
-            <input
-              name="email"
-              value={state.email}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Email Address"
-            />
-            <input
-              name="passwordOne"
-              value={state.passwordOne}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Password"
-            />
-            <input
-              name="passwordTwo"
-              value={state.passwordTwo}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Confirm Password"
-            />
-            <button type="submit">Sign Up</button>
-
-            {state.error && <p>{state.error.message}</p>}
-          </form>
-        </div>
     </div>
 );
 
 const SplashScreen = ({state}) => (
-    <div className={state.hidden}>
+    <div>
         <h1>Loading...</h1>
     </div>
 );

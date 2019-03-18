@@ -25,14 +25,23 @@ export default class ChooseUsername extends React.Component {
     let username = '';
     let usernameAvailable = false
     let localUser = localStorage.getItem(localUser)
+    let hidden = true;
 
-    this.state = {username,usernameAvailable,localUser};
+    this.state = {username,usernameAvailable,localUser,hidden};
 
     this.hasUsername = this.hasUsername.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
     this.checkUsername = this.checkUsername.bind(this);
 
+
+  }
+
+  componentDidMount() {
+    let hider = setTimeout(() => {
+      let hidden = false
+      this.setState({hidden});
+    }, 1000)
   }
 
     handleKeyUp(e) {
@@ -60,10 +69,7 @@ export default class ChooseUsername extends React.Component {
       this.props.history.push("/navigation");
     }
 
-    componentWillMount() {
-      console.log('componentWillMount');
 
-  }
 
   checkUsername(u){
     // console.log(this.state.username);
@@ -96,10 +102,11 @@ export default class ChooseUsername extends React.Component {
   render() {
     let usernameText = (this.usernameInput)?this.usernameInput.value:''
     let usernameAvailable = true
-
+    let display = (!this.state.hidden)?'block':'none'
+    let styles = {display};
 
     return (
-      <div>
+      <div style={styles}>
           <h1>Choose Username</h1>
           <input
             type="text"

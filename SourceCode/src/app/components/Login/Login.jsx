@@ -24,11 +24,27 @@ export default class Login extends React.Component {
     let fname = '';
     let userimg = '';
     let greeting = 'Please Log In';
-    let onLogin = ''
-    this.state = {fname,greeting,onLogin};
+    let onLogin = false;
+    let hidden = 'hidden';
+
+    //username option
+    let username = '';
+    let email = '';
+    let passwordOne = '';
+    let passwordTwo = '';
+    let error = '';
+
+    this.state = {hidden,fname,greeting,onLogin,username, email, passwordOne, passwordTwo, error};
 
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
     this.checkNewUser = this.checkNewUser.bind(this);
+    this.hasUsername = this.hasUsername.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.updateUsername = this.updateUsername.bind(this);
+    this.nextStep = this.nextStep.bind(this);
+
+
+
   }
 
     handleGoogleLogin() {
@@ -40,7 +56,16 @@ export default class Login extends React.Component {
         localStorage.setItem(firebaseAuthKey, "1");
     }
 
+    handleKeyUp(e) {
+      console.log('key up');
+      console.log(e.target.value);
+      let username = e.target.value
+      this.setState({username})
+    }
 
+    updateUsername() {
+
+    }
 
     componentWillMount() {
       console.log('componentWillMount');
@@ -98,6 +123,10 @@ export default class Login extends React.Component {
               // this.props.history.push("/navigation")
           }
       });
+      //hide the layout until the css is loaded
+      let hider = setTimeout(() => {
+        this.setState({hidden : ""});
+    }, 1000)
   }
 
   /*responseGoogle(response){
@@ -119,10 +148,22 @@ export default class Login extends React.Component {
     // this.sendToFirebase(profile);
   }*/
 
+  hasUsername(user){
+    return user.username ? true : false
+  }
+
+  getUsername(){
+    return user.username ? true : false
+  }
+
   checkNewUser(currUser){
+    console.log('CheckNewUser');
     // const userRef = ref;//firebase.database().ref('user');
     // let newUser = false
+    let username = '';
+    let that = this;
     let userRef = ref.ref('/users/' + currUser.uid);
+    console.log('asdf',userRef);
     let newUserCheck = ref.ref('/users/' + currUser.uid).once('value').then(function(snapshot) {
       // newUser = (snapshot.val()) ? false : true;
 
@@ -135,6 +176,7 @@ export default class Login extends React.Component {
         console.log('new user. pushing default data.');
         const data = {
           userid: uid,
+          username:'',
           fname: displayName,
           userimg: photoURL,
           gamemath:{
@@ -154,43 +196,98 @@ export default class Login extends React.Component {
         }
         // console.log('userRef',userRef)
         userRef.set(data);
+        localStorage.setItem(localUser, JSON.stringify(data));
+        that.nextStep(username)
+
       }else{
         // console.log('user exists',snapshot.val().fname);
         let existingData = snapshot.val();
         // existingData.fname = 'existing user2';
+        username = existingData.username;
+        console.log('set username',username);
         localStorage.setItem(localUser, JSON.stringify(existingData));
+        that.nextStep(username)
         // userRef.set(existingData)
         // var lu = JSON.parse(localStorage.getItem(localUser));
         // console.log('lu',lu.userimg);
         // console.log('ed',existingData.userimg);
+
       }
 
     })
-    this.props.history.push("/navigation")
+
+  }
+
+  nextStep(username){
+    // this.setState({onLogin:true});
+    console.log('new username',username);
+    if (username != '') {
+      this.props.history.push("/navigation");
+    }else{
+      this.props.history.push("/chooseusername");
+    }
   }
 
   render() {
-        console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
-        if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen/>;
-        return <LoginPage handleGoogleLogin={this.handleGoogleLogin}/>;
+    console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
+    if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen state={this.state}/>;
+    return <LoginPage handleGoogleLogin={this.handleGoogleLogin} state={this.state} />;
+
     }
 }
 
 
-const LoginPage = ({handleGoogleLogin}) => (
-    <div>
+const LoginPage = ({handleGoogleLogin,state}) => (
+    <div className={state.hidden}>
         <h1>Login</h1>
         <div>
+            <h2>Sign in with Google</h2>
             <button
                 value="Sign in with Google"
                 onClick={handleGoogleLogin}
-            >Sign in with Google</button>
+            >Sign in</button>
+        </div>
+        <div className="not-google">
+        <h2>Sign in with Username</h2>
+        <form onSubmit={this.onSubmit}>
+            <input
+              name="username"
+              value={state.username}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Username"
+            />
+            <input
+              name="email"
+              value={state.email}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Email Address"
+            />
+            <input
+              name="passwordOne"
+              value={state.passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Password"
+            />
+            <input
+              name="passwordTwo"
+              value={state.passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Confirm Password"
+            />
+            <button type="submit">Sign Up</button>
+
+            {state.error && <p>{state.error.message}</p>}
+          </form>
         </div>
     </div>
 );
 
-const SplashScreen = () => (
-    <div>
+const SplashScreen = ({state}) => (
+    <div className={state.hidden}>
         <h1>Loading...</h1>
     </div>
 );

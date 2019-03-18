@@ -33,8 +33,10 @@ export default class Main extends React.Component {
     var divBonus = (locUser) ? locUser.gamemath.div.unlocked : false;
     var ranBonus = (locUser) ? locUser.gamemath.ran.unlocked : false;
 
+    let username = locUser.username
+
     console.log('asdfasdf',addBonus);
-    this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus};
+    this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus,username};
     this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
@@ -68,8 +70,10 @@ export default class Main extends React.Component {
     return (
       <main className="page-main">
         <h1>Math 60</h1>
+
         -<a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>-
         <Link to='/statistics' className='stats-btn'> View Statistics </Link>-
+        <h3>Hi <span className="username">{this.state.username}</span>!</h3>
         <div className="main-menu">
           <div className="menu-btns">
             <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health'} }}>

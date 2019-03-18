@@ -51,7 +51,7 @@ export default class Bonus extends React.Component {
     let creature = 'default';
     let bonusPoints = this.props.bonusPoints
     if (bonusPoints == 1) coinText = 'coin'
-    let bonusTitle = 'You got' + bonusPoints + coinText + '!'
+    let bonusTitle = 'You got' + ' ' + bonusPoints + ' ' + coinText + '!'
 
     // console.log('BONUS',bonusPoints,locUser);
 

@@ -10,6 +10,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 
 import Main from '../Main/Main';
 import Login from '../Login/Login';
+import ChooseUsername from '../ChooseUsername/ChooseUsername';
 import GamePlayMath from '../GamePlayMath/GamePlayMath';
 import Stats from '../Stats/Stats';
 import Creatures from '../Creatures/Creatures';
@@ -34,6 +35,7 @@ export default class App extends React.Component {
       <Router history={customHistory}>
         <div>
           <Route exact path="/login" render={props => <Login {...props} />} />
+          <Route exact path="/chooseusername/" render={props => <ChooseUsername {...props} />} />
           <Route exact path="/navigation/" render={props => <Main {...props} />} />
           <Route exact path="/math/" render={props => <GamePlayMath {...props} />} />
           <Route exact path="/statistics/" render={props => <Stats {...props} />} />

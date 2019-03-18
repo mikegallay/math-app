@@ -16,3 +16,19 @@
 .credit,.instructions{
   font-weight: normal;
 }
+
+.hidden{
+  display: none;
+}
+
+.not-google{
+  display: none;
+  form{
+    display:flex;
+    flex-direction: column;
+    input {
+      float: left;
+    }
+  }
+
+}

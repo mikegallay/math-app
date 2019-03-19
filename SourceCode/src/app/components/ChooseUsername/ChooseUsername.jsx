@@ -45,8 +45,8 @@ export default class ChooseUsername extends React.Component {
   }
 
     handleKeyUp(e) {
-      console.log('key up');
-      console.log(e.target.value);
+      // console.log('key up');
+      // console.log(e.target.value);
       let username = e.target.value
       // this.setState({username})
       this.checkUsername(username)
@@ -102,16 +102,17 @@ export default class ChooseUsername extends React.Component {
   render() {
     let usernameText = (this.usernameInput)?this.usernameInput.value:''
     let usernameAvailable = true
-    let display = (!this.state.hidden)?'block':'none'
+    let display = (!this.state.hidden)?'flex':'none'
     let styles = {display};
 
     return (
-      <div style={styles}>
-          <h1>Choose Username</h1>
+      <div className="wrapper" style={styles}>
+          <h1 className="headline">Welcome</h1>
+          <p className="sub-copy">What would like to be called?</p>
           <input
             type="text"
-            className="input"
-            placeholder="choose a username"
+            className="mdl-textfield__input input"
+            placeholder="Choose a Username"
             ref={(ref) => (this.usernameInput = ref)}
             onKeyUp={this.handleKeyUp}
           />
@@ -120,8 +121,8 @@ export default class ChooseUsername extends React.Component {
             {usernameText} is {(!this.state.usernameAvailable)?'available':'not available'}
           </p>
 
-          <button className="button is-primary"
-               disabled={(!usernameAvailable || !usernameText)}
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+               disabled={(this.state.usernameAvailable || !usernameText)}
                onClick={this.updateUsername}>
                Select Username
           </button>

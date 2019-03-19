@@ -12,6 +12,7 @@ import './GamePlayMath.scss';
 import Equation from '../Equation/Equation';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
+import NumberPad from '../NumberPad/NumberPad';
 import Modal from '../Modal/Modal';
 
 const localUser = "localUser";
@@ -30,7 +31,8 @@ export default class GamePlayMath extends React.Component {
 
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
-    let range = 10
+    let range = 11
+    let hidden = false
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -64,9 +66,18 @@ export default class GamePlayMath extends React.Component {
       timerID:0,
       rightFX:false,
       wrongFX:false,
-      levelFX:false
+      levelFX:false,
+      hidden
     };
 
+  }
+
+  componentWillMount(){
+    //hide the layout until the css is loaded
+    let hider = setTimeout(() => {
+      let hidden = false
+      this.setState({hidden});
+    }, 1000)
   }
 
   rand(min,max){
@@ -308,14 +319,32 @@ export default class GamePlayMath extends React.Component {
   }
 
   render() {
+    let display = (!this.state.hidden)?'block':'none'
+    let styles = {display};
+
     let numOne = this.state.equation.numOne
     let numTwo = this.state.equation.numTwo
     let answer = this.state.equation.answer
     let randOne = this.state.numbers.randOne
     let randTwo = this.state.numbers.randTwo
 
+    let answerPad = <Answers
+      answered={this.state.answered}
+      onAnswer={(correct)=>{this.onAnswer(correct)}}
+      answer={answer}
+      randOne={randOne}
+      randTwo={randTwo}
+    />
+    if (this.state.gamemode == 'countdown'){
+      answerPad = <NumberPad
+        answered={this.state.answered}
+        onAnswer={(correct)=>{this.onAnswer(correct)}}
+        answer={answer}
+      />
+    }
+
     return (
-      <div className="page-main">
+      <div style={styles} className="page-main">
 
         <ReactHowler
           src='http://math.michaelgallay.com/audio/right.mp3'
@@ -354,13 +383,8 @@ export default class GamePlayMath extends React.Component {
           numTwo={numTwo}
         />
 
-        <Answers
-          answered={this.state.answered}
-          onAnswer={(correct)=>{this.onAnswer(correct)}}
-          answer={answer}
-          randOne={randOne}
-          randTwo={randTwo}
-        />
+        {answerPad}
+
         <Modal
           title={this.state.modalTitle}
           body={this.state.modalBody}

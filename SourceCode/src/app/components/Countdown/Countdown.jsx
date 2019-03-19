@@ -14,7 +14,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 6
+    let gamelength = 60
 
     this.state = {
       time: {},
@@ -75,7 +75,7 @@ export default class Countdown extends React.Component {
   }
 
   countDown() {
-    console.log('countdown',this.state.seconds);
+    // console.log('countdown',this.state.seconds);
 
     // if the component was unmounted, kill timer
     if (!this._ismounted) {

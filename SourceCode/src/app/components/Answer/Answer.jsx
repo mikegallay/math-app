@@ -17,9 +17,13 @@ export default class Answer extends React.Component {
   }
 
   render() {
+    let answerReturn = this.props.status=='correct';
+    let isNumPad = (!this.props.randOne)?true:false;
+    if (isNumPad) answerReturn = this.props.value;
+
     return (
       <button
-          onClick={(e)=> {e.target.setAttribute('id','selected'); this.props.onAnswer(this.props.status=='correct'); }}
+          onClick={(e)=> {if (!isNumPad) e.target.setAttribute('id','selected'); this.props.onAnswer(answerReturn); }}
           className={`answer ${this.props.answered ? '' : 'unanswered'} ${this.props.status}`}>
             {this.props.value}
       </button>

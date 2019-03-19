@@ -253,6 +253,7 @@ const LoginPage = ({handleGoogleLogin,state}) => (
         <div>
             <h2>Sign in with Google</h2>
             <button
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
                 value="Sign in with Google"
                 onClick={handleGoogleLogin}
             >Sign in</button>
@@ -263,5 +264,6 @@ const LoginPage = ({handleGoogleLogin,state}) => (
 const SplashScreen = ({state}) => (
     <div>
         <h1>Loading...</h1>
+        <div className="mdl-spinner mdl-js-spinner is-active"></div>
     </div>
 );

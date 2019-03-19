@@ -34,11 +34,19 @@ export default class Main extends React.Component {
     var ranBonus = (locUser) ? locUser.gamemath.ran.unlocked : false;
 
     let username = locUser.username
+    let hidden = true
 
     console.log('asdfasdf',addBonus);
-    this.state = {modalVisible:'init false',addBonus,subBonus,mulBonus,divBonus,ranBonus,username};
+    this.state = {modalVisible:'init false',hidden,addBonus,subBonus,mulBonus,divBonus,ranBonus,username};
     this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
+  }
+  componentWillMount(){
+    //hide the layout until the css is loaded
+    let hider = setTimeout(() => {
+      let hidden = false
+      this.setState({hidden});
+    }, 1000)
   }
 
   handleLogout() {
@@ -65,10 +73,12 @@ export default class Main extends React.Component {
   }
 
   render() {
+    let display = (!this.state.hidden)?'block':'none'
+    let styles = {display};
 
     let howToBody = '<p>Use this app daily to improve your math skills. You can choose addition, subtraction, multiplication, division or randomize the skill</p><p>There are two icons next to each of the math skills.</p><p><img className="legend" src='+heart+' width="25" height="25"/><br/>Choose the heart and play until you make 3 mistakes.</p><p><img className="legend" src='+stopwatch+' width="25" height="25"/><br/>Choose the clock and answer as many as you can in 60 seconds.</p><p>The more answers you get correct in a row, the higher your score multiplier. Wrong answers will lower your overall accuracy. Good luck!!</p>'
     return (
-      <main className="page-main">
+      <main style={styles} className="page-main">
         <h1>Math 60</h1>
 
         -<a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>-
@@ -212,6 +222,7 @@ export default class Main extends React.Component {
         <div>
             <button
                 value="Sign Out"
+                className="mdl-button"
                 onClick={this.handleLogout}
             >Sign Out</button>
         </div>

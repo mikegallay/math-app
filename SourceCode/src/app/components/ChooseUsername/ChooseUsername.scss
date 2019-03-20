@@ -1,39 +1,42 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
-.is-success{
-  color:green;
-}
 
-.is-danger{
-  color:red;
-}
 
-.headline{
-  font-size:2.5em;
-  margin-bottom:0;
-}
+.username.main{
+  background: transparent url('../../images/bg.jpg') no-repeat top left;
+  background-size:cover;
+  height:100vh;
+  padding: 2em;
+  .wrapper{
+      flex-direction: column;
+      padding: 0 10%;
+      align-items: center;
+      text-align: center;
+      .headline{
+        font-size:2.5em;
+        margin-bottom:0;
+      }
 
-.sub-copy{
-  font-size:1.25em;
-  margin-bottom:2em;
-}
-
-.help{
-  font-weight: normal;
-  margin-bottom:2.5em;
-}
-
-.wrapper{
-    flex-direction: column;
-    padding: 0 10%;
-    align-items: center;
-    text-align: center;
-}
-
-input{
-  padding:8px;
-  text-align:center!important;
-  font-weight: bold;
-  font-size:16px;
+      .sub-copy{
+        font-size:1.25em;
+        margin-bottom:2em;
+      }
+      input{
+        padding:8px;
+        text-align:center!important;
+        font-weight: bold;
+        font-size:16px;
+      }
+      .is-success{
+        color:green;
+      }
+      .is-danger{
+        color:red;
+      }
+      .help{
+        font-weight: normal;
+        margin-bottom:2.5em;
+      }
+  }
 }

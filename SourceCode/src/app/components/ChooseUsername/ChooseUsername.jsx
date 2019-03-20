@@ -106,26 +106,28 @@ export default class ChooseUsername extends React.Component {
     let styles = {display};
 
     return (
-      <div className="wrapper" style={styles}>
-          <h1 className="headline">Welcome</h1>
-          <p className="sub-copy">What would like to be called?</p>
-          <input
-            type="text"
-            className="mdl-textfield__input input"
-            placeholder="Choose a Username"
-            ref={(ref) => (this.usernameInput = ref)}
-            onKeyUp={this.handleKeyUp}
-          />
+      <div className="main username">
+        <div className="wrapper" style={styles}>
+            <h1 className="headline">Welcome</h1>
+            <p className="sub-copy">What would like to be called?</p>
+            <input
+              type="text"
+              className="mdl-textfield__input input"
+              placeholder="Choose a Username"
+              ref={(ref) => (this.usernameInput = ref)}
+              onKeyUp={this.handleKeyUp}
+            />
 
-          <p className={`help ${(!this.state.usernameAvailable)?'is-success':'is-danger'}`} >
-            {usernameText} is {(!this.state.usernameAvailable)?'available':'not available'}
-          </p>
+            <p className={`help ${(!this.state.usernameAvailable)?'is-success':'is-danger'}`} >
+              {usernameText} is {(!this.state.usernameAvailable)?'available':'not available'}
+            </p>
 
-          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
-               disabled={(this.state.usernameAvailable || !usernameText)}
-               onClick={this.updateUsername}>
-               Select Username
-          </button>
+            <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                 disabled={(this.state.usernameAvailable || !usernameText)}
+                 onClick={this.updateUsername}>
+                 Select Username
+            </button>
+        </div>
       </div>
     )
 

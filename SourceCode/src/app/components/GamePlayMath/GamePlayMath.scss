@@ -1,6 +1,17 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
-.page-main {
-  padding:1rem;
+.gameplaymath.main{
+  background: transparent url('../../images/bg.jpg') no-repeat top left;
+  background-size:cover;
+  height:96vh;
+  padding: 2vh;
+  flex-direction: column;
+    justify-content: center;
+  .wrapper {
+    padding:1rem;
+    background: white;
+    border-radius: 1em;
+    border:1px solid black;
+  }
 }

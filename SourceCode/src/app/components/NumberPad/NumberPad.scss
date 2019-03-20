@@ -3,11 +3,49 @@
 
 .numberpad-wrapper{
   width:100%;
-  display: flex;
-  flex-flow: row wrap;
-  .answer{
-    flex: 1 1 15%;
-    margin: 0.5em .25em 0;
-    padding: 0.3em 0;
+  //display: flex;
+  // flex-flow: row wrap;
+  display:block;
+  float:left;
+  text-align: left;
+  .numbers{
+    width:70%;
+    float:left;
+    display: inline-block;
   }
+  .answer{
+    // flex: 0 1 11%;
+    margin: 0.4em 0.8% 0;
+    padding: 1% 0;
+    display: inline-block;
+    text-align: center;
+    width: 18%;
+  }
+  .answerbox {
+    float:left;
+    padding: 4% 5%;
+    border: 2px solid gray;
+    width: 16%;
+    display: inline-block;
+    text-align: center;
+    font-size: 4em;
+    margin: 4% 0.8% 0;
+    border-radius: 1em;
+    min-height: 64px;
+    background-color: lightblue;
+    transition:background-color .5s;
+    .yourAnswer{opacity:1;transition:opacity 0s 0s;}
+    &.correct{background-color:lightgreen;}
+    &.incorrect{background-color:pink;}
+    &.correct,&.incorrect{
+      .yourAnswer{
+        transition:opacity .5s .5s;
+        opacity:0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 375px) {
+
 }

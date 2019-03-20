@@ -32,7 +32,7 @@ export default class GamePlayMath extends React.Component {
     let nextQuestionDelay = 50
     if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 11
-    let hidden = false
+    let hidden = true
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -319,7 +319,7 @@ export default class GamePlayMath extends React.Component {
   }
 
   render() {
-    let display = (!this.state.hidden)?'block':'none'
+    let display = (!this.state.hidden)?'flex':'none'
     let styles = {display};
 
     let numOne = this.state.equation.numOne
@@ -344,7 +344,8 @@ export default class GamePlayMath extends React.Component {
     }
 
     return (
-      <div style={styles} className="page-main">
+      <div style={styles} className="gameplaymath main">
+        <div className="wrapper">
 
         <ReactHowler
           src='http://math.michaelgallay.com/audio/right.mp3'
@@ -395,6 +396,7 @@ export default class GamePlayMath extends React.Component {
           visible={this.state.modalVisible}
           closeModal={()=>{this.closeModal()}}
         />
+      </div>
       </div>
     );
   }

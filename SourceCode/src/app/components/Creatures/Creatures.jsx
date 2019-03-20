@@ -37,7 +37,7 @@ export default class Creatures extends React.Component {
     var locUser = JSON.parse(localStorage.getItem(localUser));
 
     return (
-      <main className="page-main">
+      <main className="creatures">
         <h1>Creatures</h1>
         <Link to='/navigation' className='stats-btn'> Main Menu </Link>
         <Link to='/statistics' className='stats-btn'> View Statistics </Link>

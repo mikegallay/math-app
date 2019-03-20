@@ -17,9 +17,36 @@
   font-weight: normal;
 }
 
+.login.main{
+  background: transparent url('../../images/bg.jpg') no-repeat top left;
+  background-size:cover;
+  height:100vh;
+  padding: 2em;
+  .wrapper{
+      flex-direction: column;
+      padding: 0 10%;
+      align-items: center;
+      text-align: center;
+      .headline{
+        font-size:2.5em;
+        margin:0;
+      }
+      .sub-copy{
+        font-size:1.25em;
+        margin-bottom:2em;
+      }
+  }
+
+}
+
 .hidden{
   display: none;
 }
+
+
+
+
+
 
 .not-google{
   display: none;

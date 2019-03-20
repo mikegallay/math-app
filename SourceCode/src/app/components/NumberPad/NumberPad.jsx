@@ -13,11 +13,15 @@ export default class NumberPad extends React.Component {
   constructor(props) {
     super(props);
     console.log('answers',props);
-    let staticAnswers = [0,1,2,3,4,5,6,7,8,9];
+    let staticAnswers = [1,2,3,4,5,6,7,8,9,0];
     let answerString = this.props.answer.toString()
     let currAnswer = ''
-    this.state = {staticAnswers,currAnswer,answerString};
+    let lastAnswer = ''
+    let correct = 'default'
+    this.state = {staticAnswers,currAnswer,answerString,correct,lastAnswer};
     this.padPress = this.padPress.bind(this);
+    this.removeIsCorrect = this.removeIsCorrect.bind(this);
+    this.clearAnswerBox = this.clearAnswerBox.bind(this);
   }
 
   componentWillReceiveProps(props){
@@ -32,21 +36,45 @@ export default class NumberPad extends React.Component {
     // console.log('padpress',val);
     let entry = val.toString();
     let currAnswer = this.state.currAnswer + entry;
+    let lastAnswer = currAnswer
     let correct = (currAnswer == this.state.answerString)
     // console.log(currAnswer,currAnswer.length,this.props.answer,this.state.answerString, this.state.answerString.length);
     if (currAnswer.length == this.state.answerString.length){
       // console.log('YES');
         this.props.onAnswer(correct)
         currAnswer = '';
+        this.setState({currAnswer,correct,lastAnswer})
+        this.removeIsCorrect();
+    }else{
+      this.setState({currAnswer,correct:'default'})
     }
-    this.setState({currAnswer})
+  }
+
+  removeIsCorrect(){
+    let remover = setTimeout(() => {
+      let correct = 'default'
+      this.setState({correct});
+    }, 750)
+  }
+
+  clearAnswerBox(){
+    console.log('clearn');
+    let correct = 'default';
+    let currAnswer = '';
+      this.setState({currAnswer,correct})
   }
 
   render() {
+    let isCorrect = '';
+    let yourAnswer = this.state.currAnswer;
 
+    if (this.state.correct == false) isCorrect = 'incorrect';
+    if (this.state.correct == true) isCorrect = 'correct';
+    if (isCorrect != '') yourAnswer = this.state.lastAnswer;
     return(
       <div className="numberpad-wrapper">
-      {this.state.staticAnswers.map((arr,idx) => {
+        <div className="numbers">
+        {this.state.staticAnswers.map((arr,idx) => {
           return (
             <Answer
               key={idx}
@@ -57,6 +85,10 @@ export default class NumberPad extends React.Component {
             />
           );
         })}
+        </div>
+        <div
+          onClick={() => this.clearAnswerBox()}
+          className={`answerbox ${isCorrect}`}><span className="yourAnswer">{yourAnswer}</span></div>
         </div>
     );
   }

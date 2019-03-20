@@ -238,7 +238,7 @@ export default class Login extends React.Component {
 
     if (localStorage.getItem(firebaseAuthKey) === "1") toRender = <SplashScreen state={this.state}/>
     return (
-      <div style={styles}>
+      <div className="login main" style={styles}>
         {toRender}
       </div>
     )
@@ -248,10 +248,10 @@ export default class Login extends React.Component {
 
 
 const LoginPage = ({handleGoogleLogin,state}) => (
-    <div>
-        <h1>Login</h1>
+    <div className="wrapper">
+        <h1 className="headline">Login</h1>
         <div>
-            <h2>Sign in with Google</h2>
+            <p className="sub-copy">Sign in with Google</p>
             <button
                 className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
                 value="Sign in with Google"
@@ -262,8 +262,8 @@ const LoginPage = ({handleGoogleLogin,state}) => (
 );
 
 const SplashScreen = ({state}) => (
-    <div>
-        <h1>Loading...</h1>
+    <div className="wrapper">
+        <h1 className="headline">Loading...</h1>
         <div className="mdl-spinner mdl-js-spinner is-active"></div>
     </div>
 );

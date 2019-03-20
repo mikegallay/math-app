@@ -36,7 +36,7 @@ export default class Stats extends React.Component {
     var ranBattHS = locUser.gamemath.ran.battle;
     console.log('locuser',addPracHS);
     return (
-      <main className="page-main">
+      <main className="stats">
         <h1>Statistics</h1>
         <Link to='/navigation' className='stats-btn'> Main Menu </Link>
         <span className="active">View Statistics</span>

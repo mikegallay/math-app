@@ -30,12 +30,19 @@ export default class GamePlayMath extends React.Component {
     const {operator, gamemode, constant, randomize} = props.location.state
 
     let nextQuestionDelay = 50
-    if (gamemode == 'health') nextQuestionDelay = 1000
     let range = 11
     let hidden = true
+    let battle = false
+    let countdown = 3
+    if (gamemode == 'health') {
+      nextQuestionDelay = 1000
+      countdown = 4
+    }
+
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
+    this.introCountdown = this.introCountdown.bind(this)
 
     this.state = {
       //unlockScore:100,//2500
@@ -67,17 +74,44 @@ export default class GamePlayMath extends React.Component {
       rightFX:false,
       wrongFX:false,
       levelFX:false,
-      hidden
+      hidden,
+      countdown
     };
 
   }
 
   componentWillMount(){
+
+    let hidden = false;
     //hide the layout until the css is loaded
-    let hider = setTimeout(() => {
-      let hidden = false
-      this.setState({hidden});
-    }, 1000)
+     let hider = setTimeout(() => {
+        this.setState({hidden});
+        (this.state.gamemode == 'countdown')?this.introCountdown():this.readyToBattle(1000);
+      }, 1000)
+  }
+
+  introCountdown(){
+    let countdown = this.state.countdown;
+    // console.log('introCountdown',countdown);
+    let readySetGo = setInterval(() => {
+      // console.log('int',this.state.countdown);
+        countdown--;
+      if (countdown == 0) {
+        // console.log('fight');
+        countdown = 'FIGHT!'
+        this.readyToBattle(1000)
+        clearInterval(readySetGo)
+      }
+      this.setState({countdown})
+    },1000)
+  }
+
+  readyToBattle(delay){
+    //bring flashcard onto the field
+    let readyToBattle = setTimeout(() => {
+      let battle = true
+      this.setState({battle});
+    }, delay)
   }
 
   rand(min,max){
@@ -219,6 +253,7 @@ export default class GamePlayMath extends React.Component {
       modalVisible:true,
       modalTitle,
       modalBody,
+      // battle: false,
       gameover: true,
       bonus,
       rightFX:false,
@@ -344,29 +379,10 @@ export default class GamePlayMath extends React.Component {
     }
 
     return (
-      <div style={styles} className="gameplaymath main">
-        <div className="wrapper">
-
-        <ReactHowler
-          src='http://math.michaelgallay.com/audio/right.mp3'
-          playing={this.state.rightFX}
-          ref={(ref) => (this.rightFX = ref)}
-        />
-
-        <ReactHowler
-          src='http://math.michaelgallay.com/audio/wrong.mp3'
-          playing={this.state.wrongFX}
-          ref={(ref) => (this.wrongFX = ref)}
-        />
-
-        <ReactHowler
-          src='http://math.michaelgallay.com/audio/level1.mp3'
-          playing={this.state.levelFX}
-          ref={(ref) => (this.levelFX = ref)}
-        />
-
+      <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
         <ScoreBoard
           onTimeExpired={()=>{this.timeExpired()}}
+          ready={this.state.battle}
           multiplier={this.state.multiplier}
           streak={this.state.streak}
           correct={this.state.correct}
@@ -378,25 +394,50 @@ export default class GamePlayMath extends React.Component {
           health={this.state.health}
         />
 
-        <Equation
-          operator={this.state.operator}
-          numOne={numOne}
-          numTwo={numTwo}
-        />
+        <div className={`wizard ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
+        <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
+        <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
 
-        {answerPad}
+        <div className={`wrapper ${(this.state.battle)?'battle':''}`}>
 
-        <Modal
-          title={this.state.modalTitle}
-          body={this.state.modalBody}
-          score={this.state.score}
-          gameplayBtns={true}
-          bonus={this.state.bonus}
-          operator={this.state.operator}
-          visible={this.state.modalVisible}
-          closeModal={()=>{this.closeModal()}}
-        />
-      </div>
+          <ReactHowler
+            src='http://math.michaelgallay.com/audio/right.mp3'
+            playing={this.state.rightFX}
+            ref={(ref) => (this.rightFX = ref)}
+          />
+
+          <ReactHowler
+            src='http://math.michaelgallay.com/audio/wrong.mp3'
+            playing={this.state.wrongFX}
+            ref={(ref) => (this.wrongFX = ref)}
+          />
+
+          <ReactHowler
+            src='http://math.michaelgallay.com/audio/level1.mp3'
+            playing={this.state.levelFX}
+            ref={(ref) => (this.levelFX = ref)}
+          />
+
+          <Equation
+            operator={this.state.operator}
+            numOne={numOne}
+            numTwo={numTwo}
+          />
+
+          {answerPad}
+
+          <Modal
+            title={this.state.modalTitle}
+            body={this.state.modalBody}
+            score={this.state.score}
+            gameplayBtns={true}
+            bonus={this.state.bonus}
+            operator={this.state.operator}
+            visible={this.state.modalVisible}
+            closeModal={()=>{this.closeModal()}}
+          />
+
+        </div>
       </div>
     );
   }

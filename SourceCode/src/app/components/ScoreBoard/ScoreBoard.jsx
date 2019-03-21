@@ -26,7 +26,7 @@ export default class ScoreBoard extends React.Component {
   }
 
   render() {
-    let gamemode = <Countdown restart={this.props.restart} gameover={this.props.gameover} onTimeExpired={this.props.onTimeExpired}/>
+    let gamemode = <Countdown ready={this.props.ready} restart={this.props.restart} gameover={this.props.gameover} onTimeExpired={this.props.onTimeExpired}/>
 
     if (this.props.gamemode=='health'){
       gamemode = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>

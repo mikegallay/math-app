@@ -23,24 +23,36 @@
   }
   .answerbox {
     float:left;
-    padding: 4% 5%;
+    padding: 1% 3%;
+    margin: 10% 0 0 2%;
+    @media only screen and (min-width: 375px) {
+      padding: 3%;
+      margin: 6% 0 0 2%;
+    }
     border: 2px solid gray;
-    width: 16%;
+    width: 20%;
     display: inline-block;
     text-align: center;
-    font-size: 4em;
-    margin: 4% 0.8% 0;
+    font-size: 3.5em;
     border-radius: 1em;
     min-height: 64px;
     background-color: lightblue;
     transition:background-color .5s;
-    .yourAnswer{opacity:1;transition:opacity 0s 0s;}
+    .yourAnswer{
+      opacity:1;
+      transition:
+      opacity 0s 0s;
+      position: relative;
+      top: 0.1em;
+      font-weight: normal;
+    }
     &.correct{background-color:lightgreen;}
     &.incorrect{background-color:pink;}
     &.correct,&.incorrect{
       .yourAnswer{
         transition:opacity .5s .5s;
         opacity:0;
+
       }
     }
   }

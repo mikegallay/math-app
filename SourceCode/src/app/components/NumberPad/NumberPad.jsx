@@ -82,6 +82,7 @@ export default class NumberPad extends React.Component {
               onAnswer={(val)=>{this.padPress(val)}}
               value={arr}
               status={''}
+              gamemode='countdown'
             />
           );
         })}

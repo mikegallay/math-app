@@ -14,12 +14,12 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 60
+    let gamelength = 10
 
     this.state = {
       time: {},
       seconds: gamelength, gamelength,
-      timerStarted: 'false'
+      timerStarted: false
     };
 
     this.timer = 0;
@@ -32,7 +32,7 @@ export default class Countdown extends React.Component {
 
     this.setState({ time: timeLeftVar });
 
-    this.startTimer()
+    // this.startTimer()
     this._ismounted = true;
   }
 
@@ -40,9 +40,12 @@ export default class Countdown extends React.Component {
      this._ismounted = false;
   }
 
-  componentDidUpdate(){
+  componentDidUpdate(nextProps){
+    console.log('s',(this.props));
+    if (this.props.ready && !this.state.timerStarted && !this.props.gameover) {this.startTimer();console.log('here',this.state.timerStarted);}
     if (this.props.restart && !this.state.timerStarted) {
       clearInterval(this.timer)
+      console.log('here3');
       this.startTimer();
     }
   }
@@ -93,14 +96,14 @@ export default class Countdown extends React.Component {
     // Check if we're at zero.
     if (seconds == 0) {
       clearInterval(this.timer)
-
+    this.props.onTimeExpired()
       this.timer = setTimeout(()=>{
         this.setState({
           time: this.secondsToTime(this.state.gamelength),
           seconds: this.state.gamelength,
           timerStarted: false
         });
-        this.props.onTimeExpired()
+
       }, 1000)
     }
   }

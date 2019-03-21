@@ -46,7 +46,7 @@ export default class Bonus extends React.Component {
     console.log('determine creature');
     var locUser = JSON.parse(localStorage.getItem(localUser));
     let operator = this.props.operator
-    let bonusImg = 'coin'
+    let bonusImg = coin
     let coinText = 'coins'
     let creature = 'default';
     let bonusPoints = this.props.bonusPoints

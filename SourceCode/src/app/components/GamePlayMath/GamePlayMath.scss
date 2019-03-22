@@ -5,54 +5,61 @@
   background: transparent url('../../images/bg.jpg') no-repeat top left;
   background-size:cover;
   height:96vh;
+  max-width: 425px;
   padding: 2vh;
   flex-direction: column;
   // justify-content: center;
-  .wizard{
-    background: transparent url('../../images/wizard.png') no-repeat top left;
-    background-size:cover;
-    width:60%;
-    height:50vh;
-    // background-color: blue;
-    top: 25%;
-    left: -70%;
-    position: absolute;
-    transition: left 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    &.ready{
-      left: 5%;
+  .gameArt{
+    position: relative;
+    overflow: hidden;
+    height:90%;
+    .wizard{
+      background: transparent url('../../images/wizard.png') no-repeat top left;
+      background-size:cover;
+      width:60%;
+      height:50vh;
+      // background-color: blue;
+      top: 25%;
+      left: -70%;
+      position: absolute;
+      transition: left 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      &.ready{
+        left: 5%;
+      }
+    }
+    .student{
+      background: transparent url('../../images/student.png') no-repeat top left;
+      background-size:cover;
+      width:50%;
+      height:40vh;
+      // background-color: green;
+      top: 45%;
+      left: 100%;
+      position: absolute;
+      transition: left 2s .25s cubic-bezier(0.075, 0.82, 0.165, 1);
+      &.ready{
+        left: 45%;
+      }
+    }
+    .countdown {
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 5em;
+      position: absolute;
+      top: 50%;
+      margin-top: -35px;
+      -webkit-text-stroke: 2px darkred;
+      text-shadow: 0px 0px 25px rgba(0,0,0,0.4);
+      opacity:1;
+      transition:opacity .5s;
+      &.ready{
+        opacity:0;
+      }
     }
   }
-  .student{
-    background: transparent url('../../images/student.png') no-repeat top left;
-    background-size:cover;
-    width:50%;
-    height:40vh;
-    // background-color: green;
-    top: 45%;
-    left: 100%;
-    position: absolute;
-    transition: left 2s .25s cubic-bezier(0.075, 0.82, 0.165, 1);
-    &.ready{
-      left: 45%;
-    }
-  }
-  .countdown {
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    font-size: 5em;
-    position: absolute;
-    top: 50%;
-    margin-top: -35px;
-    -webkit-text-stroke: 2px darkred;
-    text-shadow: 0px 0px 25px rgba(0,0,0,0.4);
-    opacity:1;
-    transition:opacity .5s;
-    &.ready{
-      opacity:0;
-    }
-  }
+
   &.health{
     .countdown{
       display:none;
@@ -63,13 +70,25 @@
     background: white;
     border-radius: 1em;
     border:1px solid black;
-    position:relative;
+    position:absolute;
+    width:268px;
+    height:525px;
+    @media only screen and (min-width: 375px) {
+        width: 320px;
+    }
+    @media only screen and (min-width: 425px) {
+        width: 365px;
+    }
     opacity:0;
     transition:opacity .5s,top .5s;
-    top:100px;
+    top:60%;
+    margin-top:-225px;
     &.battle{
       opacity:1;
-      top:10px;
+      top:50%;
+      @media only screen and (min-width: 375px) {
+        top:46%;
+      }
     }
   }
 }

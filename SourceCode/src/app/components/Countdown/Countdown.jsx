@@ -28,9 +28,9 @@ export default class Countdown extends React.Component {
   }
 
   componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
+    let time = this.secondsToTime(this.state.seconds);
 
-    this.setState({ time: timeLeftVar });
+    this.setState({ time });
 
     // this.startTimer()
     this._ismounted = true;
@@ -41,14 +41,21 @@ export default class Countdown extends React.Component {
   }
 
   componentDidUpdate(nextProps){
-    console.log('s',(this.props));
+    console.log('s',(this.props),this.state.timerStarted);
     if (this.props.ready && !this.state.timerStarted && !this.props.gameover) {this.startTimer();console.log('here',this.state.timerStarted);}
     if (this.props.restart && !this.state.timerStarted) {
       clearInterval(this.timer)
       console.log('here3');
       this.startTimer();
     }
-    if (this.props.gameover) {console.log('cd gameover'); clearInterval(this.timer);}
+    // if (this.props.gameover) {console.log('cd gameover'); clearInterval(this.timer);}
+    // if (!this.props.gameover && this.props.restart)console.log('testingitup',this.props);
+    // if (!this.props.modalVisible && this.props.gameover) this.startTimer();
+  }
+
+  restart(){
+    this.setState({seconds: this.state.gamelength})
+    this.startTimer();
   }
 
   startTimer() {
@@ -88,7 +95,11 @@ export default class Countdown extends React.Component {
     }
 
     // Remove one second, set state so a re-render happens.
+
     let seconds = this.state.seconds - 1;
+
+    //set timer to 0 so it will reset if the wizard is defeated
+    if (this.props.gameover) seconds = 0;
     this.setState({
       seconds,
       time: this.secondsToTime(seconds)
@@ -97,13 +108,14 @@ export default class Countdown extends React.Component {
     // Check if we're at zero.
     if (seconds == 0) {
       clearInterval(this.timer)
-    this.props.onTimeExpired()
+
       this.timer = setTimeout(()=>{
         this.setState({
           time: this.secondsToTime(this.state.gamelength),
           seconds: this.state.gamelength,
           timerStarted: false
         });
+        this.props.onTimeExpired()
 
       }, 1000)
     }

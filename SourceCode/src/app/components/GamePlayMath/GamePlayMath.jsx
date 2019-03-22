@@ -34,7 +34,7 @@ export default class GamePlayMath extends React.Component {
     let hidden = true
     let battle = false
     let countdown = 3
-    let hitpoints = 500
+    let hitpoints = 200
     if (gamemode == 'health') {
       nextQuestionDelay = 1000
       countdown = 4
@@ -244,7 +244,7 @@ export default class GamePlayMath extends React.Component {
           modalVisible:true,
           modalTitle,
           modalBody,
-          // battle: false,
+          battle: false,
           gameover: true,
           bonus,
           rightFX:false,
@@ -299,7 +299,7 @@ export default class GamePlayMath extends React.Component {
       modalVisible:true,
       modalTitle,
       modalBody,
-      // battle: false,
+      battle: false,
       gameover: true,
       bonus,
       rightFX:false,
@@ -400,7 +400,7 @@ export default class GamePlayMath extends React.Component {
   }
 
   render() {
-    let display = (!this.state.hidden)?'flex':'none'
+    let display = (!this.state.hidden)?'block':'none'
     let styles = {display};
 
     let numOne = this.state.equation.numOne
@@ -439,11 +439,14 @@ export default class GamePlayMath extends React.Component {
           fullHealth={fullHealth}
           health={this.state.health}
           hitpoints = {this.state.hitpoints}
+          modalVisible = {this.state.modalVisible}
         />
 
-        <div className={`wizard ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
-        <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
-        <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
+        <div className="gameArt">
+          <div className={`wizard ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
+          <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
+          <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
+        </div>
 
         <div className={`wrapper ${(this.state.battle)?'battle':''}`}>
 
@@ -473,18 +476,19 @@ export default class GamePlayMath extends React.Component {
 
           {answerPad}
 
-          <Modal
-            title={this.state.modalTitle}
-            body={this.state.modalBody}
-            score={this.state.score}
-            gameplayBtns={true}
-            bonus={this.state.bonus}
-            operator={this.state.operator}
-            visible={this.state.modalVisible}
-            closeModal={()=>{this.closeModal()}}
-          />
+
 
         </div>
+        <Modal
+          title={this.state.modalTitle}
+          body={this.state.modalBody}
+          score={this.state.score}
+          gameplayBtns={true}
+          bonus={this.state.bonus}
+          operator={this.state.operator}
+          visible={this.state.modalVisible}
+          closeModal={()=>{this.closeModal()}}
+        />
       </div>
     );
   }

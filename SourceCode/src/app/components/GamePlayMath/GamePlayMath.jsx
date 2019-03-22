@@ -34,6 +34,7 @@ export default class GamePlayMath extends React.Component {
     let hidden = true
     let battle = false
     let countdown = 3
+    let hitpoints = 500
     if (gamemode == 'health') {
       nextQuestionDelay = 1000
       countdown = 4
@@ -75,7 +76,8 @@ export default class GamePlayMath extends React.Component {
       wrongFX:false,
       levelFX:false,
       hidden,
-      countdown
+      countdown,
+      hitpoints
     };
 
   }
@@ -142,10 +144,14 @@ export default class GamePlayMath extends React.Component {
       let levelFX = false
       if (streak%5==0) levelFX=true
       let score = this.state.score + (100 * multiplier)
-      this.setState({
-        numRight,score,streak,answered,multiplier,correct,modalVisible:false,
-        rightFX:true,wrongFX:false,levelFX
-      })
+
+        this.setState({
+          numRight,score,streak,answered,multiplier,correct,modalVisible:false,
+          rightFX:true,wrongFX:false,levelFX
+        })
+      if (this.state.gamemode == "countdown"){
+        if (score >= this.state.hitpoints) console.log('battle won!');
+      }
     }else{
       let numWrong = this.state.numWrong + 1
       multiplier = 1;
@@ -161,13 +167,14 @@ export default class GamePlayMath extends React.Component {
     }
 
     this.state.timerid = setTimeout(() => {
+      let bonus, accuracy, modalTitle, modalBody;
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
-        let bonus = 0
-        let accuracy = Math.round(this.state.numRight / (this.state.numRight + fullHealth) * 100)
+        bonus = 0
+        accuracy = Math.round(this.state.numRight / (this.state.numRight + fullHealth) * 100)
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
-        let modalTitle = 'Keep practicing!'
-        let modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
+        modalTitle = 'Keep practicing!'
+        modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
 
         //did they do well enough to unlock the timer round
         if (accuracy >= requiredAccuracy && this.state.score >= unlockScore){
@@ -203,7 +210,46 @@ export default class GamePlayMath extends React.Component {
           wrongFX:false,
           bonus,
           levelFX:false
+        })
+      }else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'countdown'){
+        //you defeated the wizard
+        console.log('you defeated the wizard');
+        accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.numWrong) * 100)
+        //did they release a monster
+        if (accuracy >= requiredAccuracy && this.state.score >= releaseScore){
 
+          modalTitle = 'You unlocked a secret!'
+          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to open it.'
+
+          // multiply by 10000 to designate it as a creature in the Bonus component
+          bonus = Math.floor(this.state.score/unlockDecimal) * 10000
+
+          //sync data
+          var locUser = JSON.parse(localStorage.getItem(localUser))
+          // console.log('loc id', locUser.userid);
+          var operator = (this.state.randomize) ? 'ran' : this.state.operator
+          locUser.gamemath[operator].unlocked = true;
+
+          if (this.state.score > locUser.gamemath[operator].battle){
+            locUser.gamemath[operator].battle = this.state.score
+          }
+          // console.log('loc user', locUser);
+          localStorage.setItem(localUser, JSON.stringify(locUser));
+
+          let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator);
+          userRef.set(locUser.gamemath[operator]);
+        }
+
+        this.setState({
+          modalVisible:true,
+          modalTitle,
+          modalBody,
+          // battle: false,
+          gameover: true,
+          bonus,
+          rightFX:false,
+          wrongFX:false,
+          levelFX:false
         })
       }else{
         let operator = this.state.operator
@@ -392,6 +438,7 @@ export default class GamePlayMath extends React.Component {
           restart={this.state.restart}
           fullHealth={fullHealth}
           health={this.state.health}
+          hitpoints = {this.state.hitpoints}
         />
 
         <div className={`wizard ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>

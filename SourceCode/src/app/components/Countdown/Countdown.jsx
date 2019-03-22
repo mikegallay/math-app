@@ -14,7 +14,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 10
+    let gamelength = 30
 
     this.state = {
       time: {},
@@ -48,6 +48,7 @@ export default class Countdown extends React.Component {
       console.log('here3');
       this.startTimer();
     }
+    if (this.props.gameover) {console.log('cd gameover'); clearInterval(this.timer);}
   }
 
   startTimer() {

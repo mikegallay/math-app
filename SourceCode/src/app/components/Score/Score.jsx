@@ -11,8 +11,6 @@ import './Score.scss';
 export default class Score extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {};
   }
 
   inactiveScore(score){
@@ -29,9 +27,17 @@ export default class Score extends React.Component {
   }
 
   render() {
+    console.log('hp',this.props.hitpoints,this.props.score);
+    let score = this.props.score;
+    let inactiveScore = this.inactiveScore(this.props.score)
+    if (this.props.gamemode=='countdown') {
+      score = this.props.hitpoints - this.props.score;
+      if (this.props.score >= this.props.hitpoints) score = "VICTORY"
+      inactiveScore = '';
+    }
     return (
       <div className="score-wrapper">
-        <span className="inactive">{this.inactiveScore(this.props.score)}</span>{this.props.score==0 ? '' : this.props.score}
+        <span className="inactive">{inactiveScore}</span>{score==0 ? '' : score}
       </div>
     );
   }

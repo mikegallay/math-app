@@ -20,7 +20,7 @@ export default class ScoreBoard extends React.Component {
 
     const {gamemode} = props
 
-    console.log('gm',props.gamemode)
+    // console.log('gm',props.gamemode)
 
     this.state = {}
   }
@@ -37,7 +37,7 @@ export default class ScoreBoard extends React.Component {
         {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>
         <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>
-        <Score score={this.props.score}/>
+        <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
       </div>
     );
   }

@@ -32,7 +32,7 @@ export default class ScoreBoard extends React.Component {
       gamemode = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>
     }
     return (
-      <div className="scoreboard-wrapper">
+      <div className={`scoreboard-wrapper ${(this.props.gameover)?'gameover':''}`}>
         <Link to='/navigation' className='back-btn'>x</Link>
         {gamemode}
         <Streak correct={this.props.correct} streak={this.props.streak}/>

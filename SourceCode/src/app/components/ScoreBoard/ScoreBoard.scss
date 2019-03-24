@@ -9,6 +9,9 @@
   height: 38px;
   top:-5px;
   position: relative;
+  &.gameover{
+    opacity:0;
+  }
   .back-btn{
     background: black;
     color: white;

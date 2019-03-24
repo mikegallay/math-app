@@ -240,17 +240,24 @@ export default class GamePlayMath extends React.Component {
           userRef.set(locUser.gamemath[operator]);
         }
 
+        this.state.timerid = setTimeout(() => {
+          this.setState({
+            modalVisible:true,
+            modalTitle,
+            modalBody,
+            bonus,
+            rightFX:false,
+            wrongFX:false,
+            levelFX:false
+          })
+        }, 3000);
+
         this.setState({
-          modalVisible:true,
-          modalTitle,
-          modalBody,
           battle: false,
           gameover: true,
-          bonus,
-          rightFX:false,
-          wrongFX:false,
-          levelFX:false
+          countdown: 'VICTORY!'
         })
+
       }else{
         let operator = this.state.operator
         let operators = ['add','sub','mul','div']
@@ -295,17 +302,27 @@ export default class GamePlayMath extends React.Component {
       userRef.set(locUser.gamemath[operator]);
     }
 
-    this.setState({
-      modalVisible:true,
-      modalTitle,
-      modalBody,
-      battle: false,
-      gameover: true,
-      bonus,
-      rightFX:false,
-      wrongFX:false,
-      levelFX:false
-    })
+    if (this.state.countdown != 'VICTORY!'){
+      this.state.timerid = setTimeout(() => {
+        this.setState({
+          modalVisible:true,
+          modalTitle,
+          modalBody,
+          bonus,
+          rightFX:false,
+          wrongFX:false,
+          levelFX:false
+        })
+      }, 3000);
+
+      this.setState({
+        battle: false,
+        gameover: true,
+        countdown: 'DEFEAT!'
+      })
+    }
+
+
   }
 
   clearAnswers(){
@@ -340,6 +357,12 @@ export default class GamePlayMath extends React.Component {
   closeModal(){
     // console.log('game play closeModal');
     // this.clearAnswers()
+    let battle = false;
+    let countdown = this.state.countdown;
+    if (countdown == "DEFEAT!" || countdown == "VICTORY!"){
+      battle = true;
+      countdown = "";
+    }
 
     this.setState({
       modalVisible:false,
@@ -353,7 +376,9 @@ export default class GamePlayMath extends React.Component {
       numRight:0,
       numWrong:0,
       gameover:false,
-      restart:true
+      restart:true,
+      battle,
+      countdown
     })
 
     this.state.timerid = setTimeout(() => {
@@ -424,6 +449,9 @@ export default class GamePlayMath extends React.Component {
       />
     }
 
+    let gameArtBattleClass = 'ready';
+    if (this.state.countdown == '') gameArtBattleClass = 'ready rematch';
+
     return (
       <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
         <ScoreBoard
@@ -443,8 +471,10 @@ export default class GamePlayMath extends React.Component {
         />
 
         <div className="gameArt">
-          <div className={`wizard ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
-          <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?'ready':''}`}></div>
+          <div className={`wizard wizard-battle ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+          <div className={`wizard wizard-defeat ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
+          <div className={`wizard wizard-victory ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
+          <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
           <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
         </div>
 

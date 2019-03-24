@@ -13,20 +13,55 @@
     position: relative;
     overflow: hidden;
     height:90%;
+    margin: 0 -1em;
     .wizard{
-      background: transparent url('../../images/wizard.png') no-repeat top left;
-      background-size:cover;
       width:60%;
       height:50vh;
-      // background-color: blue;
       top: 25%;
-      left: -70%;
       position: absolute;
-      transition: left 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    .wizard-battle{
+      background: transparent url('../../images/wizard-battle.png') no-repeat top left;
+      background-size:cover;
+      left: -70%;
+      transition: left 0s;
       &.ready{
         left: 5%;
+        transition: left 2.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+      &.rematch{
+        left:-70%!important;
       }
     }
+    .wizard-defeat{
+      background: transparent url('../../images/wizard-defeat.png') no-repeat top left;
+      background-size:cover;
+      opacity:0;
+      left:17%;
+      transform: scale(1);
+      &.ready{
+        opacity:1;
+        top:28%;
+        transition: transform 2s, top 2s;
+        transform: scale(1.25);
+      }
+    }
+
+    .wizard-victory{
+      background: transparent url('../../images/wizard-victory.png') no-repeat top left;
+      background-size:cover;
+      opacity:0;
+      transition: transform 2s, top 2s;
+      left:17%;
+      &.ready{
+        animation-name: kill-wizard;
+        animation-fill-mode: forwards;
+        animation-duration: 2s;
+        animation-delay: 0s;
+        animation-timing-function: linear;
+      }
+    }
+
     .student{
       background: transparent url('../../images/student.png') no-repeat top left;
       background-size:cover;
@@ -36,9 +71,13 @@
       top: 45%;
       left: 100%;
       position: absolute;
-      transition: left 2s .25s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition: left 0s;
       &.ready{
         left: 45%;
+        transition: left 2.5s .25s cubic-bezier(0.075, 0.82, 0.165, 1);
+      }
+      &.rematch{
+        left:100%!important;
       }
     }
     .countdown {
@@ -80,12 +119,13 @@
         width: 365px;
     }
     opacity:0;
-    transition:opacity .5s,top .5s;
+    transition:opacity .25s,top .25s;
     top:60%;
     margin-top:-225px;
     &.battle{
       opacity:1;
       top:50%;
+      transition:opacity .5s .5s,top .5s .5s;
       @media only screen and (min-width: 375px) {
         top:46%;
       }

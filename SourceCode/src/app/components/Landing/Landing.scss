@@ -1,0 +1,35 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.landing.main{
+  background: transparent url('../../images/bg.jpg') no-repeat top left;
+  background-size:cover;
+  height:100vh;
+  top:0;
+  // padding: 2em;
+  .wrapper {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+
+    h1.landing-title{
+      width:100%;
+      flex-grow:1;
+    }
+    .landing-buttons{
+      width:100%;
+      .landing-btn{
+        margin:1em;
+        i{
+          font-size:18px;
+        }
+      }
+    }
+    .credit{
+      width:100%;
+    }
+  }
+
+}

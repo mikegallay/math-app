@@ -449,6 +449,7 @@ export default class GamePlayMath extends React.Component {
       />
     }
 
+    //don't replay the battle animation countdown on rematch
     let gameArtBattleClass = 'ready';
     if (this.state.countdown == '') gameArtBattleClass = 'ready rematch';
 

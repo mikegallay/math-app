@@ -234,12 +234,14 @@ export default class Login extends React.Component {
     let styles = {display};
     console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
 
-    let toRender = <LoginPage style={styles} handleGoogleLogin={this.handleGoogleLogin} state={this.state} />
+    let toRender = <LoginPage  handleGoogleLogin={this.handleGoogleLogin} state={this.state} />
 
     if (localStorage.getItem(firebaseAuthKey) === "1") toRender = <SplashScreen state={this.state}/>
     return (
-      <div className="login main" style={styles}>
+      <div className="login main">
+        <div style={styles}>
         {toRender}
+        </div>
       </div>
     )
 

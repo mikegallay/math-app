@@ -1,5 +1,5 @@
 /**
- * Main component
+ * Navigation component
  *
  * Description of component... lorem ipsum dolor sit amet consectetur adipiscing elit
  */
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import {logout} from "../../services/auth";
 import {firebaseAuth,ref} from "../../config/constants";
 
-import './Main.scss';
+import './Navigation.scss';
 import stopwatch from '../../images/stopwatch.png';
 import heart from '../../images/heart.png';
 
@@ -18,7 +18,7 @@ import Modal from '../Modal/Modal';
 const appTokenKey = "appToken";
 const localUser = "localUser";
 
-export default class Main extends React.Component {
+export default class Navigation extends React.Component {
   constructor(props) {
     super(props);
 

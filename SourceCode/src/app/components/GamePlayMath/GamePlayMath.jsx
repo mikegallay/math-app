@@ -446,6 +446,7 @@ export default class GamePlayMath extends React.Component {
         answered={this.state.answered}
         onAnswer={(correct)=>{this.onAnswer(correct)}}
         answer={answer}
+        gameover={this.state.gameover}
       />
     }
 

@@ -25,10 +25,13 @@ export default class NumberPad extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    // console.log('did update',props);
+    console.log('numpad did update',props);
     let answerString = props.answer.toString()
     if (props.answer) {
       this.setState({answerString})
+    }
+    if (props.gameover == true){
+      this.setState({currAnswer:''})
     }
   }
 
@@ -89,7 +92,8 @@ export default class NumberPad extends React.Component {
         </div>
         <div
           onClick={() => this.clearAnswerBox()}
-          className={`answerbox ${isCorrect}`}><span className="yourAnswer">{yourAnswer}</span></div>
+          className={`answerbox ${isCorrect} ${(yourAnswer.length > 0 && this.state.answerString.length > 1 && yourAnswer.length != this.state.answerString.length)?
+          'inprogress':''}`}><span className="yourAnswer">{yourAnswer}</span></div>
         </div>
     );
   }

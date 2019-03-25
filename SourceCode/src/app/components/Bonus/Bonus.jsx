@@ -39,7 +39,12 @@ export default class Bonus extends React.Component {
     if (props.openBonus != this.state.visible) {
       // console.log('here');
       this.setState({visible:props.openBonus})
+
     }
+  }
+
+  componentDidMount(){
+    this.determineCreature()
   }
 
   determineCreature(){
@@ -107,7 +112,7 @@ export default class Bonus extends React.Component {
     let bonus = <img className="bonus-item" src={this.state.bonusImg} width="250" height="250"/>
     let bonusTitle = <h2>{this.state.bonusTitle}</h2>
 
-    if (this.state.creatureSet == false) this.determineCreature()
+    // if (this.state.creatureSet == false) this.determineCreature()
 
     let headerImg = <div onClick={() => this.closeBonus()} className={`header-img-wrapper ${this.state.visible}`}>{bonus}</div>
 

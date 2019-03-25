@@ -38,6 +38,21 @@
     min-height: 64px;
     background-color: lightblue;
     transition:background-color .5s;
+    &.inprogress{
+      &:after{
+        content:'x';
+        position:absolute;
+        border-radius:50%;
+        border: 1px solid black;
+        background:yellow;
+        font-size: 20px;
+        font-weight: normal;
+        width: 22px;
+        height: 22px;
+        bottom: 4%;
+        right: 4%;
+      }
+    }
     .yourAnswer{
       opacity:1;
       transition:

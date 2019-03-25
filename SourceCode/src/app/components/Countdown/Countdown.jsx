@@ -14,7 +14,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 50
+    let gamelength = 10
 
     this.state = {
       time: {},
@@ -41,7 +41,7 @@ export default class Countdown extends React.Component {
   }
 
   componentDidUpdate(nextProps){
-    console.log('s',(this.props),this.state.timerStarted);
+    // console.log('s',(this.props),this.state.timerStarted);
     if (this.props.ready && !this.state.timerStarted && !this.props.gameover) {this.startTimer();console.log('here',this.state.timerStarted);}
     if (this.props.restart && !this.state.timerStarted) {
       clearInterval(this.timer)

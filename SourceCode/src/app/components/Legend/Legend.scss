@@ -4,11 +4,12 @@
 .legend.main{
   background: transparent url('../../images/bg.jpg') no-repeat top left;
   background-size:cover;
-  height:100vh;
-  top:0;
   // padding: 2em;
+  .main-fade{
+    height:100%;
+  }
   .wrapper {
-    text-align: center;
+    text-align: left;
     height: 100%;
     margin: 0 5%;
     overflow: auto;

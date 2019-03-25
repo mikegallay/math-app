@@ -6,9 +6,10 @@
   flex-direction: row;
   justify-content: space-between;
   border-bottom: 2px solid black;
-  height: 36px;
+  height: 25px;
   top:-5px;
   position: relative;
+  padding: 1em;
   &.gameover{
     opacity:0;
   }

@@ -25,18 +25,20 @@ export default class Landing extends React.Component {
   }
 
   render() {
-    let display = (!this.state.hidden)?'flex':'none'
-    let styles = {display};
+    let opacity = (!this.state.hidden)?1:0
+    let styles = {opacity};
 
     return (
-      <div className="main landing" >
-        <div className="wrapper" style={styles}>
-          <h1 className="landing-title">NAME</h1>
-          <div className="landing-buttons">
-              <Link to='/legend' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">brightness_7</i> LEGEND </Link>
-              <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> QUEST </Link>
-            </div>
-            <p className="credit">© 2018 Mike Gallay</p>
+      <div className="main landing">
+        <div className="main-fade" style={styles}>
+          <div className="wrapper">
+            <h1 className="landing-title">NAME</h1>
+            <div className="landing-buttons">
+                <Link to='/legend' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">brightness_7</i> LEGEND </Link>
+                <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> QUEST </Link>
+              </div>
+              <p className="credit">© 2018 Mike Gallay</p>
+          </div>
         </div>
       </div>
     );

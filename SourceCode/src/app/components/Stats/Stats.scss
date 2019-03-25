@@ -1,11 +1,16 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
-.stats {
-  padding:1rem;
-  text-align: center;
-  h1{
-    margin-bottom: 0.25em;
+.stats.main {
+  background: transparent url('../../images/bg.jpg') no-repeat top left;
+  background-size:cover;
+  .main-fade{
+    height:100%;
+  }
+  .wrapper{
+    height: 100%;
+    margin: 0 5%;
+    overflow: auto;
   }
 }
 

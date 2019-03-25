@@ -429,8 +429,8 @@ export default class GamePlayMath extends React.Component {
   }
 
   render() {
-    let display = (!this.state.hidden)?'block':'none'
-    let styles = {display};
+    let opacity = (!this.state.hidden)?1:0
+    let styles = {opacity};
 
     let numOne = this.state.equation.numOne
     let numTwo = this.state.equation.numTwo
@@ -460,71 +460,74 @@ export default class GamePlayMath extends React.Component {
 
     return (
       <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
-        <ScoreBoard
-          onTimeExpired={()=>{this.timeExpired()}}
-          ready={this.state.battle}
-          multiplier={this.state.multiplier}
-          streak={this.state.streak}
-          correct={this.state.correct}
-          score={this.state.score}
-          gamemode={this.state.gamemode}
-          gameover={this.state.gameover}
-          restart={this.state.restart}
-          fullHealth={fullHealth}
-          health={this.state.health}
-          hitpoints = {this.state.hitpoints}
-          modalVisible = {this.state.modalVisible}
-        />
-
-        <div className="gameArt">
-          <div className={`wizard wizard-battle ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
-          <div className={`wizard wizard-defeat ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
-          <div className={`wizard wizard-victory ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
-          <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
-          <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
-        </div>
-
-        <div className={`wrapper ${(this.state.battle)?'battle':''}`}>
-
-          <ReactHowler
-            src='http://math.michaelgallay.com/audio/right.mp3'
-            playing={this.state.rightFX}
-            ref={(ref) => (this.rightFX = ref)}
+        <div className="main-fade" style={styles}>
+          <div className="wrapper">
+          <ScoreBoard
+            onTimeExpired={()=>{this.timeExpired()}}
+            ready={this.state.battle}
+            multiplier={this.state.multiplier}
+            streak={this.state.streak}
+            correct={this.state.correct}
+            score={this.state.score}
+            gamemode={this.state.gamemode}
+            gameover={this.state.gameover}
+            restart={this.state.restart}
+            fullHealth={fullHealth}
+            health={this.state.health}
+            hitpoints = {this.state.hitpoints}
+            modalVisible = {this.state.modalVisible}
           />
 
-          <ReactHowler
-            src='http://math.michaelgallay.com/audio/wrong.mp3'
-            playing={this.state.wrongFX}
-            ref={(ref) => (this.wrongFX = ref)}
-          />
+          <div className="gameArt">
+            <div className={`wizard wizard-battle ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+            <div className={`wizard wizard-defeat ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
+            <div className={`wizard wizard-victory ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
+            <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+            <div className={`countdown ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
+          </div>
 
-          <ReactHowler
-            src='http://math.michaelgallay.com/audio/level1.mp3'
-            playing={this.state.levelFX}
-            ref={(ref) => (this.levelFX = ref)}
-          />
+          <div className="howler">
+            <ReactHowler
+              src='http://math.michaelgallay.com/audio/right.mp3'
+              playing={this.state.rightFX}
+              ref={(ref) => (this.rightFX = ref)}
+            />
+            <ReactHowler
+              src='http://math.michaelgallay.com/audio/wrong.mp3'
+              playing={this.state.wrongFX}
+              ref={(ref) => (this.wrongFX = ref)}
+            />
+            <ReactHowler
+              src='http://math.michaelgallay.com/audio/level1.mp3'
+              playing={this.state.levelFX}
+              ref={(ref) => (this.levelFX = ref)}
+            />
+          </div>
 
-          <Equation
+          <div className={`flashcard ${(this.state.battle)?'battle':''}`}>
+
+            <Equation
+              operator={this.state.operator}
+              numOne={numOne}
+              numTwo={numTwo}
+            />
+
+            {answerPad}
+
+          </div>
+
+          <Modal
+            title={this.state.modalTitle}
+            body={this.state.modalBody}
+            score={this.state.score}
+            gameplayBtns={true}
+            bonus={this.state.bonus}
             operator={this.state.operator}
-            numOne={numOne}
-            numTwo={numTwo}
+            visible={this.state.modalVisible}
+            closeModal={()=>{this.closeModal()}}
           />
-
-          {answerPad}
-
-
-
+        </div>  
         </div>
-        <Modal
-          title={this.state.modalTitle}
-          body={this.state.modalBody}
-          score={this.state.score}
-          gameplayBtns={true}
-          bonus={this.state.bonus}
-          operator={this.state.operator}
-          visible={this.state.modalVisible}
-          closeModal={()=>{this.closeModal()}}
-        />
       </div>
     );
   }

@@ -14,12 +14,22 @@ const localUser = "localUser";
 export default class Stats extends React.Component {
   constructor(props) {
     super(props);
+    let hidden = true;
+    this.state = {hidden};
 
     //check current high score
     // localStorage.setItem(localUser, JSON.stringify(existingData));
     // var locUser = JSON.parse(localStorage.getItem(localUser));
     // console.log('main',locUser, (locUser));
 
+  }
+
+  componentWillMount(){
+    //hide the layout until the css is loaded
+    let hider = setTimeout(() => {
+      let hidden = false
+      this.setState({hidden});
+    }, 1000)
   }
 
   render() {
@@ -35,40 +45,48 @@ export default class Stats extends React.Component {
     var ranPracHS = locUser.gamemath.ran.practice;
     var ranBattHS = locUser.gamemath.ran.battle;
     console.log('locuser',addPracHS);
+
+    let opacity = (!this.state.hidden)?1:0
+    let styles = {opacity};
+
     return (
-      <main className="stats">
-        <h1>Statistics</h1>
-        <Link to='/navigation' className='stats-btn'> Main Menu </Link>
-        <span className="active">View Statistics</span>
-        <Link to='/creatures' className='stats-btn'> View Creatures</Link>
-        <div className="stat-list">
-          <div className="stat-section">
-            <h2>Addition</h2>
-            <h4>Practice High Score: {addPracHS}</h4>
-            <h4>Battle High Score: {addBattHS}</h4>
-          </div>
-          <div className="stat-section">
-            <h2>Subtraction</h2>
-            <h4>Practice High Score: {subPracHS}</h4>
-            <h4>Battle High Score: {subBattHS}</h4>
-          </div>
-          <div className="stat-section">
-            <h2>Multiplication</h2>
-            <h4>Practice High Score: {mulPracHS}</h4>
-            <h4>Battle High Score: {mulBattHS}</h4>
-          </div>
-          <div className="stat-section">
-            <h2>Division</h2>
-            <h4>Practice High Score: {divPracHS}</h4>
-            <h4>Battle High Score: {divBattHS}</h4>
-          </div>
-          <div className="stat-section">
-            <h2>Random</h2>
-            <h4>Practice High Score: {ranPracHS}</h4>
-            <h4>Battle High Score: {ranBattHS}</h4>
+      <div className="stats main">
+        <div className="main-fade" style={styles}>
+          <div className="wrapper">
+            <h1>Statistics</h1>
+            <Link to='/navigation' className='stats-btn'> Main Menu </Link>
+            <span className="active">View Statistics</span>
+            <Link to='/creatures' className='stats-btn'> View Creatures</Link>
+            <div className="stat-list">
+              <div className="stat-section">
+                <h2>Addition</h2>
+                <h4>Practice High Score: {addPracHS}</h4>
+                <h4>Battle High Score: {addBattHS}</h4>
+              </div>
+              <div className="stat-section">
+                <h2>Subtraction</h2>
+                <h4>Practice High Score: {subPracHS}</h4>
+                <h4>Battle High Score: {subBattHS}</h4>
+              </div>
+              <div className="stat-section">
+                <h2>Multiplication</h2>
+                <h4>Practice High Score: {mulPracHS}</h4>
+                <h4>Battle High Score: {mulBattHS}</h4>
+              </div>
+              <div className="stat-section">
+                <h2>Division</h2>
+                <h4>Practice High Score: {divPracHS}</h4>
+                <h4>Battle High Score: {divBattHS}</h4>
+              </div>
+              <div className="stat-section">
+                <h2>Random</h2>
+                <h4>Practice High Score: {ranPracHS}</h4>
+                <h4>Battle High Score: {ranBattHS}</h4>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }

@@ -4,10 +4,12 @@
 .landing.main{
   background: transparent url('../../images/bg.jpg') no-repeat top left;
   background-size:cover;
-
+  .main-fade{
+    height:100%;
+  }
   // padding: 2em;
   .wrapper {
-
+    height:100%;
     h1.landing-title{
       width:100%;
       flex-grow:1;

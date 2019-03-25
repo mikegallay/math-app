@@ -43,8 +43,6 @@ export default class Login extends React.Component {
     this.updateUsername = this.updateUsername.bind(this);
     this.nextStep = this.nextStep.bind(this);
 
-
-
   }
 
     handleGoogleLogin() {
@@ -234,9 +232,9 @@ export default class Login extends React.Component {
     let styles = {opacity};
     // console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
 
-    let toRender = <LoginPage  handleGoogleLogin={this.handleGoogleLogin} state={this.state} />
+    let toRender = <LoginPage handleGoogleLogin={this.handleGoogleLogin} />
 
-    if (localStorage.getItem(firebaseAuthKey) === "1") toRender = <SplashScreen state={this.state}/>
+    if (localStorage.getItem(firebaseAuthKey) === "1") toRender = <SplashScreen/>
     return (
       <div className="login main">
         <div className="main-fade" style={styles}>
@@ -249,7 +247,7 @@ export default class Login extends React.Component {
 }
 
 
-const LoginPage = ({handleGoogleLogin,state}) => (
+const LoginPage = ({handleGoogleLogin}) => (
     <div className="wrapper">
         <h1 className="headline">Login</h1>
         <div>
@@ -263,7 +261,7 @@ const LoginPage = ({handleGoogleLogin,state}) => (
     </div>
 );
 
-const SplashScreen = ({state}) => (
+const SplashScreen = () => (
     <div className="wrapper">
         <h1 className="headline">Loading...</h1>
         <div className="mdl-spinner mdl-js-spinner is-active"></div>

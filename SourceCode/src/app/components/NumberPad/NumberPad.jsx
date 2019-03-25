@@ -12,7 +12,7 @@ import Answer from '../Answer/Answer';
 export default class NumberPad extends React.Component {
   constructor(props) {
     super(props);
-    console.log('answers',props);
+    // console.log('answers',props);
     let staticAnswers = [1,2,3,4,5,6,7,8,9,0];
     let answerString = this.props.answer.toString()
     let currAnswer = ''
@@ -25,7 +25,7 @@ export default class NumberPad extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    console.log('numpad did update',props);
+    // console.log('numpad did update',props);
     let answerString = props.answer.toString()
     if (props.answer) {
       this.setState({answerString})
@@ -61,7 +61,7 @@ export default class NumberPad extends React.Component {
   }
 
   clearAnswerBox(){
-    console.log('clearn');
+    // console.log('clearn');
     let correct = 'default';
     let currAnswer = '';
       this.setState({currAnswer,correct})

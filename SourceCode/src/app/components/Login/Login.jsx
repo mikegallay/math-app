@@ -57,8 +57,8 @@ export default class Login extends React.Component {
     }
 
     handleKeyUp(e) {
-      console.log('key up');
-      console.log(e.target.value);
+      // console.log('key up');
+      // console.log(e.target.value);
       let username = e.target.value
       this.setState({username})
     }
@@ -68,10 +68,10 @@ export default class Login extends React.Component {
     }
 
     componentWillMount() {
-      console.log('componentWillMount');
+      // console.log('componentWillMount');
       firebaseAuth().getRedirectResult().then(function(result) {
        if (result.user) {
-       console.log("GoogleLogin Redirect result");
+       // console.log("GoogleLogin Redirect result");
        if (result.credential) {
        // This gives you a Google Access Token. You can use it to access the Google API.
        let token = result.credential.accessToken;
@@ -79,7 +79,7 @@ export default class Login extends React.Component {
        }
        // The signed-in user info.
        let user = result.user;
-       console.log("user:", JSON.stringify(user));
+       // console.log("user:", JSON.stringify(user));
        }
        }).catch(function(error) {
        // Handle Errors here.
@@ -107,8 +107,8 @@ export default class Login extends React.Component {
       firebaseAuth().onAuthStateChanged(user => {
         console.log('onAuthStateChanged');
           if (user) {
-              console.log("User signed in: ", JSON.stringify(user));
-              console.log('curruser',firebaseAuth().currentUser);
+              // console.log("User signed in: ", JSON.stringify(user));
+              // console.log('curruser',firebaseAuth().currentUser);
               localStorage.removeItem(firebaseAuthKey);
 
               // here you could authenticate with you web server to get the

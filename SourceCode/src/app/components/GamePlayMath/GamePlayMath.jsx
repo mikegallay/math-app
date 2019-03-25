@@ -359,10 +359,14 @@ export default class GamePlayMath extends React.Component {
     // this.clearAnswers()
     let battle = false;
     let countdown = this.state.countdown;
+    console.log('asd',countdown);
     if (countdown == "DEFEAT!" || countdown == "VICTORY!"){
       battle = true;
       countdown = "";
     }
+    let delay = 300;
+
+    if (this.state.gamemode == 'health') battle = true; delay = 0;
 
     this.setState({
       modalVisible:false,
@@ -383,7 +387,7 @@ export default class GamePlayMath extends React.Component {
 
     this.state.timerid = setTimeout(() => {
       this.nextQuestion()
-    }, 300);
+    }, delay);
 
   }
 

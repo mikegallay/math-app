@@ -110,13 +110,14 @@
     border-radius: 1em;
     border:1px solid black;
     position:absolute;
-    width:268px;
-    height:525px;
+    width:263px;
+    height:465px;
     @media only screen and (min-width: 375px) {
-        width: 320px;
+        width: 319px;
+        height: 525px;
     }
     @media only screen and (min-width: 425px) {
-        width: 365px;
+        width: 368px;
     }
     opacity:0;
     transition:opacity .25s,top .25s;

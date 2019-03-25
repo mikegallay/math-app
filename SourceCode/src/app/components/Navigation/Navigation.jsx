@@ -25,7 +25,7 @@ export default class Navigation extends React.Component {
     //check current high score
     // localStorage.setItem(localUser, JSON.stringify(existingData));
     var locUser = JSON.parse(localStorage.getItem(localUser));
-    console.log('main',locUser, (locUser));
+    // console.log('main',locUser, (locUser));
     // console.log('lu',lu);
     var addBonus = (locUser) ? locUser.gamemath.add.unlocked : false;
     var subBonus = (locUser) ? locUser.gamemath.sub.unlocked : false;
@@ -36,7 +36,6 @@ export default class Navigation extends React.Component {
     let username = locUser.username
     let hidden = true
 
-    console.log('asdfasdf',addBonus);
     this.state = {modalVisible:'init false',hidden,addBonus,subBonus,mulBonus,divBonus,ranBonus,username};
     this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));

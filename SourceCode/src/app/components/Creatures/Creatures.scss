@@ -9,6 +9,67 @@
   }
 }
 
+.sprite-wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-top:2em;
+  .sprite{
+    width:35%;
+    animation: levitate 1.5s alternate ease-in-out infinite;
+    img{
+      width:100%;
+    }
+
+  }
+  .carrot{
+  	border-color: transparent black;
+  	border-style: solid;
+  	border-width: 10px 20px 10px 0px;
+  	height: 0px;
+  	width: 0px;
+    z-index: 1;
+    margin-right:-2px;
+    position: relative;
+    &::before{
+      content: '';
+      border-color: transparent white;
+    	border-style: solid;
+    	border-width: 10px 20px 10px 0px;
+    	height: 0px;
+    	width: 0px;
+      position: absolute;
+      top: -10px;
+      left: 4px;
+    }
+  }
+  .sprite-message{
+    // background: transparent url('../../images/wordballoon.png') no-repeat top left;
+    // background-size:cover;
+    background: white;
+    border-radius: 2.5em;
+    width:60%;
+    text-align:left;
+    font-size:1em;
+    height: 100px;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    p{
+      font-size: 15px;
+      font-weight: bold;
+      padding:0;
+      margin:0;
+      @media only screen and (min-width: 375px) {
+          font-size: 20px;
+      }
+    }
+  }
+}
+
 .stats-btn{
   font-weight: normal;
   cursor: pointer;

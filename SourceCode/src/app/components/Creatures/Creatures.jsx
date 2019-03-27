@@ -8,7 +8,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Creatures.scss';
-const creatures = require.context('../../images/creatures', true);
+// const creatures = require.context('../../images/creatures', true);
+import sprite from '../../images/creatures/sprite.png';
 import {creatureList,creatureIds} from "../../config/constants";
 
 const localUser = "localUser";
@@ -34,7 +35,7 @@ export default class Creatures extends React.Component {
     }, 1000)
   }
 
-  renderStyles(operator,id){
+  /*renderStyles(operator,id){
     console.log(operator,id);
     var imgRef = creatureList.math[operator][id].img;
     var imgSrc = creatures(`./${imgRef}.png`);
@@ -43,7 +44,7 @@ export default class Creatures extends React.Component {
       backgroundImage:'url(' + imgSrc + ')',
       backgroundSize: 'cover'
     }
-  }
+  }*/
 
   getCreatureName(operator,id){
     return creatureList.math[operator][id].name;
@@ -84,6 +85,11 @@ export default class Creatures extends React.Component {
       <div className="creatures main">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
+            <div className="sprite-wrapper">
+            <div className="sprite"><img src={sprite}/></div>
+            <div className="carrot"></div>
+            <div className="sprite-message"><p>You can do it!</p></div>
+            </div>
             <h1>Creatures</h1>
             <Link to='/navigation' className='stats-btn'> Main Menu </Link>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>

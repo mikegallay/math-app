@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import './Creatures.scss';
 const creatures = require.context('../../images/creatures', true);
-import {creatureList} from "../../config/constants";
+import {creatureList,creatureIds} from "../../config/constants";
 
 const localUser = "localUser";
 
@@ -35,12 +35,44 @@ export default class Creatures extends React.Component {
   }
 
   renderStyles(operator,id){
+    console.log(operator,id);
     var imgRef = creatureList.math[operator][id].img;
     var imgSrc = creatures(`./${imgRef}.png`);
+    return {}
     return {
       backgroundImage:'url(' + imgSrc + ')',
       backgroundSize: 'cover'
     }
+  }
+
+  getCreatureName(operator,id){
+    return creatureList.math[operator][id].name;
+  }
+
+  getCreatureFreq(operator,id){
+    return creatureList.math[operator][id].freq;
+  }
+
+  creatureMap(operand,locUser){
+
+    let output = creatureIds.map((arr,idx) => {
+      let hasCreature = locUser.creatures[operand][arr];
+      console.log(operand,arr,hasCreature);
+      let name = this.getCreatureName(operand,arr);
+      let freq = this.getCreatureFreq(operand,arr);
+      let level = '';
+      if (idx == 0) level = "level1";
+      if (idx == 3) level = "level2";
+      if (idx == 9) level = "level3";
+        return(
+          <li className={level} key={idx}>
+            <div className={`creature ${operand} ${arr} ${(hasCreature)?'gotit':'notyet'}`}>?</div>
+            <div className={`creature-freq freq-key ${freq}`}>{freq}</div>
+            <div className="creature-name">{(hasCreature)?name:'???'}</div>
+          </li>
+        )
+    })
+    return output
   }
 
   render() {
@@ -56,17 +88,37 @@ export default class Creatures extends React.Component {
             <Link to='/navigation' className='stats-btn'> Main Menu </Link>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>
             <span className="active">View Creatures</span>
+            <div className="freq-legend">
+              <div className="freq-legend-item"><span className="freq-key common">Common</span><span className="freq-name">Common</span></div>
+              <div className="freq-legend-item"><span className="freq-key rare">Rare</span><span className="freq-name">Rare</span></div>
+              <div className="freq-legend-item"><span className="freq-key ultrarare">Ultra Rare</span><span className="freq-name">Ultra Rare</span></div>
+            </div>
             <div className="creature-wrapper">
               <div className="creature-section">
-                <h2>Addition - Common</h2>
+                <h4>Addition</h4>
                 <ul className="creature-list">
-                 <li style={this.renderStyles('add','c01')} className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>?</li>
-                 <li style={this.renderStyles('add','c02')} className="creature gotit">?</li>
-                  <li className={`creature add c01 ${(locUser.creatures.add.c01)?'gotit':'notyet'}`}>?</li>
-                  {/*<li style={this.renderStyles()} className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C02</li>
-                  <li className={`creature add c03 ${(locUser.creatures.add.c03)?'gotit':'notyet'}`}>C03</li>
-                  <li className={`creature add c02 ${(locUser.creatures.add.c02)?'gotit':'notyet'}`}>C03</li>*/}
+                  {this.creatureMap('add',locUser)}
                 </ul>
+                <h4>Subtraction</h4>
+                <ul className="creature-list">
+                  {this.creatureMap('sub',locUser)}
+                </ul>
+                <h4>Multiplication</h4>
+                <ul className="creature-list">
+                  {this.creatureMap('mul',locUser)}
+                </ul>
+                <h4>Division</h4>
+                <ul className="creature-list">
+                  {this.creatureMap('div',locUser)}
+                </ul>
+                <h4>Random</h4>
+                <div className="creature-list queen-list">
+                  <div className='queen-wrapper'>
+                    <div className={`creature ran queen ${(locUser.creatures.ran.queen)?'gotit':'notyet'}`}><span>?</span></div>
+                    <div className={`creature-freq freq-key ultrarare`}>ultra rare</div>
+                    <div className="creature-name">{((locUser.creatures.ran.queen))?'Queen':'???'}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

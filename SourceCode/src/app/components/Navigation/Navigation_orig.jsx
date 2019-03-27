@@ -80,12 +80,11 @@ export default class Navigation extends React.Component {
       <div className="main navigation">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-            <div className="legend-of">
-              <p className="luckiest-guy">The Legend of</p>
-              <h1 className="username">{this.state.username}</h1>
-            </div>
+            <h1>Math 60</h1>
+
             <a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>
+            <h3>Hi <span className="username">{this.state.username}</span>!</h3>
             <div className="main-menu">
               <div className="menu-btns">
                 <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health'} }}>

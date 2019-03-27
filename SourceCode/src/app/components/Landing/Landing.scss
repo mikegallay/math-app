@@ -10,9 +10,19 @@
   // padding: 2em;
   .wrapper {
     height:100%;
+    padding:0 5%;
     h1.landing-title{
       width:100%;
+      font-size: 3em;
+      @media only screen and (min-width: 375px) {
+          font-size: 3.5em;
+      }
       flex-grow:1;
+      margin-top:-10px;
+    }
+    p.luckiest-guy{
+      font-size:1.25em;
+      margin:5em 0 0 0;
     }
     .landing-buttons{
       width:100%;

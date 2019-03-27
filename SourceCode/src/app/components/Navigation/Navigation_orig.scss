@@ -4,31 +4,14 @@
 .navigation.main{
   background: transparent url('../../images/map.jpg') no-repeat top left;
   background-size:cover;
-  .wrapper {
-    text-align: left;
-    padding: 0 5%;
-    display:block;
-    .legend-of{
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      color: black;
-    }
-    h1{
-      margin-bottom: 0.25em;
-      font-size: 3em;
-      margin-top:-10px;
-      text-align: left;
-    }
-    p.luckiest-guy{
-      font-size:1.25em;
-      margin:1.5em 0 0 0;
-      text-align: left;
-    }
-  }
 }
 
-
+.wrapper {
+  text-align: left;
+  h1{
+    margin-bottom: 0.25em;
+  }
+}
 
 .credit,.instructions{
   font-weight: normal;

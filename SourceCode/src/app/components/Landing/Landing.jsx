@@ -32,10 +32,11 @@ export default class Landing extends React.Component {
       <div className="main landing">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-            <h1 className="landing-title">NAME</h1>
+            <p className="luckiest-guy">The Legend of the</p>
+            <h1 className="landing-title">Quest Caster</h1>
             <div className="landing-buttons">
-                <Link to='/legend' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">brightness_7</i> LEGEND </Link>
-                <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> QUEST </Link>
+                <Link to='/legend' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">brightness_7</i> NEW QUEST </Link>
+                <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> CONTINUE </Link>
               </div>
               <p className="credit">© 2018 Mike Gallay</p>
           </div>

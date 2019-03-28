@@ -68,26 +68,30 @@ export default class Creatures extends React.Component {
     return num;
   }
 
-  creatureMap(operand,locUser){
+  createCreatureList(operand,locUser){
+    let displayArray = [];
 
     let output = creatureIds.map((arr,idx) => {
       let hasCreature = locUser.creatures[operand][arr];
-      console.log(operand,arr,hasCreature);
       let name = this.getCreatureName(operand,arr);
       let freq = this.getCreatureFreq(operand,arr);
+      let levelSection = ''
+
       let level = '';
-      if (idx == 0) level = "level1";
-      if (idx == 3) level = "level2";
-      if (idx == 9) level = "level3";
-        return(
-          <li className={level} key={idx}>
-            <div className={`creature ${operand} ${arr} ${(hasCreature)?'gotit':'notyet'}`}>?</div>
-            <div className={`creature-freq freq-key ${freq}`}>{freq}</div>
-            <div className="creature-name" dangerouslySetInnerHTML={{__html:(hasCreature)?name:'???'}}></div>
-          </li>
-        )
+      if (idx == 0) level = "Training";
+      if (idx == 3) level = "Level 1";
+      if (idx == 9) level = "Level 2";
+      if (idx == 0 || idx == 3 || idx == 9){
+        displayArray.push(<li key={level} className="levelsection">{level}</li>)
+      }
+      let creature = <li key={idx}>
+        <div className={`creature ${operand} ${arr} ${(hasCreature)?'gotit':'notyet'}`}>?</div>
+        <div className={`creature-freq freq-key ${freq}`}>{freq}</div>
+        <div className="creature-name" dangerouslySetInnerHTML={{__html:(hasCreature)?name:'???'}}></div>
+      </li>;
+        displayArray.push(creature)
     })
-    return output
+    return displayArray;
   }
 
   render() {
@@ -118,19 +122,19 @@ export default class Creatures extends React.Component {
               <div className="creature-section">
                 <h4>Addition-ville</h4>
                 <ul className="creature-list">
-                  {this.creatureMap('add',locUser)}
+                  {this.createCreatureList('add',locUser)}
                 </ul>
                 <h4>Subtraction-berg</h4>
                 <ul className="creature-list">
-                  {this.creatureMap('sub',locUser)}
+                  {this.createCreatureList('sub',locUser)}
                 </ul>
                 <h4>Multiplication Land</h4>
                 <ul className="creature-list">
-                  {this.creatureMap('mul',locUser)}
+                  {this.createCreatureList('mul',locUser)}
                 </ul>
                 <h4>Division Town</h4>
                 <ul className="creature-list">
-                  {this.creatureMap('div',locUser)}
+                  {this.createCreatureList('div',locUser)}
                 </ul>
                 <h4>Random</h4>
                 <div className="creature-list queen-list">

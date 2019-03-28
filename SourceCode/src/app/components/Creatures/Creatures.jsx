@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 
 import './Creatures.scss';
 // const creatures = require.context('../../images/creatures', true);
-import sprite from '../../images/creatures/sprite.png';
-import {creatureList,creatureIds} from "../../config/constants";
+import sprite from '../../images/creatures/sprite.gif';
+import {creatureList,creatureIds,spriteQuotes} from "../../config/constants";
 
 const localUser = "localUser";
 
@@ -23,7 +23,7 @@ export default class Creatures extends React.Component {
     //check current high score
     // localStorage.setItem(localUser, JSON.stringify(existingData));
     var locUser = JSON.parse(localStorage.getItem(localUser));
-    console.log('main',locUser, (locUser));
+    // console.log('main',locUser, (locUser));
 
   }
 
@@ -54,6 +54,20 @@ export default class Creatures extends React.Component {
     return creatureList.math[operator][id].freq;
   }
 
+  getQuote(){
+    let count = spriteQuotes.length-1;
+    let rand = Number(this.rand(0,count));
+    console.log(count,rand,spriteQuotes);
+    return spriteQuotes[rand];
+
+  }
+
+  rand(min,max){
+    var num = Math.floor(Math.random() * ((max-min)+1) + min)
+    if (num < 10) num = "0" + num;
+    return num;
+  }
+
   creatureMap(operand,locUser){
 
     let output = creatureIds.map((arr,idx) => {
@@ -69,7 +83,7 @@ export default class Creatures extends React.Component {
           <li className={level} key={idx}>
             <div className={`creature ${operand} ${arr} ${(hasCreature)?'gotit':'notyet'}`}>?</div>
             <div className={`creature-freq freq-key ${freq}`}>{freq}</div>
-            <div className="creature-name">{(hasCreature)?name:'???'}</div>
+            <div className="creature-name" dangerouslySetInnerHTML={{__html:(hasCreature)?name:'???'}}></div>
           </li>
         )
     })
@@ -88,9 +102,10 @@ export default class Creatures extends React.Component {
             <div className="sprite-wrapper">
             <div className="sprite"><img src={sprite}/></div>
             <div className="carrot"></div>
-            <div className="sprite-message"><p>You can do it!</p></div>
+            <div className="sprite-message"><p>{this.getQuote()}</p></div>
             </div>
-            <h1>Creatures</h1>
+            <p className="luckiest-guy">Have you rescued all the</p>
+            <h1>Creatures?</h1>
             <Link to='/navigation' className='stats-btn'> Main Menu </Link>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>
             <span className="active">View Creatures</span>
@@ -101,19 +116,19 @@ export default class Creatures extends React.Component {
             </div>
             <div className="creature-wrapper">
               <div className="creature-section">
-                <h4>Addition</h4>
+                <h4>Addition-ville</h4>
                 <ul className="creature-list">
                   {this.creatureMap('add',locUser)}
                 </ul>
-                <h4>Subtraction</h4>
+                <h4>Subtraction-berg</h4>
                 <ul className="creature-list">
                   {this.creatureMap('sub',locUser)}
                 </ul>
-                <h4>Multiplication</h4>
+                <h4>Multiplication Land</h4>
                 <ul className="creature-list">
                   {this.creatureMap('mul',locUser)}
                 </ul>
-                <h4>Division</h4>
+                <h4>Division Town</h4>
                 <ul className="creature-list">
                   {this.creatureMap('div',locUser)}
                 </ul>

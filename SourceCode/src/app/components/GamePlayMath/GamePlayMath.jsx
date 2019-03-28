@@ -27,7 +27,7 @@ export default class GamePlayMath extends React.Component {
   constructor(props) {
     super(props);
 
-    const {operator, gamemode, constant, randomize} = props.location.state
+    const {operator, gamemode, constant, randomize, level} = props.location.state
 
     let nextQuestionDelay = 50
     let range = 11
@@ -40,6 +40,11 @@ export default class GamePlayMath extends React.Component {
       countdown = 4
     }
 
+    console.log('level',level);
+    if (level==2) {
+      hitpoints = 300
+      range = 22
+    }
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -63,6 +68,7 @@ export default class GamePlayMath extends React.Component {
       operator,
       gamemode,
       constant,
+      level,
       randomize,
       modalVisible:'init false',
       modalTitle:'Game Over',
@@ -176,7 +182,7 @@ export default class GamePlayMath extends React.Component {
         modalTitle = 'Keep practicing!'
         modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
 
-        //did they do well enough to unlock the timer round
+        //did they do well enough to unlock level1
         if (accuracy >= requiredAccuracy && this.state.score >= unlockScore){
 
           modalTitle = 'Well done!'
@@ -189,14 +195,18 @@ export default class GamePlayMath extends React.Component {
           var locUser = JSON.parse(localStorage.getItem(localUser))
           // console.log('loc id', locUser.userid);
           var operator = (this.state.randomize) ? 'ran' : this.state.operator
-          locUser.gamemath[operator].unlocked = true;
+          locUser.gamemath[operator].unlocked1 = true;
 
-          if (this.state.score > locUser.gamemath[operator].practice){
-            locUser.gamemath[operator].practice = this.state.score
+          //set new high score
+          if (this.state.score > locUser.gamemath[operator].training){
+            locUser.gamemath[operator].training = this.state.score
           }
           // console.log('loc user', locUser);
+
+          //save to localstorage
           localStorage.setItem(localUser, JSON.stringify(locUser));
 
+          //sync to firebase
           let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator);
           userRef.set(locUser.gamemath[operator]);
         }
@@ -228,14 +238,22 @@ export default class GamePlayMath extends React.Component {
           var locUser = JSON.parse(localStorage.getItem(localUser))
           // console.log('loc id', locUser.userid);
           var operator = (this.state.randomize) ? 'ran' : this.state.operator
-          locUser.gamemath[operator].unlocked = true;
 
-          if (this.state.score > locUser.gamemath[operator].battle){
-            locUser.gamemath[operator].battle = this.state.score
+          // locUser.gamemath[operator].unlocked = true;
+
+          //set new high score
+          if (this.state.level == 1){
+            if (this.state.score > locUser.gamemath[operator].battle1) locUser.gamemath[operator].battle1 = this.state.score
+          } else if (this.state.level == 2){
+            if (this.state.score > locUser.gamemath[operator].battle2) locUser.gamemath[operator].battle2 = this.state.score
           }
+
           // console.log('loc user', locUser);
+
+          //save to localstorage
           localStorage.setItem(localUser, JSON.stringify(locUser));
 
+          //sync to firebase
           let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator);
           userRef.set(locUser.gamemath[operator]);
         }
@@ -290,7 +308,7 @@ export default class GamePlayMath extends React.Component {
       var locUser = JSON.parse(localStorage.getItem(localUser))
       // console.log('loc id', locUser.userid);
       var operator = (this.state.randomize) ? 'ran' : this.state.operator
-      locUser.gamemath[operator].unlocked = true;
+      // locUser.gamemath[operator].unlocked1 = true;
 
       if (this.state.score > locUser.gamemath[operator].battle){
         locUser.gamemath[operator].battle = this.state.score
@@ -513,6 +531,7 @@ export default class GamePlayMath extends React.Component {
             />
 
             {answerPad}
+            {this.state.level}
 
           </div>
 
@@ -521,12 +540,13 @@ export default class GamePlayMath extends React.Component {
             body={this.state.modalBody}
             score={this.state.score}
             gameplayBtns={true}
+            level={this.state.level}
             bonus={this.state.bonus}
             operator={this.state.operator}
             visible={this.state.modalVisible}
             closeModal={()=>{this.closeModal()}}
           />
-        </div>  
+        </div>
         </div>
       </div>
     );

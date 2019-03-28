@@ -179,11 +179,11 @@ export default class Login extends React.Component {
           fname: displayName,
           userimg: photoURL,
           gamemath:{
-            add:{ practice:0, battle:0, unlocked:false },
-            sub:{ practice:0, battle:0, unlocked:false },
-            mul:{ practice:0, battle:0, unlocked:false },
-            div:{ practice:0, battle:0, unlocked:false },
-            ran:{ practice:0, battle:0, unlocked:false },
+            add:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
+            sub:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
+            mul:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
+            div:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
+            ran:{ battle:0, battle1:0, battle2:0, unlocked:false },
           },
           creatures:{
             add:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},

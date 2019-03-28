@@ -18,7 +18,7 @@ import Bonus from '../Bonus/Bonus';
 export default class Modal extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('modal',props);
     this.state = {
       visible: 'init false',
       openBonus: 'init false'
@@ -49,6 +49,8 @@ export default class Modal extends React.Component {
 
   render() {
     let bonus = this.props.bonus;
+    let level = this.props.level;
+    console.log('modal render',level);
     let gameplayBtns = <div className="modal-btns"><button onClick={()=>this.closeModal()} className="modal-btn again-btn">Try Again</button> <Link className="modal-btn back-btn" to="/navigation">Main Menu</Link></div>
     if (!this.props.gameplayBtns) gameplayBtns = ''
 
@@ -63,8 +65,8 @@ export default class Modal extends React.Component {
 
     let bonusRender = <div className="blankBonus"></div>
     if (bonus > 0 == true) {
-      
-      bonusRender = <Bonus openBonus={this.state.openBonus} bonusPoints={bonus} operator={this.props.operator}/>
+
+      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} bonusPoints={bonus} operator={this.props.operator}/>
     }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>

@@ -9,7 +9,7 @@ import ReactHowler from 'react-howler'
 import {creatureList,firebaseAuth,ref} from "../../config/constants";
 
 import './Bonus.scss';
-import coin from '../../images/coin.png';
+import gems from '../../images/gems.png';
 import glow from '../../images/glow-wedge.png';
 import poop from '../../images/icon_sunglasses.png';
 const creatures = require.context('../../images/creatures', true);
@@ -22,7 +22,7 @@ const rareBonus = 100000;
 export default class Bonus extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('bonus',props);
     let visible = props.openBonus ? props.openBonus : 'init false'
 
     this.state = {
@@ -51,12 +51,12 @@ export default class Bonus extends React.Component {
     console.log('determine creature');
     var locUser = JSON.parse(localStorage.getItem(localUser));
     let operator = this.props.operator
-    let bonusImg = coin
-    let coinText = 'coins'
+    let bonusImg = gems
+    // let coinText = 'coins'
     let creature = 'default';
     let bonusPoints = this.props.bonusPoints
-    if (bonusPoints == 1) coinText = 'coin'
-    let bonusTitle = 'You got' + ' ' + bonusPoints + ' ' + coinText + '!'
+    // if (bonusPoints == 1) coinText = 'coin'
+    let bonusTitle = 'You found a pile of gems!';// + ' ' + bonusPoints + ' ' + coinText + '!'
 
     // console.log('BONUS',bonusPoints,locUser);
 
@@ -67,8 +67,10 @@ export default class Bonus extends React.Component {
 
       let rareCreature = (bonusPoints > rareBonus && Math.random()*100 > 80) ? true : false;
 
-      let rand = this.rand(1,3);
-      creature = 'c' + rand;
+      let rand = this.rand(1,3)
+      let rand2 = this.rand(1,2);
+      creature = 'L' + (this.props.level + 1) + "_" + rand2 + "_" + rand;
+      console.log('bonus creature',creature);
       let creatureRef = creatureList.math[operator][creature];
       //localUser.creatures[operator]['c' + num];
 
@@ -103,7 +105,7 @@ export default class Bonus extends React.Component {
 
   rand(min,max){
     var num = Math.floor(Math.random() * ((max-min)+1) + min)
-    if (num < 10) num = "0" + num;
+    // if (num < 10) num = "0" + num;
     return num;
   }
 

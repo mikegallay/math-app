@@ -1,0 +1,82 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.profile.main {
+  background: transparent url('../../images/bg-creatures.jpg') no-repeat top center;
+  background-size:cover;
+  .main-fade{
+    height:100%;
+  }
+  .wrapper{
+    height: 100%;
+    margin: 0;
+    padding: 0 5%;
+    overflow: auto;
+    h1{
+      margin-bottom:0;
+      font-size: 3em;
+    }
+  }
+}
+
+.userinfo{
+  margin-top:1em;
+}
+.stat-list{
+  margin-bottom:1em;
+  h3{
+    margin-bottom:.5em;
+  }
+}
+
+.username{
+  h3{
+    margin-top:-5px;
+    font-size:2.5em;
+    @media only screen and (min-width: 375px) {
+      margin-top:-2px;
+      font-size:3em;
+    }
+    margin-bottom:0;
+  }.luckiest-guy{
+    margin:1em 0 0;
+  }
+  .chooseusername{
+    //text-decoration: none;
+  }
+}
+.stat-section{
+  width:44%;
+  margin:0 3% 1em;
+  float:left;
+  display: inline-block;
+  background: transparent;
+  // background: linear-gradient(180deg, rgba(204,204,204,1) 0%, rgba(204,204,204,0) 60%);
+  background: radial-gradient(circle at top, rgba(204,204,204,1) 0%, rgba(204,204,204,0) 70%);
+  min-height: 100px;
+
+  h4{
+    margin-top: 0;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    border-bottom: 2px solid black;
+    line-height: 0.8em;
+    background: gold;
+    padding: .5em 0 .1em;
+  }
+  p{margin:0;font-size:1.2em;}
+  .score{
+    font-weight: bold;
+  }
+}
+
+.stats-btn{
+  font-weight: normal;
+  cursor: pointer;
+  text-decoration: none;
+  color:black;
+}
+
+.active{
+  font-weight: bold;
+}

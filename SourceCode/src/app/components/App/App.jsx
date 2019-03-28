@@ -14,7 +14,7 @@ import Login from '../Login/Login';
 import Legend from '../Legend/Legend';
 import ChooseUsername from '../ChooseUsername/ChooseUsername';
 import GamePlayMath from '../GamePlayMath/GamePlayMath';
-import Stats from '../Stats/Stats';
+import Profile from '../Profile/Profile';
 import Creatures from '../Creatures/Creatures';
 
 import appData from '../../data/app.json';
@@ -40,7 +40,7 @@ export default class App extends React.Component {
           <Route exact path="/chooseusername/" render={props => <ChooseUsername {...props} />} />
           <Route exact path="/navigation/" render={props => <Navigation {...props} />} />
           <Route exact path="/math/" render={props => <GamePlayMath {...props} />} />
-          <Route exact path="/statistics/" render={props => <Stats {...props} />} />
+          <Route exact path="/profile/" render={props => <Profile {...props} />} />
           <Route exact path="/creatures/" render={props => <Creatures {...props} />} />
           {/*<Redirect from="/" to="/login"/>*/}
         </div>

@@ -14,6 +14,7 @@ import stopwatch from '../../images/stopwatch.png';
 import heart from '../../images/heart.png';
 
 import Modal from '../Modal/Modal';
+import SecondaryNav from '../SecondaryNav/SecondaryNav';
 
 const appTokenKey = "appToken";
 const localUser = "localUser";
@@ -90,8 +91,11 @@ export default class Navigation extends React.Component {
               <p className="luckiest-guy">The Legend of</p>
               <h1 className="username">{this.state.username}</h1>
             </div>
+            <SecondaryNav currpage="navigation"/>
+            {/*<div>
             <a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>
+            </div>*/}
             <div className="main-menu">
               <div className="menu-btns">
                 <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', level:0} }}>

@@ -8,6 +8,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Creatures.scss';
+import SecondaryNav from '../SecondaryNav/SecondaryNav';
 // const creatures = require.context('../../images/creatures', true);
 import sprite from '../../images/creatures/sprite.gif';
 import {creatureList,creatureIds,spriteQuotes} from "../../config/constants";
@@ -104,15 +105,13 @@ export default class Creatures extends React.Component {
         <div className="main-fade" style={styles}>
           <div className="wrapper">
             <div className="sprite-wrapper">
-            <div className="sprite"><img src={sprite}/></div>
-            <div className="carrot"></div>
-            <div className="sprite-message"><p>{this.getQuote()}</p></div>
+              <div className="sprite"><img src={sprite}/></div>
+              <div className="carrot"></div>
+              <div className="sprite-message"><p>{this.getQuote()}</p></div>
             </div>
+            <SecondaryNav currpage="creatures"/>
             <p className="luckiest-guy">Have you rescued all the</p>
             <h1>Creatures?</h1>
-            <Link to='/navigation' className='stats-btn'> Main Menu </Link>
-            <Link to='/statistics' className='stats-btn'> View Statistics </Link>
-            <span className="active">View Creatures</span>
             <div className="freq-legend">
               <div className="freq-legend-item"><span className="freq-key common">Common</span><span className="freq-name">Common</span></div>
               <div className="freq-legend-item"><span className="freq-key rare">Rare</span><span className="freq-name">Rare</span></div>
@@ -136,7 +135,7 @@ export default class Creatures extends React.Component {
                 <ul className="creature-list">
                   {this.createCreatureList('div',locUser)}
                 </ul>
-                <h4>Random</h4>
+                <h4>Final Battle</h4>
                 <div className="creature-list queen-list">
                   <div className='queen-wrapper'>
                     <div className={`creature ran queen ${(locUser.creatures.ran.queen)?'gotit':'notyet'}`}><span>?</span></div>

@@ -92,31 +92,31 @@ export default class Profile extends React.Component {
             <div className="stat-list">
               <h3>High Scores</h3>
               <div className="stat-section">
-                <h4>Add</h4>
+                <h4 className="corner-shadow">Add</h4>
                 <p>Training: <span className="score">{addTrainHS}</span></p>
                 <p>Level 1: <span className="score">{addBatt1HS}</span></p>
                 <p>Level 2: <span className="score">{addBatt2HS}</span></p>
               </div>
               <div className="stat-section">
-                <h4>Subtract</h4>
+                <h4 className="corner-shadow">Subtract</h4>
                 <p>Training: <span className="score">{subTrainHS}</span></p>
                 <p>Level 1: <span className="score">{subBatt1HS}</span></p>
                 <p>Level 2: <span className="score">{subBatt2HS}</span></p>
               </div>
               <div className="stat-section">
-                <h4>Multiply</h4>
+                <h4 className="corner-shadow">Multiply</h4>
                 <p>Training: <span className="score">{mulTrainHS}</span></p>
                 <p>Level 1: <span className="score">{mulBatt1HS}</span></p>
                 <p>Level 2: <span className="score">{mulBatt2HS}</span></p>
               </div>
               <div className="stat-section">
-                <h4>Divide</h4>
+                <h4 className="corner-shadow">Divide</h4>
                 <p>Training: <span className="score">{divTrainHS}</span></p>
                 <p>Level 1: <span className="score">{divBatt1HS}</span></p>
                 <p>Level 2: <span className="score">{divBatt2HS}</span></p>
               </div>
               <div className="stat-section">
-                <h4>Random</h4>
+                <h4 className="corner-shadow">Random</h4>
                 <p>Final Battle: <span className="score">{ranBattHS}</span></p>
               </div>
             </div>

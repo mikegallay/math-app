@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {logout} from "../../services/auth";
+// import {logout} from "../../services/auth";
 import {firebaseAuth,ref} from "../../config/constants";
 
 import './Navigation.scss';
@@ -44,7 +44,7 @@ export default class Navigation extends React.Component {
     let hidden = true
 
     this.state = {modalVisible:'init false',hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username};
-    this.handleLogout = this.handleLogout.bind(this);
+    // this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
   componentWillMount(){
@@ -55,7 +55,7 @@ export default class Navigation extends React.Component {
     }, 1000)
   }
 
-  handleLogout() {
+  /*handleLogout() {
     // console.log('handleLogout');
      logout().then(function () {
          localStorage.removeItem(appTokenKey);
@@ -63,7 +63,7 @@ export default class Navigation extends React.Component {
          // console.log(this.props.history);
          console.log("user signed out from firebase");
      }.bind(this));
-   }
+   }*/
 
   closeModal(){
     this.setState({
@@ -158,14 +158,6 @@ export default class Navigation extends React.Component {
                   <img src={stopwatch} width="25" height="25"/>
                 </Link>
               </div>
-            </div>
-
-            <div>
-                <button
-                    value="Sign Out"
-                    className="mdl-button"
-                    onClick={this.handleLogout}
-                >Sign Out</button>
             </div>
 
             <p className="credit">© 2018 Mike Gallay</p>

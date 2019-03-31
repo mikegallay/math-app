@@ -14,7 +14,7 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 6
+    let gamelength = 300
 
     this.state = {
       time: {},

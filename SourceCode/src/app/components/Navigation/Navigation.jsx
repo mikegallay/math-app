@@ -162,6 +162,8 @@ export default class Navigation extends React.Component {
 
             <p className="credit">© 2018 Mike Gallay</p>
 
+          
+
             <Modal
               title="How To Play"
               body={howToBody}

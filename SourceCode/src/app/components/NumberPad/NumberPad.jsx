@@ -115,7 +115,12 @@ export default class NumberPad extends React.Component {
           <div
           onClick={() => this.clearAnswerBox()}
           className={`answerbox ${isCorrect} ${(yourAnswer.length > 0)?
-          'inprogress':''}`}><span className="yourAnswer">{yourAnswer}</span>
+          'inprogress':''}`}>
+            <div className="magic-wrapper">
+              <div className="magic-child magic-mask rotateit"></div>
+              <div className="magic-child flipped magic-mask"></div>
+            </div>
+            <div className="yourAnswer luckiest-guy">{yourAnswer}</div>
           </div>
 
         </div>

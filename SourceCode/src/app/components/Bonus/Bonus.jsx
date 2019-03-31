@@ -16,8 +16,10 @@ const creatures = require.context('../../images/creatures', true);
 
 const localUser = "localUser";
 
-const creatureBonus = 10000;
-const rareBonus = 100000;
+const trainingBonus = 5000;
+const level1Bonus = 10000;
+const level2Bonus = 20000;
+const finalBonus = 50000;
 
 export default class Bonus extends React.Component {
   constructor(props) {
@@ -58,14 +60,19 @@ export default class Bonus extends React.Component {
     // if (bonusPoints == 1) coinText = 'coin'
     let bonusTitle = 'You found a pile of gems!';// + ' ' + bonusPoints + ' ' + coinText + '!'
 
+    let creatureBonus = trainingBonus;
+    if (this.props.level == 1) creatureBonus = level1Bonus;
+    if (this.props.level == 2) creatureBonus = level2Bonus;
     // console.log('BONUS',bonusPoints,locUser);
 
     //over 10000 (creatureBonus) signifies that a creature has been unlocked
     //this gets set in GamePlay
+
+    //look at making the bonus only for training.
     if (bonusPoints >= creatureBonus && this.state.visible){
       //randomize logic for rewards
 
-      let rareCreature = (bonusPoints > rareBonus && Math.random()*100 > 80) ? true : false;
+      // let rareCreature = (bonusPoints > rareBonus && Math.random()*100 > 80) ? true : false;
 
       let rand = this.rand(1,3)
       let rand2 = this.rand(1,2);
@@ -88,7 +95,14 @@ export default class Bonus extends React.Component {
 
       let userRef = ref.ref('/users/' + locUser.userid + '/creatures/' + operator + "/" + creature );
       userRef.set(locUser.creatures[operator][creature]);
+    }else{
+      //add the gems
+      let currGems = locUser.gems + bonusPoints
+      locUser.gems = currGems
+      localStorage.setItem(localUser, JSON.stringify(locUser));
 
+      let userRef = ref.ref('/users/' + locUser.userid + '/gems');
+      userRef.set(locUser.gems);
     }
     this.setState({
       bonusImg,bonusTitle,creature,creatureSet:true

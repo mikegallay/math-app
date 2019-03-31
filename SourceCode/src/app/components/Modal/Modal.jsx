@@ -18,7 +18,6 @@ import Bonus from '../Bonus/Bonus';
 export default class Modal extends React.Component {
   constructor(props) {
     super(props);
-    console.log('modal',props);
     this.state = {
       visible: 'init false',
       openBonus: 'init false'
@@ -50,7 +49,8 @@ export default class Modal extends React.Component {
   render() {
     let bonus = this.props.bonus;
     let level = this.props.level;
-    console.log('modal render',level);
+
+    console.log('modal render',this.props);
     let gameplayBtns = <div className="modal-btns"><button onClick={()=>this.closeModal()} className="modal-btn again-btn">Try Again</button> <Link className="modal-btn back-btn" to="/navigation">Main Menu</Link></div>
     if (!this.props.gameplayBtns) gameplayBtns = ''
 

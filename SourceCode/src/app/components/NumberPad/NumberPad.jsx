@@ -20,6 +20,7 @@ export default class NumberPad extends React.Component {
     let correct = 'default'
     this.state = {staticAnswers,currAnswer,answerString,correct,lastAnswer};
     this.padPress = this.padPress.bind(this);
+    this.cast = this.cast.bind(this);
     this.removeIsCorrect = this.removeIsCorrect.bind(this);
     this.clearAnswerBox = this.clearAnswerBox.bind(this);
   }
@@ -35,15 +36,35 @@ export default class NumberPad extends React.Component {
     }
   }
 
+  cast(){
+    let currAnswer = this.state.currAnswer;
+    let entry = currAnswer;
+    let lastAnswer = currAnswer;
+    let correct = (currAnswer == this.state.answerString)
+
+    // if (currAnswer.length == this.state.answerString.length){
+        this.props.onAnswer(correct)
+        currAnswer = '';
+        this.setState({currAnswer,correct,lastAnswer})
+        this.removeIsCorrect();
+    // }else{
+      // this.setState({currAnswer,correct:'default'})
+    // }
+  }
+
   padPress(val){
-    // console.log('padpress',val);
+    let currAnswer = this.state.currAnswer + val.toString();
+    this.setState({currAnswer,correct:'default'})
+
+  }
+
+  padPressOld(val){
     let entry = val.toString();
     let currAnswer = this.state.currAnswer + entry;
     let lastAnswer = currAnswer
     let correct = (currAnswer == this.state.answerString)
-    // console.log(currAnswer,currAnswer.length,this.props.answer,this.state.answerString, this.state.answerString.length);
+
     if (currAnswer.length == this.state.answerString.length){
-      // console.log('YES');
         this.props.onAnswer(correct)
         currAnswer = '';
         this.setState({currAnswer,correct,lastAnswer})
@@ -77,23 +98,26 @@ export default class NumberPad extends React.Component {
     return(
       <div className="numberpad-wrapper">
         <div className="numbers">
-        {this.state.staticAnswers.map((arr,idx) => {
-          return (
-            <Answer
-              key={idx}
-              answered={this.props.answered}
-              onAnswer={(val)=>{this.padPress(val)}}
-              value={arr}
-              status={''}
-              gamemode='countdown'
-            />
-          );
-        })}
-        </div>
-        <div
+          {this.state.staticAnswers.map((arr,idx) => {
+            return (
+              <Answer
+                key={idx}
+                answered={this.props.answered}
+                onAnswer={(val)=>{this.padPress(val)}}
+                value={arr}
+                status={''}
+                gamemode='countdown'
+              />
+            );
+          })}
+          </div>
+          <div onClick={() => this.cast()} className="cast-btn"><div className="staff-art">CAST</div></div>
+          <div
           onClick={() => this.clearAnswerBox()}
-          className={`answerbox ${isCorrect} ${(yourAnswer.length > 0 && this.state.answerString.length > 1 && yourAnswer.length != this.state.answerString.length)?
-          'inprogress':''}`}><span className="yourAnswer">{yourAnswer}</span></div>
+          className={`answerbox ${isCorrect} ${(yourAnswer.length > 0)?
+          'inprogress':''}`}><span className="yourAnswer">{yourAnswer}</span>
+          </div>
+
         </div>
     );
   }

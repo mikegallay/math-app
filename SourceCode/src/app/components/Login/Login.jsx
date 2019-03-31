@@ -178,6 +178,7 @@ export default class Login extends React.Component {
           username:'',
           fname: displayName,
           userimg: photoURL,
+          gems: 0,
           gamemath:{
             add:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
             sub:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },

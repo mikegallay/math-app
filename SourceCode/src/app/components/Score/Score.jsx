@@ -27,7 +27,7 @@ export default class Score extends React.Component {
   }
 
   render() {
-    console.log('hp',this.props.hitpoints,this.props.score);
+    // console.log('hp',this.props.hitpoints,this.props.score);
     let score = this.props.score;
     let inactiveScore = this.inactiveScore(this.props.score)
     if (this.props.gamemode=='countdown') {

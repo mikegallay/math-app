@@ -40,7 +40,6 @@ export default class GamePlayMath extends React.Component {
       countdown = 4
     }
 
-    console.log('level',level);
     if (level==2) {
       hitpoints = 300
       range = 22
@@ -58,7 +57,8 @@ export default class GamePlayMath extends React.Component {
       streak: 0,
       correct:null,
       bonus:0,
-      ansßwered: false,
+      answered: false,
+      timeExpired: false,
       multiplier: 1,
       gameover: false,
       restart:false,
@@ -320,10 +320,12 @@ export default class GamePlayMath extends React.Component {
       userRef.set(locUser.gamemath[operator]);
     }
 
-    if (this.state.countdown != 'VICTORY!'){
+    let modalVisible = (modalBody == 'Game not started')?false:true;
+
+    if (this.state.countdown != 'VICTORY!' && !this.state.timeExpired){
       this.state.timerid = setTimeout(() => {
         this.setState({
-          modalVisible:true,
+          modalVisible,
           modalTitle,
           modalBody,
           bonus,
@@ -331,12 +333,13 @@ export default class GamePlayMath extends React.Component {
           wrongFX:false,
           levelFX:false
         })
-      }, 3000);
+      }, 2000);
 
       this.setState({
         battle: false,
         gameover: true,
-        countdown: 'DEFEAT!'
+        countdown: 'DEFEAT!',
+        timeExpired: true
       })
     }
 
@@ -377,7 +380,7 @@ export default class GamePlayMath extends React.Component {
     // this.clearAnswers()
     let battle = false;
     let countdown = this.state.countdown;
-    console.log('asd',countdown);
+
     if (countdown == "DEFEAT!" || countdown == "VICTORY!"){
       battle = true;
       countdown = "";
@@ -399,6 +402,7 @@ export default class GamePlayMath extends React.Component {
       numWrong:0,
       gameover:false,
       restart:true,
+      timeExpired:false,
       battle,
       countdown
     })
@@ -531,7 +535,6 @@ export default class GamePlayMath extends React.Component {
             />
 
             {answerPad}
-            {this.state.level}
 
           </div>
 

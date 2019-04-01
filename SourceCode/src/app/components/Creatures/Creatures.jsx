@@ -119,24 +119,24 @@ export default class Creatures extends React.Component {
             </div>
             <div className="creature-wrapper">
               <div className="creature-section">
-                <h4>Addition-ville</h4>
-                <ul className="creature-list">
+                <h4 className="add">Addition-ville</h4>
+                <ul className="add creature-list">
                   {this.createCreatureList('add',locUser)}
                 </ul>
-                <h4>Subtraction-berg</h4>
-                <ul className="creature-list">
+                <h4 className="sub">Subtraction-berg</h4>
+                <ul className="sub creature-list">
                   {this.createCreatureList('sub',locUser)}
                 </ul>
-                <h4>Multiplication Land</h4>
-                <ul className="creature-list">
+                <h4 className="mul">Multiplication Land</h4>
+                <ul className="mul creature-list">
                   {this.createCreatureList('mul',locUser)}
                 </ul>
-                <h4>Division Town</h4>
-                <ul className="creature-list">
+                <h4 className="div">Division Town</h4>
+                <ul className="div creature-list">
                   {this.createCreatureList('div',locUser)}
                 </ul>
-                <h4>Final Battle</h4>
-                <div className="creature-list queen-list">
+                <h4 className="ran">Final Battle</h4>
+                <div className="ran creature-list queen-list">
                   <div className='queen-wrapper'>
                     <div className={`creature ran queen ${(locUser.creatures.ran.queen)?'gotit':'notyet'}`}><span>?</span></div>
                     <div className={`creature-freq freq-key ultrarare`}>ultra rare</div>

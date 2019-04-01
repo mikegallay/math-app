@@ -16,21 +16,107 @@
       margin-bottom:0;
       font-size: 3em;
     }
+    .subhead{
+      line-height: 1.2em;
+      margin-top:1em;
+    }
     .gems{
+      font-size:2em;
+      .gem-count{
+        color:darkmagenta;
+      }
     }
 
     .staffs{
+      position: relative;
+      width: 100%;
+      ul{padding:0;}
       .staff{
-        opacity:.5;
+
         font-weight:bold;
         color:black;
+        width: 44%;
+        text-decoration: none;
+        float: left;
+        position: relative;
+        list-style: none;
+        margin: 0 3%;
+        .staff-art{
+          opacity:.5;
+          height: 200px;
+          width:100%;
+          position: relative;
+          border: 6px solid white;
+          border-radius: 10px;
+          overflow: hidden;box-shadow: 0px 5px 8px rgba(0,0,0,.5);
+          text-indent:-999px;
+          box-sizing: border-box;
+          margin-bottom:1em;
+        }
+        .staff-name{
+          font-size:1.5em;
+          margin:0;
+          padding:0;
+        }
+        .buy-btn{
+          display:none;
+          position: absolute;
+          top: 140px;
+          left: 50%;
+          margin-left: -34%;
+        }
+        p{
+          line-height: 1em;
+        }
+        &.default{
+          .staff-art{
+            background: transparent url('../../images/staff-default.jpg') no-repeat top center;
+            background-size:cover;
+          }
+        }
+        &.fire{
+          .staff-art{
+            background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
+            background-size:cover;
+          }
+        }
         &.purchased{
-          opacity:1;
+          .staff-art{opacity:1;}
         }
         &.selected{
+          .staff-art{opacity:1;}
           color:green;
         }
+        &.available{
+          opacity:1;
+          .staff-art{opacity:.5;}
+          p{display:block;}
+          .buy-btn{
+            display:block;
+          }
+        }
+        &.notyet{
+          .staff-art{
+            background: transparent url('../../images/staff-unknown.jpg') no-repeat top center;
+            background-size:cover;
+          }
+          .staff-name,p{
+            text-indent:-9999px;
+            &:after{
+              content: '???';
+              position: absolute;
+              color: black;
+              left:0;
+              text-indent: 0;
+              width: 100%;
+              text-align: center;
+              color:gray;
+            }
+          }
+        }
       }
+
     }
+
   }
 }

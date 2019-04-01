@@ -71,11 +71,50 @@ export default class Store extends React.Component {
           <div className="wrapper">
             <h1>Store</h1>
             <SecondaryNav currpage="store"/>
-            <div className="gems">Total Gems: {gems}</div>
+            <p className="subhead">It is always a good idea to upgrade your staff. Unlock each staff by completing Level 1 in each kingom and buy them with the gems you earn by training.</p>
+            <div className="gems luckiest-guy">You have <span className="gem-count">{gems} gems</span></div>
             <div className="staffs">
               <ul>
-                <li onClick={() => this.selectStaff('default')} className={`staff default purchased ${(this.state.staff=='default')?'selected':''}`}>Default</li>
-                <li onClick={() => this.selectStaff('fire')} className={`staff fire purchased ${(this.state.staff=='fire')?'selected':''}`}>Fire</li>
+                <li onClick={() => this.selectStaff('default')} className={`staff default purchased ${(this.state.staff=='default')?'selected':''}`}>
+                  <div className="staff-art">Default</div>
+                  <div className="staff-name luckiest-guy">Default</div>
+                  <p>A sturdy staff. Great for beginners.</p>
+                  <button
+                      className="buy-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                      value="Buy Now"
+                      onClick=''
+                  >Buy Now</button>
+                </li>
+                <li onClick={() => this.selectStaff('fire')} className={`staff fire purchased ${(this.state.staff=='fire')?'selected':''}`}>
+                  <div className="staff-art">Fire</div>
+                  <div className="staff-name luckiest-guy">Fire</div>
+                  <p>Adds a small about of heat damage on some attacks.</p>
+                  <button
+                      className="buy-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                      value="Buy Now"
+                      onClick=''
+                  >Buy Now</button>
+                </li>
+                <li onClick={() => this.selectStaff('fire')} className={`staff fire available ${(this.state.staff=='fire')?'selected':''}`}>
+                  <div className="staff-art">Fire</div>
+                  <div className="staff-name luckiest-guy">Available</div>
+                  <p>Adds a small about of heat damage on some attacks.</p>
+                  <button
+                      className="buy-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                      value="Buy Now"
+                      onClick=''
+                  >Buy Now</button>
+                </li>
+                <li onClick={() => this.selectStaff('fire')} className={`staff default notyet ${(this.state.staff=='fire')?'selected':''}`}>
+                  <div className="staff-art">Fire</div>
+                  <div className="staff-name luckiest-guy">Not Yet</div>
+                  <p>Adds a small about of heat damage on some attacks.</p>
+                  <button
+                      className="buy-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                      value="Buy Now"
+                      onClick=''
+                  >Buy Now</button>
+                </li>
               </ul>
             </div>
           </div>

@@ -1,11 +1,12 @@
 @import '../../css/variables';
 @import '../../css/mixins';
 
+$altcolor: #e2effc;
 .creatures.main{
   background: transparent url('../../images/bg-creatures.jpg') no-repeat top center;
   background-size:cover;
   .wrapper{
-    padding:0 5%;
+    padding:0;
     p.luckiest-guy{
       font-size:1.25em;
       margin:1em 0 0 0;
@@ -21,7 +22,9 @@
       justify-content: center;
       align-items: center;
       font-size:23px;
-      margin-bottom:0;
+      margin: 0;
+      padding-top: 1em;
+      &.sub,&.div{background:$altcolor;}
       &:before,&:after{
         content: '';
         width: 20px;
@@ -43,7 +46,7 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  padding-top:2em;
+  padding:2em 5% 0;
   .sprite{
     width:35%;
     // animation: levitate 1.5s alternate ease-in-out infinite;
@@ -157,8 +160,10 @@
   flex-wrap:wrap;
   justify-content: space-between;
   list-style: none;
-  padding:0;
-  margin-top:0;
+  padding: 0 5% 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  &.sub,&.div{background:$altcolor;}
   /*li.level1::before{
     content:'Level 1';
     position: absolute;

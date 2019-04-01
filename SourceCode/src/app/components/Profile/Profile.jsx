@@ -50,6 +50,7 @@ export default class Profile extends React.Component {
   render() {
     var locUser = JSON.parse(localStorage.getItem(localUser));
     var gems = locUser.gems;
+    var staff = locUser.staffs.current;
     var addTrainHS = locUser.gamemath.add.training;
     var addBatt1HS = locUser.gamemath.add.battle1;
     var addBatt2HS = locUser.gamemath.add.battle2;
@@ -89,6 +90,10 @@ export default class Profile extends React.Component {
                       onClick={this.handleLogout}
                   >Sign Out</button>
               </div>
+            </div>
+
+            <div className="staff">
+              You currently have the {staff} staff equipped.
             </div>
 
             <div className="stat-list">

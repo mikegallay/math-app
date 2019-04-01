@@ -24,33 +24,34 @@
   }
   .cast-btn{
     float: left;
-    width: 27%;
-    margin-left:3%;
+    width: 30%;
+    // margin-left:3%;
     display: inline-block;
     margin-top: 0.9em;
     .staff-art{
       text-indent: -999px;
       width:100%;
+      height:0;
       padding-bottom: 100%;
       background: transparent url('../../images/cast-default.png') no-repeat top center;
       background-size:cover;
+      &.fire{
+        background: transparent url('../../images/cast-fire.png') no-repeat top center;
+        background-size:cover;
+      }
     }
   }
   .answerbox {
     // float:left;
     opacity: 0;
     position: absolute;
-    top: -175px;
-    left: 35px;
+    top: -185px;
+    left: 15px;
     // min-width: 150px;
     // min-height: 150px;
-    transform: rotate(-9deg);
+    transform: rotate(-15deg);
     padding: 0;
     margin: 0;
-    @media only screen and (min-width: 375px) {
-      padding: 0;
-      margin: 0;
-    }
     // border: 2px solid gray;
     // width: 20%;
     display: inline-block;
@@ -60,9 +61,10 @@
     // min-height: 64px;
 
     // background-color: lightblue;
-    transition:background-color .5s;
+    transition:opacity .5s .5s;
     &.inprogress{
       opacity:1;
+      transition:opacity .5s;
       &:after{
         // content:'x';
         position:absolute;
@@ -80,8 +82,8 @@
         position: absolute;
         width:150px;
         height:150px;
-        // border:1px solid yellow;
         left:30%;
+        // top:70%;
         .magic-child{
           position: absolute;
           top:0;
@@ -89,16 +91,11 @@
           margin-top:-75px;
           margin-left:-75px;
           &.magic-mask{
-            -webkit-mask-image: url('../../images/sparkle.png');
-            // background: yellow;
-            -webkit-mask-repeat: no-repeat;
-            -webkit-mask-size: 150px;
             width:100%;
             height:100%;
             &.flipped{
               transform: scale(-.9);
             }
-              // transform:rotate(0deg);
             &:before{
               content:'';
               width:200%;
@@ -106,19 +103,8 @@
               position: absolute;
               top:-50%;
               left:-50%;
-              // background: -webkit-linear-gradient(top, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* Chrome10-25,Safari5.1-6 */
-              // background: linear-gradient(to bottom, #aebcbf 0%,#6e7774 50%,#0a0e0a 51%,#0a0809 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-              background: transparent url('../../images/radial.png') no-repeat top center;
-              background-size:cover;
-              animation-duration: 3s;
-              animation-name: rotateit;
-              animation-timing-function: linear;
-              animation-iteration-count: infinite;
-              animation-direction: forwards;
             }
             &.rotateit{
-              // transition:transform 5s linear;
-              // transform:rotate(360deg);
               animation-duration: 3s;
               animation-name: rotateit;
               animation-timing-function: linear;
@@ -126,10 +112,94 @@
               animation-direction: forwards;
             }
           }
-          &.magic-bg{
-            width:80px;
-            height:80px;
-            // background: red;
+        }
+        &.default{
+          .magic-child{
+            &.magic-mask{
+              -webkit-mask-image: url('../../images/sparkle.png');
+              -webkit-mask-repeat: no-repeat;
+              -webkit-mask-size: 150px;
+              &:before{
+                background: transparent url('../../images/radial.jpg') no-repeat top center;
+                background-size:cover;
+                animation-duration: 3s;
+                animation-name: rotateit;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: forwards;
+              }
+              &.rotateit{
+                animation-duration: 3s;
+                animation-name: rotateit;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: forwards;
+              }
+            }
+          }
+        }
+        &.fire{
+          drop-shadow:0px 0px 10px black;
+          &:before{
+            content:'';
+            width:120%;
+            height:120%;
+            top:-60%;
+            left:-60%;
+            position: absolute;
+            background: transparent url('../../images/smoke-ring.png') no-repeat top center;
+            background-size:cover;
+            animation-duration: 5s;
+            animation-name: smoke-ring;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: forwards;
+            // opacity:.5;
+          }
+          .magic-child{
+            &.magic-mask{
+              -webkit-mask-image: url('../../images/fire.png');
+              -webkit-mask-repeat: no-repeat;
+              -webkit-mask-size: 150px;
+              // -webkit-filter: drop-shadow(0px 0px 0px rgba(0,0,0, .25));
+              transform: rotate(15deg);
+              opacity:.7;
+
+              &.rotateit{
+                animation-duration: 1.5s;
+
+              }
+              &:before{
+                background: transparent url('../../images/heat.jpg') no-repeat top center;
+                background-size:cover;
+                animation-duration: 1.5s;
+                animation-name: rotateit;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: forwards;
+              }
+
+              &.flipped-rotateit{
+                animation-duration: 2s;
+                animation-name: flipped-rotateit;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: forwards;
+                animation-delay: 0s;
+                opacity:.9;
+                background: transparent url('../../images/heat.jpg') no-repeat top center;
+                background-size:cover;
+                &:before{
+                  animation-delay: 1s;
+                  animation-duration: 2s;
+                }
+              }
+              &.flipped{
+                &:before{
+                  animation-delay: 3s;
+                }
+              }
+            }
           }
         }
       }
@@ -138,21 +208,28 @@
       opacity:.85;
       transition:opacity 0s 0s;
       position: relative;
-      top: -.3em;
+      top: -.4em;
       width:200px;
       margin-left:-55px;
       font-weight: normal;
       font-size: 1.5em;
       color: #ef203f;
-      text-shadow: 0px 0px 8px rgba(0,0,0,.6);
+      text-shadow: 0px 0px 8px rgba(255,255,255,.6);
+      &.fire{
+        color:#f47018;
+        text-shadow: 0px 0px 8px rgba(255,255,255,.75);
+      }
     }
-    &.correct{background-color:lightgreen;}
-    &.incorrect{background-color:pink;}
+    &.correct .yourAnswer{color:green!important;}
+    &.incorrect .yourAnswer{color:red!important;}
     &.correct,&.incorrect{
       .yourAnswer{
         transition:opacity .5s .5s;
         opacity:0;
-
+      }
+      &.inprogress .magic-wrapper{
+        opacity:0;
+        transition:opacity .5s;
       }
     }
   }

@@ -17,7 +17,20 @@
       font-size: 3em;
     }
     .gems{
-      margin-bottom:27em;
+    }
+
+    .staffs{
+      .staff{
+        opacity:.5;
+        font-weight:bold;
+        color:black;
+        &.purchased{
+          opacity:1;
+        }
+        &.selected{
+          color:green;
+        }
+      }
     }
   }
 }

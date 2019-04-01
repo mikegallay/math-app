@@ -9,6 +9,8 @@ import React from 'react';
 import './NumberPad.scss';
 import Answer from '../Answer/Answer';
 
+const localUser = "localUser";
+
 export default class NumberPad extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,9 @@ export default class NumberPad extends React.Component {
     let currAnswer = ''
     let lastAnswer = ''
     let correct = 'default'
-    this.state = {staticAnswers,currAnswer,answerString,correct,lastAnswer};
+    var locUser = JSON.parse(localStorage.getItem(localUser));
+    let staff = locUser.staffs.current;
+    this.state = {staff,staticAnswers,currAnswer,answerString,correct,lastAnswer};
     this.padPress = this.padPress.bind(this);
     this.cast = this.cast.bind(this);
     this.removeIsCorrect = this.removeIsCorrect.bind(this);
@@ -42,11 +46,12 @@ export default class NumberPad extends React.Component {
     let lastAnswer = currAnswer;
     let correct = (currAnswer == this.state.answerString)
 
-    // if (currAnswer.length == this.state.answerString.length){
+    if (currAnswer.length > 0){
         this.props.onAnswer(correct)
         currAnswer = '';
         this.setState({currAnswer,correct,lastAnswer})
         this.removeIsCorrect();
+      }
     // }else{
       // this.setState({currAnswer,correct:'default'})
     // }
@@ -89,6 +94,7 @@ export default class NumberPad extends React.Component {
   }
 
   render() {
+
     let isCorrect = '';
     let yourAnswer = this.state.currAnswer;
 
@@ -111,16 +117,16 @@ export default class NumberPad extends React.Component {
             );
           })}
           </div>
-          <div onClick={() => this.cast()} className="cast-btn"><div className="staff-art">CAST</div></div>
+          <div onClick={() => this.cast()} className="cast-btn"><div className={`staff-art ${this.state.staff}`}>CAST</div></div>
           <div
           onClick={() => this.clearAnswerBox()}
           className={`answerbox ${isCorrect} ${(yourAnswer.length > 0)?
           'inprogress':''}`}>
-            <div className="magic-wrapper">
-              <div className="magic-child magic-mask rotateit"></div>
-              <div className="magic-child flipped magic-mask"></div>
+            <div className={`magic-wrapper ${this.state.staff}`}>
+              <div className="magic-child magic-mask"></div>
+              <div className="magic-child flipped-rotateit magic-mask"></div>
             </div>
-            <div className="yourAnswer luckiest-guy">{yourAnswer}</div>
+            <div className={`yourAnswer luckiest-guy ${this.state.staff}`}>{yourAnswer}</div>
           </div>
 
         </div>

@@ -179,6 +179,11 @@ export default class Login extends React.Component {
           fname: displayName,
           userimg: photoURL,
           gems: 0,
+          staffs: {
+            current: 'default',
+            default: true,
+            fire: true
+          },
           gamemath:{
             add:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
             sub:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },

@@ -152,25 +152,32 @@
       span{top:7px;position:relative;}
     }
     &.add{
+      border-bottom:1px dashed white;
+      border-right:1px dashed white;
+      box-sizing: border-box;
       .banner{top:5%;left:-8%;transform: rotate(-20deg);}
       .training{left:15%;top:25%;}
-      .level1{left:55%;top:36%;}
-      .level2{left:55%;top:60%;}
+      .level1{left:50%;top:41%;}
+      .level2{left:55%;top:65%;}
     }
     &.sub{
+      border-bottom:1px dashed white;
+      box-sizing: border-box;
       .banner{top:5%;right:-8%;transform: rotate(20deg);}
       .training{right:15%;top:25%;}
-      .level1{right:55%;top:36%;}
-      .level2{right:55%;top:60%;}
+      .level1{right:50%;top:40%;}
+      .level2{right:55%;top:65%;}
     }
     &.mul{
+      border-right:1px dashed white;
+      box-sizing: border-box;
       .banner{
         bottom:5%;left:-10%;transform: rotate(210deg);font-size:2.5em;
         span{top:8px;}
       }
       .training{left:15%;bottom:25%;}
-      .level1{left:55%;bottom:36%;}
-      .level2{left:55%;bottom:60%;}
+      .level1{left:50%;bottom:41%;}
+      .level2{left:55%;bottom:65%;}
     }
     &.div{
       .banner{
@@ -178,8 +185,8 @@
         span{top:2px;}
       }
       .training{right:15%;bottom:25%;}
-      .level1{right:55%;bottom:36%;}
-      .level2{right:55%;bottom:60%;}
+      .level1{right:50%;bottom:40%;}
+      .level2{right:55%;bottom:65%;}
     }
   }
 

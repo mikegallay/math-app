@@ -527,7 +527,7 @@ export default class GamePlayMath extends React.Component {
           </div>
 
           <div className={`flashcard ${(this.state.battle)?'battle':''}`}>
-
+            <div className="flashcard-back"></div>
             <Equation
               operator={this.state.operator}
               numOne={numOne}

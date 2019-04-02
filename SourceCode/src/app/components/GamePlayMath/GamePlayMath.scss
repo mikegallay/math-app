@@ -19,7 +19,7 @@
   .gameArt{
     position: absolute;
     overflow: hidden;
-    height: 90%;
+    height: 80%;
     width: 100%;
     .wizard{
       width:60%;
@@ -112,19 +112,33 @@
     }
   }
   .flashcard {
-    padding:1rem;
-    background: white;
-    border-radius: 1em;
-    border:1px solid black;
+    width: 90%;
+    // height: 525px;
+    padding: 5%;
+    background: transparent url('../../images/scroll-back.png') no-repeat top center;
+    background-size: cover;
+    // padding:1rem;
+    // background: white;
+    // border-radius: 1em;
+    // border:1px solid black;
     position:relative;
-    width:263px;
-    height:465px;
-    @media only screen and (min-width: 375px) {
-        width: 319px;
-        height: 525px;
+    // width:263px;
+    // height:465px;
+    height: 515px;
+    @media only screen and (min-width: 360px) {
+        // width: 368px;
+        height:565px;
     }
-    @media only screen and (min-width: 425px) {
-        width: 368px;
+    @media only screen and (min-width: 375px) {
+        // width: 319px;
+        width: 84%;
+        padding: 7%;
+        // height: 525px;
+        height:577px;
+    }
+    @media only screen and (min-width: 411px) {
+        // width: 368px;
+        height:610px;
     }
     opacity:0;
     transition:opacity .25s,top .25s;
@@ -139,3 +153,41 @@
     }
   }
 }
+
+/*.flashcard.battle{
+  border-right: 1px solid black;
+  // background: url(https://images.freecreatives.com/wp-content/uploads/2016/02/Old-Parchment-Textures.jpg);
+  border-radius: 40px 0 0 20px;
+  z-index: 2;
+}
+
+.flashcard.battle:before, .flashcard.battle:after {
+  content: '';
+width: 123%;
+position: absolute;
+height: 120px;
+background: brown url(http://localhost:3000/public/images/scroll-top.png);
+background-size: cover;
+top: -19px;
+left: 0px;
+z-index: 0;
+border-radius: 40px 5px 0px 0;
+z-index: -1;
+  }
+
+  .flashcard.battle:after {
+    top: auto;
+    bottom: -36px;
+    left: 0px;
+    border-radius: 0 0 0 40px;
+  }
+
+  .flashcard-back {
+    width: 100%;
+height: 110%;
+position: absolute;
+background: chocolate;
+left: 0;
+top: -19px;
+border-radius: 40px 0 0 40px;
+}*/

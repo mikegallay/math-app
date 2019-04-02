@@ -95,7 +95,7 @@ export default class Store extends React.Component {
                       onClick=''
                   >Buy Now</button>
                 </li>
-                <li onClick={() => this.selectStaff('fire')} className={`staff fire available ${(this.state.staff=='fire')?'selected':''}`}>
+                <li onClick={() => this.selectStaff('fire')} className={`staff fire available ${(this.state.staff=='firee')?'selected':''}`}>
                   <div className="staff-art">Fire</div>
                   <div className="staff-name luckiest-guy">Available</div>
                   <p>Adds a small about of heat damage on some attacks.</p>
@@ -105,7 +105,7 @@ export default class Store extends React.Component {
                       onClick=''
                   >Buy Now</button>
                 </li>
-                <li onClick={() => this.selectStaff('fire')} className={`staff default notyet ${(this.state.staff=='fire')?'selected':''}`}>
+                <li onClick={() => this.selectStaff('fire')} className={`staff default notyet ${(this.state.staff=='firee')?'selected':''}`}>
                   <div className="staff-art">Fire</div>
                   <div className="staff-name luckiest-guy">Not Yet</div>
                   <p>Adds a small about of heat damage on some attacks.</p>

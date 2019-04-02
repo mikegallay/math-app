@@ -71,7 +71,7 @@ export default class Store extends React.Component {
           <div className="wrapper">
             <h1>Store</h1>
             <SecondaryNav currpage="store"/>
-            <p className="subhead">It is always a good idea to upgrade your staff. Unlock each staff by completing Level 1 in each kingom and buy them with the gems you earn by training.</p>
+            <p className="subhead">It is always a good idea to upgrade your staff. Unlock the staffs by completing Level 1 in each kingom and buy them with the gems you earn by training.</p>
             <div className="gems luckiest-guy">You have <span className="gem-count">{gems} gems</span></div>
             <div className="staffs">
               <ul>

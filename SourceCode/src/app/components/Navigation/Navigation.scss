@@ -8,6 +8,9 @@
     text-align: left;
     padding: 0 5%;
     display:block;
+    .secondary-nav{
+      margin-bottom: 2em;
+    }
     .legend-of{
       display: flex;
       align-items: flex-start;
@@ -70,6 +73,122 @@
 
 .main-menu{
   display:flex;
+  flex-grow:1;
+  width:100%;
+  height:calc(100vh - 220px);
+  @media only screen and (min-width: 375px) {
+    height:calc(100vh - 200px);
+  }
+  position: relative;
+  flex-wrap: wrap;
+  .final-battle{
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top:-30px;
+    margin-left:-30px;
+    .training,.level1,.level2{
+      width:55px;
+      height:55px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      text-align: center;
+      font-size: 3em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color:black;
+      text-decoration: none;
+      border:1px solid black;
+      &.inactive{
+        background:darkred;pointer-events: none;
+        span{opacity:.5;}
+      }
+      span{top:7px;position:relative;}
+    }
+  }
+  .nav-section{
+    width:50%;
+    height:50%;
+    position:relative;
+    // border: 1px solid black;
+    box-sizing: border-box;
+    // opacity:.5;
+    .banner{
+      background: transparent url('../../images/banner.png') no-repeat top center;
+      background-size:cover;
+      width:110px;
+      height:60px;
+      // background:chocolate;
+      position: absolute;
+      // text-align: center;
+      font-size: 4em;
+      span{
+        position: relative;
+        left:45%;
+      }
+    }
+    .training,.level1,.level2{
+      width:55px;
+      height:55px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      text-align: center;
+      font-size: 3em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color:black;
+      text-decoration: none;
+      border:1px solid black;
+      &.inactive{
+        background:gray;pointer-events: none;
+        span{opacity:.5;}
+      }
+      span{top:7px;position:relative;}
+    }
+    &.add{
+      .banner{top:5%;left:-8%;transform: rotate(-20deg);}
+      .training{left:15%;top:25%;}
+      .level1{left:55%;top:36%;}
+      .level2{left:55%;top:60%;}
+    }
+    &.sub{
+      .banner{top:5%;right:-8%;transform: rotate(20deg);}
+      .training{right:15%;top:25%;}
+      .level1{right:55%;top:36%;}
+      .level2{right:55%;top:60%;}
+    }
+    &.mul{
+      .banner{
+        bottom:5%;left:-10%;transform: rotate(210deg);font-size:2.5em;
+        span{top:8px;}
+      }
+      .training{left:15%;bottom:25%;}
+      .level1{left:55%;bottom:36%;}
+      .level2{left:55%;bottom:60%;}
+    }
+    &.div{
+      .banner{
+        bottom:5%;right:-10%;transform: rotate(-210deg);font-size:3.3em;
+        span{top:2px;}
+      }
+      .training{right:15%;bottom:25%;}
+      .level1{right:55%;bottom:36%;}
+      .level2{right:55%;bottom:60%;}
+    }
+  }
+
+
+}
+
+/*.main-menu{
+  display:flex;
+  display:none;
   flex-direction: column;
   width:100%;
   align-items: center;
@@ -108,4 +227,4 @@
     }
   }
 
-}
+}*/

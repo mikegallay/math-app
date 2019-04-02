@@ -96,7 +96,38 @@ export default class Navigation extends React.Component {
             <a className="how-to-play" onClick={()=>{this.openModal()}}> How to Play </a>
             <Link to='/statistics' className='stats-btn'> View Statistics </Link>
             </div>*/}
+
             <div className="main-menu">
+              <div className="nav-section add">
+                <div className="luckiest-guy banner"><span>+</span></div>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', level:0} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.addUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className={`luckiest-guy level2 ${(this.state.addUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', level:2} }}><span>L2</span></Link>
+              </div>
+              <div className="nav-section sub">
+                <div className="luckiest-guy banner"><span>-</span></div>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'sub', gamemode:'health', level:0} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.subUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className={`luckiest-guy level2 ${(this.state.subUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown', level:2} }}><span>L2</span></Link>
+              </div>
+              <div className="nav-section mul">
+                <div className="luckiest-guy banner"><span>x</span></div>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', level:0} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.mulUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className={`luckiest-guy level2 ${(this.state.mulUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', level:2} }}><span>L2</span></Link>
+              </div>
+              <div className="nav-section div">
+                <div className="luckiest-guy banner"><span>÷</span></div>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'div', gamemode:'health', level:0} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.divUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className={`luckiest-guy level2 ${(this.state.divUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:2} }}><span>L2</span></Link>
+              </div>
+              <div className="final-battle">
+                <Link className={`luckiest-guy level2 ${(this.state.ranUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown'} }}><span>FB</span></Link>
+              </div>
+            </div>
+
+            {/*<<div className="main-menu">
               <div className="menu-btns">
                 <Link className="health-btn" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', level:0} }}>
                   <img src={heart} width="25" height="25"/>
@@ -158,11 +189,11 @@ export default class Navigation extends React.Component {
                   <img src={stopwatch} width="25" height="25"/>
                 </Link>
               </div>
-            </div>
+            </div>*/}
 
             <p className="credit">© 2018 Mike Gallay</p>
 
-          
+
 
             <Modal
               title="How To Play"

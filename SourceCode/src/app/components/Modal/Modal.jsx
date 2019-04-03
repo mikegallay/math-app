@@ -49,6 +49,7 @@ export default class Modal extends React.Component {
   render() {
     let bonus = this.props.bonus;
     let level = this.props.level;
+    let accuracy = this.props.accuracy;
 
     console.log('modal render',this.props);
     let gameplayBtns = <div className="modal-btns"><button onClick={()=>this.closeModal()} className="modal-btn again-btn">Try Again</button> <Link className="modal-btn back-btn" to="/navigation">Main Menu</Link></div>
@@ -66,7 +67,7 @@ export default class Modal extends React.Component {
     let bonusRender = <div className="blankBonus"></div>
     if (bonus > 0 == true) {
 
-      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} bonusPoints={bonus} operator={this.props.operator}/>
+      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} bonus={bonus} operator={this.props.operator} accuracy={accuracy}/>
     }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>

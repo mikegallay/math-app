@@ -17,7 +17,7 @@ import Modal from '../Modal/Modal';
 
 const localUser = "localUser";
 
-const unlockScore = 100;//2500
+const unlockScore = 500;//2500
 const unlockDecimal = 100;
 const releaseScore = 100;//2500
 const requiredAccuracy = 25;//80
@@ -57,6 +57,7 @@ export default class GamePlayMath extends React.Component {
       streak: 0,
       correct:null,
       bonus:0,
+      accuracy:0,
       answered: false,
       timeExpired: false,
       multiplier: 1,
@@ -149,7 +150,7 @@ export default class GamePlayMath extends React.Component {
       multiplier = Math.floor(streak/5)+1
       let levelFX = false
       if (streak%5==0) levelFX=true
-      let score = this.state.score + (100 * multiplier)
+      let score = this.state.score + (1500 * multiplier)
 
         this.setState({
           numRight,score,streak,answered,multiplier,correct,modalVisible:false,
@@ -174,34 +175,56 @@ export default class GamePlayMath extends React.Component {
 
     this.state.timerid = setTimeout(() => {
       let bonus, accuracy, modalTitle, modalBody;
+      let locUser = JSON.parse(localStorage.getItem(localUser))
+      var operator = (this.state.randomize) ? 'ran' : this.state.operator
+      // let minTrainingBonus = 500;
+
       if (this.state.health <= 0 && this.state.gamemode == 'health'){
         console.log("Game Over");
-        bonus = 0
+        bonus = this.state.score;
         accuracy = Math.round(this.state.numRight / (this.state.numRight + fullHealth) * 100)
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
-        modalTitle = 'Keep practicing!'
-        modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Improve your score and accuracy to unlock the next level.'
+
+        //while in training, you didn't unlock a creature
+        if (bonus <= unlockScore){
+          modalTitle = 'Keep practicing!'
+          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Keep learning to improve your score and accuracy.'
+        }
 
         //did they do well enough to unlock level1
         if (accuracy >= requiredAccuracy && this.state.score >= unlockScore){
 
-          modalTitle = 'Well done!'
-          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>You’ve proven that you are ready for the next level.'
+          //check to see if level1 is unlocked yet and update message
+          if (!locUser.gamemath[operator].unlocked1){
+            modalTitle = "You've unlocked Level 1!"
+            modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>You’ve proven that you are ready for the next level.'
+
+            //set unlocked1 one time
+            locUser.gamemath[operator].unlocked1 = true;
+          } else {
+            //already unlocked level1 - check to see if all creatures are unlocked
+            let creatures = locUser.creatures[operator];
+            if (creatures.L1_1_1 && creatures.L1_1_2 && creatures.L1_1_3){
+              modalTitle = 'Well done!'
+              modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>'
+            }else{
+              modalTitle = 'You found a creature!'
+              modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to see who you have rescued.'
+            }
+          }
 
           // if (this.state.score > this.state.unlockScore){
-            bonus = Math.floor(this.state.score/unlockDecimal)
+            // bonus = Math.floor(this.state.score/unlockDecimal)
+            // bonus = this.state.score;
           // }
 
-          var locUser = JSON.parse(localStorage.getItem(localUser))
-          // console.log('loc id', locUser.userid);
-          var operator = (this.state.randomize) ? 'ran' : this.state.operator
-          locUser.gamemath[operator].unlocked1 = true;
+          // var operator = (this.state.randomize) ? 'ran' : this.state.operator
+
 
           //set new high score
           if (this.state.score > locUser.gamemath[operator].training){
             locUser.gamemath[operator].training = this.state.score
           }
-          // console.log('loc user', locUser);
 
           //save to localstorage
           localStorage.setItem(localUser, JSON.stringify(locUser));
@@ -219,9 +242,10 @@ export default class GamePlayMath extends React.Component {
           rightFX:false,
           wrongFX:false,
           bonus,
+          accuracy,
           levelFX:false
         })
-      }else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'countdown'){
+      } else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'countdown'){
         //you defeated the wizard
         console.log('you defeated the wizard');
         accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.numWrong) * 100)
@@ -232,12 +256,11 @@ export default class GamePlayMath extends React.Component {
           modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to open it.'
 
           // multiply by 10000 to designate it as a creature in the Bonus component
-          bonus = Math.floor(this.state.score/unlockDecimal) * 10000
+          // bonus = Math.floor(this.state.score/unlockDecimal) * 10000
+          // bonus = this.state.score;
 
           //sync data
-          var locUser = JSON.parse(localStorage.getItem(localUser))
-          // console.log('loc id', locUser.userid);
-          var operator = (this.state.randomize) ? 'ran' : this.state.operator
+          // var operator = (this.state.randomize) ? 'ran' : this.state.operator
 
           // locUser.gamemath[operator].unlocked = true;
 
@@ -264,6 +287,7 @@ export default class GamePlayMath extends React.Component {
             modalTitle,
             modalBody,
             bonus,
+            accuracy,
             rightFX:false,
             wrongFX:false,
             levelFX:false
@@ -302,7 +326,8 @@ export default class GamePlayMath extends React.Component {
       modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Click the box to open it.'
 
       // multiply by 10000 to designate it as a creature in the Bonus component
-      bonus = Math.floor(this.state.score/unlockDecimal) * 10000
+      // bonus = Math.floor(this.state.score/unlockDecimal) * 10000
+      bonus = this.state.score;
 
       //sync data
       var locUser = JSON.parse(localStorage.getItem(localUser))
@@ -545,6 +570,7 @@ export default class GamePlayMath extends React.Component {
             gameplayBtns={true}
             level={this.state.level}
             bonus={this.state.bonus}
+            accuracy={this.state.accuracy}
             operator={this.state.operator}
             visible={this.state.modalVisible}
             closeModal={()=>{this.closeModal()}}

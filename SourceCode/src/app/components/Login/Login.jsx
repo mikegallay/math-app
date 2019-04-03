@@ -181,8 +181,10 @@ export default class Login extends React.Component {
           gems: 0,
           staffs: {
             current: 'default',
-            default: true,
-            fire: true
+            forest: {ready:false,purchased:false},
+            rock: {ready:false,purchased:false},
+            water: {ready:false,purchased:false},
+            fire: {ready:false,purchased:false}
           },
           gamemath:{
             add:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },

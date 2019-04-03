@@ -4,14 +4,22 @@
 .navigation.main{
   background: transparent url('../../images/map.jpg') no-repeat top center;
   background-size:cover;
+  min-width:320px;
+  min-height:568px;
+  @media only screen and (min-width: 375px) {
+    // height:calc(100vh - 200px);
+  }
   .wrapper {
     text-align: left;
-    padding: 0 5%;
+    padding: 0%;
     display:block;
+
     .secondary-nav{
+      padding:0 5%;
       margin-bottom: 2em;
     }
     .legend-of{
+      padding:0 5%;
       display: flex;
       align-items: flex-start;
       flex-direction: column;

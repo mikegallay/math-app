@@ -63,7 +63,8 @@
           position: absolute;
           top: 140px;
           left: 50%;
-          margin-left: -34%;
+          margin-left: -51px;
+          width: 102px;
         }
         p{
           line-height: 1em;
@@ -74,15 +75,32 @@
             background-size:cover;
           }
         }
+        &.forest{
+          .staff-art{
+            background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
+            background-size:cover;
+          }
+        }
+        &.rock{
+          .staff-art{
+            background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
+            background-size:cover;
+          }
+        }
+        &.water{
+          .staff-art{
+            background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
+            background-size:cover;
+          }
+        }
         &.fire{
           .staff-art{
             background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
             background-size:cover;
           }
         }
-        &.purchased{
-          .staff-art{opacity:1;}
-        }
+
+
         &.selected{
           .staff-art{opacity:1;}
           color:green;
@@ -101,7 +119,7 @@
             background: transparent url('../../images/staff-unknown.jpg') no-repeat top center;
             background-size:cover;
           }
-          .staff-name,p{
+          .staff-name{
             text-indent:-9999px;
             &:after{
               content: '???';
@@ -113,6 +131,14 @@
               text-align: center;
               color:gray;
             }
+          }p{
+            visibility: hidden;
+          }
+        }
+        &.purchased{
+          .staff-art{opacity:1;}
+          .buy-btn{
+            display:none;
           }
         }
       }

@@ -24,14 +24,21 @@ export default class Bonus extends React.Component {
   constructor(props) {
     super(props);
     // console.log('bonus',props);
-    let visible = props.openBonus ? props.openBonus : 'init false'
+    let visible = props.openBonus ? props.openBonus : 'init false';
+    let operator = this.props.operator;
+
+    let kingdom = 'forest';
+    if (operator == 'sub') kingdom = 'rock'
+    if (operator == 'mul') kingdom = 'water'
+    if (operator == 'div') kingdom = 'fire'
 
     this.state = {
       visible,
       creatureSet:false,
       bonusImg:'default',
       creature:'default',
-      bonusTitle:'default'
+      bonusTitle:'default',
+      kingdom
     };
   }
 
@@ -139,13 +146,17 @@ export default class Bonus extends React.Component {
 
       let allLevelCreaturesUnlocked = (creatures.L2_1_1 && creatures.L2_1_2 && creatures.L2_1_3 && creatures.L2_2_1 && creatures.L2_2_2 && creatures.L2_2_3);
 
-      //all level 1 creatures released, unlock level2
-      if (allLevelCreaturesUnlocked && !locUser.gamemath[operator].unlocked2) {
+      //all level 1 creatures released, unlock level2 and the staff
+      if (allLevelCreaturesUnlocked && locUser.gamemath[operator].unlocked2) {
         locUser.gamemath[operator].unlocked2 = true;
+        locUser.staffs[this.state.kingdom].ready = true;
         localStorage.setItem(localUser, JSON.stringify(locUser));
 
         let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator + "/unlocked2");
         userRef.set(locUser.gamemath[operator].unlocked2);
+
+        let staffRef = ref.ref('/users/' + locUser.userid + '/staffs/' + this.state.kingdom + "/ready");
+        staffRef.set(locUser.staffs[this.state.kingdom].ready);
       }
 
     } else if (this.props.level == 2 && bonus == 2){

@@ -111,9 +111,10 @@ export default class ChooseUsername extends React.Component {
       <div className="main username">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-              <h1 className="headline">Welcome</h1>
-              <p className="sub-copy">What would like to be called?</p>
-              <p className="instructions">Only letters and numbers are allowed.</p>
+              <h1 className="headline">Welcome Traveler!</h1>
+              <p className="sub-copy">What shall we call you?</p>
+              <p className="instructions">Letters and numbers only.</p>
+              <div className="input-field">
               <input
                 type="text"
                 className="mdl-textfield__input input"
@@ -121,6 +122,7 @@ export default class ChooseUsername extends React.Component {
                 ref={(ref) => (this.usernameInput = ref)}
                 onKeyUp={this.handleKeyUp}
               />
+              </div>
 
               <p className={`help ${(!this.state.usernameAvailable)?'is-success':'is-danger'}`} >
                 {usernameText} is {(!this.state.usernameAvailable)?'available':'not available'}

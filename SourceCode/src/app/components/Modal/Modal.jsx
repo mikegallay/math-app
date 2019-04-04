@@ -15,6 +15,9 @@ import chestOpen from '../../images/chest-open.png';
 import chestClose from '../../images/chest-close.png';
 import Bonus from '../Bonus/Bonus';
 
+// const minTrainingBonus = 500
+// const minLevelBonus = 60
+
 export default class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -47,27 +50,31 @@ export default class Modal extends React.Component {
   }
 
   render() {
-    let bonus = this.props.bonus;
+    // let bonus = this.props.bonus;
+    let score = this.props.score;
     let level = this.props.level;
     let accuracy = this.props.accuracy;
+    let bonus = this.props.bonus;
 
-    console.log('modal render',this.props);
+    // console.log('modal render',this.props);
     let gameplayBtns = <div className="modal-btns"><button onClick={()=>this.closeModal()} className="modal-btn again-btn">Try Again</button> <Link className="modal-btn back-btn" to="/navigation">Main Menu</Link></div>
     if (!this.props.gameplayBtns) gameplayBtns = ''
 
     let headerImg = <div className="header-img-wrapper"><img src={imageEmojiSunglasses} width="125" height="125"/></div>
 
     //set new image when bonus is > 0
-    if (bonus > 0) headerImg = <div className="header-img-wrapper shake"><img src={chestClose} onClick={()=>{this.openBonus()}} width="125" height="125"/></div>
+    let earnedBonus = (bonus>0);//((level == 0 && score > minTrainingBonus) || (level != 0 && accuracy > minLevelBonus))
+
+    if (earnedBonus) headerImg = <div className="header-img-wrapper shake"><img src={chestClose} onClick={()=>{this.openBonus()}} width="125" height="125"/></div>
 
     if (!this.props.gameplayBtns) headerImg = ''
 
-    if (bonus > 0 && this.state.openBonus == true) headerImg = <div className="header-img-wrapper"><img src={chestOpen} width="125" height="125"/></div>
+    if (earnedBonus && this.state.openBonus == true) headerImg = <div className="header-img-wrapper"><img src={chestOpen} width="125" height="125"/></div>
 
     let bonusRender = <div className="blankBonus"></div>
-    if (bonus > 0 == true) {
-
-      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} bonus={bonus} operator={this.props.operator} accuracy={accuracy}/>
+    // console.log('level1',score);
+    if (earnedBonus) {
+      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} score={score} operator={this.props.operator} bonus={bonus} accuracy={accuracy}/>
     }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>

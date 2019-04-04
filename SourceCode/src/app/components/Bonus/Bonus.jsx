@@ -80,7 +80,7 @@ export default class Bonus extends React.Component {
 
   addGems(score,locUser){
     //add the gems
-    let currGems = locUser.gems + (score/100)
+    let currGems = locUser.gems + Math.floor(score/100);
     locUser.gems = currGems
     localStorage.setItem(localUser, JSON.stringify(locUser));
 

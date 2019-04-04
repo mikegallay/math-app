@@ -46,10 +46,12 @@ export default class ChooseUsername extends React.Component {
 
     handleKeyUp(e) {
       // console.log('key up');
-      // console.log(e.target.value);
-      let username = e.target.value
+      let regex = /[^a-zA-Z0-9]+/gi;
+      let target = e.target;
+      target.value = target.value.replace(regex,"")
+
       // this.setState({username})
-      this.checkUsername(username)
+      this.checkUsername(target.value)
     }
 
     updateUsername() {
@@ -111,6 +113,7 @@ export default class ChooseUsername extends React.Component {
           <div className="wrapper">
               <h1 className="headline">Welcome</h1>
               <p className="sub-copy">What would like to be called?</p>
+              <p className="instructions">Only letters and numbers are allowed.</p>
               <input
                 type="text"
                 className="mdl-textfield__input input"

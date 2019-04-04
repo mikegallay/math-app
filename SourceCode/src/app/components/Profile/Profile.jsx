@@ -183,7 +183,8 @@ export default class Profile extends React.Component {
             </div>
 
             <div className="staff">
-              You currently have the {staff} staff equipped.
+              <p>You currently have the {staff} staff equipped.</p>
+              <Link to='/store'>Equip a different one?</Link>
             </div>
 
             <div className="jumpSettings">

@@ -1,0 +1,15 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.help.main {
+  background: transparent url('../../images/bg-creatures.jpg') no-repeat top center;
+  background-size:cover;
+  .main-fade{
+    height:100%;
+  }
+  .wrapper{
+    .help-btn{
+      margin:0 .5em 1em;
+    }
+  }
+}

@@ -21,7 +21,7 @@ export default class SecondaryNav extends React.Component {
         <Link to='/profile' className={`snav ${(this.props.currpage=="profile")?"active":""}`}><i className="material-icons">person</i></Link>
         <Link to='/creatures' className={`snav ${(this.props.currpage=="creatures")?"active":""}`}><i className="material-icons">child_care</i></Link>
         <Link to='/store' className={`snav ${(this.props.currpage=="store")?"active":""}`}><i className="material-icons">flare</i></Link>
-        <Link to='/login' className={`snav ${(this.props.currpage=="help")?"active":""}`}><i className="material-icons">help</i></Link>
+        <Link to='/help' className={`snav ${(this.props.currpage=="help")?"active":""}`}><i className="material-icons">help</i></Link>
       </div>
     );
   }

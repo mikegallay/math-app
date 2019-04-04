@@ -16,6 +16,7 @@ import ChooseUsername from '../ChooseUsername/ChooseUsername';
 import GamePlayMath from '../GamePlayMath/GamePlayMath';
 import Profile from '../Profile/Profile';
 import Store from '../Store/Store';
+import Help from '../Help/Help';
 import Creatures from '../Creatures/Creatures';
 
 import appData from '../../data/app.json';
@@ -43,6 +44,7 @@ export default class App extends React.Component {
           <Route exact path="/math/" render={props => <GamePlayMath {...props} />} />
           <Route exact path="/profile/" render={props => <Profile {...props} />} />
           <Route exact path="/store/" render={props => <Store {...props} />} />
+          <Route exact path="/help/" render={props => <Help {...props} />} />
           <Route exact path="/creatures/" render={props => <Creatures {...props} />} />
           {/*<Redirect from="/" to="/login"/>*/}
         </div>

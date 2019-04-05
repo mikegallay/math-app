@@ -20,7 +20,7 @@ const appTokenKey = "appToken";
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('login',props);
     let fname = '';
     let userimg = '';
     let greeting = 'Please Log In';
@@ -55,8 +55,6 @@ export default class Login extends React.Component {
     }
 
     handleKeyUp(e) {
-      // console.log('key up');
-      // console.log(e.target.value);
       let username = e.target.value
       this.setState({username})
     }
@@ -227,6 +225,7 @@ export default class Login extends React.Component {
 
   nextStep(username){
     // this.setState({onLogin:true});
+    this.props.hasLoggedIn();
     console.log('new username',username);
     if (username != '') {
       this.props.history.push("/navigation");

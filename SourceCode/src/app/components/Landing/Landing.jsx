@@ -12,16 +12,33 @@ import './Landing.scss';
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
+    console.log('landing',props);
     let hidden = true;
-    this.state = {hidden};
+    let cookies = false;
+    this.state = {hidden,cookies};
   }
 
   componentWillMount(){
     //hide the layout until the css is loaded
+    let cookies = (this.checkCookies() == null)?false:true;
+
     let hider = setTimeout(() => {
       let hidden = false
-      this.setState({hidden});
+      this.setState({hidden,cookies});
     }, 1000)
+  }
+
+  checkCookies(){
+    var cookiepolicy = JSON.parse(localStorage.getItem("cookiepolicy"));
+    return cookiepolicy;
+    // console.log('cookiepolicy',cookiepolicy);
+  }
+
+  acceptCookies(){
+    var data = {accept:true}
+    localStorage.setItem("cookiepolicy", JSON.stringify(data));
+    this.setState({cookies:true});
+    this.props.ateCookies();
   }
 
   render() {
@@ -39,6 +56,14 @@ export default class Landing extends React.Component {
                 <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> CONTINUE </Link>
               </div>
               <p className="credit">© 2018 Mike Gallay</p>
+          </div>
+          <div className={`cookie-warning ${(this.state.hidden && !this.state.cookies)?'start':''} ${(this.state.cookies)?'remove':''}`}>
+            <div className="cookie-content">
+              <p>
+                Cookies are delicious! Read our <a href="/cookies" target="blank">cookie policy</a>.
+              </p>
+              <button className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent' onClick={() => this.acceptCookies()}>I AGREE</button>
+            </div>
           </div>
         </div>
       </div>

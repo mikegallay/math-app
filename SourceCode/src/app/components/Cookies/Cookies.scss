@@ -1,0 +1,17 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.cookies.main {
+  background: white;
+  .main-fade{
+    height:100%;
+  }
+  .wrapper{
+    color:black;
+    padding:0 5%;
+
+    h1{
+      font-size:3em;
+    }
+  }
+}

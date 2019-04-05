@@ -210,6 +210,7 @@ export default class Login extends React.Component {
         // existingData.fname = 'existing user2';
         username = existingData.username;
         console.log('set username',username);
+
         localStorage.setItem(localUser, JSON.stringify(existingData));
         that.nextStep(username)
         // userRef.set(existingData)
@@ -225,8 +226,10 @@ export default class Login extends React.Component {
 
   nextStep(username){
     // this.setState({onLogin:true});
-    this.props.hasLoggedIn();
-    console.log('new username',username);
+    console.log('props.log',this.props.loggedIn);
+    if (!this.props.loggedIn) {
+      this.props.hasLoggedIn();
+    }
     if (username != '') {
       this.props.history.push("/navigation");
     }else{

@@ -51,7 +51,7 @@ export default class App extends React.Component {
     const NeedsCookies = ({ component: Component, rest }) => (
       <Route {...rest} render={props => (
         this.state.hasCookies === true
-          ? <Component hasLoggedIn={() => this.hasLoggedIn()} {...props} />
+          ? <Component loggedIn={this.state.hasLogin} hasLoggedIn={() => this.hasLoggedIn()} {...props} />
           : <Redirect to='/' />
       )} />
     )

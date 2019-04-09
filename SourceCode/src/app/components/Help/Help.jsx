@@ -10,6 +10,39 @@ import { Link } from 'react-router-dom';
 import './Help.scss';
 import SecondaryNav from '../SecondaryNav/SecondaryNav';
 
+const paragraph = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet natus sint provident vel ab reprehenderit cum soluta, suscipit facere nisi sed earum repellendus fuga debitis, nam molestiae minima voluptates possimus.<br><br>Bully!'
+
+const data = [
+  {
+    title: 'Save to Homescreen',
+    paragraph
+  },
+  {
+    title: 'Delete Account',
+    paragraph: paragraph + paragraph + paragraph
+  },
+  {
+    title: 'Game Play/Training',
+    paragraph
+  },
+  {
+    title: 'Game Play/Battle',
+    paragraph
+  },
+  {
+    title: 'Staffs',
+    paragraph
+  },
+  {
+    title: 'Gems',
+    paragraph
+  },
+  {
+    title: 'Creatures',
+    paragraph
+  }
+]
+
 export default class Help extends React.Component {
   constructor(props) {
     super(props);
@@ -45,9 +78,62 @@ export default class Help extends React.Component {
 
             {navRender}
 
+            <ul className='accordion-list'>
+              {data.map((data, key) => {
+                return (
+                  <li className='accordion-list__item' key={key}>
+                    <AccordionItem
+                    title={data.title}
+                    paragraph={data.paragraph}/>
+                  </li>
+                )
+              })}
+            </ul>
+
           </div>
         </div>
       </div>
     );
+  }
+}
+
+class AccordionItem extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      opened: false
+    }
+  }
+
+  render () {
+    const {
+      props: {
+        paragraph,
+        title
+      },
+      state: {
+        opened
+      }
+    } = this
+
+    return (
+      <div className={`accordion-item ${this.state.opened?'accordion-item--opened':''}`}
+          onClick={() => { this.setState({ opened: !opened }) }}>
+        <div className={'accordion-item__line'}>
+          <h3 className={'accordion-item__title'}>
+            {title}
+          </h3>
+          <span className={'accordion-item__icon'}/>
+        </div>
+          <div className='accordion-item__inner'>
+            <div className='accordion-item__content'>
+              <p className='accordion-item__paragraph'
+                dangerouslySetInnerHTML={{__html:paragraph}}>
+              </p>
+            </div>
+          </div>
+      </div>
+    )
   }
 }

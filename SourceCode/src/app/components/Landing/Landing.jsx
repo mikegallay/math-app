@@ -59,10 +59,11 @@ export default class Landing extends React.Component {
           </div>
           <div className={`cookie-warning ${(this.state.hidden && !this.state.cookies)?'start':''} ${(this.state.cookies)?'remove':''}`}>
             <div className="cookie-content">
+              <h5>Quest Caster requires cookies</h5>
               <p>
-                Cookies are delicious! Read our <a href="/cookies" target="blank">cookie policy</a>.
+                This game uses your browser's local storage and other cookies to make game play possible and enable basic analytics. We will never sell your data, but to see how we use it, please review our <a href="/cookies" target="blank">cookie&nbsp;policy</a>. Unfortunately, if you are not willing or able to accept, you will not be able to play the game.
               </p>
-              <button className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent' onClick={() => this.acceptCookies()}>I AGREE</button>
+              <button className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent' onClick={() => this.acceptCookies()}>I ACCEPT</button>
             </div>
           </div>
         </div>

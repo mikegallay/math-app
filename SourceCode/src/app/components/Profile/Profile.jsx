@@ -180,6 +180,7 @@ export default class Profile extends React.Component {
                       onClick={this.handleLogout}
                   >Sign Out</button>
               </div>
+              <div>Your unique user id is {locUser.userid}</div>
             </div>
 
             <div className="staff">

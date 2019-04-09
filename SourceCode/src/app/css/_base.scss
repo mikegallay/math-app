@@ -88,12 +88,15 @@ h1,h2,h3,h4,h5,.luckiest-guy{
   transition: bottom 1s .5s;
   &.start{
     bottom:-100%;
+    transition: bottom 1s 0s;
   }
   &.remove{
     bottom:-100%;
   }
   .cookie-content{
     color:white;
-    padding:1em;
+    padding: 0 5% 1.5em;
+    h5{ margin-bottom: .25em;}
+    p,a{font-weight: bold;}
   }
 }

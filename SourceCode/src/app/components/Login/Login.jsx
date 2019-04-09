@@ -174,8 +174,8 @@ export default class Login extends React.Component {
         const data = {
           userid: uid,
           username:'',
-          fname: displayName,
-          userimg: photoURL,
+          // fname: displayName,
+          // userimg: photoURL,
           gems: 0,
           staffs: {
             current: 'default',

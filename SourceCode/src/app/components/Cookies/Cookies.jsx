@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import { Link } from 'react-router-dom';
-
+import {hideTimer} from "../../config/constants";
 import './Cookies.scss';
 
 export default class Cookies extends React.Component {
@@ -21,7 +21,7 @@ export default class Cookies extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
   render() {

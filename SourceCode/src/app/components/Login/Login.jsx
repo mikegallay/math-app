@@ -11,7 +11,7 @@ import GoogleLogin from 'react-google-login';
 import './Login.scss';
 
 import {loginWithGoogle} from "../../services/auth";
-import {firebaseAuth,ref} from "../../config/constants";
+import {firebaseAuth,ref,hideTimer} from "../../config/constants";
 
 const firebaseAuthKey = "firebaseAuthInProgress";
 const localUser = "localUser";
@@ -123,7 +123,7 @@ export default class Login extends React.Component {
       let hider = setTimeout(() => {
         let hidden = false
         this.setState({hidden});
-      }, 1000)
+      }, hideTimer)
   }
 
   /*responseGoogle(response){

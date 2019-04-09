@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import {logout} from "../../services/auth";
-import {firebaseAuth,ref} from "../../config/constants";
+import {firebaseAuth,ref,hideTimer} from "../../config/constants";
 
 import './Navigation.scss';
 import stopwatch from '../../images/stopwatch.png';
@@ -52,7 +52,7 @@ export default class Navigation extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
   /*handleLogout() {

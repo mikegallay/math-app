@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {logout} from "../../services/auth";
-import {ref} from "../../config/constants";
+import {ref,hideTimer} from "../../config/constants";
 
 import './Profile.scss';
 import SecondaryNav from '../SecondaryNav/SecondaryNav';
@@ -36,7 +36,7 @@ export default class Profile extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
   handleLogout() {

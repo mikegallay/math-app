@@ -15,6 +15,8 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const ref = firebase.database();
 export const firebaseAuth = firebase.auth;
 
+export const hideTimer = 750;
+
 export const spriteQuotes = [
   "You can do it!",
   "Keep going! We need your help!",

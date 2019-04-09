@@ -11,7 +11,7 @@ import './Creatures.scss';
 import SecondaryNav from '../SecondaryNav/SecondaryNav';
 // const creatures = require.context('../../images/creatures', true);
 import sprite from '../../images/creatures/sprite.gif';
-import {creatureList,creatureIds,spriteQuotes} from "../../config/constants";
+import {creatureList,creatureIds,spriteQuotes,hideTimer} from "../../config/constants";
 
 const localUser = "localUser";
 
@@ -33,7 +33,7 @@ export default class Creatures extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
   /*renderStyles(operator,id){

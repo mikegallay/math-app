@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
-import {ref} from "../../config/constants";
+import {ref,hideTimer} from "../../config/constants";
 
 import './ChooseUsername.scss';
 
@@ -41,7 +41,7 @@ export default class ChooseUsername extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
     handleKeyUp(e) {

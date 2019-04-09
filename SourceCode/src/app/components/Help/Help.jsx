@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import {hideTimer} from "../../config/constants";
 import './Help.scss';
 import SecondaryNav from '../SecondaryNav/SecondaryNav';
 
@@ -56,7 +56,7 @@ export default class Help extends React.Component {
     let hider = setTimeout(() => {
       let hidden = false
       this.setState({hidden});
-    }, 1000)
+    }, hideTimer)
   }
 
   render() {
@@ -77,7 +77,7 @@ export default class Help extends React.Component {
             <h1>Help</h1>
 
             {navRender}
-
+            <div className="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis hendrerit justo. Curabitur non luctus sem, in sagittis est. Nulla facilisi. Curabitur lectus leo, lobortis sed tincidunt vitae, fermentum sed mi.</div>
             <ul className='accordion-list'>
               {data.map((data, key) => {
                 return (

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactHowler from 'react-howler'
-import {firebaseAuth,ref} from "../../config/constants";
+import {firebaseAuth,ref,hideTimer} from "../../config/constants";
 
 import './GamePlayMath.scss';
 import Equation from '../Equation/Equation';
@@ -97,7 +97,7 @@ export default class GamePlayMath extends React.Component {
      let hider = setTimeout(() => {
         this.setState({hidden});
         (this.state.gamemode == 'countdown')?this.introCountdown():this.readyToBattle(1000);
-      }, 1000)
+      }, hideTimer)
   }
 
   introCountdown(){

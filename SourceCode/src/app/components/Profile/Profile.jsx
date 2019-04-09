@@ -136,6 +136,18 @@ export default class Profile extends React.Component {
   all2(){
     this.forest2(); this.rock2(); this.water2(); this.fire2();
   }
+  money(){
+    let lu = this.state.locUser;
+    lu.gems = 5000;
+    localStorage.setItem(localUser, JSON.stringify(lu));
+    ref.ref('/users/' + lu.userid + '/gems').set(lu.gems);
+  }
+  staffs(){
+    let lu = this.state.locUser;
+    lu.staffs.forest.ready = lu.staffs.rock.ready = lu.staffs.water.ready = lu.staffs.fire.ready = true;
+    localStorage.setItem(localUser, JSON.stringify(lu));
+    ref.ref('/users/' + lu.userid + '/staffs').set(lu.staffs);
+  }
 
   render() {
     var locUser = JSON.parse(localStorage.getItem(localUser));
@@ -204,7 +216,9 @@ export default class Profile extends React.Component {
               <button onClick={() => {this.rock2()}}>rock2</button>
               <button onClick={() => {this.water2()}}>water2</button>
               <button onClick={() => {this.fire2()}}>fire2</button>
-              <button onClick={() => {this.all2()}}>all2</button>
+              <button onClick={() => {this.all2()}}>all2</button><br/>
+              <button onClick={() => {this.staffs()}}>staffs</button>
+              <button onClick={() => {this.money()}}>money</button>
             </div>
 
             <div className="stat-list">

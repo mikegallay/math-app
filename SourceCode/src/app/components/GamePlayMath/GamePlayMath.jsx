@@ -35,7 +35,7 @@ export default class GamePlayMath extends React.Component {
     let hidden = true
     let battle = false
     let countdown = 3
-    let hitpoints = 200
+    let hitpoints = 100
     if (gamemode == 'health') {
       nextQuestionDelay = 1000
       countdown = 4

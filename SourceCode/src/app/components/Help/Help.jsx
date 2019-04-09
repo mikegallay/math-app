@@ -10,8 +10,8 @@ import {hideTimer} from "../../config/constants";
 import './Help.scss';
 import SecondaryNav from '../SecondaryNav/SecondaryNav';
 
-const paragraph = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet natus sint provident vel ab reprehenderit cum soluta, suscipit facere nisi sed earum repellendus fuga debitis, nam molestiae minima voluptates possimus.<br><br>Bully!'
-
+const paragraph = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet natus sint provident vel ab reprehenderit cum soluta, suscipit facere nisi sed earum repellendus fuga debitis, nam molestiae minima voluptates possimus.<br><br>Bully!<br>'
+// const locUser = JSON.parse(localStorage.getItem('localUser'));
 const data = [
   {
     title: 'Save to Homescreen',
@@ -19,7 +19,7 @@ const data = [
   },
   {
     title: 'Delete Account',
-    paragraph: paragraph + paragraph + paragraph
+    paragraph: paragraph + paragraph
   },
   {
     title: 'Game Play/Training',
@@ -71,7 +71,7 @@ export default class Help extends React.Component {
     </div>
 
     return (
-      <div className="profile main">
+      <div className="help main">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
             <h1>Help</h1>

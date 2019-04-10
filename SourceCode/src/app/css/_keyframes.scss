@@ -58,6 +58,21 @@
   100%  {transform: rotate(360deg);}
 }
 
+@keyframes scaleitsmall{
+  0%  {transform: scale(.35) rotate(0deg); opacity:1;}
+  100%  {transform: scale(.7) rotate(0deg);opacity:.9;}
+}
+
+@keyframes scaleit{
+  0%  {transform: scale(.75) rotate(0deg); opacity:1;}
+  100%  {transform: scale(1.2) rotate(-5deg);opacity:.8;}
+}
+
+@keyframes scaleitrotated{
+  0%  {transform: scale(.8) rotate(180deg); opacity:1;}
+  100%  {transform: scale(1.2) rotate(185deg);opacity:.9;}
+}
+
 @keyframes smoke-ring{
   0%  {transform: scale(.75); opacity:.05;}
   50%  {transform: scale(1);opacity:.6;}

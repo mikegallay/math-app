@@ -202,6 +202,80 @@
             }
           }
         }
+        &.water{
+          drop-shadow:0px 0px 10px black;
+          &:before{
+            content: '';
+            width:70%;
+            height:70%;
+            top:-35%;
+            left:-35%;
+            position: absolute;
+            border-radius:50%;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,.5) 44%,rgba(18,47,94,0) 62%);
+          }
+          &:after{
+            content:'';
+            width:120%;
+            height:120%;
+            top:-60%;
+            left:-60%;
+            position: absolute;
+            background: transparent url('../../images/splash.png') no-repeat top center;
+            background-size:cover;
+            animation-duration: .2s;
+            animation-name: scaleitsmall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-direction: forwards;
+          }
+          .magic-child{
+            &.magic-mask{
+              -webkit-mask-image: url('../../images/splash.png');
+              -webkit-mask-repeat: no-repeat;
+              -webkit-mask-size: 130px;
+              // -webkit-filter: drop-shadow(0px 0px 0px rgba(0,0,0, .25));
+              // transform: rotate(15deg) scale(1.1);
+              animation-duration: .2s;
+              animation-name: scaleit;
+              animation-timing-function: linear;
+              animation-iteration-count: infinite;
+              animation-direction: forwards;
+
+              &:before{
+                background:#0b5dcc;
+                // background: transparent url('../../images/water.jpg') no-repeat top center;
+                background-size:cover;
+
+              }
+
+              &.flipped-rotateit{
+                -webkit-mask-image: url('../../images/splash.png');
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-size: 130px;
+                // -webkit-filter: drop-shadow(0px 0px 0px rgba(0,0,0, .25));
+                animation-delay: .1s;
+                animation-duration: .2s;
+                animation-name: scaleitrotated;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: forwards;
+
+                &:before{
+                  background: #7fb0d6;
+                  // background: transparent url('../../images/water.jpg') no-repeat top center;
+                  background-size:cover;
+
+                }
+              }
+              &.flipped{
+                &:before{
+                  animation-delay: 3s;
+                }
+              }
+            }
+          }
+        }
       }
     }
     .yourAnswer{
@@ -218,6 +292,11 @@
       &.fire{
         color:#f47018;
         text-shadow: 0px 0px 8px rgba(255,255,255,.75);
+      }
+      &.water{
+        opacity:.9;
+        color:#0451d0;
+        text-shadow: 0px 0px 4px rgba(255,255,255,.6);
       }
     }
     &.correct .yourAnswer{color:green!important;}

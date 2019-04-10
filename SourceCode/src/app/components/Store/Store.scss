@@ -2,7 +2,7 @@
 @import '../../css/mixins';
 
 .store.main {
-  background: transparent url('../../images/bg-creatures.jpg') no-repeat top center;
+  background: transparent url('../../images/bg-clouds.jpg') no-repeat top center;
   background-size:cover;
   .main-fade{
     height:100%;
@@ -89,7 +89,7 @@
         }
         &.water{
           .staff-art{
-            background: transparent url('../../images/staff-fire.jpg') no-repeat top center;
+            background: transparent url('../../images/staff-water.jpg') no-repeat top center;
             background-size:cover;
           }
         }

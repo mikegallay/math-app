@@ -58,19 +58,32 @@
   100%  {transform: rotate(360deg);}
 }
 
-@keyframes scaleitsmall{
+@keyframes water-scaleitsmall{
   0%  {transform: scale(.4) rotate(0deg); opacity:1;}
   100%  {transform: scale(.7) rotate(0deg);opacity:1;}
 }
 
-@keyframes scaleit{
+@keyframes water-scaleit{
   0%  {transform: scale(.75) rotate(0deg); opacity:1;}
   100%  {transform: scale(1.1) rotate(-5deg);opacity:.8;}
 }
 
-@keyframes scaleitrotated{
+@keyframes water-scaleitrotated{
   0%  {transform: scale(.8) rotate(180deg); opacity:1;}
   100%  {transform: scale(1.2) rotate(185deg);opacity:.9;}
+}
+
+@keyframes water-randomrotated{
+  0%  {transform: rotate(180deg);}
+  19%  {transform: rotate(180deg);}
+  20%  {transform: rotate(80deg);}
+  39%  {transform: rotate(80deg);}
+  40%  {transform: rotate(25deg);}
+  59%  {transform: rotate(25deg);}
+  60%  {transform: rotate(185deg);}
+  79%  {transform: rotate(185deg);}
+  80%  {transform: rotate(77deg);}
+  100%  {transform: rotate(77deg);}
 }
 
 @keyframes smoke-ring{

@@ -140,7 +140,7 @@ export default class Creatures extends React.Component {
                   <div className='queen-wrapper'>
                     <div className={`creature ran queen ${(locUser.creatures.ran.queen)?'gotit':'notyet'}`}><span>?</span></div>
                     <div className={`creature-freq freq-key ultrarare`}>ultra rare</div>
-                    <div className="creature-name">{((locUser.creatures.ran.queen))?'Queen':'???'}</div>
+                    <div className="creature-name">{((locUser.creatures.ran.queen))?this.getCreatureName('ran','queen'):'???'}</div>
                   </div>
                 </div>
               </div>

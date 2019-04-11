@@ -22,7 +22,7 @@ const unlockDecimal = 100;
 const releaseScore = 100;//2500
 const requiredAccuracy = 60;//80
 const fullHealth = 1;
-const baseDamage = 50;
+const baseDamage = 500;
 
 export default class GamePlayMath extends React.Component {
   constructor(props) {
@@ -46,9 +46,23 @@ export default class GamePlayMath extends React.Component {
       range = 22
     }
 
+    console.log('gp level',level);
+
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
     this.introCountdown = this.introCountdown.bind(this)
+
+    //check if we are looking at random (final battle) for the first time and set revealed to true
+    let locUser = JSON.parse(localStorage.getItem(localUser));
+    if (locUser.gamemath.ran.unlocked && !locUser.gamemath.ran.revealed){
+      locUser.gamemath.ran.revealed = true;
+      //save to localstorage
+      localStorage.setItem(localUser, JSON.stringify(locUser));
+
+      //sync to firebase
+      let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/ran/revealed');
+      userRef.set(locUser.gamemath.ran.revealed);
+    }
 
     this.state = {
       //unlockScore:100,//2500
@@ -91,6 +105,8 @@ export default class GamePlayMath extends React.Component {
   }
 
   componentWillMount(){
+
+
 
     let hidden = false;
     //hide the layout until the css is loaded

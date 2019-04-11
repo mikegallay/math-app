@@ -165,8 +165,8 @@ export default class Profile extends React.Component {
     var divTrainHS = locUser.gamemath.div.training;
     var divBatt1HS = locUser.gamemath.div.battle1;
     var divBatt2HS = locUser.gamemath.div.battle2;
-    var ranTrainHS = locUser.gamemath.ran.training;
-    var ranBattHS = locUser.gamemath.ran.battle;
+    // var ranTrainHS = locUser.gamemath.ran.training;
+    // var ranBattHS = locUser.gamemath.ran.battle;
     // console.log('locuser',addPracHS);
 
     let opacity = (!this.state.hidden)?1:0
@@ -247,10 +247,10 @@ export default class Profile extends React.Component {
                 <p>Level 1: <span className="score">{divBatt1HS}</span></p>
                 <p>Level 2: <span className="score">{divBatt2HS}</span></p>
               </div>
-              <div className="stat-section">
+              {/*<div className="stat-section">
                 <h4 className="corner-shadow">Random</h4>
                 <p>Final Battle: <span className="score">{ranBattHS}</span></p>
-              </div>
+              </div>*/}
             </div>
           </div>
         </div>

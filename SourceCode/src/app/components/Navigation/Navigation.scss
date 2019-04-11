@@ -78,129 +78,153 @@
   text-transform: capitalize;
 
 }
-
-.main-menu{
-  display:flex;
-  flex-grow:1;
-  width:100%;
-  height:calc(100vh - 220px);
-  @media only screen and (min-width: 375px) {
-    height:calc(100vh - 200px);
+.navigation.main{
+  .wrapper{
+    .main-menu{
+      display:flex;
+      flex-grow:1;
+      width:100%;
+      height:calc(100vh - 220px);
+      @media only screen and (min-width: 375px) {
+        height:calc(100vh - 200px);
+      }
+      position: relative;
+      flex-wrap: wrap;
+      .final-battle{
+        position: absolute;
+        top:50%;
+        left:50%;
+        // opacity:0;
+        margin-top:-30px;
+        margin-left:-30px;
+        .level3{
+          width:55px;
+          height:55px;
+          border-radius: 50%;
+          background: white;
+          position: absolute;
+          text-align: center;
+          font-size: 3em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          color:black;
+          text-decoration: none;
+          border:1px solid black;
+          &.inactive{
+            background:darkred;pointer-events: none;
+            span{opacity:.5;}
+          }
+          span{top:7px;position:relative;}
+        }
+        &.fb-ready{display:block;opacity:1}
+        &.fb-hide{display:none;}
+      }
+      .nav-section{
+        width:50%;
+        height:50%;
+        position:relative;
+        // border: 1px solid black;
+        box-sizing: border-box;
+        // opacity:.5;
+        .banner{
+          background: transparent url('../../images/banner.png') no-repeat top center;
+          background-size:cover;
+          width:110px;
+          height:60px;
+          // background:chocolate;
+          position: absolute;
+          // text-align: center;
+          font-size: 4em;
+          span{
+            position: relative;
+            left:45%;
+          }
+        }
+        .training,.level1,.level2{
+          width:55px;
+          height:55px;
+          border-radius: 50%;
+          background: white;
+          position: absolute;
+          text-align: center;
+          font-size: 3em;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          color:black;
+          text-decoration: none;
+          border:1px solid black;
+          &.inactive{
+            background:gray;pointer-events: none;
+            span{opacity:.5;}
+          }
+          span{top:7px;position:relative;}
+        }
+        &.add{
+          border-bottom:1px dashed white;
+          border-right:1px dashed white;
+          box-sizing: border-box;
+          .banner{top:5%;left:-8%;transform: rotate(-20deg);}
+          .training{left:15%;top:25%;}
+          .level1{left:45%;top:38%;}
+          .level2{left:55%;top:65%;}
+        }
+        &.sub{
+          border-bottom:1px dashed white;
+          box-sizing: border-box;
+          .banner{top:5%;right:-8%;transform: rotate(20deg);}
+          .training{right:15%;top:25%;}
+          .level1{right:45%;top:38%;}
+          .level2{right:55%;top:65%;}
+        }
+        &.mul{
+          border-right:1px dashed white;
+          box-sizing: border-box;
+          .banner{
+            bottom:5%;left:-10%;transform: rotate(210deg);font-size:2.5em;
+            span{top:8px;}
+          }
+          .training{left:15%;bottom:25%;}
+          .level1{left:45%;bottom:38%;}
+          .level2{left:55%;bottom:65%;}
+        }
+        &.div{
+          .banner{
+            bottom:5%;right:-10%;transform: rotate(-210deg);font-size:3.3em;
+            span{top:2px;}
+          }
+          .training{right:15%;bottom:25%;}
+          .level1{right:45%;bottom:38%;}
+          .level2{right:55%;bottom:65%;}
+        }
+      }
+    }
   }
-  position: relative;
-  flex-wrap: wrap;
-  .final-battle{
-    position: absolute;
-    top:50%;
-    left:50%;
-    margin-top:-30px;
-    margin-left:-30px;
-    .training,.level1,.level2{
-      width:55px;
-      height:55px;
-      border-radius: 50%;
-      background: white;
-      position: absolute;
-      text-align: center;
-      font-size: 3em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color:black;
-      text-decoration: none;
-      border:1px solid black;
-      &.inactive{
-        background:darkred;pointer-events: none;
-        span{opacity:.5;}
+  &.fb-reveal{
+    animation-duration: .3s;
+    animation-name: shakeAround;
+    animation-timing-function: linear;
+    animation-iteration-count: 10;
+    animation-direction: forwards;
+    .main-menu{
+      .final-battle{
+        display: block!important;
+        // transition:opacity 2s 2s;
+        // opacity:0;
+        animation-duration: 4s;
+        animation-name: slowFadeIn;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-direction:forwards;
+        animation-delay: 0s;
+
       }
-      span{top:7px;position:relative;}
     }
   }
-  .nav-section{
-    width:50%;
-    height:50%;
-    position:relative;
-    // border: 1px solid black;
-    box-sizing: border-box;
-    // opacity:.5;
-    .banner{
-      background: transparent url('../../images/banner.png') no-repeat top center;
-      background-size:cover;
-      width:110px;
-      height:60px;
-      // background:chocolate;
-      position: absolute;
-      // text-align: center;
-      font-size: 4em;
-      span{
-        position: relative;
-        left:45%;
-      }
-    }
-    .training,.level1,.level2{
-      width:55px;
-      height:55px;
-      border-radius: 50%;
-      background: white;
-      position: absolute;
-      text-align: center;
-      font-size: 3em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      color:black;
-      text-decoration: none;
-      border:1px solid black;
-      &.inactive{
-        background:gray;pointer-events: none;
-        span{opacity:.5;}
-      }
-      span{top:7px;position:relative;}
-    }
-    &.add{
-      border-bottom:1px dashed white;
-      border-right:1px dashed white;
-      box-sizing: border-box;
-      .banner{top:5%;left:-8%;transform: rotate(-20deg);}
-      .training{left:15%;top:25%;}
-      .level1{left:45%;top:38%;}
-      .level2{left:55%;top:65%;}
-    }
-    &.sub{
-      border-bottom:1px dashed white;
-      box-sizing: border-box;
-      .banner{top:5%;right:-8%;transform: rotate(20deg);}
-      .training{right:15%;top:25%;}
-      .level1{right:45%;top:38%;}
-      .level2{right:55%;top:65%;}
-    }
-    &.mul{
-      border-right:1px dashed white;
-      box-sizing: border-box;
-      .banner{
-        bottom:5%;left:-10%;transform: rotate(210deg);font-size:2.5em;
-        span{top:8px;}
-      }
-      .training{left:15%;bottom:25%;}
-      .level1{left:45%;bottom:38%;}
-      .level2{left:55%;bottom:65%;}
-    }
-    &.div{
-      .banner{
-        bottom:5%;right:-10%;transform: rotate(-210deg);font-size:3.3em;
-        span{top:2px;}
-      }
-      .training{right:15%;bottom:25%;}
-      .level1{right:45%;bottom:38%;}
-      .level2{right:55%;bottom:65%;}
-    }
-  }
-
-
 }
-
 /*.main-menu{
   display:flex;
   display:none;

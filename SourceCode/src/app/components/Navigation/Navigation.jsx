@@ -38,12 +38,15 @@ export default class Navigation extends React.Component {
     var subUnlocked2 = (locUser) ? locUser.gamemath.sub.unlocked2 : false;
     var mulUnlocked2 = (locUser) ? locUser.gamemath.mul.unlocked2 : false;
     var divUnlocked2 = (locUser) ? locUser.gamemath.div.unlocked2 : false;
+
+    var revealed = (locUser) ? locUser.gamemath.ran.revealed : false;
+    var fbunlocked = (locUser) ? locUser.gamemath.ran.unlocked : false;
     // var ranUnlocked2 = (locUser) ? locUser.gamemath.ran.unlocked2 : false;
 
     let username = locUser.username
     let hidden = true
 
-    this.state = {modalVisible:'init false',hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username};
+    this.state = {modalVisible:'init false',revealed,fbunlocked,hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username};
     // this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
@@ -82,9 +85,11 @@ export default class Navigation extends React.Component {
     let opacity = (!this.state.hidden)?1:0
     let styles = {opacity};
 
+    let fbReveal = (!this.state.revealed && this.state.fbunlocked)?'fb-reveal':'';
+
     let howToBody = '<p>Use this app daily to improve your math skills. You can choose addition, subtraction, multiplication, division or randomize the skill</p><p>There are two icons next to each of the math skills.</p><p><img className="legend" src='+heart+' width="25" height="25"/><br/>Choose the heart and play until you make 3 mistakes.</p><p><img className="legend" src='+stopwatch+' width="25" height="25"/><br/>Choose the clock and answer as many as you can in 60 seconds.</p><p>The more answers you get correct in a row, the higher your score multiplier. Wrong answers will lower your overall accuracy. Good luck!!</p>'
     return (
-      <div className="main navigation">
+      <div className={`main navigation ${fbReveal}`}>
         <div className="main-fade" style={styles}>
           <div className="wrapper">
             <div className="legend-of">
@@ -122,8 +127,8 @@ export default class Navigation extends React.Component {
                 <Link className={`luckiest-guy level1 ${(this.state.divUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:1} }}><span>L1</span></Link>
                 <Link className={`luckiest-guy level2 ${(this.state.divUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:2} }}><span>L2</span></Link>
               </div>
-              <div className="final-battle">
-                <Link className={`luckiest-guy level2 ${(this.state.ranUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown'} }}><span>FB</span></Link>
+              <div className={`final-battle ${(this.state.revealed && this.state.fbunlocked)?'fb-ready':'fb-hide'}`}>
+                <Link className={`luckiest-guy level3 ${(this.state.ranUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:3, randomize: true} }}><span>FB</span></Link>
               </div>
             </div>
 

@@ -189,7 +189,7 @@ export default class Login extends React.Component {
             sub:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
             mul:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
             div:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
-            ran:{ battle:0, battle1:0, battle2:0, unlocked:false },
+            ran:{ battle:0, unlocked:false, revealed: false },
           },
           creatures:{
             add:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},

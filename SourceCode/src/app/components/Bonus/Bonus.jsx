@@ -23,7 +23,7 @@ const minLevelBonus = 60
 export default class Bonus extends React.Component {
   constructor(props) {
     super(props);
-    // console.log('bonus',props);
+    console.log('bonus',props);
     let visible = props.openBonus ? props.openBonus : 'init false';
     let operator = this.props.operator;
 
@@ -55,7 +55,7 @@ export default class Bonus extends React.Component {
     this.determineCreature()
   }
 
-  selectCreature(operator,locUser){
+  selectCreature(){
     let rand = this.rand(0,creaturePool.length-1);
     return creaturePool[rand];
   }
@@ -88,6 +88,31 @@ export default class Bonus extends React.Component {
     userRef.set(locUser.gems);
   }
 
+  checkAllCreaturesUnlocked(locUser){
+    let addCreatures = locUser.creatures.add;
+    let subCreatures = locUser.creatures.sub;
+    let mulCreatures = locUser.creatures.mul;
+    let divCreatures = locUser.creatures.div;
+
+    let allAddCreaturesUnlocked = (addCreatures.L2_1_1 && addCreatures.L2_1_2 && addCreatures.L2_1_3 && addCreatures.L2_2_1 && addCreatures.L2_2_2 && addCreatures.L2_2_3);
+    let allSubCreaturesUnlocked = (subCreatures.L2_1_1 && subCreatures.L2_1_2 && subCreatures.L2_1_3 && subCreatures.L2_2_1 && subCreatures.L2_2_2 && subCreatures.L2_2_3);
+    let allMulCreaturesUnlocked = (mulCreatures.L2_1_1 && mulCreatures.L2_1_2 && mulCreatures.L2_1_3 && mulCreatures.L2_2_1 && mulCreatures.L2_2_2 && mulCreatures.L2_2_3);
+    let allDivCreaturesUnlocked = (divCreatures.L2_1_1 && divCreatures.L2_1_2 && divCreatures.L2_1_3 && divCreatures.L2_2_1 && divCreatures.L2_2_2 && divCreatures.L2_2_3);
+
+    let allGameCreaturesUnlocked= (allAddCreaturesUnlocked && allSubCreaturesUnlocked && allMulCreaturesUnlocked && allDivCreaturesUnlocked);
+
+    console.log(allAddCreaturesUnlocked,allSubCreaturesUnlocked,allMulCreaturesUnlocked,allDivCreaturesUnlocked,allGameCreaturesUnlocked);
+
+    //all game creatures released, unlock final battle
+    if (allGameCreaturesUnlocked) {
+      locUser.gamemath.ran.unlocked = true;
+      localStorage.setItem(localUser, JSON.stringify(locUser));
+
+      let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/ran/unlocked');
+      userRef.set(locUser.gamemath.ran.unlocked);
+    }
+  }
+
   determineCreature(){
     // console.log('determine creature',this.props.score);
 
@@ -102,6 +127,8 @@ export default class Bonus extends React.Component {
     let bonusTitle = 'You found a pile of gems!';
     let creatures = locUser.creatures[operator];
 
+    console.log('level',this.props.level);
+
     if (this.props.level == 0){
       //you are training
       //check to see if your score warrants a creature
@@ -113,7 +140,7 @@ export default class Bonus extends React.Component {
         if (score >= creatureList.math[operator].L1_1_2.reward) creaturePool.push('L1_1_2');
         if (score >= creatureList.math[operator].L1_1_3.reward) creaturePool.push('L1_1_3');
 
-        creature = this.selectCreature(operator,locUser);
+        creature = this.selectCreature();
 
         var creatureData = this.setCreature(operator,creature);
         bonusImg = creatureData.bonusImg;
@@ -125,6 +152,8 @@ export default class Bonus extends React.Component {
         this.addGems(score,locUser)
       }
 
+      this.checkAllCreaturesUnlocked(locUser)
+
     } else if (this.props.level == 1 && bonus == 2){
       // console.log('bonus in level1');
       if (accuracy >= minLevelBonus){
@@ -135,7 +164,7 @@ export default class Bonus extends React.Component {
         if (accuracy >= creatureList.math[operator].L2_2_2.reward) creaturePool.push('L2_2_2');
         if (accuracy >= creatureList.math[operator].L2_2_3.reward) creaturePool.push('L2_2_3');
 
-        creature = this.selectCreature(operator,locUser);
+        creature = this.selectCreature();
 
         var creatureData = this.setCreature(operator,creature);
         bonusImg = creatureData.bonusImg;
@@ -159,6 +188,8 @@ export default class Bonus extends React.Component {
         staffRef.set(locUser.staffs[this.state.kingdom].ready);
       }
 
+      this.checkAllCreaturesUnlocked(locUser);
+
     } else if (this.props.level == 2 && bonus == 2){
       // console.log('bonus in level2');
       console.log('creature pool',creaturePool);
@@ -176,15 +207,36 @@ export default class Bonus extends React.Component {
         if (accuracy >= creatureList.math[operator].L3_4_2.reward) creaturePool.push('L3_4_2');
         if (accuracy >= creatureList.math[operator].L3_4_3.reward) creaturePool.push('L3_4_3');
 
-        creature = this.selectCreature(operator,locUser);
+        creature = this.selectCreature();
 
         var creatureData = this.setCreature(operator,creature);
         bonusImg = creatureData.bonusImg;
         bonusTitle = creatureData.bonusTitle;
 
         this.saveCreature(operator,creature,locUser);
+
       }
-    } else{
+
+      checkAllCreaturesUnlocked(locUser);
+
+    } else if (this.props.level == 3){
+      //the final battle
+      console.log('bonus in final battle',accuracy,operator);
+      if (accuracy == 100){
+
+        creaturePool.push('queen');
+
+        creature = this.selectCreature();
+
+        var creatureData = this.setCreature('ran',creature);
+        bonusImg = creatureData.bonusImg;
+        bonusTitle = creatureData.bonusTitle;
+
+        console.log('fb',creaturePool,creature,creatureData);
+        this.saveCreature('ran',creature,locUser);
+      }
+
+    } else {
       //didn't do well enough for a creature release in training. have some gems
       this.addGems(score,locUser);
     }

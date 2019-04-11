@@ -118,7 +118,7 @@ export const creatureList = {
       L3_4_3:{img:'D3_4_3',name:'abc',reward:98,freq:'ultrarare'}
     },
     ran:{
-      queen:{img:'queen',name:'abc',reward:100,freq:'ultrarare'}
+      queen:{img:'queen',name:'Queen Queenie',reward:100,freq:'ultrarare'}
     }
   }
 }

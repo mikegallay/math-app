@@ -86,6 +86,26 @@
   100%  {transform: rotate(77deg);}
 }
 
+@keyframes forest-scale{
+  0%  {transform: scale(.1);opacity:1;}
+  60%  {transform: scale(.9);opacity:1;}
+  75%  {transform: scale(.9);opacity:1;}
+  100%  {transform: scale(.9);opacity:0;}
+}
+
+@keyframes forest-scale2{
+  0%  {transform: rotate(45deg) scale(.1);opacity:1;}
+  60%  {transform: rotate(45deg) scale(.6);opacity:1;}
+  80%  {transform: rotate(45deg) scale(.6);opacity:1;}
+  100%  {transform: rotate(45deg) scale(.6);opacity:0;}
+}
+
+@keyframes forest-rotate{
+  0%  {transform: rotate(0deg) scale(.6);}
+  50%  {transform: rotate(180deg) scale(1);}
+  100%  {transform: rotate(360deg) scale(.6);}
+}
+
 @keyframes smoke-ring{
   0%  {transform: scale(.75); opacity:.05;}
   50%  {transform: scale(1);opacity:.6;}

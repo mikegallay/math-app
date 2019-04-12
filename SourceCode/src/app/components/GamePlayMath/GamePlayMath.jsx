@@ -557,10 +557,10 @@ export default class GamePlayMath extends React.Component {
           />
 
           <div className="gameArt">
-            <div className={`wizard wizard-battle ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
-            <div className={`wizard wizard-defeat ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
-            <div className={`wizard wizard-victory ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
-            <div className={`student ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+            <div className={`wizard wizard-battle ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+            <div className={`wizard wizard-defeat ${'level'+this.state.level} ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
+            <div className={`wizard wizard-victory ${'level'+this.state.level} ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
+            <div className={`student ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
             <div className={`countdown luckiest-guy ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
           </div>
 

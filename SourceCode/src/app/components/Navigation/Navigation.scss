@@ -100,8 +100,8 @@
         .level3{
           width:55px;
           height:55px;
-          border-radius: 50%;
-          background: white;
+          // border-radius: 50%;
+          // background: white;
           position: absolute;
           text-align: center;
           font-size: 3em;
@@ -111,12 +111,15 @@
           overflow: hidden;
           color:black;
           text-decoration: none;
-          border:1px solid black;
+          // border:1px solid black;
+          background: transparent url('../../images/dragon-fb.png') no-repeat top center;
+          background-size:cover;
           &.inactive{
-            background:darkred;pointer-events: none;
-            span{opacity:.5;}
+
+            // background:darkred;pointer-events: none;
+            // span{opacity:.5;}
           }
-          span{top:7px;position:relative;}
+          span{top:7px;position:relative;text-indent:-9999px;}
         }
         &.fb-ready{display:block;opacity:1}
         &.fb-hide{display:none;}

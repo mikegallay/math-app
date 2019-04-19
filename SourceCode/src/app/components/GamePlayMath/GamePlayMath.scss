@@ -186,3 +186,24 @@
     }
   }
 }
+
+.mdc-snackbar {
+  position: absolute;
+  top: 0;
+  background: white;
+  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  transform: translate(0,-80px);
+  color: white;
+  background: gray;
+  .mdl-snackbar__action{
+    display: none;
+  }
+  .mdl-snackbar__label{
+    text-align: center;
+  }
+  &.mdl-snackbar--active{
+        transform: translate(0,0px);
+  }
+}

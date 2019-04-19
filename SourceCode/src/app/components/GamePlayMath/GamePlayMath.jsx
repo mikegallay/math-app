@@ -14,6 +14,7 @@ import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import Answers from '../Answers/Answers';
 import NumberPad from '../NumberPad/NumberPad';
 import Modal from '../Modal/Modal';
+import SnackBar from '../SnackBar/SnackBar';
 
 const localUser = "localUser";
 
@@ -46,7 +47,7 @@ export default class GamePlayMath extends React.Component {
       range = 22
     }
 
-    console.log('gp level',level);
+    // console.log('gp level',level);
 
     let numbers = this.calculateNumbers(constant,range,operator)
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
@@ -64,10 +65,13 @@ export default class GamePlayMath extends React.Component {
       userRef.set(locUser.gamemath.ran.revealed);
     }
 
+
     this.state = {
       //unlockScore:100,//2500
       //releaseScore:100,//2500
       //requiredAccuracy:25,//80
+      sbActive:false,
+      sbMessage:'snack',
       score:0,
       streak: 0,
       correct:null,
@@ -150,6 +154,15 @@ export default class GamePlayMath extends React.Component {
     this.levelFX.stop()
   }
 
+  showSnackbarMessage(message){
+    console.log('sb',message);
+    this.setState({sbActive:true,sbMessage:message});
+
+    let sbTimer = setTimeout(() => {
+      this.setState({sbActive:false});
+    }, 4000)
+
+  }
 
   onAnswer(isCorrect){
     // prevent multiple button presses for same unanswer
@@ -540,73 +553,75 @@ export default class GamePlayMath extends React.Component {
       <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-          <ScoreBoard
-            onTimeExpired={()=>{this.timeExpired()}}
-            ready={this.state.battle}
-            multiplier={this.state.multiplier}
-            streak={this.state.streak}
-            correct={this.state.correct}
-            score={this.state.score}
-            gamemode={this.state.gamemode}
-            gameover={this.state.gameover}
-            restart={this.state.restart}
-            fullHealth={fullHealth}
-            health={this.state.health}
-            hitpoints = {this.state.hitpoints}
-            modalVisible = {this.state.modalVisible}
-          />
-
-          <div className="gameArt">
-            <div className={`wizard wizard-battle ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
-            <div className={`wizard wizard-defeat ${'level'+this.state.level} ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
-            <div className={`wizard wizard-victory ${'level'+this.state.level} ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
-            <div className={`student ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
-            <div className={`countdown luckiest-guy ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
-          </div>
-
-          <div className="howler">
-            <ReactHowler
-              src='http://math.michaelgallay.com/audio/right.mp3'
-              playing={this.state.rightFX}
-              ref={(ref) => (this.rightFX = ref)}
+            <ScoreBoard
+              onTimeExpired={()=>{this.timeExpired()}}
+              ready={this.state.battle}
+              multiplier={this.state.multiplier}
+              streak={this.state.streak}
+              correct={this.state.correct}
+              score={this.state.score}
+              gamemode={this.state.gamemode}
+              gameover={this.state.gameover}
+              restart={this.state.restart}
+              fullHealth={fullHealth}
+              health={this.state.health}
+              hitpoints = {this.state.hitpoints}
+              modalVisible = {this.state.modalVisible}
             />
-            <ReactHowler
-              src='http://math.michaelgallay.com/audio/wrong.mp3'
-              playing={this.state.wrongFX}
-              ref={(ref) => (this.wrongFX = ref)}
-            />
-            <ReactHowler
-              src='http://math.michaelgallay.com/audio/level1.mp3'
-              playing={this.state.levelFX}
-              ref={(ref) => (this.levelFX = ref)}
-            />
-          </div>
 
-          <div className={`flashcard ${(this.state.battle)?'battle':''}`}>
-            <div className="flashcard-back"></div>
-            <Equation
+            <div className="gameArt">
+              <div className={`wizard wizard-battle ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+              <div className={`wizard wizard-defeat ${'level'+this.state.level} ${(this.state.countdown=="DEFEAT!")?'ready':''}`}></div>
+              <div className={`wizard wizard-victory ${'level'+this.state.level} ${(this.state.countdown=="VICTORY!")?'ready':''}`}></div>
+              <div className={`student ${'level'+this.state.level} ${(this.state.countdown<3 || this.state.countdown=="FIGHT!")?gameArtBattleClass:''}`}></div>
+              <div className={`countdown luckiest-guy ${(this.state.battle)?'ready':''}`}>{this.state.countdown}</div>
+            </div>
+
+            <div className="howler">
+              <ReactHowler
+                src='http://math.michaelgallay.com/audio/right.mp3'
+                playing={this.state.rightFX}
+                ref={(ref) => (this.rightFX = ref)}
+              />
+              <ReactHowler
+                src='http://math.michaelgallay.com/audio/wrong.mp3'
+                playing={this.state.wrongFX}
+                ref={(ref) => (this.wrongFX = ref)}
+              />
+              <ReactHowler
+                src='http://math.michaelgallay.com/audio/level1.mp3'
+                playing={this.state.levelFX}
+                ref={(ref) => (this.levelFX = ref)}
+              />
+            </div>
+
+            <div className={`flashcard ${(this.state.battle)?'battle':''}`}>
+              <div className="flashcard-back"></div>
+              <Equation
+                operator={this.state.operator}
+                numOne={numOne}
+                numTwo={numTwo}
+              />
+
+              {answerPad}
+
+            </div>
+
+            <Modal
+              title={this.state.modalTitle}
+              body={this.state.modalBody}
+              score={this.state.score}
+              gameplayBtns={true}
+              level={this.state.level}
+              bonus={this.state.bonus}
+              accuracy={this.state.accuracy}
               operator={this.state.operator}
-              numOne={numOne}
-              numTwo={numTwo}
+              visible={this.state.modalVisible}
+              snackbar={(m)=>{this.showSnackbarMessage(m)}}
+              closeModal={()=>{this.closeModal()}}
             />
-
-            {answerPad}
-
           </div>
-
-          <Modal
-            title={this.state.modalTitle}
-            body={this.state.modalBody}
-            score={this.state.score}
-            gameplayBtns={true}
-            level={this.state.level}
-            bonus={this.state.bonus}
-            accuracy={this.state.accuracy}
-            operator={this.state.operator}
-            visible={this.state.modalVisible}
-            closeModal={()=>{this.closeModal()}}
-          />
-        </div>
+          <SnackBar active={this.state.sbActive} message={this.state.sbMessage}/>
         </div>
       </div>
     );

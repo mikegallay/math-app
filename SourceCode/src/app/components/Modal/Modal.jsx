@@ -74,7 +74,7 @@ export default class Modal extends React.Component {
     let bonusRender = <div className="blankBonus"></div>
     // console.log('level1',score);
     if (earnedBonus) {
-      bonusRender = <Bonus level={level} openBonus={this.state.openBonus} score={score} operator={this.props.operator} bonus={bonus} accuracy={accuracy}/>
+      bonusRender = <Bonus snackbar={(m)=>{this.props.snackbar(m)}} level={level} openBonus={this.state.openBonus} score={score} operator={this.props.operator} bonus={bonus} accuracy={accuracy}/>
     }
     return (
       <div className={`modal-wrapper ${this.state.visible}`}>

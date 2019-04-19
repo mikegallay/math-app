@@ -1,0 +1,17 @@
+@import '../../css/variables';
+@import '../../css/mixins';
+
+.snackbar{
+  position: absolute;
+  z-index: 5;
+  top:-250px;
+  background:black;
+  width:100%;
+  padding:2em 0;
+  text-align: center;
+  color:white;
+  transition: 1s top;
+  &.active{
+    top:0;
+  }
+}

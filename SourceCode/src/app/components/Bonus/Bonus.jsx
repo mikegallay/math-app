@@ -115,6 +115,7 @@ export default class Bonus extends React.Component {
 
   determineCreature(){
     // console.log('determine creature',this.props.score);
+    this.props.snackbar('bonus jonas')
 
     creaturePool = [];
     var locUser = JSON.parse(localStorage.getItem(localUser));
@@ -217,7 +218,7 @@ export default class Bonus extends React.Component {
 
       }
 
-      checkAllCreaturesUnlocked(locUser);
+      this.checkAllCreaturesUnlocked(locUser);
 
     } else if (this.props.level == 3){
       //the final battle

@@ -115,7 +115,7 @@ export default class Bonus extends React.Component {
 
   determineCreature(){
     // console.log('determine creature',this.props.score);
-    this.props.snackbar('bonus jonas')
+    // this.props.snackbar('bonus jonas')
 
     creaturePool = [];
     var locUser = JSON.parse(localStorage.getItem(localUser));
@@ -135,6 +135,8 @@ export default class Bonus extends React.Component {
       //check to see if your score warrants a creature
 
       let allTrainingCreaturesUnlocked = (creatures.L1_1_1 && creatures.L1_1_2 && creatures.L1_1_3);
+      let allLevelCreaturesUnlocked = (creatures.L2_1_1 && creatures.L2_1_2 && creatures.L2_1_3 && creatures.L2_2_1 && creatures.L2_2_2 && creatures.L2_2_3);
+
       if (!allTrainingCreaturesUnlocked && bonus == 2){
         //all three training creatures are NOT unlocked
         if (score >= creatureList.math[operator].L1_1_1.reward) creaturePool.push('L1_1_1');
@@ -153,6 +155,27 @@ export default class Bonus extends React.Component {
         this.addGems(score,locUser)
       }
 
+      //all level 0 & 1 creatures released, unlock level2
+      if (allLevelCreaturesUnlocked && allTrainingCreaturesUnlocked && !locUser.gamemath[operator].unlocked2) {
+        console.log('unlock level2');
+        locUser.gamemath[operator].unlocked2 = true;
+        // locUser.staffs[this.state.kingdom].ready = true;
+        localStorage.setItem(localUser, JSON.stringify(locUser));
+
+        let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator + "/unlocked2");
+        userRef.set(locUser.gamemath[operator].unlocked2);
+
+        // let staffRef = ref.ref('/users/' + locUser.userid + '/staffs/' + this.state.kingdom + "/ready");
+        // staffRef.set(locUser.staffs[this.state.kingdom].ready);
+
+        let kingdom = "Addition";
+        if (operator=='sub') kingdom = "Subtraction";
+        if (operator=='mul') kingdom = "Multiplication";
+        if (operator=='div') kingdom = "Division";
+        let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
+        this.props.snackbar(unlockedMessage);
+      }
+      
       this.checkAllCreaturesUnlocked(locUser)
 
     } else if (this.props.level == 1 && bonus == 2){
@@ -174,19 +197,49 @@ export default class Bonus extends React.Component {
         this.saveCreature(operator,creature,locUser);
       }
 
+      let allTrainingCreaturesUnlocked = (creatures.L1_1_1 && creatures.L1_1_2 && creatures.L1_1_3);
       let allLevelCreaturesUnlocked = (creatures.L2_1_1 && creatures.L2_1_2 && creatures.L2_1_3 && creatures.L2_2_1 && creatures.L2_2_2 && creatures.L2_2_3);
 
-      //all level 1 creatures released, unlock level2 and the staff
-      if (allLevelCreaturesUnlocked && locUser.gamemath[operator].unlocked2) {
-        locUser.gamemath[operator].unlocked2 = true;
+      //all level 1 creatures released, unlock staff
+      if (allLevelCreaturesUnlocked && !allTrainingCreaturesUnlocked && !locUser.staffs[this.state.kingdom].ready) {
+        console.log('unlock staff');
+        // locUser.gamemath[operator].unlocked2 = true;
         locUser.staffs[this.state.kingdom].ready = true;
+        localStorage.setItem(localUser, JSON.stringify(locUser));
+
+        // let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator + "/unlocked2");
+        // userRef.set(locUser.gamemath[operator].unlocked2);
+
+        let staffRef = ref.ref('/users/' + locUser.userid + '/staffs/' + this.state.kingdom + "/ready");
+        staffRef.set(locUser.staffs[this.state.kingdom].ready);
+
+        let staff = "FOREST";
+        if (operator=='sub') staff = "ROCK";
+        if (operator=='mul') staff = "WATER";
+        if (operator=='div') staff = "FIRE";
+        let unlockedMessage = "The " + staff + " staff has been unlocked!";
+        this.props.snackbar(unlockedMessage)
+      }
+
+      //all level 0 & 1 creatures released, unlock level2
+      if (allLevelCreaturesUnlocked && allTrainingCreaturesUnlocked && !locUser.gamemath[operator].unlocked2) {
+        console.log('unlock level2');
+        locUser.gamemath[operator].unlocked2 = true;
+        // locUser.staffs[this.state.kingdom].ready = true;
         localStorage.setItem(localUser, JSON.stringify(locUser));
 
         let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/' + operator + "/unlocked2");
         userRef.set(locUser.gamemath[operator].unlocked2);
 
-        let staffRef = ref.ref('/users/' + locUser.userid + '/staffs/' + this.state.kingdom + "/ready");
-        staffRef.set(locUser.staffs[this.state.kingdom].ready);
+        // let staffRef = ref.ref('/users/' + locUser.userid + '/staffs/' + this.state.kingdom + "/ready");
+        // staffRef.set(locUser.staffs[this.state.kingdom].ready);
+
+        let kingdom = "Addition";
+        if (operator=='sub') kingdom = "Subtraction";
+        if (operator=='mul') kingdom = "Multiplication";
+        if (operator=='div') kingdom = "Division";
+        let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
+        this.props.snackbar(unlockedMessage);
       }
 
       this.checkAllCreaturesUnlocked(locUser);

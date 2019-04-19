@@ -160,7 +160,7 @@ export default class GamePlayMath extends React.Component {
 
     let sbTimer = setTimeout(() => {
       this.setState({sbActive:false});
-    }, 4000)
+    }, 5000)
 
   }
 
@@ -232,6 +232,14 @@ export default class GamePlayMath extends React.Component {
 
             //set unlocked1 one time
             locUser.gamemath[operator].unlocked1 = true;
+
+            let kingdom = "Addition";
+            if (operator=='sub') kingdom = "Subtraction";
+            if (operator=='mul') kingdom = "Multiplication";
+            if (operator=='div') kingdom = "Division";
+            let unlockedMessage = "Level 1 in the " + kingdom + " has been unlocked!";
+            this.showSnackbarMessage(unlockedMessage);
+
           } else {
             //already unlocked level1 - check to see if all creatures are unlocked
             let creatures = locUser.creatures[operator];

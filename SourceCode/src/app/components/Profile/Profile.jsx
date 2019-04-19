@@ -54,25 +54,25 @@ export default class Profile extends React.Component {
   //training
   forest0(){
     let lu = this.state.locUser;
-    lu.gamemath.add.unlocked1 = lu.creatures.add.L1_1_1 = lu.creatures.add.L1_1_2 = lu.creatures.add.L1_1_3 = true
+    lu.creatures.add.L1_1_1 = lu.creatures.add.L1_1_2 = lu.creatures.add.L1_1_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/add').set(lu.creatures.add);
   }
   rock0(){
     let lu = this.state.locUser;
-    lu.gamemath.sub.unlocked1 = lu.creatures.sub.L1_1_1 = lu.creatures.sub.L1_1_2 = lu.creatures.sub.L1_1_3 = true
+    lu.creatures.sub.L1_1_1 = lu.creatures.sub.L1_1_2 = lu.creatures.sub.L1_1_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/sub').set(lu.creatures.sub);
   }
   water0(){
     let lu = this.state.locUser;
-    lu.gamemath.mul.unlocked1 = lu.creatures.mul.L1_1_1 = lu.creatures.mul.L1_1_2 = lu.creatures.mul.L1_1_3 = true
+    lu.creatures.mul.L1_1_1 = lu.creatures.mul.L1_1_2 = lu.creatures.mul.L1_1_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/mul').set(lu.creatures.mul);
   }
   fire0(){
     let lu = this.state.locUser;
-    lu.gamemath.div.unlocked1 = lu.creatures.div.L1_1_1 = lu.creatures.div.L1_1_2 = lu.creatures.div.L1_1_3 = true
+    lu.creatures.div.L1_1_1 = lu.creatures.div.L1_1_2 = lu.creatures.div.L1_1_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/div').set(lu.creatures.div);
   }
@@ -83,25 +83,25 @@ export default class Profile extends React.Component {
   //level1
   forest1(){
     let lu = this.state.locUser;
-    lu.gamemath.add.unlocked2 = lu.creatures.add.L2_1_1 = lu.creatures.add.L2_1_2 = lu.creatures.add.L2_1_3 = lu.creatures.add.L2_2_1 = lu.creatures.add.L2_2_2 = lu.creatures.add.L2_2_3 = true
+    lu.creatures.add.L2_1_1 = lu.creatures.add.L2_1_2 = lu.creatures.add.L2_1_3 = lu.creatures.add.L2_2_1 = lu.creatures.add.L2_2_2 = lu.creatures.add.L2_2_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/add').set(lu.creatures.add);
   }
   rock1(){
     let lu = this.state.locUser;
-    lu.gamemath.sub.unlocked2 = lu.creatures.sub.L2_1_1 = lu.creatures.sub.L2_1_2 = lu.creatures.sub.L2_1_3 = lu.creatures.sub.L2_2_1 = lu.creatures.sub.L2_2_2 = lu.creatures.sub.L2_2_3 = true
+    lu.creatures.sub.L2_1_1 = lu.creatures.sub.L2_1_2 = lu.creatures.sub.L2_1_3 = lu.creatures.sub.L2_2_1 = lu.creatures.sub.L2_2_2 = lu.creatures.sub.L2_2_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/sub').set(lu.creatures.sub);
   }
   water1(){
     let lu = this.state.locUser;
-    lu.gamemath.mul.unlocked2 = lu.creatures.mul.L2_1_1 = lu.creatures.mul.L2_1_2 = lu.creatures.mul.L2_1_3 = lu.creatures.mul.L2_2_1 = lu.creatures.mul.L2_2_2 = lu.creatures.mul.L2_2_3 = true
+    lu.creatures.mul.L2_1_1 = lu.creatures.mul.L2_1_2 = lu.creatures.mul.L2_1_3 = lu.creatures.mul.L2_2_1 = lu.creatures.mul.L2_2_2 = lu.creatures.mul.L2_2_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/mul').set(lu.creatures.mul);
   }
   fire1(){
     let lu = this.state.locUser;
-    lu.gamemath.div.unlocked2 = lu.creatures.div.L2_1_1 = lu.creatures.div.L2_1_2 = lu.creatures.div.L2_1_3 = lu.creatures.div.L2_2_1 = lu.creatures.div.L2_2_2 = lu.creatures.div.L2_2_3 = true
+    lu.creatures.div.L2_1_1 = lu.creatures.div.L2_1_2 = lu.creatures.div.L2_1_3 = lu.creatures.div.L2_2_1 = lu.creatures.div.L2_2_2 = lu.creatures.div.L2_2_3 = true
     localStorage.setItem(localUser, JSON.stringify(lu));
     ref.ref('/users/' + lu.userid + '/creatures/div').set(lu.creatures.div);
 

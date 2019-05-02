@@ -77,10 +77,10 @@ export default class ChooseUsername extends React.Component {
     // console.log(this.state.username);
     // username = this.state.username.toLowerCase()
     let that = this;
-    let username = u
+    let username = u;
     let usernameAvailable = false;
 
-    let usernameCheck = ref.ref('/usernames/' + u).once('value').then(function(snapshot) {
+    let usernameCheck = ref.ref('/usernames/' + u.toLowerCase()).once('value').then(function(snapshot) {
       // console.log(snapshot.val())
       usernameAvailable = (!snapshot.val())?false:true;
       // return snapshot.val()

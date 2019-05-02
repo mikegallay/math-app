@@ -175,7 +175,7 @@ export default class Bonus extends React.Component {
         let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
         this.props.snackbar(unlockedMessage);
       }
-      
+
       this.checkAllCreaturesUnlocked(locUser)
 
     } else if (this.props.level == 1 && bonus == 2){
@@ -200,8 +200,9 @@ export default class Bonus extends React.Component {
       let allTrainingCreaturesUnlocked = (creatures.L1_1_1 && creatures.L1_1_2 && creatures.L1_1_3);
       let allLevelCreaturesUnlocked = (creatures.L2_1_1 && creatures.L2_1_2 && creatures.L2_1_3 && creatures.L2_2_1 && creatures.L2_2_2 && creatures.L2_2_3);
 
+      let staffJustUnlocked = false;
       //all level 1 creatures released, unlock staff
-      if (allLevelCreaturesUnlocked && !allTrainingCreaturesUnlocked && !locUser.staffs[this.state.kingdom].ready) {
+      if (allLevelCreaturesUnlocked && !locUser.staffs[this.state.kingdom].ready) {
         console.log('unlock staff');
         // locUser.gamemath[operator].unlocked2 = true;
         locUser.staffs[this.state.kingdom].ready = true;
@@ -218,6 +219,7 @@ export default class Bonus extends React.Component {
         if (operator=='mul') staff = "WATER";
         if (operator=='div') staff = "FIRE";
         let unlockedMessage = "The " + staff + " staff has been unlocked!";
+        staffJustUnlocked = true;
         this.props.snackbar(unlockedMessage)
       }
 
@@ -239,7 +241,12 @@ export default class Bonus extends React.Component {
         if (operator=='mul') kingdom = "Multiplication";
         if (operator=='div') kingdom = "Division";
         let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
-        this.props.snackbar(unlockedMessage);
+
+        let to = 0;
+        if (staffJustUnlocked) to = 5000;
+        let hider = setTimeout(() => {
+          this.props.snackbar(unlockedMessage);
+        }, to)
       }
 
       this.checkAllCreaturesUnlocked(locUser);

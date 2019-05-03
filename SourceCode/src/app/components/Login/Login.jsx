@@ -184,6 +184,7 @@ export default class Login extends React.Component {
             water: {ready:false,purchased:false},
             fire: {ready:false,purchased:false}
           },
+          tutorials: {training:false,battle:false},
           gamemath:{
             add:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },
             sub:{ training:0, battle1:0, battle2:0, unlocked1:false, unlocked2:false },

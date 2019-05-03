@@ -15,6 +15,7 @@ import Answers from '../Answers/Answers';
 import NumberPad from '../NumberPad/NumberPad';
 import Modal from '../Modal/Modal';
 import SnackBar from '../SnackBar/SnackBar';
+import Tutorial from '../Tutorial/Tutorial';
 
 const localUser = "localUser";
 
@@ -29,7 +30,9 @@ export default class GamePlayMath extends React.Component {
   constructor(props) {
     super(props);
 
-    const {operator, gamemode, constant, randomize, level} = props.location.state
+    const {operator, gamemode, constant, randomize, level, tutorial} = props.location.state
+
+    console.log(props);
 
     let nextQuestionDelay = 50
     let range = 11
@@ -39,7 +42,7 @@ export default class GamePlayMath extends React.Component {
     let hitpoints = 100
     if (gamemode == 'health') {
       nextQuestionDelay = 1000
-      countdown = 4
+      // countdown = 4
     }
 
     if (level==2) {
@@ -103,8 +106,23 @@ export default class GamePlayMath extends React.Component {
       levelFX:false,
       hidden,
       countdown,
-      hitpoints
+      hitpoints,
+      tutorial
     };
+
+
+    //update tutorial code if necessary
+    if (this.state.tutorial != ''){
+      let tut = (this.state.gamemode == 'countdown') ? 'battle' : 'training';
+
+      //save to localstorage
+      locUser.tutorials[tut] = true;
+      localStorage.setItem(localUser, JSON.stringify(locUser));
+
+      //sync to firebase
+      let userRef = ref.ref('/users/' + locUser.userid + '/tutorials/' + tut);
+      userRef.set(locUser.tutorials[tut]);
+    }
 
   }
 
@@ -537,6 +555,10 @@ export default class GamePlayMath extends React.Component {
     let randOne = this.state.numbers.randOne
     let randTwo = this.state.numbers.randTwo
 
+    let tutorial = <div></div>
+    if (this.state.tutorial == 'training') tutorial = <Tutorial gamemode='training'/>
+    if (this.state.tutorial == 'battle') tutorial = <Tutorial gamemode='battle'/>
+
     let answerPad = <Answers
       answered={this.state.answered}
       onAnswer={(correct)=>{this.onAnswer(correct)}}
@@ -561,6 +583,7 @@ export default class GamePlayMath extends React.Component {
       <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
         <div className="main-fade" style={styles}>
           <div className="wrapper">
+          here {this.state.tutorial}
             <ScoreBoard
               onTimeExpired={()=>{this.timeExpired()}}
               ready={this.state.battle}
@@ -630,6 +653,7 @@ export default class GamePlayMath extends React.Component {
             />
           </div>
           <SnackBar active={this.state.sbActive} message={this.state.sbMessage}/>
+          {tutorial}
         </div>
       </div>
     );

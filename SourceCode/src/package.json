@@ -23,6 +23,7 @@
     "react-google-login": "^4.0.0",
     "react-hot-loader": "^3.1.1",
     "react-howler": "^3.7.3",
+    "react-responsive-carousel": "^3.1.49",
     "react-router-dom": "^4.2.2",
     "react-sound": "^1.2.0",
     "webpack": "^3.8.1"

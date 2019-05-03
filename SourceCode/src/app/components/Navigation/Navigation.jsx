@@ -43,10 +43,15 @@ export default class Navigation extends React.Component {
     var fbunlocked = (locUser) ? locUser.gamemath.ran.unlocked : false;
     // var ranUnlocked2 = (locUser) ? locUser.gamemath.ran.unlocked2 : false;
 
+    var tutTraining = (!locUser.tutorials.training) ? 'training' : '';
+    var tutBattle = (!locUser.tutorials.battle) ? 'battle' : '';
+
+    console.log('tut',locUser.tutorials.battle,locUser.tutorials.training);
+
     let username = locUser.username
     let hidden = true
 
-    this.state = {modalVisible:'init false',revealed,fbunlocked,hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username};
+    this.state = {modalVisible:'init false',revealed,fbunlocked,hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username,tutTraining,tutBattle};
     // this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
@@ -84,10 +89,13 @@ export default class Navigation extends React.Component {
   render() {
     let opacity = (!this.state.hidden)?1:0
     let styles = {opacity};
+    let tutT = this.state.tutTraining;
+    let tutB = this.state.tutBattle;
 
     let fbReveal = (!this.state.revealed && this.state.fbunlocked)?'fb-reveal':'';
 
     let howToBody = '<p>Use this app daily to improve your math skills. You can choose addition, subtraction, multiplication, division or randomize the skill</p><p>There are two icons next to each of the math skills.</p><p><img className="legend" src='+heart+' width="25" height="25"/><br/>Choose the heart and play until you make 3 mistakes.</p><p><img className="legend" src='+stopwatch+' width="25" height="25"/><br/>Choose the clock and answer as many as you can in 60 seconds.</p><p>The more answers you get correct in a row, the higher your score multiplier. Wrong answers will lower your overall accuracy. Good luck!!</p>'
+
     return (
       <div className={`main navigation ${fbReveal}`}>
         <div className="main-fade" style={styles}>
@@ -105,26 +113,26 @@ export default class Navigation extends React.Component {
             <div className="main-menu">
               <div className="nav-section add">
                 <div className="luckiest-guy banner"><span>+</span></div>
-                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', level:0} }}><span>T</span></Link>
-                <Link className={`luckiest-guy level1 ${(this.state.addUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'add', gamemode:'health', level:0, tutorial:tutT} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.addUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', level:1, tutorial:tutB} }}><span>L1</span></Link>
                 <Link className={`luckiest-guy level2 ${(this.state.addUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'add', gamemode:'countdown', level:2} }}><span>L2</span></Link>
               </div>
               <div className="nav-section sub">
                 <div className="luckiest-guy banner"><span>-</span></div>
-                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'sub', gamemode:'health', level:0} }}><span>T</span></Link>
-                <Link className={`luckiest-guy level1 ${(this.state.subUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'sub', gamemode:'health', level:0, tutorial:tutT} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.subUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown', level:1, tutorial:tutB} }}><span>L1</span></Link>
                 <Link className={`luckiest-guy level2 ${(this.state.subUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'sub', gamemode:'countdown', level:2} }}><span>L2</span></Link>
               </div>
               <div className="nav-section mul">
                 <div className="luckiest-guy banner"><span>x</span></div>
-                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', level:0} }}><span>T</span></Link>
-                <Link className={`luckiest-guy level1 ${(this.state.mulUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'mul', gamemode:'health', level:0, tutorial:tutT} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.mulUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', level:1, tutorial:tutB} }}><span>L1</span></Link>
                 <Link className={`luckiest-guy level2 ${(this.state.mulUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'mul', gamemode:'countdown', level:2} }}><span>L2</span></Link>
               </div>
               <div className="nav-section div">
                 <div className="luckiest-guy banner"><span>÷</span></div>
-                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'div', gamemode:'health', level:0} }}><span>T</span></Link>
-                <Link className={`luckiest-guy level1 ${(this.state.divUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:1} }}><span>L1</span></Link>
+                <Link className="luckiest-guy training" to={{ pathname: '/math', state: { operator: 'div', gamemode:'health', level:0, tutorial:tutT} }}><span>T</span></Link>
+                <Link className={`luckiest-guy level1 ${(this.state.divUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:1, tutorial:tutB} }}><span>L1</span></Link>
                 <Link className={`luckiest-guy level2 ${(this.state.divUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'countdown', level:2} }}><span>L2</span></Link>
               </div>
               <div className={`final-battle ${(this.state.revealed && this.state.fbunlocked)?'fb-ready':'fb-hide'}`}>

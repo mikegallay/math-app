@@ -110,6 +110,9 @@ export default class Bonus extends React.Component {
 
       let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/ran/unlocked');
       userRef.set(locUser.gamemath.ran.unlocked);
+
+      let unlockedMessage = "You found the last creature!! Are you ready for the final battle?";
+      this.props.snackbar(unlockedMessage);
     }
   }
 

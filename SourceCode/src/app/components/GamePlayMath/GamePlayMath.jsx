@@ -173,8 +173,24 @@ export default class GamePlayMath extends React.Component {
   }
 
   showSnackbarMessage(message){
-    console.log('sb',message);
-    this.setState({sbActive:true,sbMessage:message});
+    // console.log('sb',message);
+    let tutorial = '';
+    if (message == "You found the last creature!! Are you ready for the final battle?"){
+      tutorial = 'final'
+    }
+    this.setState({sbActive:true,sbMessage:message,tutorial});
+
+    //save tutorial final
+    if (tutorial == 'final'){
+      //save to localstorage
+      let locUser = JSON.parse(localStorage.getItem(localUser));
+      locUser.tutorials.final = true;
+      localStorage.setItem(localUser, JSON.stringify(locUser));
+
+      //sync to firebase
+      let userRef = ref.ref('/users/' + locUser.userid + '/tutorials/final');
+      userRef.set(locUser.tutorials.final);
+    }
 
     let sbTimer = setTimeout(() => {
       this.setState({sbActive:false});
@@ -545,6 +561,11 @@ export default class GamePlayMath extends React.Component {
     return obj
   }
 
+  hideTutorial(){
+    console.log('hide tutorial');
+    this.setState({tutorial:true})
+  }
+
   render() {
     let opacity = (!this.state.hidden)?1:0
     let styles = {opacity};
@@ -556,8 +577,9 @@ export default class GamePlayMath extends React.Component {
     let randTwo = this.state.numbers.randTwo
 
     let tutorial = <div></div>
-    if (this.state.tutorial == 'training') tutorial = <Tutorial gamemode='training'/>
-    if (this.state.tutorial == 'battle') tutorial = <Tutorial gamemode='battle'/>
+    if (this.state.tutorial == 'training') tutorial = <Tutorial gamemode='training' hideTutorial={()=>{this.hideTutorial()}}/>
+    if (this.state.tutorial == 'battle') tutorial = <Tutorial gamemode='battle' hideTutorial={()=>{this.hideTutorial()}}/>
+    if (this.state.tutorial == 'final') tutorial = <Tutorial gamemode='final' hideTutorial={()=>{this.hideTutorial()}}/>
 
     let answerPad = <Answers
       answered={this.state.answered}
@@ -583,7 +605,6 @@ export default class GamePlayMath extends React.Component {
       <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-          here {this.state.tutorial}
             <ScoreBoard
               onTimeExpired={()=>{this.timeExpired()}}
               ready={this.state.battle}
@@ -652,8 +673,8 @@ export default class GamePlayMath extends React.Component {
               closeModal={()=>{this.closeModal()}}
             />
           </div>
-          <SnackBar active={this.state.sbActive} message={this.state.sbMessage}/>
           {tutorial}
+          <SnackBar active={this.state.sbActive} message={this.state.sbMessage}/>
         </div>
       </div>
     );

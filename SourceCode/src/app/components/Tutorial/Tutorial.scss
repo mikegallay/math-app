@@ -1,11 +1,20 @@
 .tutorial{
   position:absolute;
   top:0;
-  padding: 2% 4%;
+  padding: 0 12px;
   display: flex;
   height: 98vh;
   justify-content: center;
   align-items: center;
+  max-width:296px;
+  @media only screen and (min-width: 321px) {
+      max-width:352px;
+  }
+  @media only screen and (min-width: 376px) {
+      max-width:401px;
+  }
+
+  width:100%;
   .carousel-slider{
     border: 4px solid black!important;
     border-radius: 10px;

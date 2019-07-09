@@ -14,7 +14,8 @@ export default class Countdown extends React.Component {
   constructor(props) {
     super(props);
 
-    let gamelength = 1500
+    let gamelength = 60
+    if (this.props.lifeboost) gamelength *= 1.2
 
     this.state = {
       time: {},

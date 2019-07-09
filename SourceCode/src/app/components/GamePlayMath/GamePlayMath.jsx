@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactHowler from 'react-howler'
-import {firebaseAuth,ref,hideTimer} from "../../config/constants";
+import {firebaseAuth,ref,hideTimer,staffBase} from "../../config/constants";
 
 import './GamePlayMath.scss';
 import Equation from '../Equation/Equation';
@@ -23,8 +23,8 @@ const unlockScore = 500;//2500
 const unlockDecimal = 100;
 const releaseScore = 100;//2500
 const requiredAccuracy = 60;//80
-const fullHealth = 1;
-const baseDamage = 500;
+let fullHealth = 1;
+let baseDamage = staffBase;
 
 export default class GamePlayMath extends React.Component {
   constructor(props) {
@@ -44,6 +44,8 @@ export default class GamePlayMath extends React.Component {
       nextQuestionDelay = 1000
       // countdown = 4
     }
+    let mulligans = 0
+    let lifeboost = false
 
     if (level==2) {
       hitpoints = 150
@@ -67,6 +69,17 @@ export default class GamePlayMath extends React.Component {
       let userRef = ref.ref('/users/' + locUser.userid + '/gamemath/ran/revealed');
       userRef.set(locUser.gamemath.ran.revealed);
     }
+
+    /* STAFF BONUS LOGIC */
+
+    let staff = locUser.staffs.current;
+    // if (staff == "forest") baseDamage *= 2;
+    // if (staff == "forest") mulligans = 1;
+    if (staff == "forest") {
+      fullHealth += 1
+      lifeboost = true
+    }
+
 
 
     this.state = {
@@ -107,7 +120,10 @@ export default class GamePlayMath extends React.Component {
       hidden,
       countdown,
       hitpoints,
-      tutorial
+      tutorial,
+      staff,
+      mulligans,
+      lifeboost
     };
 
 
@@ -223,14 +239,24 @@ export default class GamePlayMath extends React.Component {
       if (this.state.gamemode == "countdown"){
         if (score >= this.state.hitpoints) console.log('battle won!');
       }
-    }else{
-      let numWrong = this.state.numWrong + 1
-      multiplier = 1;
-      let health = this.state.health - 1
-      this.setState({
-        numWrong,streak:0,answered,multiplier,health,correct,
-        rightFX:false,wrongFX:true,levelFX:false
-      })
+    }else{ //is wrong
+      console.log('m',this.state.mulligans);
+        let numWrong = this.state.numWrong + 1
+        let mulligans = this.state.mulligans
+        let streak = 0
+        multiplier = 1
+        let health = this.state.health - 1
+        if (this.state.mulligans > 0){
+          numWrong -= 1
+          streak = this.state.streak
+          multiplier = this.state.multiplier
+          health = this.state.health
+          mulligans -= 1
+        }
+        this.setState({
+          numWrong,streak,mulligans,answered,multiplier,health,correct,
+          rightFX:false,wrongFX:true,levelFX:false
+        })
     }
 
     if (this.state.timerid) {
@@ -611,6 +637,7 @@ export default class GamePlayMath extends React.Component {
               multiplier={this.state.multiplier}
               streak={this.state.streak}
               correct={this.state.correct}
+              lifeboost = {this.state.lifeboost}
               score={this.state.score}
               gamemode={this.state.gamemode}
               gameover={this.state.gameover}

@@ -23,14 +23,15 @@ export default class Store extends React.Component {
     let hidden = true;
 
     var locUser = JSON.parse(localStorage.getItem(localUser));
+
+    let defaultpurchased = true;
     let forestpurchased = locUser.staffs.forest.purchased;
     let rockpurchased = locUser.staffs.rock.purchased;
     let waterpurchased = locUser.staffs.water.purchased;
     let firepurchased = locUser.staffs.fire.purchased;
     let staff = locUser.staffs.current;
     let gems = locUser.gems;
-    this.state = {hidden,staff,locUser,gems,forestpurchased,rockpurchased,waterpurchased,firepurchased};
-
+    this.state = {hidden,staff,locUser,gems,defaultpurchased,forestpurchased,rockpurchased,waterpurchased,firepurchased};
     this.selectStaff = this.selectStaff.bind(this)
     this.buyStaff = this.buyStaff.bind(this)
     //check current high score
@@ -51,7 +52,7 @@ export default class Store extends React.Component {
 
   selectStaff(st){
     let staff = st;
-    console.log('select',this.state[staff + 'purchased']);
+    console.log('select',staff);
 
     if (this.state[staff + 'purchased']){
 

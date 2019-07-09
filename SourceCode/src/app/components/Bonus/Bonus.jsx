@@ -130,6 +130,7 @@ export default class Bonus extends React.Component {
     let bonus = this.props.bonus;
     let bonusTitle = 'You found a pile of gems!';
     let creatures = locUser.creatures[operator];
+    let charm = this.props.charm;
 
     console.log('level',this.props.level);
 
@@ -145,6 +146,7 @@ export default class Bonus extends React.Component {
         if (score >= creatureList.math[operator].L1_1_1.reward) creaturePool.push('L1_1_1');
         if (score >= creatureList.math[operator].L1_1_2.reward) creaturePool.push('L1_1_2');
         if (score >= creatureList.math[operator].L1_1_3.reward) creaturePool.push('L1_1_3');
+        if (charm && score >= creatureList.math[operator].L1_1_3.reward) creaturePool.push('L1_1_3');
 
         creature = this.selectCreature();
 
@@ -187,10 +189,13 @@ export default class Bonus extends React.Component {
         if (accuracy >= creatureList.math[operator].L2_1_1.reward) creaturePool.push('L2_1_1');
         if (accuracy >= creatureList.math[operator].L2_1_2.reward) creaturePool.push('L2_1_2');
         if (accuracy >= creatureList.math[operator].L2_1_3.reward) creaturePool.push('L2_1_3');
+        if (charm && accuracy >= creatureList.math[operator].L2_1_3.reward) creaturePool.push('L2_1_3');
         if (accuracy >= creatureList.math[operator].L2_2_1.reward) creaturePool.push('L2_2_1');
         if (accuracy >= creatureList.math[operator].L2_2_2.reward) creaturePool.push('L2_2_2');
         if (accuracy >= creatureList.math[operator].L2_2_3.reward) creaturePool.push('L2_2_3');
+        if (charm && accuracy >= creatureList.math[operator].L2_2_3.reward) creaturePool.push('L2_2_3');
 
+        console.log('cp',creaturePool);
         creature = this.selectCreature();
 
         var creatureData = this.setCreature(operator,creature);
@@ -261,12 +266,15 @@ export default class Bonus extends React.Component {
         if (accuracy >= creatureList.math[operator].L3_1_1.reward) creaturePool.push('L3_1_1');
         if (accuracy >= creatureList.math[operator].L3_1_2.reward) creaturePool.push('L3_1_2');
         if (accuracy >= creatureList.math[operator].L3_1_3.reward) creaturePool.push('L3_1_3');
+        if (charm && accuracy >= creatureList.math[operator].L3_1_3.reward) creaturePool.push('L3_1_3');
         if (accuracy >= creatureList.math[operator].L3_2_1.reward) creaturePool.push('L3_2_1');
         if (accuracy >= creatureList.math[operator].L3_2_2.reward) creaturePool.push('L3_2_2');
         if (accuracy >= creatureList.math[operator].L3_2_3.reward) creaturePool.push('L3_2_3');
+        if (charm && accuracy >= creatureList.math[operator].L3_2_3.reward) creaturePool.push('L3_2_3');
         if (accuracy >= creatureList.math[operator].L3_3_1.reward) creaturePool.push('L3_3_1');
         if (accuracy >= creatureList.math[operator].L3_3_2.reward) creaturePool.push('L3_3_2');
         if (accuracy >= creatureList.math[operator].L3_3_3.reward) creaturePool.push('L3_3_3');
+        if (charm && accuracy >= creatureList.math[operator].L3_3_3.reward) creaturePool.push('L3_3_3');
         if (accuracy >= creatureList.math[operator].L3_4_1.reward) creaturePool.push('L3_4_1');
         if (accuracy >= creatureList.math[operator].L3_4_2.reward) creaturePool.push('L3_4_2');
         if (accuracy >= creatureList.math[operator].L3_4_3.reward) creaturePool.push('L3_4_3');

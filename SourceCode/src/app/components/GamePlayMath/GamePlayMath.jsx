@@ -46,6 +46,7 @@ export default class GamePlayMath extends React.Component {
     }
     let mulligans = 0
     let lifeboost = false
+    let charm = false
 
     if (level==2) {
       hitpoints = 150
@@ -75,10 +76,11 @@ export default class GamePlayMath extends React.Component {
     let staff = locUser.staffs.current;
     // if (staff == "forest") baseDamage *= 2;
     // if (staff == "forest") mulligans = 1;
-    if (staff == "forest") {
+    /*if (staff == "forest") {
       fullHealth += 1
       lifeboost = true
-    }
+    }*/
+    if (staff == "forest") charm = true
 
 
 
@@ -123,7 +125,8 @@ export default class GamePlayMath extends React.Component {
       tutorial,
       staff,
       mulligans,
-      lifeboost
+      lifeboost,
+      charm
     };
 
 
@@ -693,6 +696,7 @@ export default class GamePlayMath extends React.Component {
               gameplayBtns={true}
               level={this.state.level}
               bonus={this.state.bonus}
+              charm={this.state.charm}
               accuracy={this.state.accuracy}
               operator={this.state.operator}
               visible={this.state.modalVisible}

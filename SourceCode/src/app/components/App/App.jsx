@@ -60,7 +60,7 @@ export default class App extends React.Component {
       <Route {...rest} render={props => (
         (this.state.hasLogin) === true
           ? <Component {...props} />
-          : <Redirect to='/login' />
+          : <Redirect to='/login/' />
       )} />
     )
 
@@ -68,8 +68,8 @@ export default class App extends React.Component {
       <Router history={customHistory}>
         <Switch>
           <Route exact path="/" render={props => <Landing ateCookies={() => this.ateCookies()} {...props} />} />
-          <NeedsCookies exact path="/legend" component={Legend} />
-          <NeedsCookies exact path="/login" component={Login} />
+          <NeedsCookies exact path="/legend/" component={Legend} />
+          <NeedsCookies exact path="/login/" component={Login} />
           <NeedsLogin exact path="/chooseusername/" component={ChooseUsername} />
           <NeedsLogin exact path="/navigation/" component={Navigation} />
           <NeedsLogin exact path="/math/" component={GamePlayMath} />

@@ -1,7 +1,7 @@
 {
   "app_server": {
-    "isDev": true,
-    "port": 1111,
+    "isDev": false,
+    "port": 80,
     "auth_routes": [],
     "user": "",
     "password": ""

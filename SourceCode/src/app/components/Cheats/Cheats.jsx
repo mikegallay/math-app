@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import {logout} from "../../services/auth";
 import {ref,hideTimer} from "../../config/constants";
 
+const localUser = "localUser";
+
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);

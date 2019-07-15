@@ -63,7 +63,7 @@ export default class Answers extends React.Component {
               onAnswer={this.props.onAnswer}
               value={arr.answer+arr.rand}
               status={arr.status}
-              gamemode='health'
+              gamemode='training'
             />
           );
         })}

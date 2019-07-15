@@ -18,7 +18,7 @@ export default class Answer extends React.Component {
 
   render() {
     let answerReturn = this.props.status=='correct';
-    let isNumPad = (this.props.gamemode == 'countdown')?true:false;
+    let isNumPad = (this.props.gamemode == 'battle')?true:false;
     if (isNumPad) answerReturn = this.props.value;
 
     return (

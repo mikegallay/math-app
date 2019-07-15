@@ -34,7 +34,7 @@ export default class ScoreBoard extends React.Component {
         lifeboost={this.props.lifeboost}
         onTimeExpired={this.props.onTimeExpired}/>
 
-    if (this.props.gamemode=='health'){
+    if (this.props.gamemode == 'training'){
       gamemode = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>
     }
     return (

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactHowler from 'react-howler'
-import {firebaseAuth,ref,hideTimer,staffBase} from "../../config/constants";
+import {firebaseAuth,ref,hideTimer,staffBase,trainingTotal,trainingChances} from "../../config/constants";
 
 import './GamePlayMath.scss';
 import Equation from '../Equation/Equation';
@@ -23,8 +23,9 @@ const unlockScore = 500;//2500
 const unlockDecimal = 100;
 const releaseScore = 100;//2500
 const requiredAccuracy = 60;//80
-let fullHealth = 1;
+let fullHealth = trainingChances;
 let baseDamage = staffBase;
+let trainingQuestions = [];
 
 export default class GamePlayMath extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class GamePlayMath extends React.Component {
     let battle = false
     let countdown = 3
     let hitpoints = 100
-    if (gamemode == 'health') {
+    if (gamemode == 'training') {
       nextQuestionDelay = 1000
       // countdown = 4
     }
@@ -54,9 +55,15 @@ export default class GamePlayMath extends React.Component {
     }
 
     // console.log('gp level',level);
+    this.createTrainingQuestions(constant,range,operator,randomize);
 
     let numbers = this.calculateNumbers(constant,range,operator)
+    if (gamemode == 'training'){
+      numbers = trainingQuestions[0];
+    }
+
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,operator)
+
     this.introCountdown = this.introCountdown.bind(this)
 
     //check if we are looking at random (final battle) for the first time and set revealed to true
@@ -82,12 +89,7 @@ export default class GamePlayMath extends React.Component {
     }*/
     if (staff == "forest") charm = true
 
-
-
     this.state = {
-      //unlockScore:100,//2500
-      //releaseScore:100,//2500
-      //requiredAccuracy:25,//80
       sbActive:false,
       sbMessage:'snack',
       score:0,
@@ -101,6 +103,7 @@ export default class GamePlayMath extends React.Component {
       gameover: false,
       restart:false,
       health: fullHealth,
+      numTotal:0,
       numRight:0,
       numWrong:0,
       operator,
@@ -129,10 +132,9 @@ export default class GamePlayMath extends React.Component {
       charm
     };
 
-
     //update tutorial code if necessary
     if (this.state.tutorial != ''){
-      let tut = (this.state.gamemode == 'countdown') ? 'battle' : 'training';
+      let tut = (this.state.gamemode == 'battle') ? 'battle' : 'training';
 
       //save to localstorage
       locUser.tutorials[tut] = true;
@@ -143,17 +145,27 @@ export default class GamePlayMath extends React.Component {
       userRef.set(locUser.tutorials[tut]);
     }
 
+
+  }
+
+  createTrainingQuestions(_constant,_range,_operator,_randomize){
+    trainingQuestions = [];
+    let operator = (_randomize) ? 'ran' : _operator
+    for (var i = 0; i<=trainingTotal-1; i++){
+      let numbers = this.calculateNumbers(_constant,_range,operator)
+      trainingQuestions.push(numbers)
+    }
+
+    console.log('trainingQuestions',trainingQuestions);
+
   }
 
   componentWillMount(){
-
-
-
     let hidden = false;
     //hide the layout until the css is loaded
      let hider = setTimeout(() => {
         this.setState({hidden});
-        (this.state.gamemode == 'countdown')?this.introCountdown():this.readyToBattle(1000);
+        (this.state.gamemode == 'battle')?this.introCountdown():this.readyToBattle(1000);
       }, hideTimer)
   }
 
@@ -218,12 +230,13 @@ export default class GamePlayMath extends React.Component {
   }
 
   onAnswer(isCorrect){
-    // prevent multiple button presses for same unanswer
+    // prevent multiple button presses for same answer
     if (this.state.answered) return;
 
     this.stopAudio()
 
     let answered = true;
+    let numTotal = this.state.numTotal + 1;
     let correct = isCorrect;
     let multiplier = this.state.multiplier;
 
@@ -235,15 +248,19 @@ export default class GamePlayMath extends React.Component {
       if (streak%5==0) levelFX=true
       let score = this.state.score + (baseDamage * multiplier)
 
-        this.setState({
-          numRight,score,streak,answered,multiplier,correct,modalVisible:false,
-          rightFX:true,wrongFX:false,levelFX
-        })
-      if (this.state.gamemode == "countdown"){
+      this.setState({
+        numRight,numTotal,score,streak,answered,multiplier,correct,modalVisible:false,
+        rightFX:true,wrongFX:false,levelFX
+      })
+
+      if (this.state.gamemode == 'battle'){
         if (score >= this.state.hitpoints) console.log('battle won!');
+      } else {
+        trainingQuestions.shift();
       }
+
     }else{ //is wrong
-      console.log('m',this.state.mulligans);
+      // console.log('m',this.state.mulligans);
         let numWrong = this.state.numWrong + 1
         let mulligans = this.state.mulligans
         let streak = 0
@@ -256,8 +273,13 @@ export default class GamePlayMath extends React.Component {
           health = this.state.health
           mulligans -= 1
         }
+
+        if (this.state.gamemode == 'training'){
+          trainingQuestions.push(trainingQuestions.splice(0, 1)[0]);
+        }
+
         this.setState({
-          numWrong,streak,mulligans,answered,multiplier,health,correct,
+          numWrong,numTotal,streak,mulligans,answered,multiplier,health,correct,
           rightFX:false,wrongFX:true,levelFX:false
         })
     }
@@ -272,9 +294,9 @@ export default class GamePlayMath extends React.Component {
       var operator = (this.state.randomize) ? 'ran' : this.state.operator
       // let minTrainingBonus = 500;
 
-      if (this.state.health <= 0 && this.state.gamemode == 'health'){
+      if ((this.state.health <= 0 || trainingQuestions.length == 0) && this.state.gamemode == 'training'){
         console.log("Game Over");
-        accuracy = Math.round(this.state.numRight / (this.state.numRight + fullHealth) * 100)
+        accuracy = Math.round(this.state.numRight / this.state.numTotal * 100)
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
 
         //while in training, you didn't unlock a creature
@@ -349,7 +371,7 @@ export default class GamePlayMath extends React.Component {
           accuracy,
           levelFX:false
         })
-      } else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'countdown'){
+      } else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'battle'){
         //you defeated the wizard
 
         console.log('you defeated the wizard');
@@ -501,6 +523,10 @@ export default class GamePlayMath extends React.Component {
     let answered = false
 
     let numbers = this.calculateNumbers(this.state.constant,this.state.range,this.state.operator)
+    if (this.state.gamemode == 'training'){
+      console.log('next q training');
+      numbers = trainingQuestions[0];
+    }
     let equation = this.calculateEquation(numbers.numOne,numbers.numTwo,this.state.operator)
 
     this.setState({
@@ -511,7 +537,7 @@ export default class GamePlayMath extends React.Component {
       restart:false
     })
 
-    if (this.state.gamemode == 'health') this.stopAudio()
+    if (this.state.gamemode == 'training') this.stopAudio()
 
   }
 
@@ -527,7 +553,10 @@ export default class GamePlayMath extends React.Component {
     }
     let delay = 300;
 
-    if (this.state.gamemode == 'health') battle = true; delay = 0;
+    //checkthis
+    if (this.state.gamemode == 'training') battle = true; delay = 0;
+
+    this.createTrainingQuestions(this.state.constant,this.state.range,this.state.operator,this.state.randomize);
 
     this.setState({
       modalVisible:false,
@@ -539,6 +568,7 @@ export default class GamePlayMath extends React.Component {
       multiplier:1,
       score:0,
       numRight:0,
+      numTotal:0,
       numWrong:0,
       gameover:false,
       restart:true,
@@ -617,7 +647,7 @@ export default class GamePlayMath extends React.Component {
       randOne={randOne}
       randTwo={randTwo}
     />
-    if (this.state.gamemode == 'countdown'){
+    if (this.state.gamemode == 'battle'){
       answerPad = <NumberPad
         answered={this.state.answered}
         onAnswer={(correct)=>{this.onAnswer(correct)}}

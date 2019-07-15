@@ -51,7 +51,7 @@ export default class Profile extends React.Component {
    }
 
   render() {
-    var locUser = this.state.localUser;//JSON.parse(localStorage.getItem(localUser));
+    var locUser = this.state.locUser;//JSON.parse(localStorage.getItem(localUser));
     var gems = locUser.gems;
     var staff = locUser.staffs.current;
     var addTrainHS = locUser.gamemath.add.training;

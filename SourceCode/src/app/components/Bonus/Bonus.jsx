@@ -346,7 +346,7 @@ export default class Bonus extends React.Component {
       <div className={`bonus-wrapper ${this.state.visible}`}>
 
         <ReactHowler
-          src='http://math.michaelgallay.com/audio/magic.mp3'
+          src='/audio/magic.mp3'
           playing={magicFX}
           ref={(ref) => (this.magicFX = ref)}
         />

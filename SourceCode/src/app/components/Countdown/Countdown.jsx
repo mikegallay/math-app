@@ -129,7 +129,7 @@ export default class Countdown extends React.Component {
       <div className={`countdown-wrapper ${(this.state.seconds<6)?'final-5':''}`}>
         {this.state.time.m}:{this.state.time.s}
         <ReactHowler
-        src='http://math.michaelgallay.com/audio/countdown.mp3'
+        src='/audio/countdown.mp3'
         playing={final5}
       />
       </div>

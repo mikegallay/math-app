@@ -14,6 +14,8 @@ $altcolor: #e2effc;
     .secondary-nav{
       margin: 20px 0 0;
     }
+    .creature-wrapper .creature-section h4.mul,
+    .creature-wrapper .creature-section h4.ran{background:white;}
     h1{margin-top:-10px;margin-bottom:0;}
     h4{
       position: relative;
@@ -163,6 +165,7 @@ $altcolor: #e2effc;
   padding: 0 5% 1em;
   margin-top: 0;
   margin-bottom: 0;
+  background:white;
   &.sub,&.div{background:$altcolor;}
   /*li.level1::before{
     content:'Level 1';

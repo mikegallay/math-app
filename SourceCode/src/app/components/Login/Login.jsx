@@ -193,10 +193,10 @@ export default class Login extends React.Component {
             ran:{ battle:0, unlocked:false, revealed: false },
           },
           creatures:{
-            add:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},
-            sub:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},
-            mul:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},
-            div:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false,L3_4_1:false,L3_4_2:false,L3_4_3:false},
+            add:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false},
+            sub:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false},
+            mul:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false},
+            div:{L1_1_1:false,L1_1_2:false,L1_1_3:false,L2_1_1:false,L2_1_2:false,L2_1_3:false,L2_2_1:false,L2_2_2:false,L2_2_3:false,L3_1_1:false,L3_1_2:false,L3_1_3:false,L3_2_1:false,L3_2_2:false,L3_2_3:false,L3_3_1:false,L3_3_2:false,L3_3_3:false},
             ran:{queen:false}
           }
         }

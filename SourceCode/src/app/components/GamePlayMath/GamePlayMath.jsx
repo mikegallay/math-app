@@ -33,7 +33,7 @@ export default class GamePlayMath extends React.Component {
 
     const {operator, gamemode, constant, randomize, level, tutorial} = props.location.state
 
-    console.log(props);
+    console.log('gameplay',props);
 
     let nextQuestionDelay = 50
     let range = 11
@@ -131,6 +131,8 @@ export default class GamePlayMath extends React.Component {
       lifeboost,
       charm
     };
+
+    console.log('gpstate',this.state);
 
     //update tutorial code if necessary
     if (this.state.tutorial != ''){
@@ -661,7 +663,7 @@ export default class GamePlayMath extends React.Component {
     if (this.state.countdown == '') gameArtBattleClass = 'ready rematch';
 
     return (
-      <div style={styles} className={`gameplaymath main ${this.state.gamemode}`}>
+      <div style={styles} className={`gameplaymath main ${this.state.gamemode} land-${this.state.operator}`}>
         <div className="main-fade" style={styles}>
           <div className="wrapper">
             <ScoreBoard
@@ -691,17 +693,17 @@ export default class GamePlayMath extends React.Component {
 
             <div className="howler">
               <ReactHowler
-                src='http://math.michaelgallay.com/audio/right.mp3'
+                src='/audio/right.mp3'
                 playing={this.state.rightFX}
                 ref={(ref) => (this.rightFX = ref)}
               />
               <ReactHowler
-                src='http://math.michaelgallay.com/audio/wrong.mp3'
+                src='/audio/wrong.mp3'
                 playing={this.state.wrongFX}
                 ref={(ref) => (this.wrongFX = ref)}
               />
               <ReactHowler
-                src='http://math.michaelgallay.com/audio/level1.mp3'
+                src='/audio/level1.mp3'
                 playing={this.state.levelFX}
                 ref={(ref) => (this.levelFX = ref)}
               />

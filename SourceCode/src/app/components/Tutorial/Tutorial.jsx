@@ -40,16 +40,16 @@ export default class Tutorial extends React.Component {
 const TrainingTutorial = ({hideTutorial}) => (
   <Carousel>
     <div>
-      <img src="/public/images/tutorial-f1.jpg" />
+      <img src="/images/tutorial-f1.jpg" />
     </div>
     <div>
-      <img src="/public/images/tutorial-f2.jpg" />
+      <img src="/images/tutorial-f2.jpg" />
     </div>
     <div>
-      <img src="/public/images/tutorial-f3.jpg" />
+      <img src="/images/tutorial-f3.jpg" />
     </div>
     <div>
-      <img src="/public/images/tutorial-f1.jpg" />
+      <img src="/images/tutorial-f1.jpg" />
       <button onClick={hideTutorial} className='close-btn landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'>Close Tutorial</button>
     </div>
   </Carousel>
@@ -58,10 +58,10 @@ const TrainingTutorial = ({hideTutorial}) => (
 const BattleTutorial = ({hideTutorial}) => (
   <Carousel>
     <div>
-      <img src="/public/images/tutorial-f3.jpg" />
+      <img src="/images/tutorial-f3.jpg" />
     </div>
     <div>
-      <img src="/public/images/tutorial-f1.jpg" />
+      <img src="/images/tutorial-f1.jpg" />
       <p onClick={hideTutorial} className='close-btn landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'>Close Tutorial</p>
     </div>
   </Carousel>
@@ -70,7 +70,7 @@ const BattleTutorial = ({hideTutorial}) => (
 const FinalTutorial = ({hideTutorial}) => (
   <Carousel>
     <div>
-      <img src="/public/images/tutorial-f1.jpg" />
+      <img src="/images/tutorial-f1.jpg" />
       <p onClick={hideTutorial} className='close-btn landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'>Close Tutorial</p>
     </div>
   </Carousel>

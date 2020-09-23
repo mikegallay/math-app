@@ -3,10 +3,9 @@ body {
   margin:0;
   font-family: 'Helvetica', sans-serif;
   font-weight: bold;
-
+  width: 100%;
   background-color: #fff;
-  max-width: 425px;
-  margin:0 auto;
+
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -15,6 +14,10 @@ body {
       -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none;
           line-height: 1.1;
+}
+
+body #root{
+  width: 100%;
 }
 
 .inactive{
@@ -36,6 +39,36 @@ body {
 .main{
   height:100vh;
   top:0;
+  max-width: 425px;
+  margin:0 auto;
+  &::before {
+    position: fixed;
+    width: 100%;
+    background: red;
+    height: 100%;
+    content: '';
+    left: 0px;
+    z-index: -1;
+    transition: background-image .5s;
+  }
+  &.navigation::before {
+    background:red;
+  }
+  &.navigation::before {
+    background:blue;
+  }
+  &.gameplaymath.land-add::before {
+    background:green;
+  }
+  &.gameplaymath.land-sub::before {
+    background:yellow;
+  }
+  &.gameplaymath.land-mul::before {
+    background:pink;
+  }
+  &.gameplaymath.land-div::before {
+    background:gray;
+  }
   .main-fade{
     opacity:0;
 

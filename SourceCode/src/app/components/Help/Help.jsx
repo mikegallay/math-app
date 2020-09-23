@@ -43,7 +43,7 @@ const data = [
   },
   {
     title: 'Gems',
-    paragraph: 'Gems, which can be used to buy staffs, are earned while training in any kingdom. You will receive gems once you have released all three creatures in that kingdom. The higher you score, the more gems you will earn.'
+    paragraph: 'Gems, which can be used to buy staffs, are earned while playing in any kingdom. While training, you will receive gems once you have released all three creatures in that kingdom. The higher you score, the more gems you will earn. In battle, you will be awarded gems if your accuracy is not good enough to unlock a creature.'
   },
   {
     title: 'Creatures',

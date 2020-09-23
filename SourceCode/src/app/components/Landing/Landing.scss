@@ -6,7 +6,8 @@
   background-size:cover;
   .main-fade{
     height:100%;
-    position: fixed;
+    overflow: hidden;
+    position:relative;
   }
   // padding: 2em;
   .wrapper {

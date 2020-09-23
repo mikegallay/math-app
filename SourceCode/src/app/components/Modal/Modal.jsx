@@ -86,9 +86,6 @@ export default class Modal extends React.Component {
             {gameplayBtns}
           </div>
 
-          <button
-            onClick={()=>this.closeModal()}
-            className="close-btn">x</button>
         </div>
         {bonusRender}
       </div>

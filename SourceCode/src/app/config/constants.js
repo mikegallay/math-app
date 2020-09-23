@@ -47,10 +47,7 @@ export const creatureList = {
       L3_2_3:{img:'A3_2_3',name:'abc',reward:94,freq:'ultrarare'},
       L3_3_1:{img:'A3_3_1',name:'abc',reward:75,freq:'common'},
       L3_3_2:{img:'A3_3_2',name:'abc',reward:85,freq:'rare'},
-      L3_3_3:{img:'A3_3_3',name:'abc',reward:96,freq:'ultrarare'},
-      L3_4_1:{img:'A3_4_1',name:'abc',reward:80,freq:'common'},
-      L3_4_2:{img:'A3_4_2',name:'abc',reward:90,freq:'rare'},
-      L3_4_3:{img:'A3_4_3',name:'abc',reward:98,freq:'ultrarare'}
+      L3_3_3:{img:'A3_3_3',name:'abc',reward:96,freq:'ultrarare'}
     },
     sub:{
       L1_1_1:{img:'S1_1_1',name:'abc',reward:500,freq:'common'},
@@ -70,10 +67,7 @@ export const creatureList = {
       L3_2_3:{img:'S3_2_3',name:'abc',reward:94,freq:'ultrarare'},
       L3_3_1:{img:'S3_3_1',name:'abc',reward:75,freq:'common'},
       L3_3_2:{img:'S3_3_2',name:'abc',reward:85,freq:'rare'},
-      L3_3_3:{img:'S3_3_3',name:'abc',reward:96,freq:'ultrarare'},
-      L3_4_1:{img:'S3_4_1',name:'abc',reward:80,freq:'common'},
-      L3_4_2:{img:'S3_4_2',name:'abc',reward:90,freq:'rare'},
-      L3_4_3:{img:'S3_4_3',name:'abc',reward:98,freq:'ultrarare'}
+      L3_3_3:{img:'S3_3_3',name:'abc',reward:96,freq:'ultrarare'}
     },
     mul:{
       L1_1_1:{img:'M1_1_1',name:'abc',reward:500,freq:'common'},
@@ -93,10 +87,7 @@ export const creatureList = {
       L3_2_3:{img:'M3_2_3',name:'abc',reward:94,freq:'ultrarare'},
       L3_3_1:{img:'M3_3_1',name:'abc',reward:75,freq:'common'},
       L3_3_2:{img:'M3_3_2',name:'abc',reward:85,freq:'rare'},
-      L3_3_3:{img:'M3_3_3',name:'abc',reward:96,freq:'ultrarare'},
-      L3_4_1:{img:'M3_4_1',name:'abc',reward:80,freq:'common'},
-      L3_4_2:{img:'M3_4_2',name:'abc',reward:90,freq:'rare'},
-      L3_4_3:{img:'M3_4_3',name:'abc',reward:98,freq:'ultrarare'}
+      L3_3_3:{img:'M3_3_3',name:'abc',reward:96,freq:'ultrarare'}
     },
     div:{
       L1_1_1:{img:'D1_1_1',name:'abc',reward:500,freq:'common'},
@@ -116,10 +107,7 @@ export const creatureList = {
       L3_2_3:{img:'D3_2_3',name:'abc',reward:94,freq:'ultrarare'},
       L3_3_1:{img:'D3_3_1',name:'abc',reward:75,freq:'common'},
       L3_3_2:{img:'D3_3_2',name:'abc',reward:85,freq:'rare'},
-      L3_3_3:{img:'D3_3_3',name:'abc',reward:96,freq:'ultrarare'},
-      L3_4_1:{img:'D3_4_1',name:'abc',reward:80,freq:'common'},
-      L3_4_2:{img:'D3_4_2',name:'abc',reward:90,freq:'rare'},
-      L3_4_3:{img:'D3_4_3',name:'abc',reward:98,freq:'ultrarare'}
+      L3_3_3:{img:'D3_3_3',name:'abc',reward:96,freq:'ultrarare'}
     },
     ran:{
       queen:{img:'queen',name:'Queen Queenie',reward:100,freq:'ultrarare'}
@@ -127,4 +115,4 @@ export const creatureList = {
   }
 }
 
-export const creatureIds = ["L1_1_1","L1_1_2","L1_1_3","L2_1_1","L2_1_2","L2_1_3","L2_2_1","L2_2_2","L2_2_3","L3_1_1","L3_1_2","L3_1_3","L3_2_1","L3_2_2","L3_2_3","L3_3_1","L3_3_2","L3_3_3","L3_4_1","L3_4_2","L3_4_3"];
+export const creatureIds = ["L1_1_1","L1_1_2","L1_1_3","L2_1_1","L2_1_2","L2_1_3","L2_2_1","L2_2_2","L2_2_3","L3_1_1","L3_1_2","L3_1_3","L3_2_1","L3_2_2","L3_2_3","L3_3_1","L3_3_2","L3_3_3"];

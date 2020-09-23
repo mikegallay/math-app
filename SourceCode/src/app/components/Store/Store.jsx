@@ -166,6 +166,7 @@ export default class Store extends React.Component {
                 </li>
               </ul>
             </div>
+            <p className="credit rel">© 2020 Michael Gallay</p>
           </div>
         </div>
       </div>

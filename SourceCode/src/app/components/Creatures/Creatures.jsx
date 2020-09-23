@@ -143,6 +143,7 @@ export default class Creatures extends React.Component {
                     <div className="creature-name">{((locUser.creatures.ran.queen))?this.getCreatureName('ran','queen'):'???'}</div>
                   </div>
                 </div>
+                <p className="credit rel">© 2020 Michael Gallay</p>
               </div>
             </div>
           </div>

@@ -52,7 +52,7 @@ export default class Legend extends React.Component {
               <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> BEGIN QUEST </Link>
               <Link to='/help' className='mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored'><i className="material-icons">help</i></Link>
             </div>
-            <p className="credit">© 2018 Mike Gallay</p>
+            <p className="credit">© 2020 Michael Gallay</p>
           </div>
         </div>
       </div>

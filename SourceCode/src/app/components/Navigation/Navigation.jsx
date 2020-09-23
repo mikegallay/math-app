@@ -204,7 +204,7 @@ export default class Navigation extends React.Component {
               </div>
             </div>*/}
 
-            <p className="credit">© 2018 Mike Gallay</p>
+            <p className="credit">© 2020 Michael Gallay</p>
 
 
 

@@ -136,6 +136,7 @@ export default class Profile extends React.Component {
             </div>
           </div>
         </div>
+        <p className="credit rel">© 2020 Michael Gallay</p>
       </div>
     );
   }

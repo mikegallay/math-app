@@ -55,7 +55,7 @@ export default class Landing extends React.Component {
                 <Link to='/legend' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">brightness_7</i> NEW QUEST </Link>
                 <Link to='/login' className='landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">terrain</i> CONTINUE </Link>
               </div>
-              <p className="credit">© 2018 Mike Gallay</p>
+              <p className="credit">© 2020 Michael Gallay</p>
           </div>
           <div className={`cookie-warning ${(this.state.hidden && !this.state.cookies)?'start':''} ${(this.state.cookies)?'remove':''}`}>
             <div className="cookie-content">

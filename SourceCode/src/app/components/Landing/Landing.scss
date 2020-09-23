@@ -28,15 +28,14 @@
     }
     .landing-buttons{
       width:100%;
+      position:relative;
+      bottom:10%;
       .landing-btn{
         margin:1em;
         i{
           font-size:18px;
         }
       }
-    }
-    .credit{
-      width:100%;
     }
   }
 

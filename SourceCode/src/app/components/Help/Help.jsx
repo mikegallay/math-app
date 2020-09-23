@@ -101,9 +101,10 @@ export default class Help extends React.Component {
                 )
               })}
             </ul>
-
+            <p className="credit rel">© 2020 Michael Gallay</p>
           </div>
         </div>
+
       </div>
     );
   }

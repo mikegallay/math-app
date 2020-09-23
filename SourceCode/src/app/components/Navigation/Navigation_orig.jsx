@@ -228,7 +228,7 @@ export default class Navigation extends React.Component {
                 >Sign Out</button>
             </div>
 
-            <p className="credit">© 2018 Mike Gallay</p>
+            <p className="credit">© 2020 Michael Gallay</p>
 
             <Modal
               title="How To Play"

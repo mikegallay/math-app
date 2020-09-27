@@ -16,12 +16,13 @@
 
     .secondary-nav{
       padding:0 5%;
-      margin-bottom: 2em;
+      margin-bottom: 1em;
+      text-align: center;
     }
     .legend-of{
       padding:0 5%;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       flex-direction: column;
       color: black;
     }
@@ -82,9 +83,9 @@
       display:flex;
       flex-grow:1;
       width:100%;
-      height:calc(100vh - 220px);
+      height:calc(100vh - 240px);
       @media only screen and (min-width: 375px) {
-        height:calc(100vh - 200px);
+        height:calc(100vh - 250px);
       }
       position: relative;
       flex-wrap: wrap;

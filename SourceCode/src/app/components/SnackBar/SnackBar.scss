@@ -7,11 +7,11 @@
   top:-250px;
   background:black;
   width:100%;
-  padding:2em 20px;
+  padding:2em 0;
   text-align: center;
   color:white;
   transition: 1s top;
-  max-width: 385px;
+  max-width: 425px;
   &.active{
     top:0;
   }

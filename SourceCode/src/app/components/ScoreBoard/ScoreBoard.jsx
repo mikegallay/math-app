@@ -6,6 +6,7 @@
 
 import React from 'react';
 import Score from '../Score/Score';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import Health from '../Health/Health';
 import Countdown from '../Countdown/Countdown';
 import Multiplier from '../Multiplier/Multiplier';
@@ -18,9 +19,9 @@ export default class ScoreBoard extends React.Component {
   constructor(props) {
     super(props);
 
-    const {gamemode} = props
+    const {gamemode, progressTotal, progressLeft} = props
 
-    // console.log('gm',props.gamemode)
+    // console.log('gm',props)
 
     this.state = {}
   }
@@ -39,11 +40,14 @@ export default class ScoreBoard extends React.Component {
     }
     return (
       <div className={`scoreboard-wrapper ${(this.props.gameover)?'gameover':''}`}>
-        <Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
-        {gamemode}
-        <Streak correct={this.props.correct} streak={this.props.streak}/>
-        <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>
-        <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
+        <div className="main-scores">
+          <Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
+          {gamemode}
+          <Streak correct={this.props.correct} streak={this.props.streak}/>
+          <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>
+          <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
+        </div>
+        <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>
       </div>
     );
   }

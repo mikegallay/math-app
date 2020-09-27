@@ -177,7 +177,7 @@ export default class Bonus extends React.Component {
         if (operator=='sub') kingdom = "Subtraction";
         if (operator=='mul') kingdom = "Multiplication";
         if (operator=='div') kingdom = "Division";
-        let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
+        let unlockedMessage = "Level 2 in " + kingdom + " has been unlocked!";
         this.props.snackbar(unlockedMessage);
       }
 
@@ -248,7 +248,7 @@ export default class Bonus extends React.Component {
         if (operator=='sub') kingdom = "Subtraction";
         if (operator=='mul') kingdom = "Multiplication";
         if (operator=='div') kingdom = "Division";
-        let unlockedMessage = "Level 2 in the " + kingdom + " has been unlocked!";
+        let unlockedMessage = "Level 2 in " + kingdom + " has been unlocked!";
 
         let to = 0;
         if (staffJustUnlocked) to = 5000;

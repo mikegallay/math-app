@@ -129,7 +129,9 @@ export default class GamePlayMath extends React.Component {
       staff,
       mulligans,
       lifeboost,
-      charm
+      charm,
+      progressTotal:(gamemode == 'training') ? trainingTotal : 20,
+      progressLeft:(gamemode == 'training') ? trainingQuestions.length : 20
     };
 
     console.log('gpstate',this.state);
@@ -250,16 +252,18 @@ export default class GamePlayMath extends React.Component {
       if (streak%5==0) levelFX=true
       let score = this.state.score + (baseDamage * multiplier)
 
-      this.setState({
-        numRight,numTotal,score,streak,answered,multiplier,correct,modalVisible:false,
-        rightFX:true,wrongFX:false,levelFX
-      })
 
       if (this.state.gamemode == 'battle'){
         if (score >= this.state.hitpoints) console.log('battle won!');
       } else {
         trainingQuestions.shift();
       }
+
+      this.setState({
+        numRight,numTotal,score,streak,answered,multiplier,correct,modalVisible:false,
+        rightFX:true,wrongFX:false,levelFX,
+        progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
+      })
 
     }else{ //is wrong
       // console.log('m',this.state.mulligans);
@@ -302,14 +306,14 @@ export default class GamePlayMath extends React.Component {
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
 
         //while in training, you didn't unlock a creature
-        if (score <= unlockScore){
-          bonus=1;
+        if (this.state.health === 0){
+          bonus=0;
           modalTitle = 'Keep practicing!';
-          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Keep learning to improve your score and accuracy.'
+          modalBody = 'Your score:<br><h3>' + this.state.score + '</h3><span class="green bold">You got ' + this.state.numRight+ ' correct!</span><br><br><span class="bold">' + accuracy + '% Accuracy</span><br><br>Get all the training questions correct to unlock bonuses.'
         }
 
         //did they do well enough to unlock level1
-        if (score >= unlockScore){
+        if (this.state.health > 0 && score >= unlockScore){
 
           //check to see if level1 is unlocked yet and update message
           if (!locUser.gamemath[operator].unlocked1){
@@ -324,7 +328,7 @@ export default class GamePlayMath extends React.Component {
             if (operator=='sub') kingdom = "Subtraction";
             if (operator=='mul') kingdom = "Multiplication";
             if (operator=='div') kingdom = "Division";
-            let unlockedMessage = "Level 1 in the " + kingdom + " has been unlocked!";
+            let unlockedMessage = "Level 1 in " + kingdom + " has been unlocked!";
             this.showSnackbarMessage(unlockedMessage);
 
           } else {
@@ -362,6 +366,7 @@ export default class GamePlayMath extends React.Component {
           userRef.set(locUser.gamemath[operator]);
         }
 
+        console.log('here',trainingQuestions);
         this.setState({
           gameover: true,
           modalVisible:true,
@@ -371,7 +376,8 @@ export default class GamePlayMath extends React.Component {
           wrongFX:false,
           bonus,
           accuracy,
-          levelFX:false
+          levelFX:false,
+          progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
         })
       } else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'battle'){
         //you defeated the wizard
@@ -576,7 +582,9 @@ export default class GamePlayMath extends React.Component {
       restart:true,
       timeExpired:false,
       battle,
-      countdown
+      countdown,
+      progressTotal:(this.state.gamemode == 'training') ? trainingTotal : 20,
+      progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
     })
 
     this.state.timerid = setTimeout(() => {
@@ -681,6 +689,8 @@ export default class GamePlayMath extends React.Component {
               health={this.state.health}
               hitpoints = {this.state.hitpoints}
               modalVisible = {this.state.modalVisible}
+              progressTotal = {this.state.progressTotal}
+              progressLeft = {this.state.progressLeft}
             />
 
             <div className="gameArt">

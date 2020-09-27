@@ -3,15 +3,16 @@
 
 .scoreboard-wrapper{
   display: block;
-  // border-bottom: 2px solid black;
+  background: white;
+  border-bottom: 2px solid black;
   top:-5px;
   position: relative;
-
+  padding:1em;
   .main-scores{
     &.gameover{
       opacity:0;
     }
-    padding:1em;
+    padding-bottom:1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

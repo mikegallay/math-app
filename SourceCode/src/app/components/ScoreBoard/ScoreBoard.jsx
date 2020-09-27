@@ -19,7 +19,7 @@ export default class ScoreBoard extends React.Component {
   constructor(props) {
     super(props);
 
-    const {gamemode, progressTotal, progressLeft} = props
+    const {gamemode, progressTotal, progressLeft,level} = props
 
     // console.log('gm',props)
 
@@ -43,8 +43,8 @@ export default class ScoreBoard extends React.Component {
         <div className="main-scores">
           <Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
           {gamemode}
-          <Streak correct={this.props.correct} streak={this.props.streak}/>
-          <Multiplier streak={this.props.streak} multiplier={this.props.multiplier}/>
+          <Streak streakTarget={this.props.streakTarget} correct={this.props.correct} streak={this.props.streak}/>
+          <Multiplier streakTarget={this.props.streakTarget} streak={this.props.streak} multiplier={this.props.multiplier}/>
           <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
         </div>
         <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>

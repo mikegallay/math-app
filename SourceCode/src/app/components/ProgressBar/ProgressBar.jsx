@@ -33,7 +33,7 @@ export default class ProgressBar extends React.Component {
     // if (this.props.gamemode=='battle') {
     //   score = this.props.hitpoints - this.props.score;
     //   if (this.props.score >= this.props.hitpoints) score = "VICTORY"
-    //   inactiveScore = '';
+      //    = '';
     // }
     //
     //
@@ -41,11 +41,23 @@ export default class ProgressBar extends React.Component {
     let pL = this.props.progressLeft;
     let width = ((pT - pL) / pT)*100 +"%";
     let styles = {width}
+    let i = 0
+
+    let dividers = []
+
+    for (let i = 1; i <= pT+1; i++) {
+      dividers.push(<div className="divider" id={i} key={i} />);
+    }
+
+    let dividerWrapper = <div className="dividers">
+      {dividers}
+    </div>
 
     return (
-      <div className="progress-wrapper">
+      <div className={`progress-wrapper ${this.props.gamemode}`}>
         <div className="progress-back"></div>
         <div style={styles} className="progress-front"></div>
+        {(this.props.gamemode == 'training') ? dividerWrapper : ''}
       </div>
     );
   }

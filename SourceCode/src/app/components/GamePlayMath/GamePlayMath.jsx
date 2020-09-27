@@ -36,11 +36,12 @@ export default class GamePlayMath extends React.Component {
     console.log('gameplay',props);
 
     let nextQuestionDelay = 50
-    let range = 11
+    let range = 12
     let hidden = true
     let battle = false
     let countdown = 3
-    let hitpoints = 100
+    let streakTarget = 3
+    let hitpoints = 2500
     if (gamemode == 'training') {
       nextQuestionDelay = 1000
       // countdown = 4
@@ -50,8 +51,9 @@ export default class GamePlayMath extends React.Component {
     let charm = false
 
     if (level==2) {
-      hitpoints = 150
-      range = 22
+      streakTarget = 5
+      hitpoints = 4000
+      range = 24
     }
 
     // console.log('gp level',level);
@@ -106,6 +108,7 @@ export default class GamePlayMath extends React.Component {
       numTotal:0,
       numRight:0,
       numWrong:0,
+      streakTarget,
       operator,
       gamemode,
       constant,
@@ -130,8 +133,8 @@ export default class GamePlayMath extends React.Component {
       mulligans,
       lifeboost,
       charm,
-      progressTotal:(gamemode == 'training') ? trainingTotal : 20,
-      progressLeft:(gamemode == 'training') ? trainingQuestions.length : 20
+      progressTotal:(gamemode == 'training') ? trainingTotal : hitpoints,
+      progressLeft:(gamemode == 'training') ? trainingQuestions.length : hitpoints
     };
 
     console.log('gpstate',this.state);
@@ -247,9 +250,9 @@ export default class GamePlayMath extends React.Component {
     if (isCorrect){
       let numRight = this.state.numRight + 1
       let streak = this.state.streak + 1
-      multiplier = Math.floor(streak/5)+1
+      multiplier = Math.floor(streak/this.state.streakTarget)+1
       let levelFX = false
-      if (streak%5==0) levelFX=true
+      if (streak%this.state.streakTarget==0) levelFX=true
       let score = this.state.score + (baseDamage * multiplier)
 
 
@@ -262,7 +265,8 @@ export default class GamePlayMath extends React.Component {
       this.setState({
         numRight,numTotal,score,streak,answered,multiplier,correct,modalVisible:false,
         rightFX:true,wrongFX:false,levelFX,
-        progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
+        progressTotal:(this.state.gamemode == 'training') ? trainingTotal : this.state.hitpoints,
+        progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : this.state.hitpoints - score
       })
 
     }else{ //is wrong
@@ -366,7 +370,7 @@ export default class GamePlayMath extends React.Component {
           userRef.set(locUser.gamemath[operator]);
         }
 
-        console.log('here',trainingQuestions);
+        // console.log('here',trainingQuestions);
         this.setState({
           gameover: true,
           modalVisible:true,
@@ -377,7 +381,8 @@ export default class GamePlayMath extends React.Component {
           bonus,
           accuracy,
           levelFX:false,
-          progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
+          progressTotal:(this.state.gamemode == 'training') ? trainingTotal : this.state.hitpoints,
+          progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : this.state.hitpoints - this.state.score
         })
       } else if (this.state.score >= this.state.hitpoints && this.state.gamemode == 'battle'){
         //you defeated the wizard
@@ -435,7 +440,8 @@ export default class GamePlayMath extends React.Component {
         this.setState({
           battle: false,
           gameover: true,
-          countdown: 'VICTORY!'
+          countdown: 'VICTORY!',
+          score:0
         })
 
       }else{
@@ -583,8 +589,8 @@ export default class GamePlayMath extends React.Component {
       timeExpired:false,
       battle,
       countdown,
-      progressTotal:(this.state.gamemode == 'training') ? trainingTotal : 20,
-      progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : 20
+      progressTotal:(this.state.gamemode == 'training') ? trainingTotal : this.state.hitpoints,
+      progressLeft:(this.state.gamemode == 'training') ? trainingQuestions.length : this.state.hitpoints
     })
 
     this.state.timerid = setTimeout(() => {
@@ -682,6 +688,7 @@ export default class GamePlayMath extends React.Component {
               correct={this.state.correct}
               lifeboost = {this.state.lifeboost}
               score={this.state.score}
+              level={this.state.level}
               gamemode={this.state.gamemode}
               gameover={this.state.gameover}
               restart={this.state.restart}

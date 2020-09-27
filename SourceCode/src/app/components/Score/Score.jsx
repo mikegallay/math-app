@@ -31,9 +31,9 @@ export default class Score extends React.Component {
     let score = this.props.score;
     let inactiveScore = this.inactiveScore(this.props.score)
     if (this.props.gamemode=='battle') {
-      score = this.props.hitpoints - this.props.score;
+      // score = this.props.score;
       if (this.props.score >= this.props.hitpoints) score = "VICTORY"
-      inactiveScore = '';
+      // inactiveScore = '';
     }
     return (
       <div className="score-wrapper">

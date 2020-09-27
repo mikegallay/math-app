@@ -275,9 +275,6 @@ export default class Bonus extends React.Component {
         if (accuracy >= creatureList.math[operator].L3_3_2.reward) creaturePool.push('L3_3_2');
         if (accuracy >= creatureList.math[operator].L3_3_3.reward) creaturePool.push('L3_3_3');
         if (charm && accuracy >= creatureList.math[operator].L3_3_3.reward) creaturePool.push('L3_3_3');
-        if (accuracy >= creatureList.math[operator].L3_4_1.reward) creaturePool.push('L3_4_1');
-        if (accuracy >= creatureList.math[operator].L3_4_2.reward) creaturePool.push('L3_4_2');
-        if (accuracy >= creatureList.math[operator].L3_4_3.reward) creaturePool.push('L3_4_3');
 
         creature = this.selectCreature();
 

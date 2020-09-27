@@ -4,16 +4,17 @@
 .progress-wrapper{
   position:relative;
   width:100%;
-  height:15px;
+  height:10px;
   .progress-back{
-    background-color: red;
-    opacity: .5;
-    position:relative;
+    background: rgb(168,0,0);
+background: linear-gradient(0deg, rgba(168,0,0,1) 0%, rgba(191,0,0,1) 10%, rgba(255,0,0,1) 100%);
+position:relative;
     width:100%;
     height:100%;
   }
   .progress-front{
-    background-color: green;
+    background: rgb(24,135,0);
+background: linear-gradient(0deg, rgba(24,135,0,1) 0%, rgba(20,179,1,1) 10%, rgba(39,214,2,1) 100%);
     position:absolute;
     transition: width .5s;
     left:0;

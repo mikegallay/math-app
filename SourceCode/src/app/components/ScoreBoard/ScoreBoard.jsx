@@ -27,7 +27,8 @@ export default class ScoreBoard extends React.Component {
   }
 
   render() {
-    let gamemode = <Countdown
+    let chances = ''
+    let charging = <Countdown
         modalVisible={this.props.modalVisible}
         ready={this.props.ready}
         restart={this.props.restart}
@@ -36,16 +37,18 @@ export default class ScoreBoard extends React.Component {
         onTimeExpired={this.props.onTimeExpired}/>
 
     if (this.props.gamemode == 'training'){
-      gamemode = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>
+      charging = ''
+      chances = <Health gameover={this.props.gameover} health={this.props.health} fullHeath={this.props.fullHealth}/>
     }
     return (
       <div className={`scoreboard-wrapper ${(this.props.gameover)?'gameover':''}`}>
         <div className="main-scores">
           <Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
-          {gamemode}
+          {chances}
           <Streak streakTarget={this.props.streakTarget} correct={this.props.correct} streak={this.props.streak}/>
           <Multiplier streakTarget={this.props.streakTarget} streak={this.props.streak} multiplier={this.props.multiplier}/>
           <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
+          {charging}
         </div>
         <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>
       </div>

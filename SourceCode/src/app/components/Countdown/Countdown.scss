@@ -7,3 +7,50 @@
     color:red;
   }
 }
+
+/* Charging Ring */
+
+.base-timer {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.base-timer__svg {
+  transform: rotate(-288deg) scaleY(-1);
+  position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 10px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}

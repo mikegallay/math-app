@@ -49,10 +49,10 @@ export default class ScoreBoard extends React.Component {
           <div className="hero-stats">
             <Streak streakTarget={this.props.streakTarget} correct={this.props.correct} streak={this.props.streak}/>
             <Multiplier streakTarget={this.props.streakTarget} streak={this.props.streak} multiplier={this.props.multiplier}/>
-            {chances}
             <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
           </div>
         </div>
+        <div className="lives">{chances}</div>
         <div className="wizard-stats">
           <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>
           {charging}

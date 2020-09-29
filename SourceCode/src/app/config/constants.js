@@ -18,7 +18,7 @@ export const firebaseAuth = firebase.auth;
 export const hideTimer = 750;
 export const staffBase = 100; //default base damage
 export const creatureCount = [3,6,9]; //creatures per level 1-9
-export const trainingTotal = 20; //the number of questions in training.
+export const trainingTotal = 5; //the number of questions in training.
 export const trainingChances = 3; //number of chances before training ends.
 
 export const spriteQuotes = [

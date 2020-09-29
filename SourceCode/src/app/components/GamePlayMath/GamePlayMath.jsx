@@ -36,7 +36,7 @@ export default class GamePlayMath extends React.Component {
     console.log('gameplay',props);
 
     let nextQuestionDelay = 50
-    let range = 12
+    let range = 9
     let hidden = true
     let battle = false
     let countdown = 3
@@ -53,7 +53,7 @@ export default class GamePlayMath extends React.Component {
     if (level==2) {
       streakTarget = 5
       hitpoints = 4000
-      range = 24
+      range = 15
     }
 
     // console.log('gp level',level);
@@ -83,13 +83,13 @@ export default class GamePlayMath extends React.Component {
     /* STAFF BONUS LOGIC */
 
     let staff = locUser.staffs.current;
-    // if (staff == "forest") baseDamage *= 2;
-    // if (staff == "forest") mulligans = 1;
-    /*if (staff == "forest") {
-      fullHealth += 1
-      lifeboost = true
-    }*/
-    if (staff == "forest") charm = true
+     if (staff == "forest") baseDamage *= 1.5; // increase your basedamage by 50%
+     if (staff == "forest") mulligans = 1; // allows one mistake
+    if (staff == "forest") {
+      fullHealth += 1 //add one more heart for training
+      lifeboost = true //add 20% more time
+    }
+    if (staff == "forest") charm = true //double chance of finding a rare creat
 
     this.state = {
       sbActive:false,
@@ -270,14 +270,15 @@ export default class GamePlayMath extends React.Component {
       })
 
     }else{ //is wrong
-      // console.log('m',this.state.mulligans);
         let numWrong = this.state.numWrong + 1
+        let numTotal = this.state.numTotal +1
         let mulligans = this.state.mulligans
         let streak = 0
         multiplier = 1
         let health = this.state.health - 1
         if (this.state.mulligans > 0){
           numWrong -= 1
+          numTotal -= 1
           streak = this.state.streak
           multiplier = this.state.multiplier
           health = this.state.health
@@ -306,9 +307,9 @@ export default class GamePlayMath extends React.Component {
 
       if ((this.state.health <= 0 || trainingQuestions.length == 0) && this.state.gamemode == 'training'){
         console.log("Game Over");
-        accuracy = Math.round(this.state.numRight / this.state.numTotal * 100)
+        accuracy = Math.round(this.state.numRight / (this.state.numRight + this.state.numWrong) * 100)
         if (this.state.numRight + this.state.numWrong == 0) accuracy = 0
-
+        // console.log('acc',this.state.numRight,this.state.numWrong,this.state.numTotal,accuracy);
         //while in training, you didn't unlock a creature
         if (this.state.health === 0){
           bonus=0;

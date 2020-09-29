@@ -53,8 +53,8 @@
 
 @keyframes loseHealth {
   0%  {background-color: black;transform:scale(1);}
-  15%  {background-color: red;opacity:1;transform:scale(1.5);}
-  80%  {background-color: red;opacity:1;transform:scale(.95);}
+  15%  {background-color: darkred;opacity:1;transform:scale(1.5);}
+  80%  {background-color: darkred;opacity:1;transform:scale(.95);}
   100%  {background-color: black;opacity:.3;transform:scale(1);}
 }
 

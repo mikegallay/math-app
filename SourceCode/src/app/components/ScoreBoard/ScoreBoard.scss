@@ -7,11 +7,19 @@
   // border-bottom: 2px solid black;
   top:-5px;
   position: relative;
-  padding:1em;
+  padding:1em 1em 0;
+  height: 100px;
+  .lives{
+    position: absolute;
+    top:25px;
+    right:15px;
+  }
   .main-scores{
     .hero-stats{
       display: flex;
       flex-direction: column;
+      margin:10px 0 0 3px;
+      position: relative;
     }
     &.gameover{
       opacity:0;
@@ -42,5 +50,7 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
+    position:relative;
+    top:-23px;
   }
 }

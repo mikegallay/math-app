@@ -206,7 +206,7 @@ export default class Countdown extends React.Component {
             <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
             <path
               id="base-timer-path-remaining"
-              stroke-dasharray="283"
+              strokeDasharray="283"
               className={`base-timer__path-remaining ${this.setRemainingPathColor()}`}
               strokeDasharray={this.setCircleDasharray()}
               d="

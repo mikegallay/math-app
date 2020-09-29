@@ -3,8 +3,12 @@
 
 .progress-wrapper{
   position:relative;
-  width:80%;
-  height:15px;
+  width:60%;
+  // right:80px;
+  float: right;
+  height:17px;
+  right: -10px;
+  bottom: 20px;
   .progress-back{
     background: rgb(155,158,0);
     background: linear-gradient(0deg, rgba(155,158,0,1) 0%, rgba(213,217,0,1) 10%, rgba(236,241,0,1) 100%);
@@ -23,7 +27,12 @@
     height:100%;
   }
   &.training{
+    border:2px solid white;
+    box-sizing: border-box;
     width:100%;
+    float:none;
+    right:0;
+    bottom:-30px;
     .progress-back{
       background: rgb(2,0,158);
       background: linear-gradient(0deg, rgba(2,0,158,1) 0%, rgba(0,19,217,1) 10%, rgba(0,37,241,1) 100%);
@@ -34,6 +43,7 @@
     }
   }
   .dividers{
+
     position: absolute;
     display: flex;
     flex-direction: row;
@@ -46,6 +56,7 @@
       position: relative;
       height: 15px;
       background: white;
+      &.bookends{opacity:0;}
     }
   }
 }

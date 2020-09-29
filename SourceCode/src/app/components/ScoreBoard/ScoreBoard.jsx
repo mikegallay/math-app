@@ -14,6 +14,7 @@ import Streak from '../Streak/Streak';
 import { Link } from 'react-router-dom';
 
 import './ScoreBoard.scss';
+import hero from '../../images/hero.png';
 
 export default class ScoreBoard extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export default class ScoreBoard extends React.Component {
   }
 
   render() {
+    //<Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
     let chances = ''
     let charging = <Countdown
         modalVisible={this.props.modalVisible}
@@ -43,14 +45,18 @@ export default class ScoreBoard extends React.Component {
     return (
       <div className={`scoreboard-wrapper ${(this.props.gameover)?'gameover':''}`}>
         <div className="main-scores">
-          <Link to='/navigation' className='back-btn'><i className="material-icons">backspace</i></Link>
-          {chances}
-          <Streak streakTarget={this.props.streakTarget} correct={this.props.correct} streak={this.props.streak}/>
-          <Multiplier streakTarget={this.props.streakTarget} streak={this.props.streak} multiplier={this.props.multiplier}/>
-          <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
+          <Link to='/navigation'><img src={hero} height="60" width="60"/></Link>
+          <div className="hero-stats">
+            <Streak streakTarget={this.props.streakTarget} correct={this.props.correct} streak={this.props.streak}/>
+            <Multiplier streakTarget={this.props.streakTarget} streak={this.props.streak} multiplier={this.props.multiplier}/>
+            {chances}
+            <Score gamemode={this.props.gamemode} hitpoints={this.props.hitpoints} score={this.props.score}/>
+          </div>
+        </div>
+        <div className="wizard-stats">
+          <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>
           {charging}
         </div>
-        <ProgressBar gamemode={this.props.gamemode} progressTotal={this.props.progressTotal} progressLeft={this.props.progressLeft}/>
       </div>
     );
   }

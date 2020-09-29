@@ -17,7 +17,7 @@
 }
 
 .base-timer__svg {
-  transform: rotate(-288deg) scaleY(-1);
+  //transform: rotate(-288deg) scaleY(-1);
   position: absolute;
     top: 0;
     left: 0;
@@ -29,12 +29,12 @@
 }
 
 .base-timer__path-elapsed {
-  stroke-width: 10px;
+  stroke-width: 5px;
   stroke: grey;
 }
 
 .base-timer__path-remaining {
-  stroke-width: 7px;
+  stroke-width: 8px;
   stroke-linecap: round;
   transform: rotate(90deg);
   transform-origin: center;

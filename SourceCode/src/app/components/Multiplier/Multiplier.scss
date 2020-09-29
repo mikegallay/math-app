@@ -3,11 +3,24 @@
 
 .multiplier-wrapper{
   font-size: 25px;
-  text-align: right;
+  // text-align: right;
   width:auto;
   position: relative;
   transform-origin: center center;
+  display:flex;
+  flex-direction: row;
+
   &.level-up{
     animation: shake 1.5s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  .mult{
+    margin-right:5px;
+    height:10px;
+    width:25px;
+    background: lightblue;
+    opacity: .5;
+    &.active{
+      opacity:1;
+    }
   }
 }

@@ -2,10 +2,13 @@
 @import '../../css/mixins';
 
 .streak-wrapper{
-  font-size: 25px;
-  width:35px;
+  font-size: 15px;
+  // width:35px;
   text-align: center;
   position: relative;
+  display:flex;
+  flex-direction: row;
+  padding-bottom:5px;
   &.true{
     // color:green;
     animation-name: streaking;
@@ -19,6 +22,16 @@
     animation-duration: 1s;
     transform-origin: 60% 10px;
 
+  }
+  .streak{
+    margin-right:5px;
+    height:8px;
+    width:15px;
+    background: green;
+    opacity: .5;
+    &.active{
+      opacity:1;
+    }
   }
 
 }

@@ -3,19 +3,23 @@
 
 .scoreboard-wrapper{
   display: block;
-  background: white;
-  border-bottom: 2px solid black;
+  // background: white;
+  // border-bottom: 2px solid black;
   top:-5px;
   position: relative;
   padding:1em;
   .main-scores{
+    .hero-stats{
+      display: flex;
+      flex-direction: column;
+    }
     &.gameover{
       opacity:0;
     }
     padding-bottom:1em;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 25px;
     .back-btn{
       // background: black;
@@ -32,5 +36,11 @@
         position: relative;
       }
     }
+  }
+  .wizard-stats{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
   }
 }

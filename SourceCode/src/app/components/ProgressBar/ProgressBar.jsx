@@ -46,7 +46,7 @@ export default class ProgressBar extends React.Component {
     let dividers = []
 
     for (let i = 1; i <= pT+1; i++) {
-      dividers.push(<div className="divider" id={i} key={i} />);
+      dividers.push(<div className={`divider ${(i==1 || i==pT+1)?"bookends":""}`} id={i} key={i} />);
     }
 
     let dividerWrapper = <div className="dividers">

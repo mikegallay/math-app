@@ -685,6 +685,7 @@ export default class GamePlayMath extends React.Component {
               ready={this.state.battle}
               multiplier={this.state.multiplier}
               streak={this.state.streak}
+              streakTarget={this.state.streakTarget}
               correct={this.state.correct}
               lifeboost = {this.state.lifeboost}
               score={this.state.score}

@@ -2,8 +2,8 @@
 @import '../../css/mixins';
 
 .health-wrapper{
-  margin-top: 4px;
-  margin-left:3px;
+  margin-top: 5px;
+  // margin-left:3px;
   .inactive{
     // transition: background-color 1s;
     animation-name: loseHealth;

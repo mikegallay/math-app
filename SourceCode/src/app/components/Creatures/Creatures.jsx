@@ -99,19 +99,21 @@ export default class Creatures extends React.Component {
     var locUser = JSON.parse(localStorage.getItem(localUser));
     let opacity = (!this.state.hidden)?1:0
     let styles = {opacity};
-
+    /*<div className="sprite-wrapper">
+      <div className="sprite"><img src={sprite}/></div>
+      <div className="carrot"></div>
+      <div className="sprite-message"><p>{this.getQuote()}</p></div>
+    </div>*/
     return (
       <div className="creatures main">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-            <div className="sprite-wrapper">
-              <div className="sprite"><img src={sprite}/></div>
-              <div className="carrot"></div>
-              <div className="sprite-message"><p>{this.getQuote()}</p></div>
-            </div>
-            <SecondaryNav currpage="creatures"/>
+
+
             <p className="luckiest-guy">Have you rescued all the</p>
             <h1>Creatures?</h1>
+            <SecondaryNav currpage="creatures"/>
+            <p>Keep track of everyone you've rescued on this list. With a little practice and dedication you can save the entire kingdom.</p>
             <div className="freq-legend">
               <div className="freq-legend-item"><span className="freq-key common">Common</span><span className="freq-name">Common</span></div>
               <div className="freq-legend-item"><span className="freq-key rare">Rare</span><span className="freq-name">Rare</span></div>

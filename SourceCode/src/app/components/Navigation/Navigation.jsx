@@ -208,14 +208,14 @@ export default class Navigation extends React.Component {
 
 
 
-            <Modal
+            {/*<Modal
               title="How To Play"
               body={howToBody}
               score=""
               gameplayBtns={false}
               visible={this.state.modalVisible}
               closeModal={()=>{this.closeModal()}}
-            />
+            />*/}
 
           </div>
         </div>

@@ -29,12 +29,12 @@
 }
 
 .base-timer__path-elapsed {
-  stroke-width: 5px;
-  stroke: grey;
+  stroke-width: 10px;
+  stroke: #333333;
 }
 
 .base-timer__path-remaining {
-  stroke-width: 8px;
+  stroke-width: 6px;
   stroke-linecap: round;
   transform: rotate(90deg);
   transform-origin: center;

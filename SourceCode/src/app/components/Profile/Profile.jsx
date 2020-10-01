@@ -77,29 +77,35 @@ export default class Profile extends React.Component {
       <div className="profile main">
         <div className="main-fade" style={styles}>
           <div className="wrapper">
-            <h1>Profile</h1>
+            <p className="luckiest-guy profile-title">Welcome Adventurer</p>
+            <h1>{locUser.username}</h1>
             <SecondaryNav currpage="profile"/>
-            <div className="userinfo">Other content</div>
-            <div className="gems">Total Gems: {gems}</div>
+
+            <p className="desc">You can check your stats and high scores on this screen. You can even change your name or manage other characters features (coming soon).</p>
 
             <div className="username">
-              <p className="luckiest-guy">Only You Can Save Us</p>
-              <h3>{locUser.username}</h3>
-              <Link to='/chooseusername' className="chooseusername">Want to change your username?</Link>
-              <div>
-                  <button
-                      value="Sign Out"
-                      className="mdl-button"
-                      onClick={this.handleLogout}
-                  >Sign Out</button>
+              <div className="grouped-row">
+                <Link to='/chooseusername' className='chooseusername landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">edit</i> Change username </Link>
+                <button
+                    value="Sign Out"
+                    className="landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                    onClick={this.handleLogout}
+                ><i className="material-icons">exit_to_app</i>  Sign Out</button>
               </div>
-              <div>Your unique user id is {locUser.userid}</div>
+            </div>
+            <div className="grouped">
+
+              <div className="staff">
+                <h3 className="luckiest-guy">{staff} STaff</h3>
+                <Link to='/store' className='chooseusername landing-btn mdl-button mdl-js-button mdl-button--raised mdl-button--accent'><i className="material-icons">flare</i> Change your staff </Link>
+
+              </div>
+
+              <div className="staff">
+                <h3 className="luckiest-guy">{gems} Gems</h3>
+              </div>
             </div>
 
-            <div className="staff">
-              <p>You currently have the {staff} staff equipped.</p>
-              <Link to='/store'>Equip a different one?</Link>
-            </div>
 
             <Cheats/>
 

@@ -2,14 +2,15 @@
 @import '../../css/mixins';
 
 .multiplier-wrapper{
-  font-size: 25px;
+  // font-size: 25px;
   // text-align: right;
   width:auto;
   position: relative;
   transform-origin: center center;
   display:flex;
   flex-direction: row;
-
+  height:10px;
+  margin:5px 0;
   &.level-up{
     animation: shake 1.5s cubic-bezier(.36,.07,.19,.97) both;
   }

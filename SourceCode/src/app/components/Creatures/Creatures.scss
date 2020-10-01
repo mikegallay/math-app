@@ -12,11 +12,11 @@ $altcolor: #e2effc;
       margin:1em 0 0 0;
     }
     .secondary-nav{
-      margin: 20px 0 0;
+      margin: 20px 0 30px;
     }
     .creature-wrapper .creature-section h4.mul,
     .creature-wrapper .creature-section h4.ran{background:white;}
-    h1{margin-top:-10px;margin-bottom:0;}
+    h1{margin-top:-10px;margin-bottom:-30px;}
     h4{
       position: relative;
       display: flex;
@@ -26,6 +26,7 @@ $altcolor: #e2effc;
       font-size:23px;
       margin: 0;
       padding-top: 1em;
+      background:white;
       &.sub,&.div{background:$altcolor;}
       &:before,&:after{
         content: '';
@@ -117,7 +118,7 @@ $altcolor: #e2effc;
 }
 
 .freq-legend{
-  margin-top:0em;
+  margin:0 0 2em;
   .freq-legend-item {
     float: left;
     margin: 0 1em;

@@ -45,13 +45,14 @@ export default class Navigation extends React.Component {
 
     var tutTraining = (!locUser.tutorials.training) ? 'training' : '';
     var tutBattle = (!locUser.tutorials.battle) ? 'battle' : '';
+    var tutFinal = (!locUser.tutorials.final) ? 'final' : '';
 
     console.log('tut',locUser.tutorials.battle,locUser.tutorials.training);
 
     let username = locUser.username
     let hidden = true
 
-    this.state = {modalVisible:'init false',revealed,fbunlocked,hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username,tutTraining,tutBattle};
+    this.state = {modalVisible:'init false',revealed,fbunlocked,hidden,addUnlocked1,subUnlocked1,mulUnlocked1,divUnlocked1,ranUnlocked1,addUnlocked2,subUnlocked2,mulUnlocked2,divUnlocked2,username,tutTraining,tutBattle,tutFinal};
     // this.handleLogout = this.handleLogout.bind(this);
     // console.log("User:", this.state.firebaseUser,localStorage.getItem("appToken"));
   }
@@ -91,6 +92,7 @@ export default class Navigation extends React.Component {
     let styles = {opacity};
     let tutT = this.state.tutTraining;
     let tutB = this.state.tutBattle;
+    let tutF = this.state.tutFinal;
 
     let fbReveal = (!this.state.revealed && this.state.fbunlocked)?'fb-reveal':'';
 
@@ -136,7 +138,7 @@ export default class Navigation extends React.Component {
                 <Link className={`luckiest-guy level2 ${(this.state.divUnlocked2)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'battle', level:2} }}><span>L2</span></Link>
               </div>
               <div className={`final-battle ${(this.state.revealed && this.state.fbunlocked)?'fb-ready':'fb-hide'}`}>
-                <Link className={`luckiest-guy level3 ${(this.state.ranUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'battle', level:3, randomize: true} }}><span>FB</span></Link>
+                <Link className={`luckiest-guy level3 ${(this.state.ranUnlocked1)?'':'inactive'}`} to={{ pathname: '/math', state: { operator: 'div', gamemode:'battle', level:3, tutorial:tutF, randomize: true} }}><span>FB</span></Link>
               </div>
             </div>
 

@@ -142,8 +142,9 @@ export default class GamePlayMath extends React.Component {
     //update tutorial code if necessary
     if (this.state.tutorial != ''){
       let tut = (this.state.gamemode == 'battle') ? 'battle' : 'training';
-
+      if (this.state.tutorial == 'final') tut = 'final'
       //save to localstorage
+      console.log('gamemode',this.state.gamemode,this.state.tutorial);
       locUser.tutorials[tut] = true;
       localStorage.setItem(localUser, JSON.stringify(locUser));
 
@@ -172,7 +173,14 @@ export default class GamePlayMath extends React.Component {
     //hide the layout until the css is loaded
      let hider = setTimeout(() => {
         this.setState({hidden});
-        (this.state.gamemode == 'battle')?this.introCountdown():this.readyToBattle(1000);
+        console.log('statetut',this.state.tutorial);
+        if (this.state.tutorial==="battle" || this.state.tutorial==="final"){
+          //delay the game if the tutorial needs to be shown. ["battle" and "final" TO DO ]
+          if (this.state.gamemode === 'tutorial'){this.readyToBattle(1000)};
+        }else{
+          (this.state.gamemode === 'tutorial')?this.readyToBattle(1000):this.introCountdown();
+        }
+
       }, hideTimer)
   }
 
@@ -212,7 +220,8 @@ export default class GamePlayMath extends React.Component {
 
   showSnackbarMessage(message){
     // console.log('sb',message);
-    let tutorial = '';
+    this.state.tutorial==="battle"
+    /*let tutorial = '';
     if (message == "You found the last creature!! Are you ready for the final battle?"){
       tutorial = 'final'
     }
@@ -228,7 +237,7 @@ export default class GamePlayMath extends React.Component {
       //sync to firebase
       let userRef = ref.ref('/users/' + locUser.userid + '/tutorials/final');
       userRef.set(locUser.tutorials.final);
-    }
+    }*/
 
     let sbTimer = setTimeout(() => {
       this.setState({sbActive:false});
@@ -639,6 +648,7 @@ export default class GamePlayMath extends React.Component {
 
   hideTutorial(){
     console.log('hide tutorial');
+    if (this.state.tutorial=="battle" || this.state.tutorial=="final"){this.introCountdown()}
     this.setState({tutorial:true})
   }
 
